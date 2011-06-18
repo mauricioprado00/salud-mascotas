@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--xtools2_universal_type_manager-->
+<?com.ibm.xtools.emf.core.signature <signature id="com.ibm.xtools.uml.msl.model" version="7.0.0"><feature description="" name="com.ibm.xtools.ruml.feature" url="" version="7.0.0"/></signature>?>
+<?com.ibm.xtools.emf.core.signature <signature id="com.ibm.xtools.mmi.ui.signatures.diagram" version="7.0.0"><feature description="" name="Plataforma de modelado de Rational (com.ibm.xtools.rmp)" url="" version="7.0.0"/></signature>?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DSLToolProfile="http:///schemas/DSLToolProfile/_IAVnICm0Ed2i6JGuVYCC5A/139" xmlns:Default="http:///schemas/Default/1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.1/notation" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmlns:umlnotation="http://www.ibm.com/xtools/1.5.2/Umlnotation" xsi:schemaLocation="http:///schemas/DSLToolProfile/_IAVnICm0Ed2i6JGuVYCC5A/139 pathmap://PROFILE_TOOLING/DSLToolProfile.epx#_IAVnISm0Ed2i6JGuVYCC5A?DSLToolProfile/DSLToolProfile? http:///schemas/Default/1 pathmap://UML2_MSL_PROFILES/Default.epx#_IN8k8MmBEdqBcN1R6EvWUw?Default/Default?">
+  <uml:Model xmi:id="_O7dBrJm5EeC9E6pFf7kEkg" name="Modelo de caso de uso SM">
+    <eAnnotations xmi:id="_O7dBrZm5EeC9E6pFf7kEkg" source="uml2.diagrams" references="_O7dBv5m5EeC9E6pFf7kEkg">
+      <contents xmi:type="notation:Diagram" xmi:id="_O7dBrpm5EeC9E6pFf7kEkg" type="Freeform" name="${project} Use Case Overview">
+        <children xmi:id="_O7dBr5m5EeC9E6pFf7kEkg" type="Text">
+          <children xmi:id="_O7dBsJm5EeC9E6pFf7kEkg" type="DiagramName"/>
+          <children xmi:id="_O7dBsZm5EeC9E6pFf7kEkg" type="Description"/>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_O7dBspm5EeC9E6pFf7kEkg" fontHeight="14" description="${project} Use Case Overview"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_O7dBs5m5EeC9E6pFf7kEkg" x="636" y="636"/>
+        </children>
+        <children xmi:id="_O7dBtJm5EeC9E6pFf7kEkg" element="_O7jIkZm5EeC9E6pFf7kEkg">
+          <children xmi:id="_O7dBtZm5EeC9E6pFf7kEkg" type="DiagramName" element="_O7jIkZm5EeC9E6pFf7kEkg"/>
+          <children xmi:id="_O7dBtpm5EeC9E6pFf7kEkg" type="Description" element="_O7jIkZm5EeC9E6pFf7kEkg"/>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_O7dBt5m5EeC9E6pFf7kEkg" fontName="Courier New" description="Actors that participate in use cases from multiple functional areas."/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_O7dBuJm5EeC9E6pFf7kEkg" x="636" y="1908"/>
+        </children>
+        <children xmi:id="_O7dBuZm5EeC9E6pFf7kEkg" type="Note">
+          <children xmi:id="_O7dBupm5EeC9E6pFf7kEkg" type="DiagramName"/>
+          <children xmi:id="_O7dBu5m5EeC9E6pFf7kEkg" type="Description"/>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_O7dBvJm5EeC9E6pFf7kEkg" fontName="Courier New" description="TODO: populate this diagram with the functional area packages of the Use-Case model, as you create them.&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;(Delete this instructional note once you no longer need it.)" fillColor="13369343" lineColor="51455"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_O7dBvZm5EeC9E6pFf7kEkg" x="3810" y="4127" width="10477" height="2888"/>
+        </children>
+        <styles xmi:type="umlnotation:UMLDiagramStyle" xmi:id="_O7dBvpm5EeC9E6pFf7kEkg"/>
+      </contents>
+      <contents xmi:type="notation:Diagram" xmi:id="_O7dBv5m5EeC9E6pFf7kEkg" type="Class" name="Instructions">
+        <children xmi:id="_O7dBwJm5EeC9E6pFf7kEkg" type="Note">
+          <children xmi:id="_O7dBwZm5EeC9E6pFf7kEkg" type="DiagramName"/>
+          <children xmi:id="_O7dBwpm5EeC9E6pFf7kEkg" type="Description"/>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_O7dBw5m5EeC9E6pFf7kEkg" fontName="Courier New" description="The template is set up to help you create content for a use case model, where the structure of the model reflects the guidance provided in the Rational Software Architect Model Structure Guidelines found at &#xD;&#xA;&#xD;&#xA;&#x9;http://www.ibm.com/developerworks/rational/products/rsm/...&#xD;&#xA;&#xD;&#xA;A part of that guidance is to organize the use case model around internally cohesive, loosely coupled functional groupings. Accordingly, within the template you will find:&#xD;&#xA;&#xD;&#xA;•&#x9;A package entitled “Use-Case Building Blocks”.  This package contains chunks of model content that you can use to build the use case model more quickly.  The general techniques for using the building blocks are described in this diagram:&#xD;&#xA;&#xD;&#xA;&#x9;Use-Case Building Block Instructions (double-click the diagram link below)&#xD;&#xA;  &#xD;&#xA;•&#x9;A package entitled “Versatile Actors”.  Generally, Actors should be stored within the same &quot;functional area&quot; package as the use case(s) it performs, but Actors that perform multiple use cases that span functional areas should be stored in the &quot;Versatile Actors&quot; package.&#xD;&#xA;&#xD;&#xA;•&#x9;A «perspective» package named Overviews, in which to keep diagrams depicting cross-cutting views of the model.   &#xD;&#xA;&#xD;&#xA;In brief, to create your use case model using the building blocks you will iteratively perform these activities:&#xD;&#xA;•&#x9;Create &quot;functional area&quot; Packages using the provided functional area package building block&#xD;&#xA;•&#x9;Populate each such package with the Use Cases for that functional grouping, again using the provided Use Case building block.  &#xD;&#xA;&#xD;&#xA;Then you perform the various other activities of Use Case modeling such as composing the Use Cases into Use Case Diagrams, adding Actors, drawing extend / include relationships among the Use Cases, drawing associations from the use cases to the Actors that participate in them, writing descriptions for the Use Cases and Actors, and (where it adds value) composing the high-level Activity and &quot;black box&quot; Sequence diagrams per Use Case.&#xD;&#xA;&#xD;&#xA; &#xD;&#xA;WHEN YOU NO LONGER NEED THESE INSTRUCTIONS:&#xD;&#xA;1. Delete this diagram (&quot;Instructions&quot;) from the model&#xD;&#xA;2. Make the &quot;Use Case Model Overview&quot; diagram the default diagram for the model (right click on it and select &quot;Make Default Diagram&quot;).&#xD;&#xA;" fillColor="13369343" lineColor="51455"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_O7dBxJm5EeC9E6pFf7kEkg" x="500" y="2519" width="19101" height="18260"/>
+        </children>
+        <children xmi:id="_O7dBxZm5EeC9E6pFf7kEkg" type="shadowRectangle">
+          <children xmi:id="_O7dBxpm5EeC9E6pFf7kEkg" type="DiagramName"/>
+          <children xmi:id="_O7dBx5m5EeC9E6pFf7kEkg" type="Description"/>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_O7dByJm5EeC9E6pFf7kEkg" fontHeight="24" description="Use Case Modeling Template" fillColor="13369343" lineColor="51455"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_O7dByZm5EeC9E6pFf7kEkg" x="500" y="317" width="19181" height="1905"/>
+        </children>
+        <children xmi:id="_O7dBypm5EeC9E6pFf7kEkg" element="_O7jIQZm5EeC9E6pFf7kEkg">
+          <children xmi:id="_O7dBy5m5EeC9E6pFf7kEkg" type="DiagramName" element="_O7jIQZm5EeC9E6pFf7kEkg"/>
+          <children xmi:id="_O7dBzJm5EeC9E6pFf7kEkg" type="Description" element="_O7jIQZm5EeC9E6pFf7kEkg"/>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_O7dBzZm5EeC9E6pFf7kEkg"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_O7dBzpm5EeC9E6pFf7kEkg" x="636" y="20988" height="845"/>
+        </children>
+        <styles xmi:type="umlnotation:UMLDiagramStyle" xmi:id="_O7dBz5m5EeC9E6pFf7kEkg"/>
+      </contents>
+      <contents xmi:type="notation:Diagram" xmi:id="_YqhvAJm5EeC9E6pFf7kEkg" type="Class" name="MODP SM">
+        <styles xmi:type="umlnotation:UMLDiagramStyle" xmi:id="_YqhvAZm5EeC9E6pFf7kEkg"/>
+        <element xsi:nil="true"/>
+      </contents>
+    </eAnnotations>
+    <eAnnotations xmi:id="_O7dB0Jm5EeC9E6pFf7kEkg" source="uml2.isTemplate"/>
+    <eAnnotations xmi:id="_O7dB0Zm5EeC9E6pFf7kEkg" source="com.ibm.xtools.common.ui.reduction.editingCapabilities">
+      <details xmi:id="_O7dB0pm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBActivityDiagram" value="1"/>
+      <details xmi:id="_O7dB05m5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBFreeFormDiagram" value="1"/>
+      <details xmi:id="_O7dB1Jm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBUseCaseDiagram" value="1"/>
+      <details xmi:id="_O7dB1Zm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBAction" value="1"/>
+      <details xmi:id="_O7dB1pm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBActivity1" value="1"/>
+      <details xmi:id="_O7dB15m5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBActivity2" value="1"/>
+      <details xmi:id="_O7dB2Jm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBPackage" value="1"/>
+      <details xmi:id="_O7dB2Zm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBRelationship1" value="1"/>
+      <details xmi:id="_O7dB2pm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBRelationship2" value="1"/>
+      <details xmi:id="_O7dB25m5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBUseCase1" value="1"/>
+      <details xmi:id="_O7dB3Jm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBUseCase2" value="1"/>
+      <details xmi:id="_O7dB3Zm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBSubsystem" value="1"/>
+      <details xmi:id="_O7dB3pm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBFunctionTemplateParameter" value="1"/>
+      <details xmi:id="_O7dB35m5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBPrimitiveTypeTemplateParameter" value="1"/>
+      <details xmi:id="_O7dB4Jm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBFragment" value="1"/>
+      <details xmi:id="_O7dB4Zm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBElementImport1" value="1"/>
+      <details xmi:id="_O7dB4pm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBElementImport2" value="1"/>
+      <details xmi:id="_O7dB45m5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBArtifact" value="1"/>
+      <details xmi:id="_O7dB5Jm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBInterfaceTemplateParameter" value="1"/>
+      <details xmi:id="_O7dB5Zm5EeC9E6pFf7kEkg" key="updm.project.activity" value="1"/>
+      <details xmi:id="_O7dB5pm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBFunction" value="1"/>
+      <details xmi:id="_O7dB55m5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBProfile" value="1"/>
+      <details xmi:id="_O7dB6Jm5EeC9E6pFf7kEkg" key="updm.standard.activity" value="1"/>
+      <details xmi:id="_O7dB6Zm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBStructureDiagram" value="1"/>
+      <details xmi:id="_O7dB6pm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBSignal" value="1"/>
+      <details xmi:id="_O7dB65m5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBClass" value="1"/>
+      <details xmi:id="_O7dB7Jm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBRelationship3" value="1"/>
+      <details xmi:id="_O7dB7Zm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBStateMachine1" value="1"/>
+      <details xmi:id="_O7dB7pm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBStateMachine2" value="1"/>
+      <details xmi:id="_O7dB75m5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBComponent" value="1"/>
+      <details xmi:id="_O7dB8Jm5EeC9E6pFf7kEkg" key="updm.strategic.activity" value="1"/>
+      <details xmi:id="_O7dB8Zm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBDeploymentSpecification" value="1"/>
+      <details xmi:id="_O7dB8pm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBAbstractionRelation" value="1"/>
+      <details xmi:id="_O7dB85m5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBActivity3" value="1"/>
+      <details xmi:id="_O7dB9Jm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBClassTemplateParameter" value="1"/>
+      <details xmi:id="_O7dB9Zm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBActivity4" value="1"/>
+      <details xmi:id="_O7dB9pm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBTemplate" value="1"/>
+      <details xmi:id="_O7dB95m5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBStereotypedDeployment1" value="1"/>
+      <details xmi:id="_O7dB-Jm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBCollaborationUse" value="1"/>
+      <details xmi:id="_O7dB-Zm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBSpecificInstanceType1" value="1"/>
+      <details xmi:id="_O7dB-pm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBSequence1" value="1"/>
+      <details xmi:id="_O7dB-5m5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBSpecificInstanceType2" value="1"/>
+      <details xmi:id="_O7dB_Jm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBSequence2" value="1"/>
+      <details xmi:id="_O7dB_Zm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBSequenceDiagram" value="1"/>
+      <details xmi:id="_O7dB_pm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBObjectDiagram" value="1"/>
+      <details xmi:id="_O7dB_5m5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBDependancy" value="1"/>
+      <details xmi:id="_O7dCAJm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBLifeLine" value="1"/>
+      <details xmi:id="_O7dCAZm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBComponentTemplateParameter" value="1"/>
+      <details xmi:id="_O7dCApm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBUsage" value="1"/>
+      <details xmi:id="_O7dCA5m5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBInstance" value="1"/>
+      <details xmi:id="_O7dCBJm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBStereotypedArtifact" value="1"/>
+      <details xmi:id="_O7dCBZm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBComponentDiagram" value="1"/>
+      <details xmi:id="_O7dCBpm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBEvent1" value="1"/>
+      <details xmi:id="_O7dCB5m5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBTypes1" value="1"/>
+      <details xmi:id="_O7dCCJm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBEvent2" value="1"/>
+      <details xmi:id="_O7dCCZm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBTypes2" value="1"/>
+      <details xmi:id="_O7dCCpm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBTypes3" value="1"/>
+      <details xmi:id="_O7dCC5m5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBTypes4" value="1"/>
+      <details xmi:id="_O7dCDJm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBConstraint" value="1"/>
+      <details xmi:id="_O7dCDZm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBCommunicationDiagram" value="1"/>
+      <details xmi:id="_O7dCDpm5EeC9E6pFf7kEkg" key="updm.organizational.activity" value="1"/>
+      <details xmi:id="_O7dCD5m5EeC9E6pFf7kEkg" key="updm.performance.activity" value="1"/>
+      <details xmi:id="_O7dCEJm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBStereotypedClass" value="1"/>
+      <details xmi:id="_O7dCEZm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBProfileApplication" value="1"/>
+      <details xmi:id="_O7dCEpm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBPackageTemplateParameter" value="1"/>
+      <details xmi:id="_O7dCE5m5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBStereotypedComponent" value="1"/>
+      <details xmi:id="_O7dCFJm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBInterface" value="1"/>
+      <details xmi:id="_O7dCFZm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBInformationFlow" value="1"/>
+      <details xmi:id="_O7dCFpm5EeC9E6pFf7kEkg" key="updm.system.activity" value="1"/>
+      <details xmi:id="_O7dCF5m5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBComment1" value="1"/>
+      <details xmi:id="_O7dCGJm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBComment2" value="1"/>
+      <details xmi:id="_O7dCGZm5EeC9E6pFf7kEkg" key="com.ibm.xtools.uml.profile.tooling.ui.editor.uireduction.activity" value="2"/>
+      <details xmi:id="_O7dCGpm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBCollaboration" value="1"/>
+      <details xmi:id="_O7dCG5m5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBCompositeStructure1" value="1"/>
+      <details xmi:id="_O7dCHJm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBRealization" value="1"/>
+      <details xmi:id="_O7dCHZm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBStateChartDiagram" value="1"/>
+      <details xmi:id="_O7dCHpm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBCompositeStructure2" value="1"/>
+      <details xmi:id="_O7dCH5m5EeC9E6pFf7kEkg" key="updm.service.activity" value="1"/>
+      <details xmi:id="_O7dCIJm5EeC9E6pFf7kEkg" key="updm.enterprise.activity" value="1"/>
+      <details xmi:id="_O7dCIZm5EeC9E6pFf7kEkg" key="com.ibm.xtools.modeling.enterprise.services.uireduction.activity" value="1"/>
+      <details xmi:id="_O7dCIpm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBClassDiagram" value="1"/>
+      <details xmi:id="_O7dCI5m5EeC9E6pFf7kEkg" key="updm.operational.activity" value="1"/>
+      <details xmi:id="_O7dCJJm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBDeployment1" value="1"/>
+      <details xmi:id="_O7dCJZm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBDeployment2" value="1"/>
+      <details xmi:id="_O7dCJpm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBDeploymentDiagram" value="1"/>
+      <details xmi:id="_O7dCJ5m5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBInteraction" value="1"/>
+      <details xmi:id="_O7dCKJm5EeC9E6pFf7kEkg" key="com.ibm.xtools.activities.umlBBCommunication" value="1"/>
+    </eAnnotations>
+    <packageImport xmi:id="_O7dCKZm5EeC9E6pFf7kEkg">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Package" xmi:id="_O7dCKpm5EeC9E6pFf7kEkg" name="Use-Case Building Blocks">
+      <eAnnotations xmi:id="_O7jIQJm5EeC9E6pFf7kEkg" source="uml2.diagrams" references="_O7jIQZm5EeC9E6pFf7kEkg">
+        <contents xmi:type="notation:Diagram" xmi:id="_O7jIQZm5EeC9E6pFf7kEkg" type="Class" name="Use-Case Building Block Instructions">
+          <children xmi:id="_O7jIQpm5EeC9E6pFf7kEkg" element="_O7jIgpm5EeC9E6pFf7kEkg">
+            <children xmi:id="_O7jIQ5m5EeC9E6pFf7kEkg" type="ImageCompartment" element="_O7jIgpm5EeC9E6pFf7kEkg">
+              <layoutConstraint xmi:type="notation:Size" xmi:id="_O7jIRJm5EeC9E6pFf7kEkg" width="2216" height="1322"/>
+            </children>
+            <children xmi:id="_O7jIRZm5EeC9E6pFf7kEkg" type="Stereotype" element="_O7jIgpm5EeC9E6pFf7kEkg"/>
+            <children xmi:id="_O7jIRpm5EeC9E6pFf7kEkg" type="Name" element="_O7jIgpm5EeC9E6pFf7kEkg"/>
+            <children xmi:id="_O7jIR5m5EeC9E6pFf7kEkg" type="Parent"/>
+            <children xmi:id="_O7jISJm5EeC9E6pFf7kEkg" visible="false" type="Extension_Points" element="_O7jIgpm5EeC9E6pFf7kEkg">
+              <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_O7jISZm5EeC9E6pFf7kEkg"/>
+              <layoutConstraint xmi:type="notation:Ratio" xmi:id="_O7jISpm5EeC9E6pFf7kEkg"/>
+            </children>
+            <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_O7jIS5m5EeC9E6pFf7kEkg" showStereotype="Label"/>
+            <styles xmi:type="umlnotation:UMLClassifierStyle" xmi:id="_O7jITJm5EeC9E6pFf7kEkg"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_O7jITZm5EeC9E6pFf7kEkg" x="1908" y="9540"/>
+          </children>
+          <children xmi:id="_O7jITpm5EeC9E6pFf7kEkg" element="_O7jIdJm5EeC9E6pFf7kEkg">
+            <children xmi:id="_O7jIT5m5EeC9E6pFf7kEkg" type="ImageCompartment" element="_O7jIdJm5EeC9E6pFf7kEkg">
+              <layoutConstraint xmi:type="notation:Size" xmi:id="_O7jIUJm5EeC9E6pFf7kEkg" width="1320" height="1320"/>
+            </children>
+            <children xmi:id="_O7jIUZm5EeC9E6pFf7kEkg" type="Stereotype" element="_O7jIdJm5EeC9E6pFf7kEkg"/>
+            <children xmi:id="_O7jIUpm5EeC9E6pFf7kEkg" type="Name" element="_O7jIdJm5EeC9E6pFf7kEkg"/>
+            <children xmi:id="_O7jIU5m5EeC9E6pFf7kEkg" type="Parent"/>
+            <children xmi:id="_O7jIVJm5EeC9E6pFf7kEkg" type="PackageContents">
+              <styles xmi:type="umlnotation:UMLShapeCompartmentStyle" xmi:id="_O7jIVZm5EeC9E6pFf7kEkg"/>
+            </children>
+            <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_O7jIVpm5EeC9E6pFf7kEkg" showStereotype="Label"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_O7jIV5m5EeC9E6pFf7kEkg" x="1590" y="6678"/>
+          </children>
+          <children xmi:id="_O7jIWJm5EeC9E6pFf7kEkg" type="Note">
+            <children xmi:id="_O7jIWZm5EeC9E6pFf7kEkg" type="DiagramName"/>
+            <children xmi:id="_O7jIWpm5EeC9E6pFf7kEkg" type="Description"/>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_O7jIW5m5EeC9E6pFf7kEkg" fontName="Courier New" description="A container for a group of functionally related Use-Cases and Actors." fillColor="13369343" lineColor="51455"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_O7jIXJm5EeC9E6pFf7kEkg" x="9034" y="6360" width="6375" height="1904"/>
+          </children>
+          <children xmi:id="_O7jIXZm5EeC9E6pFf7kEkg" type="Text">
+            <children xmi:id="_O7jIXpm5EeC9E6pFf7kEkg" type="DiagramName"/>
+            <children xmi:id="_O7jIX5m5EeC9E6pFf7kEkg" type="Description"/>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_O7jIYJm5EeC9E6pFf7kEkg" fontName="Courier New" description="TO USE A BUILDING BLOCK:&#xD;&#xA;&#xD;&#xA;1) CTRL-drag a building block element from &quot;Use-Case Building Blocks&quot; to desired model location.  NOTE: You must perform the CTRL-drag operation via the Project Explorer, not via this diagram.&#xD;&#xA;&#xD;&#xA;2) Right-click over the new element, choose Find/Replace to change the placeholder text ${...} to the desired name.&#xD;&#xA;&#xD;&#xA;"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_O7jIYZm5EeC9E6pFf7kEkg" x="954" y="1272" width="14922" height="4500"/>
+          </children>
+          <children xmi:id="_O7jIYpm5EeC9E6pFf7kEkg" type="Text">
+            <children xmi:id="_O7jIY5m5EeC9E6pFf7kEkg" type="DiagramName"/>
+            <children xmi:id="_O7jIZJm5EeC9E6pFf7kEkg" type="Description"/>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_O7jIZZm5EeC9E6pFf7kEkg" fontHeight="14" description="Use-Case Building Block Instructions"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_O7jIZpm5EeC9E6pFf7kEkg" x="396" y="555"/>
+          </children>
+          <children xmi:id="_O7jIZ5m5EeC9E6pFf7kEkg" type="Note">
+            <children xmi:id="_O7jIaJm5EeC9E6pFf7kEkg" type="DiagramName"/>
+            <children xmi:id="_O7jIaZm5EeC9E6pFf7kEkg" type="Description"/>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_O7jIapm5EeC9E6pFf7kEkg" fontName="Courier New" description="A prototypical Use-Case, including optional Activity Diagram.  Should be stored within a &quot;functional area&quot; package" fillColor="13369343" lineColor="51455"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_O7jIa5m5EeC9E6pFf7kEkg" x="9034" y="8904" width="6374" height="2886"/>
+          </children>
+          <styles xmi:type="umlnotation:UMLDiagramStyle" xmi:id="_O7jIbJm5EeC9E6pFf7kEkg"/>
+          <edges xmi:id="_O7jIbZm5EeC9E6pFf7kEkg" type="NoteAttachment" source="_O7jIWJm5EeC9E6pFf7kEkg" target="_O7jITpm5EeC9E6pFf7kEkg">
+            <styles xmi:type="notation:ConnectorStyle" xmi:id="_O7jIbpm5EeC9E6pFf7kEkg"/>
+            <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_O7jIb5m5EeC9E6pFf7kEkg" points="[-109, 2, 196, 1]$[-305, 1, 0, 0]"/>
+          </edges>
+          <edges xmi:id="_O7jIcJm5EeC9E6pFf7kEkg" type="NoteAttachment" source="_O7jIQpm5EeC9E6pFf7kEkg" target="_O7jIZ5m5EeC9E6pFf7kEkg">
+            <styles xmi:type="notation:ConnectorStyle" xmi:id="_O7jIcZm5EeC9E6pFf7kEkg"/>
+            <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_O7jIcpm5EeC9E6pFf7kEkg" points="[48, -6, -290, 21]$[229, -30, -109, -3]"/>
+          </edges>
+        </contents>
+      </eAnnotations>
+      <eAnnotations xmi:id="_O7jIc5m5EeC9E6pFf7kEkg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+      <packagedElement xmi:type="uml:Package" xmi:id="_O7jIdJm5EeC9E6pFf7kEkg" name="${functional.area}">
+        <eAnnotations xmi:id="_O7jIdZm5EeC9E6pFf7kEkg" source="uml2.diagrams" references="_O7jIdpm5EeC9E6pFf7kEkg">
+          <contents xmi:type="notation:Diagram" xmi:id="_O7jIdpm5EeC9E6pFf7kEkg" type="Usecase" name="${functional.area} Use Cases">
+            <children xmi:id="_O7jId5m5EeC9E6pFf7kEkg" type="Text">
+              <children xmi:id="_O7jIeJm5EeC9E6pFf7kEkg" type="DiagramName"/>
+              <children xmi:id="_O7jIeZm5EeC9E6pFf7kEkg" type="Description"/>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_O7jIepm5EeC9E6pFf7kEkg" fontHeight="14" description="${functional.area} Use Cases"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_O7jIe5m5EeC9E6pFf7kEkg" x="954" y="636"/>
+            </children>
+            <children xmi:id="_O7jIfJm5EeC9E6pFf7kEkg" type="Note">
+              <children xmi:id="_O7jIfZm5EeC9E6pFf7kEkg" type="DiagramName"/>
+              <children xmi:id="_O7jIfpm5EeC9E6pFf7kEkg" type="Description"/>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_O7jIf5m5EeC9E6pFf7kEkg" fontName="Courier New" description="Use this diagram to provide an overview of the Use-Cases and Actors for the functional area.  Here you will depict any extend and include relationships among the Use-Cases, and will also depict the associations between the Actors and the Use-Cases in which they participate.&#xD;&#xA;&#xD;&#xA;TO ADD A USE CASE:&#xD;&#xA;&#xD;&#xA;1) Using the Project Explorer, CTRL-drag &quot;${use.case}&quot; from the &quot;Use-Case Building Blocks&quot; package to the desired functional area package.&#xD;&#xA;&#xD;&#xA;2) Use the Project Explorer to select the new Use-Case, right click it and use Find/Replace feature to rename &quot;${use.case}&quot; with the desired name for the Use-Case.&#xD;&#xA;&#xD;&#xA;3) Drag the new Use-Case to this diagram.&#xD;&#xA;&#xD;&#xA;TO ADD AN ACTOR:&#xD;&#xA;&#xD;&#xA;1) Using the tool palette or the drawing action bar for this diagram, create a new Actor in this diagram.  &#xD;&#xA;&#xD;&#xA;2) If you later realize that the Actor participates in multiple Use-Cases that span functional areas, use the Project Explorer to move it to the &quot;Versatile Actors&quot; package&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;(Delete this instructional note once you no longer need it.) " fillColor="13369343" lineColor="51455"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_O7jIgJm5EeC9E6pFf7kEkg" x="2544" y="2862" width="14603" height="12381"/>
+            </children>
+            <styles xmi:type="umlnotation:UMLDiagramStyle" xmi:id="_O7jIgZm5EeC9E6pFf7kEkg"/>
+          </contents>
+        </eAnnotations>
+      </packagedElement>
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_O7jIgpm5EeC9E6pFf7kEkg" name="${use.case}">
+        <ownedBehavior xmi:type="uml:Activity" xmi:id="_O7jIg5m5EeC9E6pFf7kEkg" name="${use.case}">
+          <eAnnotations xmi:id="_O7jIhJm5EeC9E6pFf7kEkg" source="uml2.diagrams">
+            <contents xmi:type="notation:Diagram" xmi:id="_O7jIhZm5EeC9E6pFf7kEkg" type="Activity" element="_O7jIg5m5EeC9E6pFf7kEkg" name="${use.case} Activity Diagram">
+              <children xmi:id="_O7jIhpm5EeC9E6pFf7kEkg" type="Activity Frame" element="_O7jIg5m5EeC9E6pFf7kEkg">
+                <children xmi:id="_O7jIh5m5EeC9E6pFf7kEkg" type="ActivityCompartment" element="_O7jIg5m5EeC9E6pFf7kEkg">
+                  <styles xmi:type="umlnotation:UMLShapeCompartmentStyle" xmi:id="_O7jIiJm5EeC9E6pFf7kEkg"/>
+                  <layoutConstraint xmi:type="notation:Ratio" xmi:id="_O7jIiZm5EeC9E6pFf7kEkg"/>
+                </children>
+                <children xmi:id="_O7jIipm5EeC9E6pFf7kEkg" type="Name" element="_O7jIg5m5EeC9E6pFf7kEkg"/>
+                <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_O7jIi5m5EeC9E6pFf7kEkg" showStereotype="Label"/>
+                <styles xmi:type="umlnotation:UMLFrameStyle" xmi:id="_O7jIjJm5EeC9E6pFf7kEkg"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_O7jIjZm5EeC9E6pFf7kEkg"/>
+              </children>
+              <styles xmi:type="umlnotation:UMLDiagramStyle" xmi:id="_O7jIjpm5EeC9E6pFf7kEkg"/>
+            </contents>
+          </eAnnotations>
+        </ownedBehavior>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_O7jIj5m5EeC9E6pFf7kEkg" name="Versatile Actors">
+      <eAnnotations xmi:id="_O7jIkJm5EeC9E6pFf7kEkg" source="uml2.diagrams" references="_O7jIkZm5EeC9E6pFf7kEkg">
+        <contents xmi:type="notation:Diagram" xmi:id="_O7jIkZm5EeC9E6pFf7kEkg" type="Usecase" name="Versatile Actors">
+          <children xmi:id="_O7jIkpm5EeC9E6pFf7kEkg" type="Text">
+            <children xmi:id="_O7jIk5m5EeC9E6pFf7kEkg" type="DiagramName"/>
+            <children xmi:id="_O7jIlJm5EeC9E6pFf7kEkg" type="Description"/>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_O7jIlZm5EeC9E6pFf7kEkg" fontHeight="14" description="Versatile Actors"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_O7jIlpm5EeC9E6pFf7kEkg" x="318" y="318"/>
+          </children>
+          <children xmi:id="_O7jIl5m5EeC9E6pFf7kEkg" type="Text">
+            <children xmi:id="_O7jImJm5EeC9E6pFf7kEkg" type="DiagramName"/>
+            <children xmi:id="_O7jImZm5EeC9E6pFf7kEkg" type="Description"/>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_O7jImpm5EeC9E6pFf7kEkg" fontHeight="10" description="Actors that participate in use-cases in multiple functional areas."/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_O7jIm5m5EeC9E6pFf7kEkg" x="1270" y="1640"/>
+          </children>
+          <styles xmi:type="umlnotation:UMLDiagramStyle" xmi:id="_O7jInJm5EeC9E6pFf7kEkg"/>
+        </contents>
+      </eAnnotations>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_O7jInZm5EeC9E6pFf7kEkg" name="Overviews">
+      <eAnnotations xmi:id="_O7jInpm5EeC9E6pFf7kEkg" source="uml2.diagrams" references="_O7jIn5m5EeC9E6pFf7kEkg">
+        <contents xmi:type="notation:Diagram" xmi:id="_O7jIn5m5EeC9E6pFf7kEkg" type="Class" name="Overviews">
+          <children xmi:id="_O7jIoJm5EeC9E6pFf7kEkg" type="Text">
+            <children xmi:id="_O7jIoZm5EeC9E6pFf7kEkg" type="DiagramName"/>
+            <children xmi:id="_O7jIopm5EeC9E6pFf7kEkg" type="Description"/>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_O7jIo5m5EeC9E6pFf7kEkg" fontHeight="14" description="Overviews"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_O7jIpJm5EeC9E6pFf7kEkg" x="636" y="318"/>
+          </children>
+          <children xmi:id="_O7jIpZm5EeC9E6pFf7kEkg" type="Text">
+            <children xmi:id="_O7jIppm5EeC9E6pFf7kEkg" type="DiagramName"/>
+            <children xmi:id="_O7jIp5m5EeC9E6pFf7kEkg" type="Description"/>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_O7jIqJm5EeC9E6pFf7kEkg" fontName="Courier New" description="Overviews of the Use-Case Model"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_O7jIqZm5EeC9E6pFf7kEkg" x="1590" y="1272"/>
+          </children>
+          <children xmi:id="_O7jIqpm5EeC9E6pFf7kEkg" type="Note">
+            <children xmi:id="_O7jIq5m5EeC9E6pFf7kEkg" type="DiagramName"/>
+            <children xmi:id="_O7jIrJm5EeC9E6pFf7kEkg" type="Description"/>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_O7jIrZm5EeC9E6pFf7kEkg" fontName="Courier New" description="TO ADD ADDITIONAL OVERVIEW DIAGRAMS&#xD;&#xA;&#xD;&#xA;1) In the Project Explorer, right-click over the Overviews package, and choose Add Diagram...&#xD;&#xA;&#xD;&#xA;2) Return to this Overviews diagram and drag the new diagram from the Project Explorer onto this diagram.&#xD;&#xA;&#xD;&#xA;(Delete this instructional note once you no longer need it.)" fillColor="13369343" lineColor="51455"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_O7jIrpm5EeC9E6pFf7kEkg" x="4452" y="8586" width="10158" height="5363"/>
+          </children>
+          <children xmi:id="_O7jIr5m5EeC9E6pFf7kEkg" element="_O7jIupm5EeC9E6pFf7kEkg">
+            <children xmi:id="_O7jIsJm5EeC9E6pFf7kEkg" type="DiagramName" element="_O7jIupm5EeC9E6pFf7kEkg"/>
+            <children xmi:id="_O7jIsZm5EeC9E6pFf7kEkg" type="Description" element="_O7jIupm5EeC9E6pFf7kEkg"/>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_O7jIspm5EeC9E6pFf7kEkg" fontName="Courier New" description="Example: All actors in the use-case model, depicted as an inheritance tree"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_O7jIs5m5EeC9E6pFf7kEkg" x="2836" y="3472" width="13624" height="1825"/>
+          </children>
+          <children xmi:id="_O7jItJm5EeC9E6pFf7kEkg" element="_O7jIwZm5EeC9E6pFf7kEkg">
+            <children xmi:id="_O7jItZm5EeC9E6pFf7kEkg" type="DiagramName" element="_O7jIwZm5EeC9E6pFf7kEkg"/>
+            <children xmi:id="_O7jItpm5EeC9E6pFf7kEkg" type="Description" element="_O7jIwZm5EeC9E6pFf7kEkg"/>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_O7jIt5m5EeC9E6pFf7kEkg" fontName="Courier New" description="Key use cases of the system, shown in system context, with performing Actors shown outside the system"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_O7jIuJm5EeC9E6pFf7kEkg" x="1272" y="5724" width="17408" height="1877"/>
+          </children>
+          <styles xmi:type="umlnotation:UMLDiagramStyle" xmi:id="_O7jIuZm5EeC9E6pFf7kEkg"/>
+        </contents>
+        <contents xmi:type="notation:Diagram" xmi:id="_O7jIupm5EeC9E6pFf7kEkg" type="Usecase" name="Actors Overview">
+          <children xmi:id="_O7jIu5m5EeC9E6pFf7kEkg" type="Note">
+            <children xmi:id="_O7jIvJm5EeC9E6pFf7kEkg" type="DiagramName"/>
+            <children xmi:id="_O7jIvZm5EeC9E6pFf7kEkg" type="Description"/>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_O7jIvpm5EeC9E6pFf7kEkg" fontName="Courier New" description="Use this diagram to depict the Actors in your use case model, and their generalization relationships.   &#xD;&#xA;&#xD;&#xA;(Delete this instructional note once you no longer need it.)" fillColor="13369343" lineColor="51455"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_O7jIv5m5EeC9E6pFf7kEkg" x="4445" y="1270" width="9842" height="3492"/>
+          </children>
+          <styles xmi:type="umlnotation:UMLDiagramStyle" xmi:id="_O7jIwJm5EeC9E6pFf7kEkg"/>
+        </contents>
+        <contents xmi:type="notation:Diagram" xmi:id="_O7jIwZm5EeC9E6pFf7kEkg" type="Usecase" name="Context Diagram">
+          <children xmi:id="_O7jIwpm5EeC9E6pFf7kEkg" type="Note">
+            <children xmi:id="_O7jIw5m5EeC9E6pFf7kEkg" type="DiagramName"/>
+            <children xmi:id="_O7jIxJm5EeC9E6pFf7kEkg" type="Description"/>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_O7jIxZm5EeC9E6pFf7kEkg" fontName="Courier New" description="Use this diagram to depict the most important use cases of your system-under-development.   Place them within a rectangle (Geometric Shapes) that represents the boundaries of that system.   Place the Actors that perform the use cases outside of the rectangle.   &#xD;&#xA;&#xD;&#xA;(Delete this instructional note once you no longer need it.)" fillColor="13369343" lineColor="51455"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_O7jIxpm5EeC9E6pFf7kEkg" x="3492" y="1587" width="11747" height="3714"/>
+          </children>
+          <styles xmi:type="umlnotation:UMLDiagramStyle" xmi:id="_O7jIx5m5EeC9E6pFf7kEkg"/>
+        </contents>
+      </eAnnotations>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="__Op8IJm5EeC9E6pFf7kEkg" name="StyleClase"/>
+    <profileApplication xmi:id="_O7jIyJm5EeC9E6pFf7kEkg">
+      <eAnnotations xmi:id="_O7jIyZm5EeC9E6pFf7kEkg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://UML_PROFILES/Standard.profile.uml#_yzU58YinEdqtvbnfB2L_5w"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_O7jIypm5EeC9E6pFf7kEkg">
+      <eAnnotations xmi:id="_O7jIy5m5EeC9E6pFf7kEkg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://UML2_MSL_PROFILES/Default.epx#_IN8k8MmBEdqBcN1R6EvWUw?Default/Default?"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML2_MSL_PROFILES/Default.epx#_a_S3wNWLEdiy4IqP8whjFA?Default?"/>
+    </profileApplication>
+    <profileApplication xmi:id="_O7jIzJm5EeC9E6pFf7kEkg">
+      <eAnnotations xmi:id="_O7jIzZm5EeC9E6pFf7kEkg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://UML2_MSL_PROFILES/Deployment.epx#_IrdAUMmBEdqBcN1R6EvWUw?Deployment/Deployment?"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML2_MSL_PROFILES/Deployment.epx#_vjbuwOvHEdiDX5bji0iVSA?Deployment?"/>
+    </profileApplication>
+    <profileApplication xmi:id="__WY70Jm5EeC9E6pFf7kEkg">
+      <eAnnotations xmi:id="__WY70Zm5EeC9E6pFf7kEkg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://PROFILE_TOOLING/DSLToolProfile.epx#_IAVnISm0Ed2i6JGuVYCC5A?DSLToolProfile/DSLToolProfile?"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://PROFILE_TOOLING/DSLToolProfile.epx#_3yOsgKM6EdyoFfoXSVZpEg?DSLToolProfile?"/>
+    </profileApplication>
+  </uml:Model>
+  <Default:Perspective xmi:id="_O7jIzpm5EeC9E6pFf7kEkg" base_Package="_O7jInZm5EeC9E6pFf7kEkg"/>
+  <DSLToolProfile:Style xmi:id="__gzcEJm5EeC9E6pFf7kEkg" base_Class="__Op8IJm5EeC9E6pFf7kEkg"/>
+</xmi:XMI>
