@@ -1,0 +1,33 @@
+
+11/07/2011
+
+cambios:
+* cambie todos los nombres de claves primarias por "id"
+* cambie todos los nombres de campos con camelcase a formato unerlined (ej: tipoDocumento por tipo_documento)
+* complete nombres de claves foraneas, algunos estaban cortados y/o no tenian el nombre de la tabla de referencia
+* eliminé el campo fecha_reencuentro de la tabla "reencuentro"
+* cambie el campo hora_reencuentro de TIME a DATETIME
+* elimine la referencia de la tabla "mascota" a la tabla "tipomascota"
+* cambie el nombre de la tabla "tipomascota" por "especie"
+* cree una referencia de la tabla "mascota" a la tabla "raza"
+* hice el campo username de la tabla usuario de tipo Unico
+* hice el campo email de la tabla usuario de tipo Unico
+* eliminé el campo fecha_extravio de la tabla "perdida"
+* cambie el campo hora_extravio de TIME a DATETIME
+* le quite el not null de id_domicilio de mascota
+* le quite el not null de id_domicilio de usuario ( sino no vamos a poder crear el usuario hasta que no tenga domicilio)
+* agrege referencia de la tabla "mascota" a "usuario"
+* cambie todas las tablas  a tipo "utf8 default collation"
+* cambie el campo descripcion de "especies" a tipo TEXT
+* cambie el campo descripcion de "mascota" a tipo TEXT
+* cambie el campo descripcion de "reclamomascota" a tipo TEXT
+* cambie el campo descripcion de "encuentro" a tipo TEXT
+* cambie el campo descripcion de "reencuentro" a tipo TEXT
+* cambie el campo descripcion de "perdida" a tipo TEXT
+* cambie el campo descripcion de "raza" a tipo TEXT
+* agrege la tabla administrador donde van solo los usuarios administradores
+* agrege la tabla config donde van a ir las configuraciones de la aplicación
+
+
+(¿No deberíamos eliminar el id_domicilio en la tabla mascota? el domicilio va a ser siempre el mismo del dueño... y si no tiene dueño no tiene domicilio)
+(¿necesitamos la tabla sesión para algo? estaba por eliminarla pero queria preguntarte primero)
