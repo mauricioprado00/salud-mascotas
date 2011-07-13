@@ -1,5 +1,36 @@
+13/07/2011 - mauricio
+* cambio campo id_usuario de tabla mascota por id_dueno. Lo hago que sea nulleable.
+* quito el campo edad de la tabla mascota, no tiene sentido con la fecha de nacimiento alcanza.
+* cambio el campo tamaño de la tabla mascota para no tener lio con las Ñ
+* cambio tabla pelaje por manto
+* elimino el campo tamaño de la tabla manto
+* agrego campo descripcion a tabla manto
+* agrego campo ruta_imagen a tabla manto
+* agrego campo longitud_pelaje a tabla mascota
+* cambio nombre campo id_pelaje por id_manto a tabla mascota (referencia a tabla manto)
+* agrego campo sexo a mascota
+* agrego campo castrado a mascota
+* elimino campo color de mascota (ya existe una tabla para esto)
+* cambio el nombre de la tabla imagen por foto_mascota
+* cambio el campo ruta de la tabla foto_mascota, a TEXT y no nulleable
+* cambio el campo idi por id en la tabla foto_mascota
+* elimino campo id_barrio de tabla perdida
+* agrego campo id_domicilio a tabla perdida
+* agrego campo id_domicilio a tabla encuentro
+* agrego campo lat y lng (latitud y longitud) a tabla domicilio
+* agrego campo notificacion_email a tabla perdida
+* agrego campo republicar_automaticamente a tabla perdida
+* agrego campo quiere_destacar a tabla perdida (este esta en "si" cuando el usuario quiere destacarlo)
+* agrego campo destacado a tabla perdida  (este solo el administrador podrá cambiarlo, lo hara luego de cobrarle.)
+* agrego campo fecha_publicación y fecha_expiración a tabla perdida
+* agrego campo activo a tabla perdida
 
-11/07/2011
+
+
+
+
+
+11/07/2011 - mauricio
 
 cambios:
 * cambie todos los nombres de claves primarias por "id"
