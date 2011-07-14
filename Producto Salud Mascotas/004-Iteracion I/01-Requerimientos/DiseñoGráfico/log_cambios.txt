@@ -1,3 +1,11 @@
+14/07/2011  mauricio
+* modifico registrar_perdida2.psd
+	cambio texto paso 3.
+
+* cambio nombres de enlaces en home_dashboard.psd hacia los casos de uso "registrar mascota perdida" (perdí mi mascota) y "registrar mascota encontrada" (encontré una mascota)
+
+* creo el archivo registrar_encontrada.psd y todos sus pasos
+	
 13/07/2011  mauricio
 * modifico registrar_perdida2.psd
 	* agrego listado desplegable en paso 1, para seleccionar mascotas existentes
