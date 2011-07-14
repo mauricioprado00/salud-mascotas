@@ -1,3 +1,7 @@
+14/07/2011 mauricio
+* agrego registrar mascota y consultar mascota normal.
+* actualizo registrar mascota encontrada
+
 14/07/2011  mauricio
 * modifico registrar_perdida2.psd
 	cambio texto paso 3.
