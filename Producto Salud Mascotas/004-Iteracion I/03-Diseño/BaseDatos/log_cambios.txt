@@ -1,3 +1,34 @@
+15/07/2011 - mauricio
+* agrego campo confirmado a la tabla reencuentro
+* agrego campo email_informante a la tabla reencuentro
+* agrego campo nombre_informante a la tabla reencuentro
+* modifico campo email en tabla usuario, lo hago de varchar de 100
+* modifico campo castrado de tabla mascota, le agrego opción "no se"
+* modifico campo id_manto en tabla mascota, lo hago nulleable por si el usuario no sabe que tipo de manto tiene
+* modifico campo calle de la tabla domicilio, lo llamo calle_numero para que se guarden ambas cosas
+* elimino campo numero de tabla domicilio
+* elimino campo piso de tabla domicilio
+* elimino campo depto de tabla domicilio
+* elimino el campo id_mascota de tabla reencuentro
+* agrego campo id_perdida a tabla reencuentro
+* agrego campo id_encuentro a tabla reencuentro
+* agrego campo activa a mascota
+* agrego campo para_cruza a mascota
+* agrego campo para_adoptar a mascota
+* agrego campo para_venta a mascota
+* agrego campo quiere_destacar a mascota
+* agrego campo destacada a mascota
+* agrego campo pedigree a mascota
+* agrego campo entrenada a mascota
+* agrego campo tiene_mascota a tabla encontrada
+* agrego campo estado_mascota a tabla encontrada
+* agrego campo notificacion_email a tabla encontrada
+* agrego campo mostrar_telefono a tabla encontrada
+* agrego campo republicar_automaticamente a tabla encontrada
+* agrego campo mostrar_telefono a tabla perdida
+
+
+
 13/07/2011 - mauricio
 * cambio campo id_usuario de tabla mascota por id_dueno. Lo hago que sea nulleable.
 * quito el campo edad de la tabla mascota, no tiene sentido con la fecha de nacimiento alcanza.
