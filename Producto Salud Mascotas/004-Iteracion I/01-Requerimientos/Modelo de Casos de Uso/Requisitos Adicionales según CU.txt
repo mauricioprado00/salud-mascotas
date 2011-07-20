@@ -1,0 +1,7 @@
+Estos requisitos se deben discutir al trabajar en las iteraciones 2, 3 y 4.
+
+-Agregar el atributo Estado a los ReportesContenidoInapropiado.
+-Ver si se pueden escribir más de una respuesta por producto. Me parece innecesario, ya que sólo el vendedor contesta (distinto es el caso de las consultas generales de las mascotas). Unir las entidades preguntaProducto y RespuestaProducto, si es así.
+-Agregar en Producto un atributo Destacado(s/n) para que después se muestre entre los primeros o detacarlo de alguna manera.
+-Crear la entidad CausaPerdida para poder realizar el CU 34-Mostrar informe gráfico de causas de pérdida de mascota por periodo o eliminar ese CU.
+
