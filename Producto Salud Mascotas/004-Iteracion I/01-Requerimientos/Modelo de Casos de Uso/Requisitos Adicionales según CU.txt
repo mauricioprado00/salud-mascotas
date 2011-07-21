@@ -6,5 +6,8 @@ Estos requisitos se deben discutir al trabajar en las iteraciones 2, 3 y 4.
 -Crear la entidad CausaPerdida para poder realizar el CU 34-Mostrar informe gráfico de causas de pérdida de mascota por periodo o eliminar ese CU.
 -Entidad MensajeUsuario: agregar el atributo "asunto" y el atributo "leído" que puede tomar el estado "si" o "no" para destacar si fue leído o no el mensaje para luego destacarlos y diferenciarlos (CU 43-Consultar Mensajes Recibidos).
 -Es necesaria una entidad ConfirguraciónProtectoraDeAnimales para guardar las configuraciones para calcular el patrullaje.
+-Eliminar período de vigencia de la entidad "SolicitudCambioPerfil". o ver para qué la utilizamos.
+
+
 
 
