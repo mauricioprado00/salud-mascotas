@@ -1,3 +1,10 @@
+21/07/2011 - mauricio
+* agrego clave única en tabla provincia
+* agrego clave única en tabla localidad
+* agrego clave única en tabla barrio
+19/07/2011 - mauricio
+* agrego campo activo en la tabla usuario
+* elimino clave foranea id_perfil de tabla usuario
 15/07/2011 - mauricio
 * agrego campo confirmado a la tabla reencuentro
 * agrego campo email_informante a la tabla reencuentro
