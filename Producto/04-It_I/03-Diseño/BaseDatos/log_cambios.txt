@@ -1,3 +1,22 @@
+26/07/2011 - mauricio
+* agrego filas a estadomascota segun digrama de estados
+* cambio la clave foranea id_domicilio en tabla mascota, le hago on delete set null
+* cambio campo entrenada, lo hago nulleable y dejo por default en NULL (el campo no es necesario de cargar para mascotas perdidas)
+25/07/2011 - mauricio
+* agrego constraint de clave primaria a tambla colores
+24/07/2011 - mauricio
+* cambio campo id_mascota de tabla foto_mascota, lo hago nulleable
+* agrego campo id_usuario en tabla foto_mascota
+* agrego campo fecha_carga en tabla foto_mascota
+23/07/2011 - mauricio
+* agrego filas a diferentes tablas (estadomascota, manto, longitud_pelaje, raza, especie)
+22/07/2011 - mauricio
+* agrego propiedad auto_increment a campo id de tabla manto
+* cambio campo manto de tabla manto por nombre
+* elimino campo longitud_pelaje de tabla  mascota
+* agrego tabla longitud_pelaje
+* agrego campo id_longitud_pelaje a tabla mascota
+* agrego opción "no sé" a campo sexo de mascota
 21/07/2011 - mauricio
 * agrego clave única en tabla provincia
 * agrego clave única en tabla localidad
