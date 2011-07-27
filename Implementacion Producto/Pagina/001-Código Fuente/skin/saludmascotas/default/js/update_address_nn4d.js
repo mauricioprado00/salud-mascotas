@@ -135,6 +135,10 @@
 			Map24.MapApplication.Map.addListener( "Map24.Event.MapClick", this.add_my_house_on_click.bind(this) );
 			return this;
 		},
+		add_null_on_click_listener: function(){
+			Map24.MapApplication.Map.addListener( "Map24.Event.MapClick", function(){} );
+			return this;
+		},
 		remove_my_house_on_click_listener: function(){
 			Map24.MapApplication.Map.removeListener( "Map24.Event.MapClick", this.add_my_house_on_click.bind(this) );
 			return this;

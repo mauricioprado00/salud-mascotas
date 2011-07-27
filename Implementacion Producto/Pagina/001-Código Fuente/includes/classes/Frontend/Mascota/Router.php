@@ -66,20 +66,47 @@ class Frontend_Mascota_Router extends Frontend_Router_Abstract{
 		}
 		
 		$domicilio_mascota = null;
-		if($paso==1)
-			$object_to_edit->setEstadoConDueno();
-		if($paso==2){
-			if(!$preserve_mascota_edicion || !($domicilio_mascota = Frontend_Mascota_Helper::getDomicilioMascotaEdicionFromSession($id_mascota))){
+		if(!$preserve_mascota_edicion || !($domicilio_mascota = Frontend_Mascota_Helper::getDomicilioMascotaEdicionFromSession($id_mascota))){
+			if($paso==2)
 				$domicilio_mascota = Frontend_Mascota_Helper::getDomicilioEdicion($object_to_edit);
-				//$domicilio_mascota = $object_to_edit->getDomicilio();
+			//$domicilio_mascota = $object_to_edit->getDomicilio();
+		}
+		if(!$domicilio_mascota)
+			$domicilio_mascota = new Frontend_Model_Domicilio();
+//		echo Core_Helper::DebugVars($object_to_edit->getData(),$domicilio_mascota->getData());
+//		die(__FILE__.__LINE__);
+		switch($paso){
+			case 1:{
+				$object_to_edit->setEstadoConDueno();
+				break;
 			}
-			if(!$domicilio_mascota)
-				$domicilio_mascota = new Frontend_Model_Domicilio();
-//			echo Core_Helper::DebugVars($object_to_edit->getData(),$domicilio_mascota->getData());
-//			die(__FILE__.__LINE__);
 		}
 		$this->setObjectToEdit($object_to_edit);
 		$this->setDomicilioMascota($domicilio_mascota);
+	}
+	protected function _editar_step_ok($paso=1, $id_mascota=null, $preserve_mascota_edicion=false){
+		switch($paso){
+			case 1:{//si el paso está bien cargado redirijo al paso siguiente
+				$object_to_edit = $this->getObjectToEdit();
+				Core_Http_Header::Redirect(Frontend_Mascota_Helper::getUrlEditar($object_to_edit->getId(), 1, 2), true);
+				return true;
+				break;
+			}
+			case 2:{//si el paso esta bien cargado, guardo domicilio y mascota
+				$object_to_edit = $this->getObjectToEdit();
+				$domicilio_mascota = $this->getDomicilioMascota();
+				$domicilio_mascota_guardada = Frontend_Mascota_Helper::actionAgregarEditarDomicilio($domicilio_mascota, false)?true:false;
+				if($domicilio_mascota_guardada){
+					$mascota_guardada = Frontend_Mascota_Helper::actionAgregarEditarMascota($object_to_edit, false, $domicilio_mascota)?true:false;
+					if($mascota_guardada){
+						Frontend_Mascota_Helper::clearSessionVars();
+						Core_Http_Header::Redirect(Frontend_Mascota_Helper::getUrlUsuario(), true);
+						return true;
+					}
+				}
+				break;
+			}
+		}
 	}
 	protected function _pre_editar_handle_post($paso=1, $id_mascota=null, $preserve_mascota_edicion=false){
 		$object_to_edit = $this->getObjectToEdit();
@@ -95,8 +122,11 @@ class Frontend_Mascota_Router extends Frontend_Router_Abstract{
 //				echo Core_Helper::DebugVars($object_to_edit->getId(), 1, 2);
 //				var_dump(Frontend_Mascota_Helper::getUrlEditar($object_to_edit->getId(), 1, 2));
 //				die(__FILE__.__LINE__);
-				Core_Http_Header::Redirect(Frontend_Mascota_Helper::getUrlEditar($object_to_edit->getId(), 1, 2), true);
-				return true;
+				$return = $this->_editar_step_ok($paso, $id_mascota, $preserve_mascota_edicion);
+				if(isset($return))
+					return $return;
+				//Core_Http_Header::Redirect(Frontend_Mascota_Helper::getUrlEditar($object_to_edit->getId(), 1, 2), true);
+				//return true;
 //				echo "mascota guardada en sesión";
 //				die(__FILE__.__LINE__);
 //				//Core_Http_Header::Redirect(Frontend_Usuario_Helper::getUrlLogin($object_to_edit), true);
@@ -111,15 +141,9 @@ class Frontend_Mascota_Router extends Frontend_Router_Abstract{
 //			die(__FILE__.__LINE__);
 			$guardado_en_sesion = Frontend_Mascota_Helper::actionAgregarEditarDomicilio($domicilio_mascota, true)?true:false;
 			if($guardado_en_sesion){//pasa validaciones
-				$domicilio_mascota_guardada = Frontend_Mascota_Helper::actionAgregarEditarDomicilio($domicilio_mascota, false)?true:false;
-				if($domicilio_mascota_guardada){
-					$mascota_guardada = Frontend_Mascota_Helper::actionAgregarEditarMascota($object_to_edit, false, $domicilio_mascota)?true:false;
-					if($mascota_guardada){
-						Frontend_Mascota_Helper::clearSessionVars();
-						Core_Http_Header::Redirect(Frontend_Mascota_Helper::getUrlUsuario(), true);
-						return true;
-					}
-				}
+				$return = $this->_editar_step_ok($paso, $id_mascota, $preserve_mascota_edicion);
+				if(isset($return))
+					return $return;
 			}
 		}
 //		$object_to_edit = $this->getObjectToEdit();
@@ -157,16 +181,17 @@ class Frontend_Mascota_Router extends Frontend_Router_Abstract{
 			;
 			$fotos_addedit = $loaded_layout->getBlock('fotos_addedit');
 			$usuario = $this->getLogedUser();
-			$foto_mascota = new Saludmascotas_Model_FotoMascota();
-			$foto_mascota->setWhere(
-				Db_Helper::equal('id_usuario'), 
-				Db_Helper::equal('id_mascota')
-			);
-			$foto_mascota
-				->setIdUsuario($usuario->getId())
-				->setIdMascota($object_to_edit->getId())
-			;
-			$fotos_mascotas = $foto_mascota->search(null, 'ASC', null, 0, get_class($foto_mascota));
+//			$foto_mascota = new Saludmascotas_Model_FotoMascota();
+//			$foto_mascota->setWhere(
+//				Db_Helper::equal('id_usuario'), 
+//				Db_Helper::equal('id_mascota')
+//			);
+//			$foto_mascota
+//				->setIdUsuario($usuario->getId())
+//				->setIdMascota($object_to_edit->getId())
+//			;
+//			$fotos_mascotas = $foto_mascota->search(null, 'ASC', null, 0, get_class($foto_mascota));
+			$fotos_mascotas = $object_to_edit->getListFoto(true);//el true es para que permita pk nula
 //			var_dump(count($fotos_mascotas));
 //			die(__FILE__.__LINE__);
 			$fotos_addedit
@@ -181,11 +206,13 @@ class Frontend_Mascota_Router extends Frontend_Router_Abstract{
 //			var_dump($domicilio_usuario->getData());
 //			die(__FILE__.__LINE__);
 			foreach($loaded_layout->getBlocks('form_edit') as $form_edit){
+				//var_dump(get_class($form_edit), $form_edit->getTemplate());
 				$form_edit
 					->setObjectToEdit($domicilio_mascota)
 					->setDomicilioUsuario($domicilio_usuario)
 				;
 			}
+//			die(__FILE__.__LINE__);
 			$location_selector = $loaded_layout
 				->getBlock('location_selector')
 				->setObjectToEdit($domicilio_mascota)

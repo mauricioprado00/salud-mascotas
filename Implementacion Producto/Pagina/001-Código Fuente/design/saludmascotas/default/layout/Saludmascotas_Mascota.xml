@@ -54,7 +54,7 @@
 		</reference>
 	-->
 	</mascota_addedit>
-	<mascota_addedit_datos>
+	<default when="accion(mascota_addedit_datos, mascota_perdida_addedit_datos)">
 		<reference name="html_head">
 			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.core.js</script>
 			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.widget.js</script>
@@ -77,8 +77,8 @@
 				<mascota_fotos_addedit name="fotos_addedit" />
 			</template>
 		</reference>
-	</mascota_addedit_datos>
-	<mascota_addedit_domicilio>
+	</default>
+	<default when="accion(mascota_addedit_domicilio, mascota_perdida_addedit_domicilio)">
 		<reference name="html_head">
 			<script charset="utf8" external="true">http://api.maptp.map24.com/ajax?appkey=FJX5715ae3ff53e4ea286f2a1aab1356X50</script>
 			<script charset="utf8">js/update_address_nn4d.js</script>
@@ -86,13 +86,55 @@
 			<script charset="utf8">js/addedit_mascota_paso2.js</script>
 		</reference>
 		<reference name="contenido">
-			<template name="form_edit" template="mascota/agregar_paso2.phtml">
-				<template name="form_edit" template="mascota/agregar_paso2_otro_domicilio.phtml">
-					<location_selector_nn4d name="location_selector" />
-				</template>
+			<template name="addedit_paso2_form" template="mascota/agregar_paso2.phtml">
+				<domicilio_selector name="domicilio_selector,form_edit">
+					<template name="form_edit" template="mascota/agregar_paso2_otro_domicilio.phtml">
+						<location_selector_nn4d name="location_selector" />
+					</template>
+				</domicilio_selector>
 			</template>
 		</reference>
-	</mascota_addedit_domicilio>
+	</default>
+	<mascota_perdida_addedit_domicilio>
+		<reference name="html_head">
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.core.js</script>
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.widget.js</script>
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.datepicker.js</script>
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/i18n/jquery.ui.datepicker-es.js</script>
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.datepicker.js</script>
+			<script>jquery-timepicker/jquery.ui.timepicker.js</script>
+			<script>jquery-timepicker/jquery.ui.timepicker-es.js</script>
+			<css>jquery-timepicker/jquery-ui-timepicker.css</css>
+			
+			<css>jquery-ui-1.8.4-126/development-bundle/themes/base/jquery.ui.all.css</css>
+		</reference>
+		<reference name="addedit_paso2_form">
+			<template name="addedit_fecha_extravio" template="mascota/perdida/paso2_fecha_extravio.phtml" />
+		</reference>
+	</mascota_perdida_addedit_domicilio>
+	<default when="accion(mascota_perdida_addedit_busqueda)">
+		<reference name="contenido">
+			<template name="form_edit" template="mascota/perdida/paso3.phtml">
+				
+			</template>
+		</reference>
+	</default>
+	<default when="accion(mascota_perdida_addedit_publicacion)">
+		<reference name="html_head">
+			<script charset="utf8" external="true">http://api.maptp.map24.com/ajax?appkey=FJX5715ae3ff53e4ea286f2a1aab1356X50</script>
+			<script charset="utf8">js/update_address_nn4d.js</script>
+			<script>js/jQuery/fancybox/jquery.fancybox-1.3.1.pack.js</script>
+			<css>js/jQuery/fancybox/jquery.fancybox-1.3.1.css</css>
+		</reference>
+		<reference name="contenido">
+			<template name="form_edit" template="mascota/perdida/paso4.phtml">
+				<mascota_view name="view_datos_mascota" template="mascota/preview.phtml" />
+				<domicilio_view name="view_ubicacion_perdida" />
+				<block name="view_posibles_reencuentros" />
+				<template name="form_edit_publicacion" template="mascota/perdida/paso4_opciones_publicacion.phtml" />
+			</template>
+		</reference>
+	</default>
 	<mascota_upload_foto>
 		<reference name="html_head">
 			<script>js/xhr_file_upload.js</script>

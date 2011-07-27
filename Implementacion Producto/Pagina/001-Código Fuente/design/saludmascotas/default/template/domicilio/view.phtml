@@ -1,0 +1,80 @@
+<?php /* es útf8 */
+
+if($domicilio = $this->getDomicilio()){
+	$lat = $domicilio->getLat();
+	$lng = $domicilio->getLng();
+}
+else{
+	$lat = $lng = '';
+}
+
+?>
+<div class="domicilio_view">
+    <a name="mapa"></a>
+	<DIV id="maparea" class="maparea"></DIV>
+	<div id="geocodingresults" class="geocodingresults"></div>
+	<div id="coordinates"></div>
+</div>
+<script type="text/javascript">
+(function(){
+	function on_add_my_house( Longitude, Latitude ){
+		//window.console.log( Longitude, Latitude, 'on_add_my_house' );
+		$( 'lat' ).value = Latitude;
+		$( 'lng' ).value = Longitude;
+	}
+	Event.observe(window, 'load', function() {
+		MapaNavTeq
+			.setCustomOnload(function(){
+				//window.console.log("custom onload", this);
+				//this.add_my_house_on_click_listener();
+				this.add_null_on_click_listener();
+			})
+			.setAddMyHouseCustomListener( on_add_my_house );
+		;
+		MapaNavTeq.initialize(<?php print substr(json_encode(array(
+			'lat',
+			'lng', 
+			'maparea',
+			'My House/Department',
+			null//custom onload
+		)), 1, -1); ?>);	
+
+//	Event.observe(document.getElementById('limpiar_overlays'), 'click', function() {
+//		alert("limpiando overlays");
+//		clearOverlays();
+//	});
+	
+	});
+	function center_address_location(){
+		try{
+			Map24.MapApplication.center(<?php print json_encode(array(
+				'Longitude'=>$lng,
+				'Latitude'=>$lat,
+			)); ?>);
+		}
+		catch(e){
+			setTimeout(center_address_location, 1000);
+		}
+	}
+	function add_address_location(){
+		try{
+			//Create a new location.
+			myLoc = new Map24.Location(<?php print json_encode(array(
+				'Longitude'=>$lng,
+				'Latitude'=>$lat,
+				'Description'=>'Ubicación de Pérdida',
+				'LogoURL'=>'http://maptpzone.navteq.com/AJAXAPI/images/pin_maparea_home.png',
+			)); ?>);
+			//Commit the location. Only after calling commit() it is possible
+			//to execute further operations on the location such as hide and show.
+			myLoc.commit();
+			center_address_location();
+		}
+		catch(e){
+			setTimeout(add_address_location, 1000);
+		}
+	}
+	add_address_location();
+})();
+</script>
+		

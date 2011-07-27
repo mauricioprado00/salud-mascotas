@@ -16,6 +16,31 @@ class Saludmascotas_Model_Color extends Core_Model_Abstract{
 			$col->addItem($color, strtolower($color->getColorRgb()));
 		return $col;
 	}
+	public static function getColoresFromRgb($arr_rgb){
+//		var_dump($arr_rgb);
+//		die(__FILE__.__LINE__);
+		$return = array();
+		if($arr_rgb){
+			foreach($arr_rgb as $rgb){
+				$color = new self();
+				$color->setColorRgb($rgb);
+				if($color->load())
+					$return[] = $color;
+			}
+		}
+		if(!$return)
+			return null;
+		return $return;
+	}
+	public static function getNombresColoresFromRgb($arr_rgb){
+		$colores = self::getColoresFromRgb($arr_rgb);
+		if(!$colores)
+			return null;
+		$return = array();
+		foreach($colores as $color)
+			$return[] = $color->getNombre();
+		return $return;
+	}
 	public function getDbTableName() 
 	{
 		return 'sm_color';

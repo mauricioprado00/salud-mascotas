@@ -102,39 +102,54 @@ class Frontend_Mascota_Helper extends Frontend_Helper{
 			$domicilio_usuario->restorePrivateData();
 		return $domicilio_usuario;
 	}
+	protected static function getUserSessionContext(){
+		return array(__CLASS__);
+	}
 	public static function getDomicilioMascotaEdicionFromSession($id_mascota=null){
-		$usuario = self::getLogedUser();
-//		var_dump($usuario->getSessionVar('id_mascota_edicion'), $id_mascota, $usuario->getSessionVar('id_mascota_edicion') != $id_mascota, $usuario->getSessionVar('mascota_edicion'));
-//		DIE(__FILE__.__LINE__);
-		if($usuario->getSessionVar('id_mascota_edicion', array(__CLASS__)) != $id_mascota)
+		if(self::getUserSessionVar('id_mascota_edicion') != $id_mascota)
 			return null;
-		return $usuario->getSessionVar('domicilio_mascota_edicion', array(__CLASS__));
+		return self::getUserSessionVar('domicilio_mascota_edicion');
+//		$usuario = self::getLogedUser();
+////		var_dump($usuario->getSessionVar('id_mascota_edicion'), $id_mascota, $usuario->getSessionVar('id_mascota_edicion') != $id_mascota, $usuario->getSessionVar('mascota_edicion'));
+////		DIE(__FILE__.__LINE__);
+//		if($usuario->getSessionVar('id_mascota_edicion', array(__CLASS__)) != $id_mascota)
+//			return null;
+//		return $usuario->getSessionVar('domicilio_mascota_edicion', array(__CLASS__));
 	}
 	public static function getMascotaEdicionFromSession($id_mascota=null){
-		$usuario = self::getLogedUser();
-//		var_dump($usuario->getSessionVar('id_mascota_edicion'), $id_mascota, $usuario->getSessionVar('id_mascota_edicion') != $id_mascota, $usuario->getSessionVar('mascota_edicion'));
-//		DIE(__FILE__.__LINE__);
-//		$usuario->setSessionVar('id_mascota_edicion', null);
-//		$usuario->setSessionVar('mascota_edicion', null);
-		if($usuario->getSessionVar('id_mascota_edicion', array(__CLASS__)) != $id_mascota)
+		if(self::getUserSessionVar('id_mascota_edicion') != $id_mascota)
 			return null;
-		return $usuario->getSessionVar('mascota_edicion', array(__CLASS__));
+		return self::getUserSessionVar('mascota_edicion');
+//		$usuario = self::getLogedUser();
+////		var_dump($usuario->getSessionVar('id_mascota_edicion'), $id_mascota, $usuario->getSessionVar('id_mascota_edicion') != $id_mascota, $usuario->getSessionVar('mascota_edicion'));
+////		DIE(__FILE__.__LINE__);
+////		$usuario->setSessionVar('id_mascota_edicion', null);
+////		$usuario->setSessionVar('mascota_edicion', null);
+//		if($usuario->getSessionVar('id_mascota_edicion', array(__CLASS__)) != $id_mascota)
+//			return null;
+//		return $usuario->getSessionVar('mascota_edicion', array(__CLASS__));
 	}
 	private static function setMascotaEdicionInSession($mascota){
-		$usuario = self::getLogedUser();
-		$usuario->setSessionVar('id_mascota_edicion', $mascota->getId(), array(__CLASS__));
-		$usuario->setSessionVar('mascota_edicion', $mascota, array(__CLASS__));
+		self::setUserSessionVar('id_mascota_edicion', $mascota->getId());
+		self::setUserSessionVar('mascota_edicion', $mascota);
+//		$usuario = self::getLogedUser();
+//		$usuario->setSessionVar('id_mascota_edicion', $mascota->getId(), array(__CLASS__));
+//		$usuario->setSessionVar('mascota_edicion', $mascota, array(__CLASS__));
 	}
-	private static function setDomicilioMascotaEdicionFromSession($domicilio){
-		$usuario = self::getLogedUser();
-		$usuario->setSessionVar('domicilio_mascota_edicion', $domicilio, array(__CLASS__));
+	private static function setDomicilioMascotaEdicionInSession($domicilio){
+		self::setUserSessionVar('domicilio_mascota_edicion', $domicilio);
+//		$usuario = self::getLogedUser();
+//		$usuario->setSessionVar('domicilio_mascota_edicion', $domicilio, array(__CLASS__));
 	}
 
 	public static function clearSessionVars(){
-		$usuario = self::getLogedUser();
-		$usuario->setSessionVar('id_mascota_edicion', null, array(__CLASS__));
-		$usuario->setSessionVar('mascota_edicion', null, array(__CLASS__));
-		$usuario->setSessionVar('domicilio_mascota_edicion', null, array(__CLASS__));
+		self::setUserSessionVar('id_mascota_edicion', null);
+		self::setUserSessionVar('mascota_edicion', null);
+		self::setUserSessionVar('domicilio_mascota_edicion', null);
+//		$usuario = self::getLogedUser();
+//		$usuario->setSessionVar('id_mascota_edicion', null, array(__CLASS__));
+//		$usuario->setSessionVar('mascota_edicion', null, array(__CLASS__));
+//		$usuario->setSessionVar('domicilio_mascota_edicion', null, array(__CLASS__));
 	}
 	public static function getMascotaEdicion($id_mascota){
 		$mascota = new Frontend_Model_Mascota();
@@ -196,12 +211,13 @@ class Frontend_Mascota_Helper extends Frontend_Helper{
 		if($domicilio_mascota->getMidomicilio()=='si' || !isset($domicilio_mascota)){
 			if(!($id_domicilio = $usuario->getIdDomicilio())){
 				Core_App::getInstance()->addErrorMessage(self::getInstance()->__t("No se pudo registrar la mascota, su domicilio es incorrecto"), true);
+				return false;
 			}
 			$mascota->setIdDomicilio($id_domicilio);
 		}
 		else{
 			//if(!$mascota->getIdDomicilio())
-				$mascota->setIdDomicilio($domicilio_mascota->getId());
+			$mascota->setIdDomicilio($domicilio_mascota->getId());
 		}
 		if(!$mascota->hasId()){/** aca hay que agregar a la base de datos*/
 			$mascota->setIdDueno($usuario->getId());
@@ -242,7 +258,7 @@ class Frontend_Mascota_Helper extends Frontend_Helper{
 		}
 		$errors = array();
 		if($to_session){
-			self::setDomicilioMascotaEdicionFromSession($domicilio);
+			self::setDomicilioMascotaEdicionInSession($domicilio);
 		}
 		if($domicilio->getMidomicilio()=='no'){
 			if(((float)$domicilio->getLng())==0 || ((float)$domicilio->getLat())==0 ){

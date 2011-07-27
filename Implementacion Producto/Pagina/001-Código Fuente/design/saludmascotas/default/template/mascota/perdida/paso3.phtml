@@ -1,12 +1,18 @@
 <?php //útf8
+$object_to_edit = $this->getObjectToEdit();
+
 
 ?>
 
-<div class="addeditmascota_domicilio">
-	<form class="standart domicilio" name="form1" method="post">
-		<?php print $this->getChildHtml(); ?> 
+<div class="addeditmascota_busqueda">
+	<form class="standart busqueda" name="form1" method="post">
+		<p>
+			Antes de continuar con la publicación del anuncio te mostramos las mascotas reportadas como encontradas de la ubicación y período indicado.
+		</p>
+		<p>Revísalas cuidadosamente y si encuentras a tu mascota reclámala.</p>
+		<input name="dummy" value="continuar" />
 		<div class="form_row actions_row single_action">
-			<button class="submit button" type="submit">Guardar</button>
+			<button class="submit button" type="submit">Continuar</button>
 			<ul>
 				<li><a href="#">algun link</a></li>
 			</ul>

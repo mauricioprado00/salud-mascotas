@@ -12,6 +12,37 @@ class Frontend_Mascota_Perdida_Helper extends Frontend_Mascota_Helper{
 //	public static function getUrlPhoto(){
 //		return 'mascotas/fotos';
 //	}
+	public static function getUpdatablePerdidaFields(){
+		return array(
+			'extravio_fecha'
+			,'extravio_hora'
+//			,'activo'
+//			,'destacado'
+			,'hora_extravio'
+			,'descripcion'
+			,'notificacion_email'
+			,'republicar_automaticamente'
+			,'quiere_destacar'
+			,'mostrar_telefono'
+			
+//			,'fecha_publicacion'
+//			,'fecha_expiracion'
+//			,'id_domicilio'
+//			,'id_mascota'
+//			,'id_usuario'
+		);
+	}
+	public static function getPerdidaEdicion($mascota){
+		$perdidas = $mascota->getListPerdida();
+		if(!$perdida)
+			return null;
+		$perdidas = new Core_Collection($perdidas);
+		$perdidas = $perdidas->addFilterEq('activa', 'si');
+		if(!$perdidas)
+			return null;
+		$perdida = $perdidas[0];
+		return $perdida;
+	}
 	public static function getUrlAgregar($preserve_mascota_edicion=0, $paso=1){
 		if($paso==1&&$preserve_mascota_edicion==false)
 			return 'mascotas/perdida/agregar';
@@ -22,21 +53,30 @@ class Frontend_Mascota_Perdida_Helper extends Frontend_Mascota_Helper{
 			return self::getUrlAgregar($preserve_mascota_edicion, $paso);
 		return 'mascotas/perdida/editar/'.$paso.'/'.$id_mascota.'/'.$preserve_mascota_edicion;
 	}
-	public static function actionAgregarEditarMascota($mascota, $to_session=true, $domicilio_mascota=null){
-		if(!is_a($mascota,'Frontend_Model_Mascota')){
-			$array = $mascota->getData();
-			$mascota = new Frontend_Model_Mascota();
-			$mascota->loadFromArray($array);
+	private static function setPerdidaEdicionInSession($perdida){
+		self::setUserSessionVar('perdida_mascota_edicion', $perdida);
+	}
+	public static function getPerdidaEdicionFromSession($id_mascota=null){
+		if(self::getUserSessionVar('id_mascota_edicion') != $id_mascota)
+			return null;
+		return self::getUserSessionVar('perdida_mascota_edicion');
+	}
+
+	public static function actionAgregarEditarPerdida($perdida, $to_session=true, $id_mascota=null, $domicilio_mascota=null){
+		if(!is_a($perdida,'Frontend_Model_Perdida')){
+			$array = $perdida->getData();
+			$perdida = new Frontend_Model_Perdida();
+			$perdida->loadFromArray($array);
 		}
 		$errors = array();
-		if(!$mascota->getCantidadColores()){
-			$errors[] = 'Debe seleccionar los <b>colores</b>';
+		if($to_session){
+			self::setPerdidaEdicionInSession($perdida);
+			Core_App::getInstance()->addSuccessMessage(self::getInstance()->__t('Perdida guardada en sesión'), true);
 		}
-		
-		if(!$mascota->validateFields() || $errors){
-			Core_App::getInstance()->addErrorMessage(self::getInstance()->__t("No se pudo registrar la mascota"));
+		if(!$perdida->validateFields() || $errors){
+			Core_App::getInstance()->addErrorMessage(self::getInstance()->__t("No se pudo registrar la perdida"));
 			Core_Helper::LoadValidationTranslation();
-			foreach($mascota->getValidationMessages() as $key=>$messages){
+			foreach($perdida->getValidationMessages() as $key=>$messages){
 				foreach($messages as $message){
 					Core_App::getInstance()->addErrorMessage($message);
 				}
@@ -48,37 +88,37 @@ class Frontend_Mascota_Perdida_Helper extends Frontend_Mascota_Helper{
 		}
 		$usuario = self::getLogedUser();
 		if($to_session){
-			self::setMascotaEdicionInSession($mascota);
-			Core_App::getInstance()->addSuccessMessage(self::getInstance()->__t('Mascota guardada en sesión'), true);
 			return true;
 		}
 		if($domicilio_mascota->getMidomicilio()=='si' || !isset($domicilio_mascota)){
 			if(!($id_domicilio = $usuario->getIdDomicilio())){
 				Core_App::getInstance()->addErrorMessage(self::getInstance()->__t("No se pudo registrar la mascota, su domicilio es incorrecto"), true);
+				return false;
 			}
-			$mascota->setIdDomicilio($id_domicilio);
+			$perdida->setIdDomicilio($id_domicilio);
 		}
 		else{
 			//if(!$mascota->getIdDomicilio())
-				$mascota->setIdDomicilio($domicilio_mascota->getId());
+			$perdida->setIdDomicilio($domicilio_mascota->getId());
 		}
-		if(!$mascota->hasId()){/** aca hay que agregar a la base de datos*/
-			$mascota->setIdDueno($usuario->getId());
-			$resultado = $mascota->insert()?true:false;
+		if(!$perdida->hasId()){/** aca hay que agregar a la base de datos*/
+			$perdida->setIdUsuario($usuario->getId());
+			$perdida->setIdMascota($id_mascota);
+			$resultado = $perdida->insert()?true:false;
 			if($resultado){
-				Core_App::getInstance()->addSuccessMessage(self::getInstance()->__t('Mascota registrada correctamente'), true);
+				Core_App::getInstance()->addSuccessMessage(self::getInstance()->__t('Perdida registrada correctamente'), true);
 			}
 			else{
-				Core_App::getInstance()->addErrorMessage("No se pudo registrar la mascota");
-				foreach($mascota->getTranslatedErrors() as $error){
+				Core_App::getInstance()->addErrorMessage("No se pudo registrar la perdida");
+				foreach($perdida->getTranslatedErrors() as $error){
 					Core_App::getInstance()->addErrorMessage($error->getTranslatedDescription());
 				}
 			}
 		}
 		else{/** aca hay que actualizar el registro*/
-			$resultado = $mascota->update(null)?true:false;
+			$resultado = $perdida->update(null)?true:false;
 //			header('content-type:text/plain');
-//			var_dump($mascota);
+//			var_dump($perdida);
 //			die(__FILE__.__LINE__);
 //			
 			if($resultado){
@@ -86,109 +126,109 @@ class Frontend_Mascota_Perdida_Helper extends Frontend_Mascota_Helper{
 			}
 			else{
 				Core_App::getInstance()->addErrorMessage("No se pudo actualizar sus datos");
-				foreach($mascota->getTranslatedErrors() as $error){
+				foreach($perdida->getTranslatedErrors() as $error){
 					Core_App::getInstance()->addErrorMessage($error->getTranslatedDescription());
 				}
 			}
  		}
 		return($resultado);
 	}
-	public static function actionAgregarEditarDomicilio($domicilio, $to_session=true){
-		if(!is_a($domicilio,'Frontend_Model_Domicilio')){
-			$array = $domicilio->getData();
-			$domicilio = new Frontend_Model_Domicilio();
-			$domicilio->loadFromArray($array);
-		}
-		$errors = array();
-		if($to_session){
-			self::setDomicilioMascotaEdicionFromSession($domicilio);
-		}
-		if($domicilio->getMidomicilio()=='no'){
-			if(((float)$domicilio->getLng())==0 || ((float)$domicilio->getLat())==0 ){
-				$errors[] = 'Debe seleccionar un punto en el mapa';
-			}
-			if(!$domicilio->validateFields()||$errors){
-				Core_App::getInstance()->addErrorMessage("No se pudo actualizar el domicilio");
-				Core_Helper::LoadValidationTranslation();
-				foreach($errors as $message){
-					Core_App::getInstance()->addErrorMessage(self::getInstance()->__t($message));
-				}
-				if($domicilio->getValidationMessages())
-				foreach($domicilio->getValidationMessages() as $key=>$messages){
-					foreach($messages as $message){
-						Core_App::getInstance()->addErrorMessage($message);
-					}
-				}
-				return false;
-			}
-		}
-		if($to_session){
-			Core_App::getInstance()->addSuccessMessage(self::getInstance()->__t('Domicilio mascota guardada en sesión'), true);
-			return true;
-		}
-		if($domicilio->getMidomicilio()=='no'){
-			$usuario = self::getLogedUser();
-			if($domicilio->getId()==$usuario->getIdDomicilio())
-				$domicilio->setId(null);
-			if(!$domicilio->hasId()){/** aca hay que agregar a la base de datos*/
-				$resultado = $domicilio->insert()?true:false;
-				//echo Core_Helper::DebugVars(get_class($domicilio),$domicilio->getData());
-				if($resultado){
-					
-				}
-				else{
-					Core_App::getInstance()->addErrorMessage("El domicilio de su mascota no pudo ser registrado");
-					foreach($domicilio->getTranslatedErrors() as $error){
-						Core_App::getInstance()->addErrorMessage($error->getTranslatedDescription());
-					}
-				}
-			}
-			else{/** aca hay que actualizar el registro*/
-				//$actualizada = true;// actualizarEnLaBase()
-				$resultado = $domicilio->update(null)?true:false;
-				//echo Core_Helper::DebugVars(Inta_Db::getInstance()->getLastQuery());
-				if($resultado){
-				}
-				else{
-					Core_App::getInstance()->addErrorMessage("El domicilio de su mascota no pudo ser actualizado");
-					foreach($domicilio->getTranslatedErrors() as $error){
-						Core_App::getInstance()->addErrorMessage($error->getTranslatedDescription());
-					}
-				}
-	 		}
-	 	}
-	 	else{
-			if($domicilio->getId()){
-				$usuario = self::getLogedUser();
-				$domicilio_usuario = $usuario->getDomicilio();
-				if($domicilio->getId()!=$domicilio_usuario->getId()){
-					$resultado = $domicilio->delete();
-					if($resultado){
-						Core_App::getInstance()->addSuccessMessage(self::getInstance()->__t('Domicilio de la mascota eliminado correctamente'), true);
-					}
-					else{
-						Core_App::getInstance()->addErrorMessage("No se pudo eliminar el domicilio de la mascota");
-						foreach($domicilio->getTranslatedErrors() as $error){
-							Core_App::getInstance()->addErrorMessage($error->getTranslatedDescription());
-						}
-					}
-				}
-				else{
-					$resultado = true;
-				}
-			}
-		}
-		return($resultado);
-	}
-	public static function getColorsAsCollection(){
-		return Saludmascotas_Model_Color::getColorsAsCollection();
-//		$return = array();
-//		$color = new Saludmascotas_Model_Color();
-//		$colores = $color->search();
-//		$col = new Core_Collection();
-//		foreach($colores as $color)
-//			$col->addItem($color, strtolower($color->getColorRgb()));
-//		return $col;
-	}
+//	public static function actionAgregarEditarDomicilio($domicilio, $to_session=true){
+//		if(!is_a($domicilio,'Frontend_Model_Domicilio')){
+//			$array = $domicilio->getData();
+//			$domicilio = new Frontend_Model_Domicilio();
+//			$domicilio->loadFromArray($array);
+//		}
+//		$errors = array();
+//		if($to_session){
+//			self::setDomicilioMascotaEdicionFromSession($domicilio);
+//		}
+//		if($domicilio->getMidomicilio()=='no'){
+//			if(((float)$domicilio->getLng())==0 || ((float)$domicilio->getLat())==0 ){
+//				$errors[] = 'Debe seleccionar un punto en el mapa';
+//			}
+//			if(!$domicilio->validateFields()||$errors){
+//				Core_App::getInstance()->addErrorMessage("No se pudo actualizar el domicilio");
+//				Core_Helper::LoadValidationTranslation();
+//				foreach($errors as $message){
+//					Core_App::getInstance()->addErrorMessage(self::getInstance()->__t($message));
+//				}
+//				if($domicilio->getValidationMessages())
+//				foreach($domicilio->getValidationMessages() as $key=>$messages){
+//					foreach($messages as $message){
+//						Core_App::getInstance()->addErrorMessage($message);
+//					}
+//				}
+//				return false;
+//			}
+//		}
+//		if($to_session){
+//			Core_App::getInstance()->addSuccessMessage(self::getInstance()->__t('Domicilio mascota guardada en sesión'), true);
+//			return true;
+//		}
+//		if($domicilio->getMidomicilio()=='no'){
+//			$usuario = self::getLogedUser();
+//			if($domicilio->getId()==$usuario->getIdDomicilio())
+//				$domicilio->setId(null);
+//			if(!$domicilio->hasId()){/** aca hay que agregar a la base de datos*/
+//				$resultado = $domicilio->insert()?true:false;
+//				//echo Core_Helper::DebugVars(get_class($domicilio),$domicilio->getData());
+//				if($resultado){
+//					
+//				}
+//				else{
+//					Core_App::getInstance()->addErrorMessage("El domicilio de su mascota no pudo ser registrado");
+//					foreach($domicilio->getTranslatedErrors() as $error){
+//						Core_App::getInstance()->addErrorMessage($error->getTranslatedDescription());
+//					}
+//				}
+//			}
+//			else{/** aca hay que actualizar el registro*/
+//				//$actualizada = true;// actualizarEnLaBase()
+//				$resultado = $domicilio->update(null)?true:false;
+//				//echo Core_Helper::DebugVars(Inta_Db::getInstance()->getLastQuery());
+//				if($resultado){
+//				}
+//				else{
+//					Core_App::getInstance()->addErrorMessage("El domicilio de su mascota no pudo ser actualizado");
+//					foreach($domicilio->getTranslatedErrors() as $error){
+//						Core_App::getInstance()->addErrorMessage($error->getTranslatedDescription());
+//					}
+//				}
+//	 		}
+//	 	}
+//	 	else{
+//			if($domicilio->getId()){
+//				$usuario = self::getLogedUser();
+//				$domicilio_usuario = $usuario->getDomicilio();
+//				if($domicilio->getId()!=$domicilio_usuario->getId()){
+//					$resultado = $domicilio->delete();
+//					if($resultado){
+//						Core_App::getInstance()->addSuccessMessage(self::getInstance()->__t('Domicilio de la mascota eliminado correctamente'), true);
+//					}
+//					else{
+//						Core_App::getInstance()->addErrorMessage("No se pudo eliminar el domicilio de la mascota");
+//						foreach($domicilio->getTranslatedErrors() as $error){
+//							Core_App::getInstance()->addErrorMessage($error->getTranslatedDescription());
+//						}
+//					}
+//				}
+//				else{
+//					$resultado = true;
+//				}
+//			}
+//		}
+//		return($resultado);
+//	}
+//	public static function getColorsAsCollection(){
+//		return Saludmascotas_Model_Color::getColorsAsCollection();
+////		$return = array();
+////		$color = new Saludmascotas_Model_Color();
+////		$colores = $color->search();
+////		$col = new Core_Collection();
+////		foreach($colores as $color)
+////			$col->addItem($color, strtolower($color->getColorRgb()));
+////		return $col;
+//	}
 }
 ?>

@@ -1,0 +1,81 @@
+<?php //es útf8
+
+$mascota = $this->getMascota();
+$fotos_mascota = $this->getPhotoList();
+//$perdida = $this->getPerdida();
+$extra_data = $this->getExtraData();
+//$foto_principal = array_shift($fotos_mascota);
+
+//datos
+$nombre = $mascota->getNombre();
+$edad = $mascota->calcularEdad();
+$sexo = $mascota->getSexo();
+$castrado = ucfirst($mascota->getCastrado());
+$raza = $mascota->getRaza(false);
+$manto = $mascota->getManto();
+$largo = $mascota->getLongitudPelaje();
+$manto = $manto->getNombre() . ', ' . $largo->getNombre();
+$nombres_colores = Saludmascotas_Model_Color::getNombresColoresFromRgb($mascota->getColoresSeleccionados());
+$nombres_colores = implode(', ', $nombres_colores);
+$manto .= ', ' . $nombres_colores;
+$descripcion = $mascota->getDescripcion();
+
+?>
+<div class="view_mascota view_mascota_preview" id="<?php print ($id = 'view'.uniqid())?>">
+<?php if($fotos_mascota): ?>
+	<ul class="view_fotos_mascota">
+	<?php foreach($fotos_mascota as $idx=>$foto_mascota): ?> 
+	<?php $max_height=$idx?36:190; $max_width=$idx?60:180; $class=($idx?'':'first'); ?>
+		<li>
+			<a rel="listado_imagenes" href="<?php print $foto_mascota->getUrl(); ?>"><img src="<?php print $foto_mascota->getThumbUrl($max_width, $max_height); ?>" /></a>
+		</li>
+	<?php endforeach; ?> 
+	</ul>
+<?php endif; ?> 
+	<ul class="view_datos_mascota">
+	<?php if($extra_data && $extra_data->count()): ?>
+	<?php foreach($extra_data as $extra_data_item): ?> 
+		<li class="<?php print (preg_replace('/[a-z]+/', '', strtolower($extra_data_item->getLabel()))); ?>">
+			<b><?php print $extra_data_item->getLabel(); ?>:</b><em><?php print $extra_data_item->getText(); ?></em>
+		</li>
+	<?php endforeach; ?>
+	<?php endif; ?>  
+		<li class="nombre">
+			<b>Nombre</b>:<em><?php print $nombre; ?></em>
+		</li>
+		<li class="edad">
+			<b>Edad</b>:<em><?php print $edad; ?></em>
+		</li>
+		<li class="sexo">
+			<b>Sexo</b>:<em><?php print $sexo; ?></em>
+		</li>
+		<li class="castrado">
+			<b>Castrado</b>:<em><?php print $castrado; ?></em>
+		</li>
+		<li class="raza">
+			<b>Raza</b>:<em><?php print $raza; ?></em>
+		</li>
+		<li class="manto">
+			<b>Manto</b>:<em><?php print $manto; ?></em>
+		</li>
+		<li class="descripcion">
+			<b>Descripcion</b>:<em><?php print $descripcion; ?></em>
+		</li>
+	</ul>
+	<div class="view_tamano_mascota">
+		<?php print $mascota->getTamano(); ?> 
+	</div>
+</div>
+<script type="text/javascript">
+<!--
+	jQuery('#<?php print $id; ?> .view_fotos_mascota li a')
+		.fancybox({
+//			'width': 423,
+//			'height':287,
+	        'autoDimensions':true,
+	        'transitionIn':'none',
+			'transitionOut':'none'
+		})
+	;
+-->
+</script>

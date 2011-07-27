@@ -404,7 +404,7 @@ abstract class Db_Model_Abstract extends Core_Object{
 		}
 		return false;
 	}
-	private function _getListType($list_type){
+	private function _getListType($list_type, $allow_null_pk=false){
 		if($data = $this->_getListTypeData($list_type)){
 			//return isset($data[$list_type]);
 			if(isset($data[$list_type])){
@@ -413,7 +413,8 @@ abstract class Db_Model_Abstract extends Core_Object{
 					$data[$list_type]['list_type'], 
 					$data[$list_type]['fk'], 
 					$data[$list_type]['class'], 
-					$data[$list_type]['pk']
+					$data[$list_type]['pk'],
+					$allow_null_pk
 				);
 				//die("aca".__FILE__.__LINE__);
 			}
@@ -421,8 +422,8 @@ abstract class Db_Model_Abstract extends Core_Object{
 		return null;
 	}
 	private $_list_type_objects = array();
-	public function _getListTypeObjects($list_type, $fk, $class, $pk){
-		if(!$this->hasData($pk)||!$this->getData($pk))
+	public function _getListTypeObjects($list_type, $fk, $class, $pk, $allow_null_pk=false){
+		if(!$allow_null_pk && (!$this->hasData($pk)||!$this->getData($pk)))
 			return null;
 		if(!isset($this->_list_type_objects[$list_type])){
 			$o = new $class();
@@ -449,7 +450,8 @@ abstract class Db_Model_Abstract extends Core_Object{
             	if(count($args)&&$args[0]==false)//para permitir obterner elementos _data
             		break;
             	if(strpos($method, 'getList')===0&& $this->_hasListType($list_type = substr($method, 7))){
-            		$listado = $this->_getListType($list_type);
+            		$allow_null_pk = isset($args[0])&&$args[0];
+            		$listado = $this->_getListType($list_type, $allow_null_pk);
             		return $listado;
 //            		var_dump($listado);
 //					die("aca".__FILE__.__LINE__);

@@ -802,9 +802,11 @@ class Base_Layout extends Base_Singleton{
 		$obj->setLayout($this);
 		//var_dump($obj->getName());
 		if($obj->hasName()){
-			$obj->setName($obj->getData('name'));
-			$this->addByName($obj);
-			$obj->setNameInLayout($obj->getName());
+			$names = explode(',', $obj->getData('name'));
+			$simple_name = trim($names[0]);
+			$obj->setName($simple_name);
+			$this->addByNames($obj, $names);
+			$obj->setNameInLayout($simple_name);
 			//var_dump($obj->getNameInLayout());
 		}
 		else{
@@ -833,6 +835,13 @@ class Base_Layout extends Base_Singleton{
 	private function addByName($block){
 //		echo "agregando por nombre ".(get_class($block))."-".($block->getName())."\n";
 		return($this->setBlock($block->getName(), $block));
+	}
+	private function addByNames($block, $names){
+//		echo "agregando por nombre ".(get_class($block))."-".($block->getName())."\n";
+		foreach($names as $name){
+			($this->setBlock(trim($name), $block));
+		}
+		return;
 	}
 	public function setBlock($name, $block){
 		$args = func_get_args();

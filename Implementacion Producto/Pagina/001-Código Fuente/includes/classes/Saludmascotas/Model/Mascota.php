@@ -8,6 +8,7 @@
  *@referencia Raza(id_raza) Saludmascotas_Model_Raza(id)
  *@listar Foto Saludmascotas_Model_FotoMascota
  *@listar Color Saludmascotas_Model_ColorMascota
+ *@listar Perdida Saludmascotas_Model_Perdida
 */
 //*@listar Localidad Saludmascotas_Model_Localidad
 class Saludmascotas_Model_Mascota extends Core_Model_Abstract{
