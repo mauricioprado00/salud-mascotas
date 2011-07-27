@@ -28,8 +28,8 @@ class Saludmascotas_Model_Perdida extends Core_Model_Abstract{
 			,'id_mascota'
 			,'id_usuario'
 		);
-		$this->addAutofilterFieldInput('hora_extravio', array('Mysql_Helper','filterDateInput'));
-		$this->addAutofilterFieldOutput('hora_extravio', array('Mysql_Helper','filterDateOutput'));
+		$this->addAutofilterFieldInput('hora_extravio', array('Mysql_Helper','filterTimestampInput'));
+		$this->addAutofilterFieldOutput('hora_extravio', array('Mysql_Helper','filterTimestampOutput'));
 		$this->addAutofilterFieldInput('fecha_publicacion', array('Mysql_Helper','filterDateInput'));
 		$this->addAutofilterFieldOutput('fecha_publicacion', array('Mysql_Helper','filterDateOutput'));
 		$this->addAutofilterFieldInput('fecha_expiracion', array('Mysql_Helper','filterDateInput'));

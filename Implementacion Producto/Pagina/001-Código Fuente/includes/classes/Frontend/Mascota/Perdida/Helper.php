@@ -34,13 +34,16 @@ class Frontend_Mascota_Perdida_Helper extends Frontend_Mascota_Helper{
 	}
 	public static function getPerdidaEdicion($mascota){
 		$perdidas = $mascota->getListPerdida();
-		if(!$perdida)
-			return null;
-		$perdidas = new Core_Collection($perdidas);
-		$perdidas = $perdidas->addFilterEq('activa', 'si');
 		if(!$perdidas)
 			return null;
-		$perdida = $perdidas[0];
+		$perdidas = new Core_Collection($perdidas);
+		$perdidas = $perdidas->addFilterEq('activo', 'si');
+		if(!$perdidas->count())
+			return null;
+		$perdida = $perdidas->getFirst();
+		$perdida->loadNonTableColumn();
+//		var_dump($perdida);
+//		die(__FILE__.__LINE__);
 		return $perdida;
 	}
 	public static function getUrlAgregar($preserve_mascota_edicion=0, $paso=1){

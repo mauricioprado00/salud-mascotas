@@ -108,6 +108,14 @@ class Frontend_Mascota_Router extends Frontend_Router_Abstract{
 			}
 		}
 	}
+  /**
+   * Frontend_Mascota_Router::_pre_editar_handle_post()
+   *
+   * @param integer $paso
+   * @param mixed $id_mascota
+   * @param bool $preserve_mascota_edicion
+   * @return true si maneja el post y realiza las acciones correctamente, false si maneja el post y no realiza las acciones correctamente, null si no maneja el post
+   */
 	protected function _pre_editar_handle_post($paso=1, $id_mascota=null, $preserve_mascota_edicion=false){
 		$object_to_edit = $this->getObjectToEdit();
 		$domicilio_mascota = $this->getDomicilioMascota();
@@ -122,9 +130,10 @@ class Frontend_Mascota_Router extends Frontend_Router_Abstract{
 //				echo Core_Helper::DebugVars($object_to_edit->getId(), 1, 2);
 //				var_dump(Frontend_Mascota_Helper::getUrlEditar($object_to_edit->getId(), 1, 2));
 //				die(__FILE__.__LINE__);
-				$return = $this->_editar_step_ok($paso, $id_mascota, $preserve_mascota_edicion);
-				if(isset($return))
-					return $return;
+				return true;
+//				$return = $this->_editar_step_ok($paso, $id_mascota, $preserve_mascota_edicion);
+//				if(isset($return))
+//					return $return;
 				//Core_Http_Header::Redirect(Frontend_Mascota_Helper::getUrlEditar($object_to_edit->getId(), 1, 2), true);
 				//return true;
 //				echo "mascota guardada en sesión";
@@ -141,9 +150,10 @@ class Frontend_Mascota_Router extends Frontend_Router_Abstract{
 //			die(__FILE__.__LINE__);
 			$guardado_en_sesion = Frontend_Mascota_Helper::actionAgregarEditarDomicilio($domicilio_mascota, true)?true:false;
 			if($guardado_en_sesion){//pasa validaciones
-				$return = $this->_editar_step_ok($paso, $id_mascota, $preserve_mascota_edicion);
-				if(isset($return))
-					return $return;
+				return true;
+//				$return = $this->_editar_step_ok($paso, $id_mascota, $preserve_mascota_edicion);
+//				if(isset($return))
+//					return $return;
 			}
 		}
 //		$object_to_edit = $this->getObjectToEdit();
@@ -163,9 +173,12 @@ class Frontend_Mascota_Router extends Frontend_Router_Abstract{
 			return $return;
 		}
 		if(Core_Http_Post::hasParameters()){
-			$return = $this->_pre_editar_handle_post($paso, $id_mascota, $preserve_mascota_edicion);
-			if(isset($return)){
-				return $return;
+			$handled = $this->_pre_editar_handle_post($paso, $id_mascota, $preserve_mascota_edicion);
+			if(isset($handled)&&$handled){
+				$return = $this->_editar_step_ok($paso, $id_mascota, $preserve_mascota_edicion);
+				if(isset($return))
+					return $return;
+				//return $return;
 			}
 		}
 	}

@@ -11,6 +11,9 @@ class Frontend_Model_Perdida extends Saludmascotas_Model_Perdida{
 		//artificiales
 		$this->setNonTableColumn('extravio_fecha', 'extravio_hora');
 //		$this->setNonTableColumn('id_pais', 'provincia', 'localidad', 'barrio');
+
+		$this->addAutofilterFieldInput('extravio_fecha', array('Mysql_Helper','filterDateInput'));
+		$this->addAutofilterFieldOutput('extravio_fecha', array('Mysql_Helper','filterDateOutput'));
 		$this
 
 			->setFieldLabel('entrenada','Entrenamiento')
@@ -26,6 +29,16 @@ class Frontend_Model_Perdida extends Saludmascotas_Model_Perdida{
 //		$inserted = parent::insert($data,$use_null_values, $get_sql);
 //		return $inserted;
 //	}
+	public function loadNonTableColumn(){
+		$time = $this->getData('hora_extravio', null, array());
+		//$time = $this->getHoraExtravio();
+		//var_dump($time);
+		$time = explode(' ', $time);
+		$this
+			->setData('extravio_fecha', $time[0], array())
+			->setExtravioHora($time[1])
+		;
+	}
 	public function getUrlEditar($preserve_mascota_edicion=0, $paso=1){
 		$mascota = $this->getMascota();
 		return Frontend_Mascota_Perdida_Helper::getUrlEditar($mascota->getId(), $preserve_mascota_edicion, $paso);

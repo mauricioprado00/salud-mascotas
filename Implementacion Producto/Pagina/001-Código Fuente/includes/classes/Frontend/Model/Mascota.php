@@ -1,6 +1,7 @@
 <?php //es útf8
 /**
  *@referencia Domicilio(id_domicilio) Frontend_Model_Domicilio(id)
+ *@listar Perdida Frontend_Model_Perdida
 */
 class Frontend_Model_Mascota extends Saludmascotas_Model_Mascota{
 	protected static $class = __CLASS__; 

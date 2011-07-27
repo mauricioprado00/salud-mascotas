@@ -54,12 +54,14 @@ class Frontend_Mascota_Perdida_Router extends Frontend_Mascota_Router{
 		
 		$perdida = null;
 		if(!$preserve_mascota_edicion || !($perdida = Frontend_Mascota_Perdida_Helper::getPerdidaEdicionFromSession($id_mascota))){
-			if($paso==4)
+			if(in_array($paso, array(2,4)))
 				$perdida = Frontend_Mascota_Perdida_Helper::getPerdidaEdicion($object_to_edit);
 			//$perdida = $object_to_edit->getPerdida();
 		}
 		if(!$perdida)
 			$perdida = new Frontend_Model_Perdida();
+//		echo Core_Helper::DebugVars($perdida->getData());
+//		die(__FILE__.__LINE__);
 
 		switch($paso){
 			case 1:{
@@ -117,19 +119,21 @@ class Frontend_Mascota_Perdida_Router extends Frontend_Mascota_Router{
 				break;
 			}
 			case 2:{//si el paso esta bien cargado (domicilio) checkeo la carga de fecha y hora de extravio y redirijo al paso siguiente
-				$perdida = $this->getPerdida();
-				$post = Core_Http_Post::getParameters('Core_Object', Frontend_Mascota_Perdida_Helper::getUpdatablePerdidaFields());
-				$perdida->loadFromArray($post->getData(), false);
-//				header('content-type:text/plain');
-//				var_dump($perdida->getData());
-//				die(__FILE__.__LINE__);
-				$object_to_edit = $this->getObjectToEdit();
-				$id_mascota = $object_to_edit->getId();
-				$guardado_en_sesion = Frontend_Mascota_Perdida_Helper::actionAgregarEditarPerdida($perdida, true, $id_mascota)?true:false;
-				if($guardado_en_sesion){//pasa validaciones
-					Core_Http_Header::Redirect(Frontend_Mascota_Perdida_Helper::getUrlEditar($id_mascota, 1, 3), true);
-					return true;
-				}
+				Core_Http_Header::Redirect(Frontend_Mascota_Perdida_Helper::getUrlEditar($id_mascota, 1, 3), true);
+				return true;
+//				$perdida = $this->getPerdida();
+//				$post = Core_Http_Post::getParameters('Core_Object', Frontend_Mascota_Perdida_Helper::getUpdatablePerdidaFields());
+//				$perdida->loadFromArray($post->getData(), false);
+////				header('content-type:text/plain');
+////				var_dump($perdida->getData());
+////				die(__FILE__.__LINE__);
+//				$object_to_edit = $this->getObjectToEdit();
+//				$id_mascota = $object_to_edit->getId();
+//				$guardado_en_sesion = Frontend_Mascota_Perdida_Helper::actionAgregarEditarPerdida($perdida, true, $id_mascota)?true:false;
+//				if($guardado_en_sesion){//pasa validaciones
+//					Core_Http_Header::Redirect(Frontend_Mascota_Perdida_Helper::getUrlEditar($id_mascota, 1, 3), true);
+//					return true;
+//				}
 				break;			
 			}
 			case 3:{//si las selecciones de mascotas coincidentes en la búsqueda estan correctas redirijo al paso siguiente
@@ -155,16 +159,40 @@ class Frontend_Mascota_Perdida_Router extends Frontend_Mascota_Router{
 			}
 		}
 	}
+  /**
+   * Frontend_Mascota_Router::_pre_editar_handle_post()
+   *
+   * @param integer $paso
+   * @param mixed $id_mascota
+   * @param bool $preserve_mascota_edicion
+   * @return true si maneja el post y realiza las acciones correctamente, false si maneja el post y no realiza las acciones correctamente, null si no maneja el post
+   */
 	protected function _pre_editar_handle_post($paso=1, $id_mascota=null, $preserve_mascota_edicion=false){
 		$return = parent::_pre_editar_handle_post($paso, $id_mascota, $preserve_mascota_edicion);
 		switch($paso){
+			case 2:{
+				$perdida = $this->getPerdida();
+				$post = Core_Http_Post::getParameters('Core_Object', Frontend_Mascota_Perdida_Helper::getUpdatablePerdidaFields());
+				$perdida->loadFromArray($post->getData(), false);
+//				header('content-type:text/plain');
+//				var_dump($perdida->getData());
+//				die(__FILE__.__LINE__);
+				$object_to_edit = $this->getObjectToEdit();
+				$id_mascota = $object_to_edit->getId();
+				$guardado_en_sesion = Frontend_Mascota_Perdida_Helper::actionAgregarEditarPerdida($perdida, true, $id_mascota)?true:false;
+				if($guardado_en_sesion){//pasa validaciones
+					$return &= true;
+				}
+				break;
+			}
 			case 3:{//verificar que las selecciones sean correcta y guardar en sesión
 				Core_App::getInstance()->addErrorMessage('verificar que las selecciones sean correcta y guardar en sesión '.__FILE__.__LINE__);
 				$guardado = true;
 				if($guardado){
-					$return = $this->_editar_step_ok($paso, $id_mascota, $preserve_mascota_edicion);
-					if(isset($return))
-						return $return;
+					return true;
+//					$return = $this->_editar_step_ok($paso, $id_mascota, $preserve_mascota_edicion);
+//					if(isset($return))
+//						return $return;
 				}
 				break;
 			}
@@ -180,9 +208,10 @@ class Frontend_Mascota_Perdida_Router extends Frontend_Mascota_Router{
 				$id_mascota = $object_to_edit->getId();
 				$guardado_en_sesion = Frontend_Mascota_Perdida_Helper::actionAgregarEditarPerdida($perdida, true, $id_mascota)?true:false;
 				if($guardado_en_sesion){//pasa validaciones
-					$return = $this->_editar_step_ok($paso, $id_mascota, $preserve_mascota_edicion);
-					if(isset($return))
-						return $return;
+					return true;
+//					$return = $this->_editar_step_ok($paso, $id_mascota, $preserve_mascota_edicion);
+//					if(isset($return))
+//						return $return;
 				}
 			}
 		}
