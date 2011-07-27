@@ -1,0 +1,17 @@
+<?php //útf8 
+	$logeado = Frontend_Usuario_Model_User::getLogedUser();
+	$username = $logeado->getUsername();
+?>
+<div class="usermenu">
+	<div class="usermenu_normal"><?php print $username; ?></div>
+	<div class="usermenu_floating">
+		<ul class="opciones">
+			<li class="first"><a><?php print $username; ?></a></li>
+			<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlUpdate()); ?>">Perfil de Usuario</a></li>
+			<li><a href="#<?php //print $this->getUrl(Frontend_Usuario_Helper::getUrlUpdate()); ?>">Domicilio</a></li>
+			<li><a href="#<?php //print $this->getUrl(Frontend_Usuario_Helper::getUrlUpdate()); ?>">Mascotas</a></li>
+			<li><a href="#<?php //print $this->getUrl(Frontend_Usuario_Helper::getUrlUpdate()); ?>">Notificaciones</a></li>
+			<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlLogout()); ?>">Cerrar Sesión</a></li>
+		</ul>
+	</div>
+</div>

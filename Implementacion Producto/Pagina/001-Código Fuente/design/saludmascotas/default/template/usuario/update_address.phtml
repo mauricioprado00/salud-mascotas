@@ -1,0 +1,297 @@
+<?php //útf8
+
+$object_to_edit = $this->getObjectToEdit();
+
+$barrio = $object_to_edit->getData('barrio');
+$localidad = $object_to_edit->getData('localidad');
+$provincia = $object_to_edit->getData('provincia');
+$id_pais = $object_to_edit->getData('id_pais');
+$calle_numero = $object_to_edit->getData('calle_numero');
+$lat = $object_to_edit->getLat();
+$lng = $object_to_edit->getLng();
+
+
+ ?>
+<div class="form_container form_login">
+	<form class="standart login" name="form1" method="post">
+		<div class="textbox">
+			<div class="holding share_row half_size pais">
+				<div class="input_autocomplete">
+					<?
+						$selector_pais = $this->appendBlock('<selector_pais />');
+						if(!$id_pais){
+							foreach($selector_pais->listEntityes() as $entity){
+								if($entity->getNombre()=='argentina'){
+									$id_pais = $entity->getId();
+									$selector_pais->setSelectedValue($id_pais);
+									break;
+								}
+							}
+						}
+						else $selector_pais->setSelectedValue($id_pais);
+						echo c($selector_pais)
+							//->setSelectedValue($x->getIdpais())
+							//->void($selector_pais->setSelectedValue($id_pais_argentina))
+							//->void(($entityes = $selector_pais->listEntityes()) && isset($entityes[0]) && $entityes[0]->getId() && $selector_pais->setSelectedValue($entityes[0]->getId()))
+//                            ->setSelectMessage('Cualquiera')
+//                            ->setSelectedValue($x->getIdAgencia())
+							->void($selector_pais
+								->getSelectControl()
+									->setName('id_pais')
+									->setId('pais')
+									->setTitle('pais')
+//									->setData('data-campo', '<b>pais</b>')
+//									->setData('data-mensaje', 'Seleccione %field')
+//									->setData('data-validator', '{empty:false}')
+//									->setMultiple('multiple')
+//									->setStyle('min-width:200px')
+							)
+							->toHtml()
+						;
+					?>
+					<!--<input type="text" autocomplete="off" title="pais" name="pais" id="pais" value="">
+					<div class="dropdown_button"></div>
+					-->
+				</div>
+				<!--
+					<span class="holder">País</span>
+				-->
+			</div>
+			<div class="holding share_row half_size provincia">
+				<div class="input_autocomplete">
+					<!-- <input type="text" autocomplete="off" title="provincia" name="provincia" id="provincia" value="">
+					<div class="dropdown_button"></div>-->
+					<?
+						$selector_provincia = $this->appendBlock('<selector_provincia id_pais="'.$id_pais.'" parent_loader="pais" />');
+						
+						$id_provincia = 0;
+						if($provincia){
+							foreach($selector_provincia->listEntityes() as $entity){
+								if($entity->getNombre()==$provincia){
+									$id_provincia = $id_entity = $entity->getId();
+									$selector_provincia->setSelectedValue($id_entity);
+									break;
+								}
+							}
+						}
+						
+						echo c($selector_provincia)
+							//->setSelectedValue($x->getIdpais())
+							//->void($selector_pais->setSelectedValue($id_pais_argentina))
+							//->void(($entityes = $selector_pais->listEntityes()) && isset($entityes[0]) && $entityes[0]->getId() && $selector_pais->setSelectedValue($entityes[0]->getId()))
+//                            ->setSelectMessage('Cualquiera')
+//                            ->setSelectedValue($x->getIdAgencia())
+							->void($selector_provincia
+								->getSelectControl()
+									->setName('provincia')
+									->setId('provincia')
+									->setTitle('provincia')
+//									->setData('data-campo', '<b>pais</b>')
+//									->setData('data-mensaje', 'Seleccione %field')
+//									->setData('data-validator', '{empty:false}')
+//									->setMultiple('multiple')
+//									->setStyle('min-width:200px')
+							)
+							->toHtml()
+						;
+					?>
+				</div>
+				<span class="holder">Provincia</span>
+				<span class="help">Selecciona país y provincia</span>
+			</div>
+			<div style="clear:both;"></div>
+
+			<div class="holding share_row half_size ciudad">
+				<div class="input_autocomplete">
+					<!--<input type="text" autocomplete="off" title="localidad" name="localidad" id="localidad" value="">
+					<div class="dropdown_button"></div>
+					-->
+					<?
+						$selector_localidad = $this->appendBlock('<selector_localidad id_provincia="'.$id_provincia.'" parent_loader="provincia" aditional_data="pais" />');
+
+						$id_localidad = 0;
+						if($localidad){
+							foreach($selector_localidad->listEntityes() as $entity){
+								if($entity->getNombre()==$localidad){
+									$id_localidad = $id_entity = $entity->getId();
+									$selector_localidad->setSelectedValue($id_entity);
+									break;
+								}
+							}
+						}
+
+						echo c($selector_localidad)
+							//->setSelectedValue($x->getIdprovincia())
+							//->void($selector_provincia->setSelectedValue($id_provincia_argentina))
+							//->void(($entityes = $selector_provincia->listEntityes()) && isset($entityes[0]) && $entityes[0]->getId() && $selector_provincia->setSelectedValue($entityes[0]->getId()))
+//                            ->setSelectMessage('Cualquiera')
+//                            ->setSelectedValue($x->getIdAgencia())
+							->void($selector_localidad
+								->getSelectControl()
+									->setName('localidad')
+									->setId('localidad')
+									->setTitle('localidad')
+//									->setData('data-campo', '<b>provincia</b>')
+//									->setData('data-mensaje', 'Seleccione %field')
+//									->setData('data-validator', '{empty:false}')
+//									->setMultiple('multiple')
+//									->setStyle('min-width:200px')
+							)
+							->toHtml()
+						;
+					?>
+				</div>
+				<span class="holder">Ciudad</span>
+			</div>
+			<div class="holding share_row half_size barrio">
+				<div class="input_autocomplete">
+					<!--<input type="text" autocomplete="off" title="barrio" name="barrio" id="barrio" value="">
+					<div class="dropdown_button"></div>
+					-->
+					<?
+						$selector_barrio = $this->appendBlock('<selector_barrio id_localidad="'.$id_localidad.'" parent_loader="localidad" aditional_data="pais,provincia" />');
+						$id_barrio = 0;
+						if($barrio){
+							foreach($selector_barrio->listEntityes() as $entity){
+								if($entity->getNombre()==$barrio){
+									$id_barrio = $id_entity = $entity->getId();
+									$selector_barrio->setSelectedValue($id_entity);
+									break;
+								}
+							}
+						}
+						
+						echo c($selector_barrio)
+							//->setSelectedValue($x->getIdlocalidad())
+							//->void($selector_localidad->setSelectedValue($id_localidad_argentina))
+							//->void(($entityes = $selector_localidad->listEntityes()) && isset($entityes[0]) && $entityes[0]->getId() && $selector_localidad->setSelectedValue($entityes[0]->getId()))
+//                            ->setSelectMessage('Cualquiera')
+//                            ->setSelectedValue($x->getIdAgencia())
+							->void($selector_barrio
+								->getSelectControl()
+									->setName('barrio')
+									->setId('barrio')
+									->setTitle('barrio')
+//									->setData('data-campo', '<b>localidad</b>')
+//									->setData('data-mensaje', 'Seleccione %field')
+//									->setData('data-validator', '{empty:false}')
+//									->setMultiple('multiple')
+//									->setStyle('min-width:200px')
+							)
+							->toHtml()
+						;
+					?>
+				</div>
+				<span class="holder">Barrio</span>
+				<span class="help">Selecciona ciudad y barrio</span>
+			</div>
+			<div style="clear:both;"></div>
+
+			<div class="holding domicilio">
+				<?php
+				echo c($this->appendBlock('<input_text html_autocomplete="off" html_title="domicilio" html_name="calle_numero" html_id="domicilio" />'))
+					->setHtmlValue(utf8_decode($calle_numero))
+					->toHtml()
+				;
+				//<input type="text" autocomplete="off" title="domicilio" name="calle_numero" id="domicilio" value="">
+				?> 
+				
+				<span class="holder">Domicilio</span>
+				<span class="help">Ingresa tu domicilio</span>
+			</div>
+			<?php print $this->getChildHtml('location_selector'); ?>
+		</div>
+		<div class="form_row actions_row single_action">
+			<button class="submit button" type="submit">Actualizar Domicilio</button>
+			<ul>
+				<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlUpdate()); ?>">Modificar Datos</a></li>
+				<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlUpdatePassword()); ?>">Modificar contraseña</a></li>
+			</ul>
+			<ul>
+				<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlServiceConditions()); ?>">Condiciones de Servicio</a></li>
+				<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlPrivacyPolicy()); ?>">Políticas de Privacidad</a></li>
+			</ul>
+		</div>
+	</form>
+	<script type="text/javascript">
+	<!--
+	function searchLocation(){
+		
+		var location = [];
+		var direccion = $$('#domicilio').pop().value;
+		if(direccion)
+			location.push(direccion);
+		var localidad = $$('#localidad').pop().value;
+		if(localidad)
+			location.push(localidad);
+		var provincia = $$('#provincia').pop().value;
+		if(provincia)
+			location.push(provincia);
+		var pais = jQuery('#pais option:selected').text();
+		///var pais = $$('#pais').pop().value;
+		if(pais)
+			location.push(pais);
+		location = location.join(',');
+		if(location=='')
+			return;
+		//window.console.log(location);
+		//MapaNavTeq.findAddress(direccion, localidad, provincia, 'argentina');
+		MapaNavTeq.try_geocode(location);
+	}
+	function searchLocation2(){
+		var searchText = new Map24.WebServices.Address();
+		var location = [];
+		var direccion = $$('#domicilio').pop().value;
+		if(direccion)
+			searchText.Street = direccion;
+		var localidad = $$('#localidad').pop().value;
+		if(localidad)
+			searchText.City = localidad;
+		var provincia = $$('#provincia').pop().value;
+		if(provincia)
+			searchText.County = provincia;//District
+		var pais = jQuery('#pais option:selected').text();
+		pais = 'AR';
+		///var pais = $$('#pais').pop().value;
+		if(pais)
+			searchText.Country = pais;
+		//location = location.join(',');
+		//window.console.log(location);
+		//MapaNavTeq.findAddress(direccion, localidad, provincia, 'argentina');
+		window.console.log(searchText instanceof Map24.WebServices.Address);
+		MapaNavTeq.try_geocode(searchText);
+	}
+	
+	Event.observe(document.getElementById('domicilio'), 'keyup', searchLocation);
+	Event.observe(document.getElementById('localidad'), 'keyup', searchLocation);
+	Event.observe(document.getElementById('provincia'), 'change', searchLocation);
+	Event.observe(document.getElementById('pais'), 'change', searchLocation);
+	<?php if($lat && $lng): ?> 
+	function add_address_location(){
+		try{
+			//Create a new location.
+			myLoc = new Map24.Location(<?php print json_encode(array(
+				'Longitude'=>$lng,
+				'Latitude'=>$lat,
+				'Description'=>'Tu domicilio',
+				'LogoURL'=>'http://maptpzone.navteq.com/AJAXAPI/images/pin_maparea_home.png',
+			)); ?>);
+			//Commit the location. Only after calling commit() it is possible
+			//to execute further operations on the location such as hide and show.
+			myLoc.commit();
+			Map24.MapApplication.center(<?php print json_encode(array(
+				'Longitude'=>$lng,
+				'Latitude'=>$lat,
+			)); ?>);
+		}
+		catch(e){
+			setTimeout(add_address_location, 1000);
+		}
+	}
+	add_address_location();
+	<?php else: ?> 
+	setTimeout(searchLocation, 10000);
+	<?php endif; ?> 
+	// -->
+	</script>
+</div>      

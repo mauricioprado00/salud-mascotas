@@ -1,0 +1,30 @@
+./classes/Inta/Model/Actividad.php:			$id_agencia = Admin_Helper::getInstance()->getIdAgenciaSeleccionada();
+./classes/Inta/Model/Audiencia.php:			$id_agencia = Admin_Helper::getInstance()->getIdAgenciaSeleccionada();
+./classes/Inta/Model/View/MedioVerificacion.php://			$id_agencia = Admin_Helper::getInstance()->getIdAgencia();
+./classes/Inta/Model/View/MedioVerificacion.php://			$id_agencia = Admin_Helper::getInstance()->getIdAgencia();
+./classes/Inta/Model/View/Objetivo.php://			$id_agencia = Admin_Helper::getInstance()->getIdAgencia();
+./classes/Inta/Model/View/Objetivo.php://			$id_agencia = Admin_Helper::getInstance()->getIdAgencia();
+./classes/Inta/Model/View/Actividad.php:			$id_agencia = Admin_Helper::getInstance()->getIdAgencia();
+./classes/Inta/Model/View/Actividad.php:			$id_agencia = Admin_Helper::getInstance()->getIdAgencia();
+./classes/Inta/Model/View/ResultadoEsperado.php://			$id_agencia = Admin_Helper::getInstance()->getIdAgencia();
+./classes/Inta/Model/View/ResultadoEsperado.php://			$id_agencia = Admin_Helper::getInstance()->getIdAgencia();
+./classes/Inta/Model/View/Usuario.php://			$id_agencia = Admin_Helper::getInstance()->getIdAgencia();
+./classes/Inta/Model/View/Usuario.php://			$id_agencia = Admin_Helper::getInstance()->getIdAgencia();
+./classes/Inta/Model/View/Problema.php://			$id_agencia = Admin_Helper::getInstance()->getIdAgencia();
+./classes/Inta/Model/View/Problema.php://			$id_agencia = Admin_Helper::getInstance()->getIdAgencia();
+./classes/Inta/Model/Problema.php:			$id_agencia = Admin_Helper::getInstance()->getIdAgenciaSeleccionada();
+./classes/Admin/TipoAspecto/Router.php:					$tipo_aspecto->setIdAgencia(Admin_Helper::getInstance()->getIdAgencia());
+./classes/Admin/User/Router/User.php:			var_dump(Admin_Helper::getInstance()->getIdAgenciaSeleccionada());
+./classes/Admin/Helper.php:	public function getIdAgencia(){
+./classes/Admin/Helper.php:	public function getIdAgenciaSeleccionada(){
+./classes/Admin/ResultadoEsperado/Router.php:					$resultado_esperado->setIdAgencia(Admin_Helper::getInstance()->getIdAgencia());
+./classes/Admin/ResultadoEsperado/Router.php:				$audiencia->setIdAgencia(Admin_Helper::getInstance()->getIdAgencia());
+./classes/Admin/Audiencia/Router.php:					$audiencia->setIdAgencia(Admin_Helper::getInstance()->getIdAgencia());
+./classes/Admin/Objetivo/Router.php:					$objetivo->setIdAgencia(Admin_Helper::getInstance()->getIdAgencia());
+./classes/Admin/Objetivo/Router.php:				$audiencia->setIdAgencia(Admin_Helper::getInstance()->getIdAgencia());
+./classes/Admin/Objetivo/Router.php:				//echo Core_Helper::DebugVars($ids_audiencia, Admin_Helper::getInstance()->getIdAgencia());
+./classes/Admin/Actividad/Router.php:				$filtros['id_agencia'] = Admin_Helper::getInstance()->getIdAgencia();
+./classes/Admin/Actividad/Router.php:				//$filtros['id_agencia'] = Admin_Helper::getInstance()->getIdAgencia();
+./classes/Admin/Actividad/Router.php:				$wheres[] = Db_Helper::equal('responsable_id_agencia', Admin_Helper::getInstance()->getIdAgencia());
+./classes/Admin/Usuario/Block/Selector.php:		    	->setIdAgencia(Admin_Helper::getInstance()->getIdAgencia())
+./classes/Admin/Aspecto/Router.php:					$aspecto->setIdAgencia(Admin_Helper::getInstance()->getIdAgencia());

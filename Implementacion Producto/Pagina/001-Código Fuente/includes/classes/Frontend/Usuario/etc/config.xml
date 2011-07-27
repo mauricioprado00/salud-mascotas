@@ -1,0 +1,12 @@
+<global>
+	<modules>
+	</modules>
+	<routers>
+		<Frontend_Usuario_Router>user</Frontend_Usuario_Router>
+	</routers>
+	<design>
+	</design>
+	<layouts>
+		<saludmascotas>Saludmascotas_Usuario.xml</saludmascotas>
+	</layouts>
+</global>

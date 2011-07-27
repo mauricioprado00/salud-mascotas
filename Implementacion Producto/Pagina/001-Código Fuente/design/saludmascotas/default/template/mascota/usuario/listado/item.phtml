@@ -1,0 +1,39 @@
+<?php //es útf8
+
+$mascota = $this->getEntity();
+
+//var_dump(get_class($mascota),$mascota->getData());
+//die(__FILE__.__LINE__);
+?> 
+<div class="mascota_item">
+	<div class="image">
+		<img src="<?php print $this->getUrl($mascota->getUrlImage(70, 78)); ?>" />
+	</div>
+	<ul class="column1">
+		<li>
+			<b>Nombre:</b>
+			<em><?php print $mascota->getNombre(); ?></em>
+		</li>
+		<li>
+			<b>Sexo:</b>
+			<em><?php print $mascota->getSexo(); ?></em>
+		</li>
+		<li>
+			<b>Edad:</b>
+			<em><?php print $mascota->calcularEdad(); ?></em>
+		</li>
+		<li>
+			<b>Raza:</b>
+			<em><?php print $mascota->getRaza()->getNombre(); ?></em>
+		</li>
+	</ul>
+	<ul class="column2">
+		<li>
+			<b>Estado:</b>
+			<em><?php print $mascota->getEstadoMascota()->getNombre(); ?></em>
+		</li>
+		<li>
+			<a href="<?php print $this->getUrl($mascota->getUrlEditar()); ?>">Modificar o agregar fotos</a>
+		</li>
+	</ul>
+</div>

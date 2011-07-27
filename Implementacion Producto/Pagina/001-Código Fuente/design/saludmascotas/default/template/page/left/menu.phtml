@@ -1,0 +1,27 @@
+<?php //útf8 ?>
+<?php
+$items = $this->getOrderedItems();
+?>
+<ul class="left_menu"><?php 
+	foreach($items as $item){?> 
+	<li<?php if($item->getActive()){?> class="active"<?php }?>>
+		<a href="<?php print $this->getUrl($item->getLink()); ?>"><?php print $item->getText(); ?></a><?php
+		if($item->getChildrens()){?> 
+		<ul><?php
+			foreach($item->getChildrens() as $child_item){?> 
+			<li<?php if($child_item->getActive()){?> class="active"<?php }?>>
+				<a href="<?php print $this->getUrl($child_item->getLink()); ?>"><?php print $child_item->getText(); ?></a>
+			</li><?php
+			}?> 
+		</ul><?php
+		}?> 
+	</li><?
+	}?>
+	<?php /** / ?>
+	<li><a href="#x">-------Estáticos--------</a></li>
+	<li class="active"><a href="#x">Perfil Usuario</a></li>
+	<li><a href="#x">Domicilio</a></li>
+	<li><a href="#x">Mis Mascotas</a></li>
+	<li><a href="#x">Notificaciones</a></li>
+	<?php /**/ ?>
+</ul>

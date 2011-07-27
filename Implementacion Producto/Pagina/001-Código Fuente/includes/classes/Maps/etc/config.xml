@@ -1,0 +1,6 @@
+<global>
+	<block>
+		<type>location_selector_nn4d</type>
+		<class>Maps_Block_LocationSelectorNn4d</class>
+	</block>
+</global>

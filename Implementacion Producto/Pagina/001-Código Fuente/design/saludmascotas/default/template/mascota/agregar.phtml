@@ -1,0 +1,692 @@
+<?php //útf8 
+$object_to_edit = $this->getObjectToEdit();
+
+$nombre = $object_to_edit->getNombre();
+$edad = $object_to_edit->getEdad();
+$fecha_nacimiento = $object_to_edit->getFechaNacimiento();
+$id_especie = $object_to_edit->getIdEspecie();
+$raza = $object_to_edit->getRaza(false);
+//var_dump($raza);die(__FILE__.__LINE__);
+$id_manto = $object_to_edit->getIdManto();
+$id_longitud_pelaje = $object_to_edit->getIdLongitudPelaje();
+$tamano = $object_to_edit->getTamano();
+$cantidad_colores = $object_to_edit->getCantidadColores();
+$castrado = $object_to_edit->getCastrado();
+$sexo = $object_to_edit->getSexo();
+$entrenada = $object_to_edit->getEntrenada();
+$pedigree = $object_to_edit->getPedigree();
+$descripcion = $object_to_edit->getDescripcion();
+$perdido = $object_to_edit->getPerdido();
+$para_cruza = $object_to_edit->getParaCruza();
+$para_adoptar = $object_to_edit->getParaAdoptar();
+$para_venta = $object_to_edit->getParaVenta(); 
+$quiere_destacar = $object_to_edit->getQuiereDestacar();
+
+$colores_seleccionados = $object_to_edit->getColoresSeleccionados();
+
+?>
+<div class="addeditmascota_datos">
+	<div class="form_container form_mascota_datos">
+		<form class="standart login" name="form1" method="post">
+			<div class="textbox">
+				<div class="holding nombre">
+					<?php
+						$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+						$input
+							->setMaxlength(300)
+							->setType('text')
+							->setAutocomplete('on')
+							->setTitle('nombre')
+							->setName('nombre')
+							->setId('nombre')
+							->setValue($nombre)
+						;
+						echo $input->getHtml();
+						//<input type="text" autocomplete="on" title="nombre" name="nombre" id="nombre" value="">
+					?> 
+					<span class="holder">Nombre</span>
+					<span class="help">Ingresa el nombre de tu mascota</span>
+				</div>
+			</div>
+			<div class="textbox">
+				<div class="holding share_row half_size edad">
+					<?php
+						$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+						$input
+							->setMaxlength(300)
+							->setType('text')
+							->setAutocomplete('on')
+							->setTitle('edad')
+							->setName('edad')
+							->setId('edad')
+							->setValue($edad)
+						;
+						echo $input->getHtml();
+						//<input type="text" autocomplete="on" title="edad" name="edad" value="">
+					?> 
+					<span class="holder">Edad</span>
+					<!--<span class="help">Ingresa tu edad</span>-->
+				</div>
+				<div class="holding share_row half_size fecha_nacimiento">
+					<div class="input_autocomplete">
+						<?php
+							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+							$input
+								->setMaxlength(20)
+								->setType('text')
+								->setAutocomplete('off')
+								->setTitle('Fecha de Nacimiento')
+								->setClass('datepicker')
+								->setName('fecha_nacimiento')
+								->setId('fecha_nacimiento')
+								->setValue($fecha_nacimiento)
+							;
+							echo $input->getHtml();
+						?>
+						<!--<input type="text" autocomplete="off" title="fecha_nacimiento" name="fecha_nacimiento" id="fecha_nacimiento" value="">
+						<div class="dropdown_button"></div>
+						-->
+					</div>
+					<span class="holder">Fecha de Nacimiento</span>
+					<span class="help">Ingresa su edad o fecha de nacimiento si la recuerdas</span>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+			<div class="textbox">
+				<div class="holding share_row half_size especie">
+					<div class="input_autocomplete">
+						<?
+							$selector_especie = $this->appendBlock('<selector_especie />');
+	//						if(!$id_especie){
+	//							foreach($selector_especie->listEntityes() as $entity){
+	//								if($entity->getNombre()=='argentina'){
+	//									$id_especie = $entity->getId();
+	//									$selector_especie->setSelectedValue($id_especie);
+	//									break;
+	//								}
+	//							}
+	//						}
+	//						else $selector_especie->setSelectedValue($id_especie);
+							if($id_especie)
+								$selector_especie->setSelectedValue($id_especie);
+							echo c($selector_especie)
+								//->setSelectedValue($x->getIdespecie())
+								//->void($selector_especie->setSelectedValue($id_especie_argentina))
+								//->void(($entityes = $selector_especie->listEntityes()) && isset($entityes[0]) && $entityes[0]->getId() && $selector_especie->setSelectedValue($entityes[0]->getId()))
+	//                            ->setSelectMessage('Cualquiera')
+	//                            ->setSelectedValue($x->getIdAgencia())
+								->void($selector_especie
+									->getSelectControl()
+										->setName('id_especie')
+										->setId('id_especie')
+										->setTitle('Especie')
+	//									->setData('data-campo', '<b>especie</b>')
+	//									->setData('data-mensaje', 'Seleccione %field')
+	//									->setData('data-validator', '{empty:false}')
+	//									->setMultiple('multiple')
+	//									->setStyle('min-width:200px')
+								)
+								->toHtml()
+							;
+						?>
+						<!--<input type="text" autocomplete="off" title="especie" name="especie" id="especie" value="">
+						<div class="dropdown_button"></div>
+						-->
+					</div>
+					<!--
+						<span class="holder">País</span>
+					-->
+				</div>
+				<div class="holding share_row half_size raza">
+					<div class="input_autocomplete">
+						<?
+							$selector_raza = $this->appendBlock('<selector_raza id_especie="'.$id_especie.'" parent_loader="id_especie" />');
+							
+	//						$raza = 0;
+	//						if($raza){
+	//							foreach($selector_raza->listEntityes() as $entity){
+	//								if($entity->getNombre()==$raza){
+	//									$id_raza = $id_entity = $entity->getId();
+	//									$selector_raza->setSelectedValue($id_entity);
+	//									break;
+	//								}
+	//							}
+	//						}
+							$selector_raza->setInputText($raza);
+							
+							echo c($selector_raza)
+								//->setSelectedValue($x->getIdespecie())
+								//->void($selector_especie->setSelectedValue($id_especie_argentina))
+								//->void(($entityes = $selector_especie->listEntityes()) && isset($entityes[0]) && $entityes[0]->getId() && $selector_especie->setSelectedValue($entityes[0]->getId()))
+	//                            ->setSelectMessage('Cualquiera')
+	//                            ->setSelectedValue($x->getIdAgencia())
+								->void($selector_raza
+									->getSelectControl()
+										->setName('raza')
+										->setId('raza')
+										->setTitle('Raza')
+	//									->setData('data-campo', '<b>especie</b>')
+	//									->setData('data-mensaje', 'Seleccione %field')
+	//									->setData('data-validator', '{empty:false}')
+	//									->setMultiple('multiple')
+	//									->setStyle('min-width:200px')
+								)
+								->toHtml()
+							;
+						?>
+						<!--<input type="text" autocomplete="off" title="raza" name="raza" id="raza" value="">
+						<div class="dropdown_button"></div>
+						-->
+					</div>
+					<!--
+						<span class="holder">País</span>
+					-->
+					<span class="holder">Raza</span>
+					<span class="help">Ingresa información sobre su especie y raza</span>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+			<div class="textbox">
+				<div class="holding share_row half_size manto">
+					<div class="input_autocomplete">
+						<?
+							$selector_manto = $this->appendBlock('<selector_manto />');
+	//						if(!$id_manto){
+	//							foreach($selector_manto->listEntityes() as $entity){
+	//								if($entity->getNombre()=='argentina'){
+	//									$id_manto = $entity->getId();
+	//									$selector_manto->setSelectedValue($id_manto);
+	//									break;
+	//								}
+	//							}
+	//						}
+	//						else $selector_manto->setSelectedValue($id_manto);
+							if($id_manto){
+								$selector_manto->setSelectedValue($id_manto);
+							}
+							echo c($selector_manto)
+								//->setSelectedValue($x->getIdmanto())
+								//->void($selector_manto->setSelectedValue($id_manto_argentina))
+								//->void(($entityes = $selector_manto->listEntityes()) && isset($entityes[0]) && $entityes[0]->getId() && $selector_manto->setSelectedValue($entityes[0]->getId()))
+	//                            ->setSelectMessage('Cualquiera')
+	//                            ->setSelectedValue($x->getIdAgencia())
+								->void($selector_manto
+									->getSelectControl()
+										->setName('id_manto')
+										->setId('id_manto')
+										->setTitle('Manto')
+	//									->setData('data-campo', '<b>manto</b>')
+	//									->setData('data-mensaje', 'Seleccione %field')
+	//									->setData('data-validator', '{empty:false}')
+	//									->setMultiple('multiple')
+	//									->setStyle('min-width:200px')
+								)
+								->toHtml()
+							;
+						?>
+						<!--<input type="text" autocomplete="off" title="manto" name="manto" id="manto" value="">
+						<div class="dropdown_button"></div>
+						-->
+					</div>
+					<!--
+						<span class="holder">País</span>
+					-->
+				</div>
+				<div class="holding share_row half_size longitud_pelaje">
+					<div class="input_autocomplete">
+						<?
+							$selector_longitud_pelaje = $this->appendBlock('<selector_longitud_pelaje />');
+	//						if(!$id_longitud_pelaje){
+	//							foreach($selector_longitud_pelaje->listEntityes() as $entity){
+	//								if($entity->getNombre()=='argentina'){
+	//									$id_longitud_pelaje = $entity->getId();
+	//									$selector_longitud_pelaje->setSelectedValue($id_longitud_pelaje);
+	//									break;
+	//								}
+	//							}
+	//						}
+	//						else $selector_longitud_pelaje->setSelectedValue($id_longitud_pelaje);
+							if($id_longitud_pelaje)
+								$selector_longitud_pelaje->setSelectedValue($id_longitud_pelaje);
+							echo c($selector_longitud_pelaje)
+								//->setSelectedValue($x->getIdlongitud_pelaje())
+								//->void($selector_longitud_pelaje->setSelectedValue($id_longitud_pelaje_argentina))
+								//->void(($entityes = $selector_longitud_pelaje->listEntityes()) && isset($entityes[0]) && $entityes[0]->getId() && $selector_longitud_pelaje->setSelectedValue($entityes[0]->getId()))
+	//                            ->setSelectMessage('Cualquiera')
+	//                            ->setSelectedValue($x->getIdAgencia())
+								->void($selector_longitud_pelaje
+									->getSelectControl()
+										->setName('id_longitud_pelaje')
+										->setId('id_longitud_pelaje')
+										->setTitle('Longitud Pelaje')
+	//									->setData('data-campo', '<b>longitud_pelaje</b>')
+	//									->setData('data-mensaje', 'Seleccione %field')
+	//									->setData('data-validator', '{empty:false}')
+	//									->setMultiple('multiple')
+	//									->setStyle('min-width:200px')
+								)
+								->toHtml()
+							;
+						?>
+						<!--<input type="text" autocomplete="off" title="longitud_pelaje" name="longitud_pelaje" id="longitud_pelaje" value="">
+						<div class="dropdown_button"></div>
+						-->
+					</div>
+					<!--
+						<span class="holder">País</span>
+					-->
+					<span class="help">Ingresa una descripción de su pelaje</span>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+			<div class="select">
+				<div class="holding tamano">
+					<div class="input_autocomplete">
+						<?
+							$selector_tamano = $this->appendBlock('<selector_longitud_tamano_mascota />');
+	//						if(!$id_tamano){
+	//							foreach($selector_tamano->listEntityes() as $entity){
+	//								if($entity->getNombre()=='argentina'){
+	//									$id_tamano = $entity->getId();
+	//									$selector_tamano->setSelectedValue($id_tamano);
+	//									break;
+	//								}
+	//							}
+	//						}
+	//						else $selector_tamano->setSelectedValue($id_tamano);
+							if($tamano)
+								$selector_tamano->setSelectedValue($tamano);
+							echo c($selector_tamano)
+								//->setSelectedValue($x->getIdtamano())
+								//->void($selector_tamano->setSelectedValue($id_tamano_argentina))
+								//->void(($entityes = $selector_tamano->listEntityes()) && isset($entityes[0]) && $entityes[0]->getId() && $selector_tamano->setSelectedValue($entityes[0]->getId()))
+	//                            ->setSelectMessage('Cualquiera')
+	//                            ->setSelectedValue($x->getIdAgencia())
+								->void($selector_tamano
+									->getSelectControl()
+										->setName('tamano')
+										->setId('tamano')
+										->setTitle('tamano')
+	//									->setData('data-campo', '<b>tamano</b>')
+	//									->setData('data-mensaje', 'Seleccione %field')
+	//									->setData('data-validator', '{empty:false}')
+	//									->setMultiple('multiple')
+	//									->setStyle('min-width:200px')
+								)
+								->toHtml()
+							;
+						?>
+						<!--<input type="text" autocomplete="off" title="tamano" name="tamano" id="tamano" value="">
+						<div class="dropdown_button"></div>
+						-->
+					</div>
+					<!--
+						<span class="holder">País</span>
+					-->
+					<span class="help">Selecciona el tamaño de tu mascota</span>
+				</div>
+			</div>
+			<div class="select select_colores" id="<?php print ($id = 'handler_' . uniqid()); ?>">
+				<div class="holding share_row half_size cantidad_colores">
+				<?
+						$selector_cantidad_colores = $this->appendBlock('<selector_cantidad_colores />');
+//						if(!$id_cantidad_colores){
+//							foreach($selector_cantidad_colores->listEntityes() as $entity){
+//								if($entity->getNombre()=='argentina'){
+//									$id_cantidad_colores = $entity->getId();
+//									$selector_cantidad_colores->setSelectedValue($id_cantidad_colores);
+//									break;
+//								}
+//							}
+//						}
+//						else $selector_cantidad_colores->setSelectedValue($id_cantidad_colores);
+						$cantidad_colores = count($colores_seleccionados);
+						if($cantidad_colores)
+							$selector_cantidad_colores->setSelectedValue($cantidad_colores);
+						echo c($selector_cantidad_colores)
+							//->setSelectedValue($x->getIdcantidad_colores())
+							//->void($selector_cantidad_colores->setSelectedValue($id_cantidad_colores_argentina))
+							//->void(($entityes = $selector_cantidad_colores->listEntityes()) && isset($entityes[0]) && $entityes[0]->getId() && $selector_cantidad_colores->setSelectedValue($entityes[0]->getId()))
+//                            ->setSelectMessage('Cualquiera')
+//                            ->setSelectedValue($x->getIdAgencia())
+							->void($selector_cantidad_colores
+								->getSelectControl()
+									->setName('cantidad_colores')
+									->setId('cantidad_colores')
+									->setTitle('Cantidad de Colores')
+//									->setData('data-campo', '<b>cantidad_colores</b>')
+//									->setData('data-mensaje', 'Seleccione %field')
+//									->setData('data-validator', '{empty:false}')
+//									->setMultiple('multiple')
+//									->setStyle('min-width:200px')
+							)
+							->toHtml()
+						;
+					?>
+				</div>
+				<div class="holding share_row half_size contenedor_colores">
+					<ul class="paleta">
+					<?php
+					$colors = Frontend_Mascota_Helper::getColorsAsCollection();
+					foreach($colors as $key=>$color){?> 
+						<li style="background-color:#<?php print $key; ?>" data-color="<?php print $key; ?>"></li><?
+					}
+					/*
+					$color = $colors->addFilterEq('color_rgb','ffa12b');
+					if($color && $color->count()){
+						var_dump($color->getFirst());
+					}*/
+					?> 
+					</ul>
+					<ul class="colores_seleccionados">
+						<?php for($i=0; $i<5; $i++): ?> 
+						<?php $color = isset($colores_seleccionados[$i])?$colores_seleccionados[$i]:'ffffff'; ?>
+						<li><input type="checkbox" name="colores_seleccionados[]" value="<?php print $color; ?>" /></li>
+						<?php endfor; ?> 
+					</ul>
+					<script type="text/javascript">
+						var <?php print $id; ?> = new selector_colores();
+						<?php print $id; ?>.init(<?php print json_encode(array(
+							'container_id'=>$id,
+						))?>);
+					</script>
+					<!--
+						<span class="holder">País</span>
+					-->
+					<span class="help">Ingresa los colores de su pelaje</span>
+				</div>
+				<div style="clear:both;float: none;"></div>
+			</div>
+			<div class="textbox">
+				<div class="holding share_row half_size sexo">
+					<div class="input_autocomplete">
+						<?
+							$selector_sexo = $this->appendBlock('<selector_longitud_sexo_mascota />');
+	//						if(!$id_sexo){
+	//							foreach($selector_sexo->listEntityes() as $entity){
+	//								if($entity->getNombre()=='argentina'){
+	//									$id_sexo = $entity->getId();
+	//									$selector_sexo->setSelectedValue($id_sexo);
+	//									break;
+	//								}
+	//							}
+	//						}
+	//						else $selector_sexo->setSelectedValue($id_sexo);
+							if($sexo)
+								$selector_sexo->setSelectedValue($sexo);
+							echo c($selector_sexo)
+								//->setSelectedValue($x->getIdsexo())
+								//->void($selector_sexo->setSelectedValue($id_sexo_argentina))
+								//->void(($entityes = $selector_sexo->listEntityes()) && isset($entityes[0]) && $entityes[0]->getId() && $selector_sexo->setSelectedValue($entityes[0]->getId()))
+	//                            ->setSelectMessage('Cualquiera')
+	//                            ->setSelectedValue($x->getIdAgencia())
+								->void($selector_sexo
+									->getSelectControl()
+										->setName('sexo')
+										->setId('sexo')
+										->setTitle('sexo')
+	//									->setData('data-campo', '<b>sexo</b>')
+	//									->setData('data-mensaje', 'Seleccione %field')
+	//									->setData('data-validator', '{empty:false}')
+	//									->setMultiple('multiple')
+	//									->setStyle('min-width:200px')
+								)
+								->toHtml()
+							;
+						?>
+						<!--<input type="text" autocomplete="off" title="sexo" name="sexo" id="sexo" value="">
+						<div class="dropdown_button"></div>
+						-->
+					</div>
+					<!--
+						<span class="holder">País</span>
+					-->
+				</div>
+				<div class="holding share_row half_size castrado">
+					<input type="hidden" name="castrado" value="no">
+					<?php
+						$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+						$input
+							//->setMaxlength(20)
+							->setType('checkbox')
+							//->setAutocomplete('off')
+							->setTitle('Castrado')
+							//->setClass('datepicker')
+							->setName('castrado')
+							->setId('castrado')
+							->setValue('si')
+						;
+						if($castrado=='si')
+							$input->setChecked('checked');
+						echo $input->getHtml();
+					?>
+					<label for="castrado">¿Castrado?</label>
+					<!--
+						<span class="holder">País</span>
+					-->
+					<span class="help">Ingresa información sobre su sexo</span>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+			<div class="textbox">
+				<div class="holding share_row half_size entrenada">
+					<div class="input_autocomplete">
+						<?
+							$selector_entrenada = $this->appendBlock('<selector_longitud_entrenada_mascota />');
+	//						if(!$id_entrenada){
+	//							foreach($selector_entrenada->listEntityes() as $entity){
+	//								if($entity->getNombre()=='argentina'){
+	//									$id_entrenada = $entity->getId();
+	//									$selector_entrenada->setSelectedValue($id_entrenada);
+	//									break;
+	//								}
+	//							}
+	//						}
+	//						else $selector_entrenada->setSelectedValue($id_entrenada);
+							if($entrenada)
+								$selector_entrenada->setSelectedValue($entrenada);
+							echo c($selector_entrenada)
+								//->setSelectedValue($x->getIdentrenada())
+								//->void($selector_entrenada->setSelectedValue($id_entrenada_argentina))
+								//->void(($entityes = $selector_entrenada->listEntityes()) && isset($entityes[0]) && $entityes[0]->getId() && $selector_entrenada->setSelectedValue($entityes[0]->getId()))
+	//                            ->setSelectMessage('Cualquiera')
+	//                            ->setSelectedValue($x->getIdAgencia())
+								->void($selector_entrenada
+									->getSelectControl()
+										->setName('entrenada')
+										->setId('entrenada')
+										->setTitle('¿Entrenada?')
+	//									->setData('data-campo', '<b>entrenada</b>')
+	//									->setData('data-mensaje', 'Seleccione %field')
+	//									->setData('data-validator', '{empty:false}')
+	//									->setMultiple('multiple')
+	//									->setStyle('min-width:200px')
+								)
+								->toHtml()
+							;
+						?>
+						<!--<input type="text" autocomplete="off" title="entrenada" name="entrenada" id="entrenada" value="">
+						<div class="dropdown_button"></div>
+						-->
+					</div>
+					<!--
+						<span class="holder">País</span>
+					-->
+				</div>
+				<div class="holding share_row half_size pedigree">
+					<input type="hidden" name="pedigree" value="no">
+					<?php
+						$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+						$input
+							//->setMaxlength(20)
+							->setType('checkbox')
+							//->setAutocomplete('off')
+							->setTitle('Pedigree')
+							//->setClass('datepicker')
+							->setName('pedigree')
+							->setId('pedigree')
+							->setValue('si')
+						;
+						if($pedigree=='si')
+							$input->setChecked('checked');
+						echo $input->getHtml();
+					?> 
+					<label for="pedigree">Pedigree</label>
+					<span class="help">Ingresa información sobre su sexo</span>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+			<div class="textarea">
+				<?
+					$input = Core::getObject('Core_Html_Tag_Custom', 'textarea');
+					$input
+						->setId('descripcion')
+						->setName('descripcion')
+						->setInnerHtml(/*htmlentities*/($descripcion))
+	//                                        ->setRows(5)
+	//                                        ->setCols(40)
+	//					->setData('data-campo', '<b>Observaciones</b>')
+	//					->setData('data-validator', '{empty:false}')
+	//                                        ->setData('data-mensaje', 'Debe cargar uno o mas %field separados por comas')
+					;
+					echo $input->getHtml();
+				?> 
+			</div>
+			<?php print $this->getChildHtml('fotos_addedit'); ?>
+			<h4>Opciones de Publicación</h4>
+			<div class="opciones_formulario">
+				<div class="opcion_formulario">
+					<div class="holding perdido">
+						<input type="hidden" name="perdido" value="no">
+						<?php
+							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+							$input
+								//->setMaxlength(20)
+								->setType('checkbox')
+								//->setAutocomplete('off')
+								->setTitle('¿Está perdido?')
+								//->setClass('datepicker')
+								->setName('perdido')
+								->setId('perdido')
+								->setValue('si')
+							;
+							if($perdido=='si')
+								$input->setChecked('checked');
+							echo $input->getHtml();
+						?>
+						<label for="pedigree">¿Está perdido?</label>
+					</div>
+				</div>
+				<div class="opcion_formulario">
+					<div class="holding longitud_pelaje">
+						<input type="hidden" name="para_cruza" value="no">
+						<?php
+							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+							$input
+								//->setMaxlength(20)
+								->setType('checkbox')
+								//->setAutocomplete('off')
+								->setTitle('Quiero cruzarlo')
+								//->setClass('datepicker')
+								->setName('para_cruza')
+								->setId('para_cruza')
+								->setValue('si')
+							;
+							if($para_cruza=='si')
+								$input->setChecked('checked');
+							echo $input->getHtml();
+						?>
+						<label for="para_cruza">Quiero cruzarlo</label>
+					</div>
+				</div>
+				<div class="opcion_formulario">
+					<div class="holding para_adoptar">
+						<input type="hidden" name="para_adoptar" value="no">
+						<?php
+							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+							$input
+								//->setMaxlength(20)
+								->setType('checkbox')
+								//->setAutocomplete('off')
+								->setTitle('Ofrecer para regalar')
+								//->setClass('datepicker')
+								->setName('para_adoptar')
+								->setId('para_adoptar')
+								->setValue('si')
+							;
+							if($para_adoptar=='si')
+								$input->setChecked('checked');
+							echo $input->getHtml();
+						?>
+						<label for="para_adoptar">Ofrecer para regalar</label>
+					</div>
+				</div>
+				<div class="opcion_formulario">
+					<div class="holding para_venta">
+						<input type="hidden" name="para_venta" value="no">
+						<?php
+							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+							$input
+								//->setMaxlength(20)
+								->setType('checkbox')
+								//->setAutocomplete('off')
+								->setTitle('Ofrecer para vender')
+								//->setClass('datepicker')
+								->setName('para_venta')
+								->setId('para_venta')
+								->setValue('si')
+							;
+							if($para_venta=='si')
+								$input->setChecked('checked');
+							echo $input->getHtml();
+						?>
+						<label for="para_venta">Ofrecer para vender</label>
+					</div>
+					<div class="holding quiere_destacar">
+						<input type="hidden" name="quiere_destacar" value="no">
+						<?php
+							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+							$input
+								//->setMaxlength(20)
+								->setType('checkbox')
+								//->setAutocomplete('off')
+								->setTitle('Destacar anuncio de venta')
+								//->setClass('datepicker')
+								->setName('quiere_destacar')
+								->setId('quiere_destacar')
+								->setValue('si')
+							;
+							if($quiere_destacar=='si')
+								$input->setChecked('checked');
+							echo $input->getHtml();
+						?>
+						<label for="pedigree">Destacar anuncio de venta</label>
+						<em>(Costo $10)</em>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form_row actions_row single_action">
+				<button class="submit button" type="submit">Continuar</button>
+				<ul>
+					<li><a href="#">Algún link</a></li>
+				</ul>
+				<!--
+				<ul>
+					<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlServiceConditions()); ?>">Condiciones de Servicio</a></li>
+					<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlPrivacyPolicy()); ?>">Políticas de Privacidad</a></li>
+				</ul>
+				<ul>
+					<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlLogin()); ?>">¿Ya tienes cuenta?</a></li>
+				</ul>
+				-->
+			</div>
+		</form>
+		<script type="text/javascript">
+		jQuery(document).ready(function(){
+			jQuery('.datepicker').datepicker({ dateFormat: 'dd/mm/yy', changeYear: true });
+		});
+		</script>
+	
+	</div>
+</div>      

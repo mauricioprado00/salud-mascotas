@@ -1,0 +1,35 @@
+<div class="fieldset">
+        <h2 class="legend"><?php print $this->__('Googlemap Location')?></h2>
+        <ul class="form-list">
+    		<li class="wide">
+            	<div class="field">
+	                <label class="required" for="direccion"><em>*</em><?php print $this->__('Youtube Video Url'); ?></label>
+	                <p></p>
+	                <input type="text" name="lat" id="lat"/>
+	                <input type="text" name="lng" id="lng"/>
+	                <input type="text" name="domicilio" id="domicilio" />
+	                <div id="map_canvas" style="width: 620px; height: 590px"></div>
+					<input type="button" value="Limpiar" id="limpiar_overlays"/>
+					<script type="text/javascript">
+						Event.observe(window, 'load', function() {
+							MapaGoogle.initialize(<?php print substr(json_encode(array(
+								$this->getUrl('alquiler/publicante/buscar_ubicacion/'),
+								'lat',
+								'lng', 
+							)), 1, -1); ?>);
+//							Event.observe(document.getElementById('limpiar_overlays'), 'click', function() {
+//								alert("limpiando overlays");
+//								clearOverlays();
+//							});
+							
+							Event.observe(document.getElementById('domicilio'), 'keyup', function() {
+								MapaGoogle.findAddress(this.value, 'villa carlos paz','cordoba', 'argentina');
+//								window.console.log(this.value);
+//								window.console.log(findAddress(this.value, 'villa carlos paz','córdoba', '5152'));
+							});
+						});
+					</script>
+                </div>
+			</li>
+        </ul>
+    </div>

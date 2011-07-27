@@ -1,0 +1,45 @@
+<div id="mini_login">
+
+	<form class="signin" name="form1" method="post">
+		<div class="textbox">
+			<div class="holding username">
+				<input type="text" autocomplete="on" title="Nombre de usuario o correo electr&oacute;nico" name="username" id="username" value="">
+				<span class="holder">Nombre de usuario</span>
+			</div>
+		</div>
+		<div class="textbox">
+			<div class="holding password">
+				<input type="password" autocomplete="on" title="password" name="password" value="">
+				<span class="holder">Contrase&ntilde;a</span>
+			</div>
+		</div>
+		<div class="form_row actions_row">
+			<button class="submit button" type="submit">Iniciar sesi&oacute;n</button>
+			<!--<
+				input value="Ingresar" name="commit" class="button" type="submit">
+			-->
+		</div>
+	</form>
+	
+	<script type="text/javascript" language="JavaScript">
+	<!--
+	var focusControl = document.getElementById('username');
+	
+	if (focusControl.type != "hidden") {
+		focusControl.focus();
+	}
+	jQuery(document).ready(function(){
+		jQuery('.holder').click(function(){
+			jQuery(this).parents('.holding').find('input').focus();
+		});
+		var handle_change = function(){
+			var es_vacio = this.value == '';
+			if(!es_vacio)
+				jQuery(this).parents('.holding').find('.holder').hide();
+			else jQuery(this).parents('.holding').find('.holder').show();
+		};
+		jQuery('form .holding input').change(handle_change).keyup(handle_change);
+	});
+	// -->
+	</script>
+</div>      

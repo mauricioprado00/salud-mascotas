@@ -1,0 +1,84 @@
+<?php //útf8
+$object_to_edit = $this->getObjectToEdit();
+$domicilio_usuario = $this->getDomicilioUsuario();
+$midomicilio = $object_to_edit->getMidomicilio();
+$midomicilio = $midomicilio==''?'no':$midomicilio;
+$midomicilio = $midomicilio=='si'&&!$domicilio_usuario?'no':$midomicilio;
+
+
+
+?>
+
+<div class="addeditmascota_domicilio">
+	<form class="standart domicilio" name="form1" method="post">
+		<?php if($domicilio_usuario): ?>
+		<div class="selector_midomicilio">
+			<?php
+				$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+				$input
+					//->setMaxlength(20)
+					->setType('radio')
+					//->setAutocomplete('off')
+					->setTitle('Mi domicilio')
+					//->setClass('datepicker')
+					->setName('midomicilio')
+					->setId('midomicilio_si')
+					->setValue('si')
+				;
+				if($midomicilio=='si')
+					$input->setChecked('checked');
+				echo $input->getHtml();
+			?> 
+			<label for="midomicilio_si">Mi domicilio</label>
+			<?php
+				$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+				$input
+					//->setMaxlength(20)
+					->setType('radio')
+					//->setAutocomplete('off')
+					->setTitle('Otro domicilio')
+					//->setClass('datepicker')
+					->setName('midomicilio')
+					->setId('midomicilio_no')
+					->setValue('no')
+				;
+				if($midomicilio=='no')
+					$input->setChecked('checked');
+				echo $input->getHtml();
+			?> 
+			<label for="midomicilio_no">Otro domicilio</label>
+		</div>
+		<div class="midomicilio_si_contenido midomicilio_contenido"<?php if($midomicilio=='no'): ?> style="display:none;"<?php endif; ?>>
+			<ul>
+				<li>
+					<strong>País</strong>: <em><?php print htmlentities($domicilio_usuario->getPais())?></em>
+					<strong>Provincia</strong>: <em><?php print htmlentities($domicilio_usuario->getProvincia())?></em>
+					<strong>Localidad</strong>: <em><?php print htmlentities($domicilio_usuario->getLocalidad())?></em>
+					<strong>Barrio</strong>: <em><?php print htmlentities($domicilio_usuario->getBarrio())?></em>
+					<strong>Domicilio</strong>: <em><?php print htmlentities($domicilio_usuario->getCalleNumero())?></em>
+				</li>
+			</ul>
+		</div>
+		<?php endif; ?> 
+		<div class="midomicilio_no_contenido midomicilio_contenido"<?php if($midomicilio=='si'): ?> style="display:none;"<?php endif; ?>>
+		<?php print $this->getChildHtml(); ?> 
+		</div>
+		
+		<div class="form_row actions_row single_action">
+			<button class="submit button" type="submit">Guardar</button>
+			<ul>
+				<li><a href="#">algun link</a></li>
+			</ul>
+			<!--
+			<ul>
+				<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlUpdate()); ?>">Modificar Datos</a></li>
+				<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlUpdatePassword()); ?>">Modificar contraseña</a></li>
+			</ul>
+			<ul>
+				<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlServiceConditions()); ?>">Condiciones de Servicio</a></li>
+				<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlPrivacyPolicy()); ?>">Políticas de Privacidad</a></li>
+			</ul>
+			-->
+		</div>
+	</form>
+</div>

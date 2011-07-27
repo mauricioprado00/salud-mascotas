@@ -1,0 +1,29 @@
+<?php //útf8 
+$usuario = $this->getUsuario();
+$nombre = $usuario->getNombre();
+$apellido = $usuario->getApellido();
+$email = $usuario->getEmail();
+$username = $usuario->getUsername();
+$password = $usuario->getPassword();
+$login_url = $this->getUrl($this->getLoginUrl());
+?>
+<div class="form_container">
+	<p>Hola <?php print $nombre; ?>, a continuación te brindamos tus datos de acceso al sitio SaludMascotas que has solicitado recuperar.</p>
+	<ul>
+		<li><b>Nombre de Usuario</b>:<em><?php print $username; ?></em> <small> o tambien puede utilizar: </small></li>
+		<li><b>Email</b>:<em><?php print $email; ?></em></li>
+		<li><b>Contraseña</b>:<em><?php print $password; ?></em></li>
+	</ul>
+	
+	<small>( si tu no has solicitado la recuperación de tus datos puedes omitir este email )</small>
+	
+	<p>Para logearte puedes seguir el link a continuación: </p>
+	
+	<a href="<?php print $login_url; ?>"><?php print $login_url; ?></a> <br />
+	<small>( si no puede hacer click copia y pega la dirección en tu navegador )</small><br /><br />
+	
+	
+	
+	Gracias por ser parte de la comunidad online.
+		
+</div>      

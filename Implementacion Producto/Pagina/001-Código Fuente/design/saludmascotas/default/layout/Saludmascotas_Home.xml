@@ -1,0 +1,15 @@
+<layout><!-- útf8 -->
+	<home>
+		<reference name="html_body">
+			<action method="appHtmlClass">
+				<class> home</class>
+			</action>
+		</reference>
+		<reference name="contenido">
+			<template template="page/home.phtml">
+				<template name="login_form" template="usuario/mini_login.phtml" />
+				<template name="register_form" template="usuario/mini_registro.phtml" />
+			</template>
+		</reference>
+	</home>
+</layout>

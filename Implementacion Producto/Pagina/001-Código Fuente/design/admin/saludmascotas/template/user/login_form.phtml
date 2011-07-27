@@ -1,0 +1,76 @@
+<?
+$messages = Core_App::getMessages('loginerror');
+?>
+<div id="overfix">
+	<div id="overfix">
+		<div id="white-box" class="clearfix">
+			<div class="blue-vdeg">
+				<div id="login_top">
+					<div class="content">
+						<div class="left">
+							<div class="logo">
+								<img src="<?php print $this->getSkinUrl('legacy/img/logotd.png'); ?>" alt="SaludMascotas">
+							</div>
+						</div>
+					</div>
+				</div>
+					
+				<div id="login_bottom">
+					<div class="content">
+						<div class="right">
+						<form class="signin" name="form1" method="post">
+							<input name="josso_cmd" value="login" type="hidden">
+							<div class="textbox">
+								<div class="holding username">
+									<input type="text" autocomplete="on" title="Nombre de usuario o correo electr&oacute;nico" name="username" id="username" value="">
+									<span class="holder">Nombre de usuario</span>
+								</div>
+							</div>
+							<div class="textbox">
+								<div class="holding password">
+									<input type="password" autocomplete="on" title="password" name="password" value="">
+									<span class="holder">Contrase&ntilde;a</span>
+								</div>
+							</div>
+							<div class="form_row actions_row">
+								<button class="submit button" type="submit">Iniciar sesi&oacute;n</button>
+								<!--<
+									input value="Ingresar" name="commit" class="button" type="submit">
+								-->
+							</div>
+							<center class="mensajes"><?php if($messages)
+							foreach($messages as $message){?> 
+							<b><?=$message?></b><?	
+							}?></center>
+						</form>
+						
+						<script type="text/javascript" language="JavaScript">
+						<!--
+						var focusControl = document.getElementById('username');
+						
+						if (focusControl.type != "hidden") {
+							focusControl.focus();
+						}
+						jQuery(document).ready(function(){
+							jQuery('.holder').click(function(){
+								jQuery(this).parents('.holding').find('input').focus();
+							});
+							var handle_change = function(){
+								var es_vacio = this.value == '';
+								if(!es_vacio)
+									jQuery(this).parents('.holding').find('.holder').hide();
+								else jQuery(this).parents('.holding').find('.holder').show();
+							};
+							jQuery('form .holding input').change(handle_change).keyup(handle_change);
+						});
+						// -->
+						</script>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="half_shadow"></div>
+      

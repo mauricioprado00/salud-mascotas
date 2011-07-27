@@ -1,0 +1,27 @@
+<script>
+<!--
+	var entered = 0;
+	function dodragenter(o){
+		entered++;
+		window.console.log(document.getElementById('uploadelement'));
+		document.getElementById('uploadelement').style.display='block';
+	}
+	function dodragleave(o){
+		entered--;
+		window.console.log(o);
+		if (!entered) 
+			document.getElementById('uploadelement').style.display='none';
+		
+	}
+	function dodrop(o){
+		window.console.log('drpeando');
+		return false;
+	}
+-->
+</script>
+<body ondragenter="javascript: return dodragenter(this);" ondragleave="javascript: return dodragleave(this);" ondrop="javascript: return dodrop(this);" ondragend="javascript: return dodrop(this);">
+  <form method="post" enctype="multipart/form-data" id="uploadform">
+    Things can be dragged and dropped here!
+    <input type="file" id="uploadelement" name="dragupload[]" onchange="if (this.value) { document.getElementById('uploadform').submit(); }" style="display:none;position:absolute;top:0;left:0;right:0;bottom:0;opacity:0;" />
+  </form>
+</body>

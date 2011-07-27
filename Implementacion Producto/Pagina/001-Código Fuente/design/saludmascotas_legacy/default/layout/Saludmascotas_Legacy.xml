@@ -1,0 +1,32 @@
+<layout><!-- útf8 -->
+	<default>
+		<block type="Page/html_document" name="html_document">
+			<block compress_scripts="0" type="Page/html_head" name="html_head" title="SaludMascotas">
+			
+				<css name="saludmascotas_legacy_css_estilos">css/styles.css</css>
+				<script charset="utf8">jquery-ui-1.8.1.custom/development-bundle/jquery-1.4.2.js</script>
+                <!--<css when="!accion(homeloadajax)">css/skin.css</css>-->
+                <!--
+				
+				<script charset="UTF-8">js/jQuery/jquery.blockUI-2.33.js</script>
+				-->
+			</block>
+			<block type="Page/html_body" name="html_body" html_class="cuerpo">
+				<wrapper html_class="bg_degradado">
+					<wrapper html_class="simple">
+						<template template="page/saludmascotas_legacy.phtml">
+							<wrapper html_class="head">
+							</wrapper>
+							<wrapper html_class="content">
+								<block name="contenido" />
+							</wrapper>
+						</template>
+					</wrapper>
+				</wrapper>
+				<wrapper html_class="footer">
+					<template template="page/footer/links.phtml" />
+				</wrapper>
+			</block>
+		</block>
+	</default>
+</layout>

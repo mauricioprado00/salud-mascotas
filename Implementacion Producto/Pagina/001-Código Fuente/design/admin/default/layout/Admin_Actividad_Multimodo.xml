@@ -1,0 +1,228 @@
+<layout>
+	<list_admin_actividad>
+		<reference name="contenedor_main">
+			<block
+				type="Admin/AddEditForm"
+				action_url="reporte/agregarActividades"
+				ajax_target=".contenedor_main"
+				ajax_replace_with="true"
+				validador_js="validar_cantidad_items"
+				method="post"
+				before="listado_datos_grid">
+			<template template="actividad/cesta.phtml"  />
+			</block>
+		</reference>
+		<reference in="superadmin" name="listado_datos_grid"
+			toolbar_edit_url="administrator/actividad/addEdit,id"
+			toolbar_delete_url="administrator/actividad/delete,id">
+		</reference>
+		<reference name="listado_datos_grid"
+			caption="Listado de Actividad"
+			source="administrator/actividad/datalist2"
+			sort_name="actividad_id"
+			sort_order="asc"
+			can_edit="false"
+			can_add="false"
+			can_delete="false"
+			full_width="true"
+			toolbar="top"
+			can_export_as_html="true"
+			>
+			<block custom_type="boton"
+				titulo="Buscar"
+				action_js="jQuery(&quot;###table_id##&quot;).searchGrid( {sopt:['cn','bw','eq','ne','lt','gt','ew']} );" />
+			<action named_args="true" method="addColumn">
+				<title>Acciones</title>
+				<name>acciones</name>
+				<index>acciones</index>
+				<width>90</width>
+				<align>left</align>
+				<sortable>false</sortable>
+				<hideinexport>1</hideinexport>
+			</action>
+			<action named_args="true" method="addColumn">
+				<title>Inv No</title>
+				<name>actividad_id</name>
+				<index>actividad_id</index>
+				<width>36</width>
+				<align>left</align>
+				<sortable>true</sortable>
+			</action>
+			<action named_args="true" method="addColumn">
+				<title>Agencia</title>
+				<name>agencia_nombre</name>
+				<index>agencia_nombre</index>
+				<width>104</width>
+				<align>left</align>
+				<sortable>true</sortable>
+			</action>
+			<action named_args="true" method="addColumn">
+				<title>Nombre</title>
+				<name>actividad_nombre</name>
+				<index>actividad_nombre</index>
+				<width>300</width>
+				<align>left</align>
+				<sortable>true</sortable>
+			</action>
+       		<action named_args="true" method="addColumn">
+				<title>Responsable</title>
+				<name>responsable_apellido</name>
+				<index>responsable_apellido</index>
+				<width>90</width>
+				<align>left</align>
+				<sortable>true</sortable>
+			</action>
+			<action named_args="true" method="addColumn">
+				<title>Año</title>
+				<name>actividad_ano</name>
+				<index>actividad_ano</index>
+				<width>50</width>
+				<align>left</align>
+				<sortable>true</sortable>
+			</action>
+			<action named_args="true" method="addColumn">
+				<title>Cumplimiento</title>
+				<name>actividad_porcentaje_cumplimiento</name>
+				<index>actividad_porcentaje_cumplimiento</index>
+				<width>50</width>
+				<align>left</align>
+				<sortable>true</sortable>
+			</action>
+			<action named_args="true" method="addColumn">
+				<title>Tiempo</title>
+				<name>actividad_porcentaje_tiempo</name>
+				<index>actividad_porcentaje_tiempo</index>
+				<width>50</width>
+				<align>left</align>
+				<sortable>true</sortable>
+			</action>
+			<action named_args="true" method="addColumn">
+				<title>Presupuesto</title>
+				<name>actividad_presupuesto_sum</name>
+				<index>actividad_presupuesto_sum</index>
+				<width>50</width>
+				<align>left</align>
+				<sortable>true</sortable>
+			</action>
+			<action named_args="true" method="addColumn">
+				<title>Observaciones</title>
+				<name>actividad_observaciones</name>
+				<index>actividad_observaciones</index>
+				<width>170</width>
+				<align>left</align>
+				<sortable>true</sortable>
+			</action>
+			<action named_args="true" method="addColumn">
+				<title>Estado</title>
+				<name>actividad_estado</name>
+				<index>actividad_estado</index>
+				<width>90</width>
+				<align>left</align>
+				<sortable>true</sortable>
+			</action>
+		</reference>
+	</list_admin_actividad>
+	<addedit_admin_actividad>
+		<reference name="contenedor_main">
+			<block
+				type="Admin/AddEditForm"
+				action_url="actividad/addEdit"
+				ajax_target=".contenedor_main"
+				ajax_replace_with="true"
+				validador_js="validar_agregar_actividad,validar_seleccion_resultado_esperado"
+				method="post"
+				name="formulario_edicion_actividad">
+				<tabset>
+					<!-- cuando agregamos una nueva forzamos a que seleccionen el resultado esperado -->
+					<!--
+					<tab when="accion(entity_new)" title="Resultado Esperado">
+						<add_edit_list_resultado_esperado_actividad name="add_edit_list_resultado_esperado_actividad" allow_in_new="si_dejar" validator="validar_seleccion_resultado_esperado" />
+						<reference name="formulario_edicion_actividad">
+							<action method="setValidadorJs">
+								<valor>validar_agregar_actividad,validar_seleccion_resultado_esperado</valor>
+							</action>
+						</reference>
+					</tab>
+					-->
+					<tab title="Datos de Actividad">
+						<block name="actividad_add_edit_form" as="datos" type="template" template="actividad/add.phtml">
+							<block as="hijos_arriba">
+								<fieldset html_style="float:none;" when="accion(entity_new)|accion(edit_actividad_estado_planificado)" caption="Resultados a los que aporta">
+									<add_edit_list_resultado_esperado_actividad name="add_edit_list_resultado_esperado_actividad" allow_in_new="si_dejar" validator="validar_seleccion_resultado_esperado" />
+								</fieldset>
+								<fieldset html_style="float:none;" when="!accion(entity_new)&amp;!accion(edit_actividad_estado_planificado)" caption="Resultados a los que aporta">
+									<add_edit_list_resultado_esperado_actividad view_only="1" name="add_edit_list_resultado_esperado_actividad" />
+								</fieldset>
+							</block>
+							<block as="hijos_abajo">
+								<block name="actividad_add_edit_form" as="cronograma"
+									nofieldset="1" 
+									type="template" template="actividad/planificacion.phtml" />
+								<fieldset when="!accion(entity_new)" caption="Concurrencia">
+									<add_edit_list_audiencia_actividad name="add_edit_list_audiencia_actividad" />
+								</fieldset>
+								<fieldset when="!accion(entity_new)" caption="Documentos">
+									<add_edit_list_documentos name="add_edit_list_documentos_actividad" 
+									tipo_entidad="actividad" />
+								</fieldset>
+								<fieldset html_style="clear:both;" when="!accion(entity_new)" caption="Proyectos">
+									<add_edit_list_proyecto_actividad name="add_edit_list_proyecto_actividad" />
+								</fieldset>
+							</block>
+						</block>
+					</tab>
+					<!--
+					<tab title="Planificacion">
+						<block name="actividad_add_edit_form" type="template" template="actividad/planificacion.phtml"></block>
+					</tab>
+					-->
+					<!--
+                                        <tab title="Datos de Proyecto">
+						<block name="actividad_add_edit_form" type="template" template="actividad/link_proyecto.phtml"></block>
+					</tab>
+                                        <tab title="Resultado Esperado">
+						<block name="actividad_add_edit_form" type="template" template="actividad/link_resultado_esperado.phtml"></block>
+					</tab>
+					-->
+					<tab when="!accion(entity_new)" title="Usuarios Involucrados">
+						<add_edit_list_usuario_actividad name="add_edit_list_usuario_actividad" />
+					</tab>
+					<!--
+					<tab when="!accion(entity_new)" title="Concurrencia">
+						<add_edit_list_audiencia_actividad name="add_edit_list_audiencia_actividad" />
+					</tab>
+					-->
+					<tab when="!accion(entity_new,edit_actividad_estado_planificado)" title="Aspectos">
+						<add_edit_list_aspecto_actividad name="add_edit_list_aspecto_actividad" />
+					</tab>
+					<tab when="!accion(entity_new,edit_actividad_estado_planificado)" title="Estrategias">
+						<add_edit_list_estrategia_actividad name="add_edit_list_estrategia_actividad" />
+					</tab>
+					<!--
+					<tab when="!accion(entity_new)" title="Proyectos">
+						<add_edit_list_proyecto_actividad name="add_edit_list_proyecto_actividad" />
+					</tab>
+					-->
+					
+					<!-- solo se puede agregar resultados esperados una vez que existe la entidad 
+					-->
+					<!--
+					<tab when="!accion(entity_new)&amp;accion(edit_actividad_estado_planificado)" title="Resultado Esperado">
+						<add_edit_list_resultado_esperado_actividad name="add_edit_list_resultado_esperado_actividad" validator="validar_seleccion_resultado_esperado" />
+						<reference name="formulario_edicion_actividad">
+							<action method="setValidadorJs">
+								<valor>validar_agregar_actividad,validar_seleccion_resultado_esperado</valor>
+							</action>
+						</reference>
+					</tab>
+					-->
+					<!--
+					<tab when="!accion(entity_new)" title="Documentos">
+						<add_edit_list_documentos name="add_edit_list_documentos_actividad" tipo_entidad="actividad" />
+					</tab>
+					-->
+				</tabset>
+			</block>
+		</reference>
+	</addedit_admin_actividad>
+</layout>

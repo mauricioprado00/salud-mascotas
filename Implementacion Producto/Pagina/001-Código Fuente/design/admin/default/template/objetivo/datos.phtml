@@ -1,0 +1,113 @@
+<?
+if(!$this->hasObjectToEdit()){
+	echo  ("no hay objeto a editar ".__FILE__.'-'.__LINE__);
+	return;
+}
+$x = $this->getObjectToEdit();
+
+?><?if($this->getIdToEdit()):?>
+<input type="hidden" name="objetivo[id]" value="<?=$x->getId()?>" /><!-- si esta a cero o vacio es agregar --><?endif;?>
+<fieldset id="<?php print $id_fielset = $this->generateRandomId(); ?>">
+	<legend><?if(!$this->getIdToEdit()):
+		echo $this->__t('Nuevo Objetivo');
+	else:
+		echo $this->__t('Editar Objetivo');
+	endif;?></legend>
+	<fieldset>
+		<h3>Informacion de Objetivo</h3>
+		<div><?php 
+			$id_agencia = $x->getIdAgencia()?$x->getIdAgencia():Admin_Helper::getInstance()->getIdAgenciaSeleccionada(); 
+			$agencia = new Inta_Model_Agencia();
+			$agencia->setId($id_agencia);
+			$agencia->load();
+
+			?>
+			<label>Agencia: <?php print '<b>'.$agencia->getNombre().'</b>'; ?></label>
+			<span><?
+		
+				$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+				$input
+					->setMaxlength(300)
+					->setType('hidden')
+					->setId('nombre')
+					->setName('objetivo[id_agencia]')
+					->setValue($id_agencia)
+				;
+				echo $input->getHtml();
+
+//				$agencias = $agencia->search();
+//				$html_select = '';
+//				foreach($agencias as $agencia){
+//					$option = c(Core::getObject('Core_Html_Tag_Custom', 'option'))
+//						->setValue($agencia->getId())
+//						->setInnerHtml($agencia->getNombre())
+//					;
+//					if($agencia->getId()==$id_agencia)
+//						$option->setSelected('selected');
+//					$html_select .= $option->getHtml();
+//				}
+//				echo c(Core::getObject('Core_Html_Tag_Custom', 'select'))
+//					->setName('objetivo[id_agencia]')
+//					->setId('id_agencia')
+//					//->setDisabled('disabled')
+//					->setReadonly('readonly')
+//					->setInnerHtml($html_select)
+//					->getHtml()
+//				;
+
+			?> 
+			</span>
+			<label>Objetivo: </label>
+			<span><?
+				$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+				$input
+					->setMaxlength(300)
+					->setType('text')
+					->setId('nombre')
+					->setSize(80)
+					->setName('objetivo[nombre]')
+					->setValue($x->getNombre())
+					->setData('data-campo', '<b>Nombre</b>')
+					->setData('data-validator', '{empty:false}')
+				;
+				echo $input->getHtml();
+			?> 
+			</span>
+			<label>Detalle: </label>
+			<span><?
+				$input = Core::getObject('Core_Html_Tag_Custom', 'textarea');
+				$input
+					->setMaxlength(300)
+					->setType('textarea')
+					->setId('descripcion')
+					->setName('objetivo[descripcion]')
+					->setInnerHtml(htmlentities(stripslashes($x->getDescripcion())))
+					->setData('data-campo', '<b>Descripcion</b>')
+					->setData('data-validator', '{empty:false}')
+				;
+				echo $input->getHtml();
+			?> 
+			</span>
+			<div>
+		</div>
+		</div>
+	</fieldset>
+	<div class="controls">
+		<?php print Core::getObject('Core_Html_Tag_Custom', 'input')->settype('submit')->setValue('Guardar')->getHtml(); ?>
+	</div>
+</fieldset>
+<script>
+
+jQuery(document).ready(function(){
+	jQuery('#descripcion').ckeditor();
+});
+
+function validar_agregar_objetivo_datos(formData, jqForm, options) {
+	jQuery('#descripcion').ckeditor('refresh');
+	if(!validar_estatico_en('#<?php print $id_fielset; ?>')){
+		tabpanelfocus(jQuery('#<?php print $id_fielset; ?>'));
+		return false;
+	}
+	return(true);
+}
+</script>

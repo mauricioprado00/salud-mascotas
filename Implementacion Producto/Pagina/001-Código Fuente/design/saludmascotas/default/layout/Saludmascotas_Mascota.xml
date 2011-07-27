@@ -1,0 +1,106 @@
+<layout><!-- útf8 -->
+
+	<left_menu_usuario>
+		<reference name="left_menu">
+			<action method="addItem">
+				<name>mascotas_usuario</name>
+				<text>Mis Mascotas</text>
+				<link>mascotas/usuario</link>
+				<weight>2</weight>
+				<parent></parent>
+			</action>
+			<action  method="addItem">
+				<name>mascotas_usuario_mis_mascotas</name>
+				<text>Mis Mascotas</text>
+				<link>mascotas/usuario</link>
+				<weight>0</weight>
+				<parent>mascotas_usuario</parent>
+			</action>
+			<action  method="addItem">
+				<name>mascotas_usuario_perdi_mi_mascota</name>
+				<text>Perdi mi mascota</text>
+				<link>mascotas/usuario/perdi_mi_mascota</link>
+				<weight>1</weight>
+				<parent>mascotas_usuario</parent>
+			</action>
+			<action  method="addItem">
+				<name>mascotas_usuario_quiero_cruzar</name>
+				<text>Quiero cruzar</text>
+				<link>mascotas/usuario/quiero_cruzar</link>
+				<weight>2</weight>
+				<parent>mascotas_usuario</parent>
+			</action>
+			<action  method="addItem">
+				<name>mascotas_usuario_quiero_adoptar</name>
+				<text>Quiero adoptar</text>
+				<link>mascotas/usuario/quiero_adoptar</link>
+				<weight>3</weight>
+				<parent>mascotas_usuario</parent>
+			</action>
+		</reference>
+	</left_menu_usuario>
+	<mascota_usuario_listado>
+		<reference name="contenido">
+			<template template="mascota/usuario/listado2.phtml" />
+			<mascota_listado_usuario name="mascota_listado_usuario">
+				<template name="list_entity_template" template="mascota/usuario/listado/item.phtml" />
+			</mascota_listado_usuario>
+		</reference>
+	</mascota_usuario_listado>
+	<mascota_addedit>
+	<!--
+		<reference name="html_head">
+		
+		</reference>
+	-->
+	</mascota_addedit>
+	<mascota_addedit_datos>
+		<reference name="html_head">
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.core.js</script>
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.widget.js</script>
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.datepicker.js</script>
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/i18n/jquery.ui.datepicker-es.js</script>
+			<css>jquery-ui-1.8.4-126/development-bundle/themes/base/jquery.ui.all.css</css>
+			<script charset="utf8">js/select_typeable.js</script>
+			<script>js/jQuery/fancybox/jquery.fancybox-1.3.1.pack.js</script>
+			<css>js/jQuery/fancybox/jquery.fancybox-1.3.1.css</css>
+			<script>js/file_upload.js</script>
+			<!--
+			<script>colorpicker/js/colorpicker.js</script>
+			<css>colorpicker/css/colorpicker.css</css>
+			<css>colorpicker/css/layout1.css</css>
+			-->
+			<script>js/selector_colores.js</script>
+		</reference>
+		<reference name="contenido">
+			<template name="form_edit" template="mascota/agregar.phtml">
+				<mascota_fotos_addedit name="fotos_addedit" />
+			</template>
+		</reference>
+	</mascota_addedit_datos>
+	<mascota_addedit_domicilio>
+		<reference name="html_head">
+			<script charset="utf8" external="true">http://api.maptp.map24.com/ajax?appkey=FJX5715ae3ff53e4ea286f2a1aab1356X50</script>
+			<script charset="utf8">js/update_address_nn4d.js</script>
+			<script charset="utf8">js/select_typeable.js</script>
+			<script charset="utf8">js/addedit_mascota_paso2.js</script>
+		</reference>
+		<reference name="contenido">
+			<template name="form_edit" template="mascota/agregar_paso2.phtml">
+				<template name="form_edit" template="mascota/agregar_paso2_otro_domicilio.phtml">
+					<location_selector_nn4d name="location_selector" />
+				</template>
+			</template>
+		</reference>
+	</mascota_addedit_domicilio>
+	<mascota_upload_foto>
+		<reference name="html_head">
+			<script>js/xhr_file_upload.js</script>
+		</reference>
+		<reference name="contenido">
+			<template name="form_edit" template="mascota/agregar_foto.phtml">
+				<file_upload name="file_upload" />
+			</template>
+		</reference>
+	</mascota_upload_foto>
+</layout>

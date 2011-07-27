@@ -1,0 +1,24 @@
+<global>
+	<layouts>
+		<!-- la idea es que se puedan cargar layouts segun el modo 
+			ej: para mostrar pagina normal, para ajax, para print, rss, etc -->
+		<admin>Admin_ResultadoEsperado.xml</admin>
+		<admin>Admin_ResultadoEsperado_Multimodo.xml</admin>
+		<ajax>Admin_ResultadoEsperado_Multimodo.xml</ajax>
+	</layouts>
+	<block>
+		<type>selector_resultado_esperado_simple</type>
+		<class>Admin_ResultadoEsperado_Block_Selector</class>
+	</block>
+	<block>
+		<type>selector_resultado_esperado</type>
+		<class>Admin_ResultadoEsperado_Block_Selector_ChainedObjetivo</class>
+	</block>
+	<block>
+		<type>selector_resultado_esperado_objetivo_simple</type>
+		<class>Admin_ResultadoEsperado_Block_Selector_ChainedObjetivoSimple</class>
+	</block>
+	<routers>
+		<Admin_ResultadoEsperado_Router>administrator/resultado_esperado</Admin_ResultadoEsperado_Router>
+	</routers>
+</global>

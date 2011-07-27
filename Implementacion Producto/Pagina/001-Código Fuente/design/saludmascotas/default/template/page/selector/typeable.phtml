@@ -1,0 +1,41 @@
+<?php 
+if(!$this->hasEntityToList()||!$this->getEntityToList()){?> 
+	error, no hay entidad para el control <?php print get_class($this); ?><?
+	return;
+}
+
+	$html_select = '';
+	$text = $this->getInputText();
+	//var_dump($text);die(__FILE__.__LINE__);
+	if($options = $this->createOptions())
+		foreach($options as $option){
+			if($option->getSelected()){
+				$text = $option->getInnerHtml();
+			}
+			$html_select .= $option->getHtml();
+		}
+	
+	$c = $this->getSelectControl();
+?> 
+<div class="select_typeable" id="<?php print $control_id = uniqid(); ?>">
+	<input type="text" autocomplete="off" value="<?php print htmlentities($text); ?>" />
+	<div class="dropdown_button"></div>
+	<ul class="options"></ul><?php
+	echo $c
+		->setStyle('display:none')
+		->setInnerHtml($html_select)
+		->getHtml()
+	;
+?> 
+	
+</div>
+<script type="text/javascript">
+jQuery(document).ready(function(){
+	create_typeable(<?php print json_encode((object)array(
+		'control_id'=>$control_id,
+		'url_search'=>$this->getUrl($this->getUrlLoad()),
+		'parent_loader'=>$this->getParentLoader(),
+		'aditional_data'=>$this->getAditionalData(),
+	)); ?>);
+});
+</script>

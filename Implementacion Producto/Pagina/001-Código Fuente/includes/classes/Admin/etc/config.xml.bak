@@ -1,0 +1,67 @@
+<global>
+	<modules>
+		<Admin_User/>
+		<!--<cosas_de_inta>-->
+		<Admin_Actividad/>
+		<Admin_Agencia/>
+		<Admin_Audiencia/>
+		<Admin_Problema/>
+		<Admin_Objetivo/>
+		<Admin_ResultadoEsperado/>
+		<Admin_Documento/>
+		<Admin_Estrategia/>
+		<Admin_Indicador/>
+		<Admin_MedioVerificacion/>
+		<Admin_Proyecto/>
+		<Admin_TipoAudiencia/>
+		<Admin_Aspecto/>
+		<Admin_TipoAspecto/>
+		<Admin_AspectoActividad/>
+		<Admin_EstrategiaActividad/>
+		<Admin_UsuarioActividad/>
+		<Admin_ProyectoActividad/>
+		<Admin_ResultadoEsperadoActividad/>
+		<Admin_Usuario/>
+		<Admin_TipoIndicador/>
+		<Admin_Config/>
+		<!--</cosas_de_inta>-->
+		<!--<cosas_de_granguia>-->
+<!--		<Admin_Estadistica/>
+		<Admin_TipoPunto/>
+		<Admin_Categoria/>
+		<Admin_Barrio/>
+		<Admin_Archivo/>
+		<Admin_Menu/>
+		<Admin_Pagina/>
+		<Admin_Anuncio/>
+		<Admin_Nodo/>
+		<Admin_BannerCarrousel/>
+		<Admin_BannerDinamico/>
+		
+		<Admin_CronjobResult/>
+		<Admin_Sitemap />-->
+		<!--</cosas_de_granguia>-->
+<!--
+		<Admin_Importador/>
+		<Admin_Ciudad/>
+		<Admin_MetodoEnvio/>
+		<Admin_FormaPago/>
+		<Admin_MarcaImagen/>
+		<Admin_CiudadCodigoPostal/>
+		<Admin_Cliente/>
+		<Admin_Venta/>
+		<Admin_Novedad/>
+		<Admin_Testimonio/>
+		-->
+	</modules>
+	<routers>
+		<Admin_Router_Admin>administrator</Admin_Router_Admin>
+	</routers>
+	<layouts>
+		<!-- la idea es que se puedan cargar layouts segun el modo 
+			ej: para mostrar pagina normal, para ajax, para print, rss, etc -->
+		<admin>Admin.xml</admin>
+		<ajax>Admin_Ajax.xml</ajax>
+		<admin>Simple.xml</admin>
+	</layouts>
+</global>

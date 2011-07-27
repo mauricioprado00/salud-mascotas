@@ -1,0 +1,102 @@
+<layout><!-- útf8 -->
+	<left_menu_usuario>
+		<reference name="left_menu">
+			<action method="addItem">
+				<name>user_update</name>
+				<text>Perfil de Usuario</text>
+				<link>user/update</link>
+				<weight>0</weight>
+				<parent></parent>
+			</action>
+			<action method="addItem">
+				<name>user_update_address</name>
+				<text>Domicilio</text>
+				<link>user/update_address</link>
+				<weight>1</weight>
+				<parent></parent>
+			</action>
+			<action method="addItem">
+				<name>user_notificaciones</name>
+				<text>Notificaciones</text>
+				<link>user/notificaciones</link>
+				<weight>4</weight>
+				<parent></parent>
+			</action>
+		</reference>
+	</left_menu_usuario>
+	
+	<left_menu_usuario_logged_out>
+		<reference name="left_menu">
+			<action method="addItem">
+				<name>user_login</name>
+				<text>Iniciar Sesión</text>
+				<link>user/login</link>
+				<weight>0</weight>
+				<parent></parent>
+			</action>
+			<action method="addItem">
+				<name>user_register</name>
+				<text>Crear Cuenta</text>
+				<link>user/register</link>
+				<weight>1</weight>
+				<parent></parent>
+			</action>
+			<action method="addItem">
+				<name>user_recover</name>
+				<text>Recuperar Cuenta</text>
+				<link>user/recover</link>
+				<weight>2</weight>
+				<parent></parent>
+			</action>
+		</reference>
+	</left_menu_usuario_logged_out>
+
+	
+	<usuario_login>
+		<reference name="contenido">
+			<template name="form_login" template="usuario/login.phtml" />
+		</reference>
+	</usuario_login>
+	<usuario_register>
+		<reference name="contenido">
+			<template name="form_edit" template="usuario/register.phtml" />
+		</reference>
+	</usuario_register>
+	<usuario_update>
+		<reference name="contenido">
+			<template name="form_edit" template="usuario/update.phtml" />
+		</reference>
+	</usuario_update>
+	<usuario_update_address>
+		<reference name="html_head">
+			<script charset="utf8" external="true">http://api.maptp.map24.com/ajax?appkey=FJX5715ae3ff53e4ea286f2a1aab1356X50</script>
+			<script charset="utf8">js/update_address_nn4d.js</script>
+			<script charset="utf8">js/select_typeable.js</script>
+		</reference>
+		<reference name="contenido">
+			<template name="form_edit" template="usuario/update_address.phtml">
+				<location_selector_nn4d name="location_selector" />
+			</template>
+		</reference>
+	</usuario_update_address>
+	<usuario_update_password>
+		<reference name="contenido">
+			<template name="form_edit" template="usuario/update_password.phtml" />
+		</reference>
+	</usuario_update_password>
+	<usuario_recover>
+		<reference name="contenido">
+			<template name="form_recover" template="usuario/recover.phtml" />
+		</reference>
+	</usuario_recover>
+	<privacy_policy>
+		<reference name="contenido">
+			<template template="usuario/pages/privacy_policy.phtml" />
+		</reference>
+	</privacy_policy>
+	<service_conditions>
+		<reference name="contenido">
+			<template template="usuario/pages/service_conditions.phtml" />
+		</reference>
+	</service_conditions>
+</layout>

@@ -1,0 +1,22 @@
+<global>
+	<modules>
+		<Frontend_Mascota_Perdida />
+	</modules>
+	<routers>
+		<Frontend_Mascota_Router>mascotas</Frontend_Mascota_Router>
+		<Frontend_Mascota_Router_Fotos>mascotas/fotos</Frontend_Mascota_Router_Fotos>
+	</routers>
+	<block>
+		<type>mascota_fotos_addedit</type>
+		<class>Frontend_Mascota_Block_Fotos_AddEdit</class>
+	</block>
+	<block>
+		<type>mascota_listado_usuario</type>
+		<class>Frontend_Mascota_Block_ListadoUsuario</class>
+	</block>
+	<design>
+	</design>
+	<layouts>
+		<saludmascotas>Saludmascotas_Mascota.xml</saludmascotas>
+	</layouts>
+</global>
