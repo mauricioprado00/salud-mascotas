@@ -1,3 +1,11 @@
+28/07/2011 - mauricio
+* agrego campo activo a tabla encuentro
+* agrego campo fecha_publicacion a tabla encuentro
+* agrego campo fecha_expiracion a tabla encuentro
+* cambio campo id_domicilio de tabla encuentro, la hago nulleable
+* cambio clave foranea id_domicilio de tabla  encuentro, le hago on delete set null
+* elimino campo fecha_encuentro de la tabla encuentro
+* cambio el campo hora_encuentro a tipo DATETIME
 27/07/2011 - mauricio
 * cambio campo id_domicilio de tabla perdida, la hago nulleable
 * cambio clave foranea id_domicilio de tabla  perdida, le hago on delete set null

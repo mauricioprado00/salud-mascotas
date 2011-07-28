@@ -1,6 +1,7 @@
 <global>
 	<modules>
 		<Frontend_Mascota_Perdida />
+		<Frontend_Mascota_Encuentro />
 	</modules>
 	<routers>
 		<Frontend_Mascota_Router>mascotas</Frontend_Mascota_Router>

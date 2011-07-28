@@ -54,7 +54,7 @@
 		</reference>
 	-->
 	</mascota_addedit>
-	<default when="accion(mascota_addedit_datos, mascota_perdida_addedit_datos)">
+	<default when="accion(mascota_addedit_datos, mascota_perdida_addedit_datos, mascota_encuentro_addedit_datos)">
 		<reference name="html_head">
 			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.core.js</script>
 			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.widget.js</script>
@@ -80,7 +80,7 @@
 			</template>
 		</reference>
 	</default>
-	<default when="accion(mascota_addedit_domicilio, mascota_perdida_addedit_domicilio)">
+	<default when="accion(mascota_addedit_domicilio, mascota_perdida_addedit_domicilio, mascota_encuentro_addedit_domicilio)">
 		<reference name="html_head">
 			<script charset="utf8" external="true">http://api.maptp.map24.com/ajax?appkey=FJX5715ae3ff53e4ea286f2a1aab1356X50</script>
 			<script charset="utf8">js/update_address_nn4d.js</script>
@@ -97,7 +97,7 @@
 			</template>
 		</reference>
 	</default>
-	<mascota_perdida_addedit_domicilio>
+	<default when="accion(mascota_perdida_addedit_domicilio,mascota_encuentro_addedit_domicilio)">
 		<reference name="html_head">
 			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.core.js</script>
 			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.widget.js</script>
@@ -110,10 +110,13 @@
 			
 			<css>jquery-ui-1.8.4-126/development-bundle/themes/base/jquery.ui.all.css</css>
 		</reference>
-		<reference name="addedit_paso2_form">
+		<reference name="addedit_paso2_form" when="accion(mascota_perdida_addedit_domicilio)">
 			<template name="addedit_fecha_extravio" template="mascota/perdida/paso2_fecha_extravio.phtml" />
 		</reference>
-	</mascota_perdida_addedit_domicilio>
+		<reference name="addedit_paso2_form" when="accion(mascota_encuentro_addedit_domicilio)">
+			<template name="addedit_fecha_encuentro" template="mascota/encuentro/paso2_fecha_encuentro.phtml" />
+		</reference>
+	</default>
 	<default when="accion(mascota_perdida_addedit_busqueda)">
 		<reference name="contenido">
 			<template name="form_edit" template="mascota/perdida/paso3.phtml">
@@ -121,7 +124,13 @@
 			</template>
 		</reference>
 	</default>
-	<default when="accion(mascota_perdida_addedit_publicacion)">
+	<default when="accion(mascota_encuentro_addedit_busqueda)">
+		<reference name="contenido">
+			<template name="form_edit" template="mascota/encuentro/paso3.phtml">
+			</template>
+		</reference>
+	</default>
+	<default when="accion(mascota_perdida_addedit_publicacion, mascota_encuentro_addedit_publicacion)">
 		<reference name="html_head">
 			<script charset="utf8" external="true">http://api.maptp.map24.com/ajax?appkey=FJX5715ae3ff53e4ea286f2a1aab1356X50</script>
 			<script charset="utf8">js/update_address_nn4d.js</script>
@@ -130,10 +139,14 @@
 		</reference>
 		<reference name="contenido">
 			<template name="form_edit" template="mascota/perdida/paso4.phtml">
+				<action when="accion(mascota_encuentro_addedit_publicacion)" method="setTemplate">
+					<template>mascota/encuentro/paso4.phtml</template>
+				</action>
 				<mascota_view name="view_datos_mascota" template="mascota/preview.phtml" />
-				<domicilio_view name="view_ubicacion_perdida" />
+				<domicilio_view name="view_ubicacion" />
 				<block name="view_posibles_reencuentros" />
-				<template name="form_edit_publicacion" template="mascota/perdida/paso4_opciones_publicacion.phtml" />
+				<template when="accion(mascota_perdida_addedit_publicacion)" name="form_edit_publicacion" template="mascota/perdida/paso4_opciones_publicacion.phtml" />
+				<template when="accion(mascota_encuentro_addedit_publicacion)" name="form_edit_publicacion" template="mascota/encuentro/paso4_opciones_publicacion.phtml" />
 			</template>
 		</reference>
 	</default>
@@ -147,4 +160,18 @@
 			</template>
 		</reference>
 	</mascota_upload_foto>
+	<kradkk>
+		<reference name="html_head">
+			<script charset="utf8" external="true">http://api.maptp.map24.com/ajax?appkey=FJX5715ae3ff53e4ea286f2a1aab1356X50</script>
+			<script charset="utf8">js/update_address_nn4d.js</script>
+		</reference>
+		<reference name="contenido">
+			<domicilio_view name="view_ubicacion" />
+		</reference>
+	</kradkk>
+	<kradkk_embeeder>
+		<reference name="contenido">
+			<template template="prueba/kradkk_embeeder.phtml" />
+		</reference>
+	</kradkk_embeeder>
 </layout>

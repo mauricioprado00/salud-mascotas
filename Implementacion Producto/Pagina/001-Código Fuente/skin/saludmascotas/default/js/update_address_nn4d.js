@@ -23,7 +23,7 @@
 			return this;
 		},
 		map24ApiLoaded: function (){
-			Map24.MapApplication.init( { NodeName: this.id_mapa } );
+			Map24.MapApplication.init( { NodeName: this.id_mapa, MapType:'Applet' } );//'Applet'
 			Map24.MapApplication.Map.addListener( "Map24.Event.MapClick", this.on_click.bind(this) );
 			if( this.custom_onload ){
 				try{

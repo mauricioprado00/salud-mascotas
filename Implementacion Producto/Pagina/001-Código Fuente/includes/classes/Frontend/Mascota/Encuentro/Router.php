@@ -1,5 +1,5 @@
 <?php /*es útf8*/
-class Frontend_Mascota_Perdida_Router extends Frontend_Mascota_Router{
+class Frontend_Mascota_Encuentro_Router extends Frontend_Mascota_Router{
 	protected function initialize(){
 		parent::initialize();
 		$this->addActions(
@@ -7,7 +7,22 @@ class Frontend_Mascota_Perdida_Router extends Frontend_Mascota_Router{
 			//,
 			'agregar'
 			,'editar'
+			,'kradkk'
+			,'kradkk_embeeder'
 		);
+	}
+	protected function kradkk(){
+		Core_App::getLayout()
+			->setModo('saludmascotas')
+			->setActions('simple_layout','kradkk')
+		;
+		$this->setPageReference('Prueba de mapa', '');
+	}
+	protected function kradkk_embeeder(){
+		Core_App::getLayout()
+			->setModo('saludmascotas')
+			->addAction('kradkk_embeeder')
+		;
 	}
 //	protected function localDispatch(){
 //		echo 'home mascotas';
@@ -52,20 +67,20 @@ class Frontend_Mascota_Perdida_Router extends Frontend_Mascota_Router{
 		$return = parent::_pre_editar_init($paso, $id_mascota, $preserve_mascota_edicion);
 		$object_to_edit = $this->getObjectToEdit();
 		
-		$perdida = null;
-		if(!$preserve_mascota_edicion || !($perdida = Frontend_Mascota_Perdida_Helper::getPerdidaEdicionFromSession($id_mascota))){
+		$encuentro = null;
+		if(!$preserve_mascota_edicion || !($encuentro = Frontend_Mascota_Encuentro_Helper::getEncuentroEdicionFromSession($id_mascota))){
 			if(in_array($paso, array(2,4)))
-				$perdida = Frontend_Mascota_Perdida_Helper::getPerdidaEdicion($object_to_edit);
-			//$perdida = $object_to_edit->getPerdida();
+				$encuentro = Frontend_Mascota_Encuentro_Helper::getEncuentroEdicion($object_to_edit);
+			//$encuentro = $object_to_edit->getEncuentro();
 		}
-		if(!$perdida)
-			$perdida = new Frontend_Model_Perdida();
-//		echo Core_Helper::DebugVars($perdida->getData());
+		if(!$encuentro)
+			$encuentro = new Frontend_Model_Encuentro();
+//		echo Core_Helper::DebugVars($encuentro->getData());
 //		die(__FILE__.__LINE__);
 
 		switch($paso){
 			case 1:{
-				$this->getObjectToEdit()->setEstadoPerdida();
+				$this->getObjectToEdit()->setEstadoEncuentro();//todo:aca va el estado en guarda o en vista default, aunque se deberia cambiar con los checks
 				break;
 			}
 			case 3:{
@@ -73,13 +88,13 @@ class Frontend_Mascota_Perdida_Router extends Frontend_Mascota_Router{
 				break;
 			}
 			case 4:{
-//				var_dump($perdida->getData());
+//				var_dump($encuentro->getData());
 //				die(__FILE__.__LINE__);
 				break;
 			}
 		}
 		
-		$this->setPerdida($perdida);
+		$this->setEncuentro($encuentro);
 
 		return $return;
 //		$object_to_edit = null;
@@ -114,37 +129,37 @@ class Frontend_Mascota_Perdida_Router extends Frontend_Mascota_Router{
 		switch($paso){
 			case 1:{//si el paso está bien cargado redirijo al paso siguiente
 				$object_to_edit = $this->getObjectToEdit();
-				Core_Http_Header::Redirect(Frontend_Mascota_Perdida_Helper::getUrlEditar($object_to_edit->getId(), 1, 2), true);
+				Core_Http_Header::Redirect(Frontend_Mascota_Encuentro_Helper::getUrlEditar($object_to_edit->getId(), 1, 2), true);
 				return true;
 				break;
 			}
-			case 2:{//si el paso esta bien cargado (domicilio) checkeo la carga de fecha y hora de extravio y redirijo al paso siguiente
-				Core_Http_Header::Redirect(Frontend_Mascota_Perdida_Helper::getUrlEditar($id_mascota, 1, 3), true);
+			case 2:{//si el paso esta bien cargado (domicilio) checkeo la carga de fecha y hora de encuentro y redirijo al paso siguiente
+				Core_Http_Header::Redirect(Frontend_Mascota_Encuentro_Helper::getUrlEditar($id_mascota, 1, 3), true);
 				return true;
-//				$perdida = $this->getPerdida();
-//				$post = Core_Http_Post::getParameters('Core_Object', Frontend_Mascota_Perdida_Helper::getUpdatablePerdidaFields());
-//				$perdida->loadFromArray($post->getData(), false);
+//				$encuentro = $this->getEncuentro();
+//				$post = Core_Http_Post::getParameters('Core_Object', Frontend_Mascota_Encuentro_Helper::getUpdatableEncuentroFields());
+//				$encuentro->loadFromArray($post->getData(), false);
 ////				header('content-type:text/plain');
-////				var_dump($perdida->getData());
+////				var_dump($encuentro->getData());
 ////				die(__FILE__.__LINE__);
 //				$object_to_edit = $this->getObjectToEdit();
 //				$id_mascota = $object_to_edit->getId();
-//				$guardado_en_sesion = Frontend_Mascota_Perdida_Helper::actionAgregarEditarPerdida($perdida, true, $id_mascota)?true:false;
+//				$guardado_en_sesion = Frontend_Mascota_Encuentro_Helper::actionAgregarEditarEncuentro($encuentro, true, $id_mascota)?true:false;
 //				if($guardado_en_sesion){//pasa validaciones
-//					Core_Http_Header::Redirect(Frontend_Mascota_Perdida_Helper::getUrlEditar($id_mascota, 1, 3), true);
+//					Core_Http_Header::Redirect(Frontend_Mascota_Encuentro_Helper::getUrlEditar($id_mascota, 1, 3), true);
 //					return true;
 //				}
 				break;			
 			}
 			case 3:{//si las selecciones de mascotas coincidentes en la búsqueda estan correctas redirijo al paso siguiente
 				$object_to_edit = $this->getObjectToEdit();
-				Core_Http_Header::Redirect(Frontend_Mascota_Perdida_Helper::getUrlEditar($object_to_edit->getId(), 1, 4), true);
+				Core_Http_Header::Redirect(Frontend_Mascota_Encuentro_Helper::getUrlEditar($object_to_edit->getId(), 1, 4), true);
 				break;
 			}
 			case 4:{//si la carga de opciones y verificación final es correcta, guardo domicilio, mascota, reencuentros y anuncio
 				//Core_App::getInstance()->addErrorMessage('guardo domicilio, mascota, reencuentros y anuncio '.__FILE__.__LINE__, true);
 				
-				$perdida = $this->getPerdida();
+				$encuentro = $this->getEncuentro();
 				$object_to_edit = $this->getObjectToEdit();
 				//$id_mascota = $object_to_edit->getId();
 				
@@ -154,10 +169,10 @@ class Frontend_Mascota_Perdida_Router extends Frontend_Mascota_Router{
 					$mascota_guardada = $this->getHelper()->actionAgregarEditarMascota($object_to_edit, false, null/* no vamos a modificar el domicilio de la mascota $domicilio_mascota*/)?true:false;
 					if($mascota_guardada){
 						$id_mascota = $object_to_edit;
-						$guardado_en_sesion = Frontend_Mascota_Perdida_Helper::actionAgregarEditarPerdida($perdida, false, $id_mascota, $domicilio_mascota)?true:false;
+						$guardado_en_sesion = Frontend_Mascota_Encuentro_Helper::actionAgregarEditarEncuentro($encuentro, false, $id_mascota, $domicilio_mascota)?true:false;
 						if($guardado_en_sesion){//pasa validaciones
 							$this->getHelper()->clearSessionVars();
-							Core_Http_Header::Redirect(Frontend_Mascota_Perdida_Helper::getUrlUsuario(), true);
+							Core_Http_Header::Redirect(Frontend_Mascota_Encuentro_Helper::getUrlUsuario(), true);
 							return true;
 						}
 //						$this->getHelper()->clearSessionVars();
@@ -166,14 +181,14 @@ class Frontend_Mascota_Perdida_Router extends Frontend_Mascota_Router{
 					}
 				}
 
-//				$perdida = $this->getPerdida();
+//				$encuentro = $this->getEncuentro();
 //				$object_to_edit = $this->getObjectToEdit();
 //				$id_mascota = $object_to_edit->getId();
 //				$domicilio_mascota = $this->getDomicilioMascota();
-//				$guardado_en_sesion = Frontend_Mascota_Perdida_Helper::actionAgregarEditarPerdida($perdida, false, $id_mascota, $domicilio_mascota)?true:false;
+//				$guardado_en_sesion = Frontend_Mascota_Encuentro_Helper::actionAgregarEditarEncuentro($encuentro, false, $id_mascota, $domicilio_mascota)?true:false;
 //				if($guardado_en_sesion){//pasa validaciones
 //					$object_to_edit = $this->getObjectToEdit();
-//					Core_Http_Header::Redirect(Frontend_Mascota_Perdida_Helper::getUrlUsuario(), true);
+//					Core_Http_Header::Redirect(Frontend_Mascota_Encuentro_Helper::getUrlUsuario(), true);
 //					return true;
 //				}
 //				die('guardo domicilio, mascota, reencuentros y anuncio '.__FILE__.__LINE__);
@@ -194,15 +209,15 @@ class Frontend_Mascota_Perdida_Router extends Frontend_Mascota_Router{
 		$return = parent::_pre_editar_handle_post($paso, $id_mascota, $preserve_mascota_edicion);
 		switch($paso){
 			case 2:{
-				$perdida = $this->getPerdida();
-				$post = Core_Http_Post::getParameters('Core_Object', Frontend_Mascota_Perdida_Helper::getUpdatablePerdidaFields());
-				$perdida->loadFromArray($post->getData(), false, true);
+				$encuentro = $this->getEncuentro();
+				$post = Core_Http_Post::getParameters('Core_Object', Frontend_Mascota_Encuentro_Helper::getUpdatableEncuentroFields());
+				$encuentro->loadFromArray($post->getData(), false, true);
 //				header('content-type:text/plain');
-//				var_dump($perdida->getData());
+//				var_dump($encuentro->getData());
 //				die(__FILE__.__LINE__);
 				$object_to_edit = $this->getObjectToEdit();
 				$id_mascota = $object_to_edit->getId();
-				$guardado_en_sesion = Frontend_Mascota_Perdida_Helper::actionAgregarEditarPerdida($perdida, true, $id_mascota)?true:false;
+				$guardado_en_sesion = Frontend_Mascota_Encuentro_Helper::actionAgregarEditarEncuentro($encuentro, true, $id_mascota)?true:false;
 				$return &= $guardado_en_sesion;
 //				if($guardado_en_sesion){//pasa validaciones
 //					
@@ -224,15 +239,15 @@ class Frontend_Mascota_Perdida_Router extends Frontend_Mascota_Router{
 			}
 			case 4:{//verificar la carga de opciones de verificación final
 //				die('verificar la carga de opciones de verificación final'.__FILE__.__LINE__);
-				$perdida = $this->getPerdida();
-				$post = Core_Http_Post::getParameters('Core_Object', Frontend_Mascota_Perdida_Helper::getUpdatablePerdidaFields());
-				$perdida->loadFromArray($post->getData(), false);
+				$encuentro = $this->getEncuentro();
+				$post = Core_Http_Post::getParameters('Core_Object', Frontend_Mascota_Encuentro_Helper::getUpdatableEncuentroFields());
+				$encuentro->loadFromArray($post->getData(), false);
 //				header('content-type:text/plain');
-//				var_dump($perdida->getData());
+//				var_dump($encuentro->getData());
 //				die(__FILE__.__LINE__);
 				$object_to_edit = $this->getObjectToEdit();
 				$id_mascota = $object_to_edit->getId();
-				$guardado_en_sesion = Frontend_Mascota_Perdida_Helper::actionAgregarEditarPerdida($perdida, true, $id_mascota)?true:false;
+				$guardado_en_sesion = Frontend_Mascota_Encuentro_Helper::actionAgregarEditarEncuentro($encuentro, true, $id_mascota)?true:false;
 				if($guardado_en_sesion){//pasa validaciones
 					return true;
 //					$return = $this->_editar_step_ok($paso, $id_mascota, $preserve_mascota_edicion);
@@ -310,22 +325,22 @@ class Frontend_Mascota_Perdida_Router extends Frontend_Mascota_Router{
 		$return = parent::_editar_handle_load_layout($paso, $id_mascota, $preserve_mascota_edicion);
 		if($paso==2){
 			$loaded_layout = Core_App::getLoadedLayout();
-			$perdida = $this->getPerdida();
+			$encuentro = $this->getEncuentro();
 			$loaded_layout
-				->getBlock('addedit_fecha_extravio')
-				->setPerdida($perdida);
+				->getBlock('addedit_fecha_encuentro')
+				->setEncuentro($encuentro);
 			;
 		}
 		if($paso==4){
 			$loaded_layout = Core_App::getLoadedLayout();
 			$object_to_edit = $this->getObjectToEdit();
 			$fotos_mascotas = $object_to_edit->getListFoto(true);//el true es para que permita pk nula
-			$perdida = $this->getPerdida();
+			$encuentro = $this->getEncuentro();
 			$view_datos_mascota = $loaded_layout
 				->getBlock('view_datos_mascota')
 				->setMascota($object_to_edit)
 				->setPhotoList($fotos_mascotas)
-				->addExtraData('Fecha Extravío', $perdida->getExtravioFecha())
+				->addExtraData('Fecha Encuentro', $encuentro->getEncuentroFecha())
 			;
 			$view_ubicacion = $loaded_layout
 				->getBlock('view_ubicacion')
@@ -333,11 +348,11 @@ class Frontend_Mascota_Perdida_Router extends Frontend_Mascota_Router{
 			;
 			$view_posibles_reencuentros = $loaded_layout
 				->getBlock('view_posibles_reencuentros')
-				->setPerdida(NULL)
+				->setEncuentro(NULL)
 			;
 			$form_edit_publicacion = $loaded_layout
 				->getBlock('form_edit_publicacion')
-				->setPerdida($perdida)
+				->setEncuentro($encuentro)
 			;
 		}
 		return $return;
@@ -392,14 +407,14 @@ class Frontend_Mascota_Perdida_Router extends Frontend_Mascota_Router{
 		$this->setActiveLeftMenu('mascotas_usuario_perdi_mi_mascota');
 	}
 	protected function _editar_handle_init_layout($paso=1, $id_mascota=null, $preserve_mascota_edicion=false){
-		$this->setPageReference('Perdí mi mascota', 'Publicar anuncio');
+		$this->setPageReference('Encontré', 'Una mascota');
 		$handle_type = !isset($id_mascota)||$id_mascota=='new'||!$id_mascota?'nueva':'existente';
 		$handle = array(1=>'datos',2=>'domicilio',3=>'busqueda',4=>'publicacion');
 		$handle = $handle[$paso];
 		Core_App::getLayout()
 			->setModo('saludmascotas')
-			->addAction('mascota_perdida_addedit')
-			->addAction('mascota_perdida_addedit_' . $handle);
+			->addAction('mascota_encuentro_addedit')
+			->addAction('mascota_encuentro_addedit_' . $handle);
 		;
 		$this->showLeftMenu('usuario');	
 	}

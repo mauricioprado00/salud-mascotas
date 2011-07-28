@@ -7,19 +7,21 @@
 // *@listar Foto Saludmascotas_Model_FotoMascota
 // *@listar Color Saludmascotas_Model_ColorMascota
 // *@listar Localidad Saludmascotas_Model_Localidad
-class Saludmascotas_Model_Perdida extends Core_Model_Abstract{
+class Saludmascotas_Model_Encuentro extends Core_Model_Abstract{
 	public function init(){
 		parent::init();
 		$this->setTableColumn(
 			'id'
 			,'activo'
-			,'destacado'
-			,'hora_extravio'
+//			,'destacado'
+			,'hora_encuentro'
 			,'descripcion'
 			,'notificacion_email'
 			,'republicar_automaticamente'
-			,'quiere_destacar'
+//			,'quiere_destacar'
 			,'mostrar_telefono'
+			,'tiene_mascota'
+			,'estado_mascota'
 			
 			,'fecha_publicacion'
 			,'fecha_expiracion'
@@ -28,8 +30,8 @@ class Saludmascotas_Model_Perdida extends Core_Model_Abstract{
 			,'id_mascota'
 			,'id_usuario'
 		);
-		$this->addAutofilterFieldInput('hora_extravio', array('Mysql_Helper','filterTimestampInput'));
-		$this->addAutofilterFieldOutput('hora_extravio', array('Mysql_Helper','filterTimestampOutput'));
+		$this->addAutofilterFieldInput('hora_encuentro', array('Mysql_Helper','filterTimestampInput'));
+		$this->addAutofilterFieldOutput('hora_encuentro', array('Mysql_Helper','filterTimestampOutput'));
 		$this->addAutofilterFieldInput('fecha_publicacion', array('Mysql_Helper','filterTimestampInput'));
 		$this->addAutofilterFieldOutput('fecha_publicacion', array('Mysql_Helper','filterTimestampOutput'));
 		$this->addAutofilterFieldInput('fecha_expiracion', array('Mysql_Helper','filterTimestampInput'));
@@ -37,7 +39,7 @@ class Saludmascotas_Model_Perdida extends Core_Model_Abstract{
 	}
 	public function getDbTableName() 
 	{
-		return 'sm_perdida';
+		return 'sm_encuentro';
 	}
 }
 ?>

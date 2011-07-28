@@ -4,42 +4,42 @@
  *@referencia Mascota(id_mascota) Frontend_Model_Mascota(id)
  *@referencia Usuario(id_usuario) Frontend_Usuario_Model_User(id)
 */
-class Frontend_Model_Perdida extends Saludmascotas_Model_Perdida{
+class Frontend_Model_Encuentro extends Saludmascotas_Model_Encuentro{
 	protected static $class = __CLASS__; 
 	public function _construct(){
 		parent::_construct();
 		//artificiales
-		$this->setNonTableColumn('extravio_fecha', 'extravio_hora');
+		$this->setNonTableColumn('encuentro_fecha', 'encuentro_hora');
 //		$this->setNonTableColumn('id_pais', 'provincia', 'localidad', 'barrio');
 
-		$this->addAutofilterFieldInput('extravio_fecha', array('Mysql_Helper','filterDateInput'));
-		$this->addAutofilterFieldOutput('extravio_fecha', array('Mysql_Helper','filterDateOutput'));
+		$this->addAutofilterFieldInput('encuentro_fecha', array('Mysql_Helper','filterDateInput'));
+		$this->addAutofilterFieldOutput('encuentro_fecha', array('Mysql_Helper','filterDateOutput'));
 		$this
 
 //			->setFieldLabel('entrenada','Entrenamiento')
 //			->addValidator('entrenada', c(new Zend_Validate_NotEmpty(array('allowWhiteSpace' => true))))
 
-			->setFieldLabel('extravio_fecha','Fecha de Extravío')
-			->addValidator('extravio_fecha', c(new Zend_Validate_NotEmpty(array('allowWhiteSpace' => false))))
+			->setFieldLabel('encuentro_fecha','Fecha de Encuentro')
+			->addValidator('encuentro_fecha', c(new Zend_Validate_NotEmpty(array('allowWhiteSpace' => false))))
 
-			->setFieldLabel('extravio_hora','Hora de Extravío')
-			->addValidator('extravio_hora', c(new Zend_Validate_NotEmpty(array('allowWhiteSpace' => false))))
+			->setFieldLabel('encuentro_hora','Hora de Encuentro')
+			->addValidator('encuentro_hora', c(new Zend_Validate_NotEmpty(array('allowWhiteSpace' => false))))
 		;
 	}
 	public function loadNonTableColumn(){
-		$time = $this->getData('hora_extravio', null, array());
-		//$time = $this->getHoraExtravio();
+		$time = $this->getData('hora_encuentro', null, array());
+		//$time = $this->getHoraEncuentro();
 		//var_dump($time);
 		$time = explode(' ', $time);
 		$this
-			->setData('extravio_fecha', $time[0], array())
-			->setExtravioHora($time[1])
+			->setData('encuentro_fecha', $time[0], array())
+			->setEncuentroHora($time[1])
 		;
 	}
 	public function commitNonTableColumn(){
-		$hora_extravio = $this->getData('extravio_fecha', null, array());
-		$hora_extravio .= ' ' . $this->getExtravioHora();
-		$this->setHoraExtravio($hora_extravio, array());
+		$hora_encuentro = $this->getData('encuentro_fecha', null, array());
+		$hora_encuentro .= ' ' . $this->getEncuentroHora();
+		$this->setHoraEncuentro($hora_encuentro, array());
 	}
 	public function update($data=null, $use_null_values=false, $match_fields=array('id')){
 		$this->commitNonTableColumn();
@@ -49,13 +49,13 @@ class Frontend_Model_Perdida extends Saludmascotas_Model_Perdida{
 	public function insert($data=null,$use_null_values=false, $get_sql=false){
 		$this->commitNonTableColumn();
 		$this->setFechaPublicacion(time());
-		$this->setFechaExpiracion(time()+60*60*24*Saludmascotas_Model_Config::findConfigValue('sm/dias_expiracion_perdida', 7*4/*4 semanas*/));
+		$this->setFechaExpiracion(time()+60*60*24*Saludmascotas_Model_Config::findConfigValue('sm/dias_expiracion_encuentro', 7*4/*4 semanas*/));
 		$inserted = parent::insert($data,$use_null_values, $get_sql);
 		return $inserted;
 	}
 	public function getUrlEditar($preserve_mascota_edicion=0, $paso=1){
 		$mascota = $this->getMascota();
-		return Frontend_Mascota_Perdida_Helper::getUrlEditar($mascota->getId(), $preserve_mascota_edicion, $paso);
+		return Frontend_Mascota_Encuentro_Helper::getUrlEditar($mascota->getId(), $preserve_mascota_edicion, $paso);
 	}
 }
 

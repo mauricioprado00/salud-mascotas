@@ -1,0 +1,120 @@
+<?php //es útf8
+
+$encuentro = $this->getEncuentro();
+$descripcion = $encuentro->getDescripcion();
+$notificacion_email = $encuentro->getNotificacionEmail();
+$mostrar_telefono = $encuentro->getMostrarTelefono();
+$republicar_automaticamente = $encuentro->getRepublicarAutomaticamente();
+$quiere_destacar = $encuentro->getQuiereDestacar();
+
+?>
+
+			<div class="textarea">
+				<?
+					$input = Core::getObject('Core_Html_Tag_Custom', 'textarea');
+					$input
+						->setId('descripcion')
+						->setName('descripcion')
+						->setInnerHtml(/*htmlentities*/($descripcion))
+	//                                        ->setRows(5)
+	//                                        ->setCols(40)
+	//					->setData('data-campo', '<b>Observaciones</b>')
+	//					->setData('data-validator', '{empty:false}')
+	//                                        ->setData('data-mensaje', 'Debe cargar uno o mas %field separados por comas')
+					;
+					echo $input->getHtml();
+				?> 
+			</div>
+			<div class="opciones_formulario opciones_formulario_encuentro">
+				<div class="opcion_formulario">
+					<div class="holding notificacion_email">
+						<input type="hidden" name="notificacion_email" value="no">
+						<?php
+							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+							$input
+								//->setMaxlength(20)
+								->setType('checkbox')
+								//->setAutocomplete('off')
+								->setTitle('Notificarme por email sobre novedades')
+								//->setClass('datepicker')
+								->setName('notificacion_email')
+								->setId('notificacion_email')
+								->setValue('si')
+							;
+							if($notificacion_email=='si')
+								$input->setChecked('checked');
+							echo $input->getHtml();
+						?>
+						<label for="pedigree">Notificarme por email sobre novedades</label>
+					</div>
+				</div>
+				<div class="opcion_formulario">
+					<div class="holding mostrar_telefono">
+						<input type="hidden" name="mostrar_telefono" value="no">
+						<?php
+							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+							$input
+								//->setMaxlength(20)
+								->setType('checkbox')
+								//->setAutocomplete('off')
+								->setTitle('Mostrar mi teléfono en el anuncio')
+								//->setClass('datepicker')
+								->setName('mostrar_telefono')
+								->setId('mostrar_telefono')
+								->setValue('si')
+							;
+							if($mostrar_telefono=='si')
+								$input->setChecked('checked');
+							echo $input->getHtml();
+						?>
+						<label for="para_cruza">Mostrar mi teléfono en el anuncio</label>
+					</div>
+				</div>
+				<div class="opcion_formulario">
+					<div class="holding republicar_automaticamente">
+						<input type="hidden" name="republicar_automaticamente" value="no">
+						<?php
+							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+							$input
+								//->setMaxlength(20)
+								->setType('checkbox')
+								//->setAutocomplete('off')
+								->setTitle('Republicar automáticamente una vez')
+								//->setClass('datepicker')
+								->setName('republicar_automaticamente')
+								->setId('republicar_automaticamente')
+								->setValue('si')
+							;
+							if($republicar_automaticamente=='si')
+								$input->setChecked('checked');
+							echo $input->getHtml();
+						?>
+						<label for="republicar_automaticamente">Republicar automáticamente una vez</label>
+						<em>(1 semana de extensión)</em>
+					</div>
+				</div>
+				<div class="opcion_formulario">
+					<div class="holding quiere_destacar">
+						<input type="hidden" name="quiere_destacar" value="no">
+						<?php
+							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+							$input
+								//->setMaxlength(20)
+								->setType('checkbox')
+								//->setAutocomplete('off')
+								->setTitle('Quiero destacar mi anuncio')
+								//->setClass('datepicker')
+								->setName('quiere_destacar')
+								->setId('quiere_destacar')
+								->setValue('si')
+							;
+							if($quiere_destacar=='si')
+								$input->setChecked('checked');
+							echo $input->getHtml();
+						?>
+						<label for="pedigree">Quiero destacar mi anuncio</label>
+						<em>(Costo $10)</em>
+						<a href="#">más información</a>
+					</div>
+				</div>
+			</div>

@@ -1,0 +1,20 @@
+<global>
+	<modules>
+	</modules>
+	<routers>
+		<Frontend_Mascota_Encuentro_Router>mascotas/encuentro</Frontend_Mascota_Encuentro_Router>
+	</routers>
+	<!--
+	<block>
+		<type>mascota_fotos_addedit</type>
+		<class>Frontend_Mascota_Block_Fotos_AddEdit</class>
+	</block>
+	-->
+	<design>
+	</design>
+	<layouts>
+	<!--
+		<saludmascotas>Saludmascotas_Mascota.xml</saludmascotas>
+	-->
+	</layouts>
+</global>

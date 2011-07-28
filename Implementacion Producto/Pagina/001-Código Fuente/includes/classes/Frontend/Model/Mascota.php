@@ -231,6 +231,12 @@ class Frontend_Model_Mascota extends Saludmascotas_Model_Mascota{
 		return $inserted;
 	}
 	public function getUrlEditar($preserve_mascota_edicion=0, $paso=1){
+//		var_dump($this->getId(), $this->getIdEstadomascota());
+//		die(__FILE__.__LINE__);
+		if($this->esEstadoPerdida())
+			return Frontend_Mascota_Perdida_Helper::getUrlEditar($this->getId(), $preserve_mascota_edicion, $paso);
+		elseif($this->esEstadoEnGuarda()||$this->esEstadoVista())
+			return Frontend_Mascota_Encuentro_Helper::getUrlEditar($this->getId(), $preserve_mascota_edicion, $paso);
 		return Frontend_Mascota_Helper::getUrlEditar($this->getId(), $preserve_mascota_edicion, $paso);
 	}
 //	public function update($data=null, $use_null_values=false, $match_fields=array('id')){
