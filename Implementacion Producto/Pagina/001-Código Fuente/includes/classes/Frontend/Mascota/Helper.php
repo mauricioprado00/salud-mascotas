@@ -192,11 +192,12 @@ class Frontend_Mascota_Helper extends Frontend_Helper{
 		if(!$mascota->validateFields() || $errors){
 			Core_App::getInstance()->addErrorMessage(self::getInstance()->__t("No se pudo registrar la mascota"));
 			Core_Helper::LoadValidationTranslation();
-			foreach($mascota->getValidationMessages() as $key=>$messages){
-				foreach($messages as $message){
-					Core_App::getInstance()->addErrorMessage($message);
+			if($mascota->getValidationMessages())
+				foreach($mascota->getValidationMessages() as $key=>$messages){
+					foreach($messages as $message){
+						Core_App::getInstance()->addErrorMessage($message);
+					}
 				}
-			}
 			foreach($errors as $message){
 				Core_App::getInstance()->addErrorMessage($message);
 			}

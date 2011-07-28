@@ -53,6 +53,8 @@ class Frontend_Mascota_Perdida_Helper extends Frontend_Mascota_Helper{
 	}
 	public static function getDomicilioEdicion($mascota){
 		$perdida = self::getPerdidaEdicion($mascota);
+		if(!$perdida)
+			return null;
 		$domicilio = $perdida->getDomicilio();
 		if(!$domicilio)
 			return null;
@@ -99,7 +101,7 @@ class Frontend_Mascota_Perdida_Helper extends Frontend_Mascota_Helper{
 		if(!$perdida->validateFields() || $errors){
 			Core_App::getInstance()->addErrorMessage(self::getInstance()->__t("No se pudo registrar la perdida"));
 			Core_Helper::LoadValidationTranslation();
-			
+			if($perdida->getValidationMessages())
 			foreach($perdida->getValidationMessages() as $key=>$messages){
 				foreach($messages as $message){
 					Core_App::getInstance()->addErrorMessage($message);

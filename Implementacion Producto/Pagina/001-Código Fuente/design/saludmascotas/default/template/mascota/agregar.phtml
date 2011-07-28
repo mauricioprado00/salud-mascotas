@@ -59,7 +59,7 @@ $colores_seleccionados = $object_to_edit->getColoresSeleccionados();
 							->setTitle('edad')
 							->setName('edad')
 							->setId('edad')
-							->setValue($edad)
+							->setValue(utf8_decode($edad))
 						;
 						echo $input->getHtml();
 						//<input type="text" autocomplete="on" title="edad" name="edad" value="">
@@ -683,9 +683,12 @@ $colores_seleccionados = $object_to_edit->getColoresSeleccionados();
 			</div>
 		</form>
 		<script type="text/javascript">
+		<!--
 		jQuery(document).ready(function(){
+			new calcular_edad().init('#edad', '#fecha_nacimiento', <?php print json_encode(date('d/m/Y')); ?>);
 			jQuery('.datepicker').datepicker({ dateFormat: 'dd/mm/yy', changeYear: true });
 		});
+		-->
 		</script>
 	
 	</div>

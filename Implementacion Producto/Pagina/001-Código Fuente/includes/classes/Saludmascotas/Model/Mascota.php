@@ -1,4 +1,4 @@
-<?
+<?//es útf8
 /**
  *@referencia Domicilio(id_domicilio) Saludmascotas_Model_Domicilio(id)
  *@referencia Dueno(id_dueno) Saludmascotas_Model_User(id)
@@ -112,7 +112,14 @@ class Saludmascotas_Model_Mascota extends Core_Model_Abstract{
 		return $collection;
 	}
 	public function calcularEdad(){
-		return 'calcularEdad';
+		$fecha_nacimiento = $this->getFechaNacimiento();
+		if(!$fecha_nacimiento)
+			return null;
+		list($dia_nacimiento, $mes_nacimiento, $anio_nacimiento) = explode('/', $fecha_nacimiento);
+		$fecha_actual = date('d/m/Y');
+		list($dia_actual, $mes_actual, $anio_actual) = explode('/', $fecha_actual);
+		
+		return Core_Helper::calculateAgeFormatted($dia_nacimiento, $mes_nacimiento, $anio_nacimiento, $dia_actual, $mes_actual, $anio_actual);
 	}
 	public function getDbTableName() 
 	{

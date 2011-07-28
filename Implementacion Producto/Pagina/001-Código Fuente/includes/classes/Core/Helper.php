@@ -164,6 +164,135 @@ class Core_Helper extends Core_Singleton{
 	function Cast($o, $class){ 
 		return(unserialize(preg_replace('/O:[0-9]+:"'.get_class($o).'":/', 'O:'.strlen($class).':"'.$class.'":', serialize($o), 1)));
 	}
-
+	function calculateAge($birth_day, $birth_month, $birth_year, $current_day, $current_month, $current_year){
+		$years = $current_year - $birth_year;
+		$months = 0;
+		$days = 0;
+		$age = null;
+		//filter invalid dates
+		if(	$current_year<$birth_year ||//future year
+			$current_year==$birth_year&&$current_month<$birth_month ||//same year and future month 
+			$current_year==$birth_year&&$current_month==$birth_month&&$current_day<$birth_day ){//same year and month but future day
+			$age = null;
+		}
+		else{
+			if($current_year>$birth_year && ($current_month<$birth_month || ($current_month==$birth_month && $current_day<$birth_day)))
+				$years--;
+			if($years==0){
+				$current_year+=0;
+				$birth_year+=0;
+				if($current_year==$birth_year){
+					$months = $current_month - $birth_month;
+				}
+				else{//last year
+					$months = 12 + $current_month - $birth_month;
+				}
+				if($current_day<$birth_day)
+					$months--;
+				if($months){
+					$age = array('m'=>$months);
+				}
+				else{
+					if($birth_month == $current_month)
+						$days = $current_day - $birth_day;
+					else $days = cal_days_in_month(CAL_GREGORIAN, $birth_month, $current_year) + $current_day - $birth_day;
+					$age = array('d'=>$days);
+				}
+			}
+			else{
+				$age = array('y'=>$years);
+			}
+		}
+		return $age;
+	}
+	function calculateAgeFormatted($birth_day, $birth_month, $birth_year, $current_day, $current_month, $current_year, $names='es'){
+		if(!isset($names))
+			$names = 'es';
+		if(is_string($names)){
+			$i18n = array(
+				'en'=> array(
+					array(
+						'y'=>'year',
+						'm'=>'month',
+						'd'=>'day'
+					),
+					array(
+						'y'=>'years',
+						'm'=>'months',
+						'd'=>'days'
+					),
+				),
+				'es'=> array(
+					array(
+						'y'=>'año',
+						'm'=>'mes',
+						'd'=>'dia'
+					),
+					array(
+						'y'=>'años',
+						'm'=>'meses',
+						'd'=>'dias'
+					),
+				),
+			);
+			$names = $i18n[$names];
+		}
+		$age = self::calculateAge($birth_day, $birth_month, $birth_year, $current_day, $current_month, $current_year);
+		if(!$age)//invalid date
+			return null;
+		$vars = array('y','m','d');
+		foreach($vars as $var)
+			if(isset($age[$var]))
+				return $age = $age[$var] . ' ' . $names[$age[$var]>1?1:0][$var];
+		return null;//never happens
+	}
+//	function calculateAge($birth_day, $birth_month, $birth_year, $current_day, $current_month, $current_year){
+//		$years = $current_year - $birth_year;
+//		$months = 0;
+//		$days = 0;
+//		$age = null;
+//		//filtro todas las fechas invalidas
+//		if(	$current_year<$birth_year ||//si el year futuro
+//			$current_year==$birth_year&&$current_month<$birth_month ||//si es mismo year y $month futuro 
+//			$current_year==$birth_year&&$current_month==$birth_month&&$current_day<$birth_day ){//si es mismo year y $month pero $day futuro
+//			$age = null;
+//		}
+//		else{
+//			if($current_year>$birth_year && ($current_month<$birth_month || ($current_month==$birth_month && $current_day<$birth_day)))
+//				$years--;
+//			if($years==0){
+//				$current_year+=0;
+//				$birth_year+=0;
+//				if($current_year==$birth_year){
+//					$months = $current_month - $birth_month;
+//				}
+//				else{//year pasado
+//					$months = 12 + $current_month - $birth_month;
+//				}
+//				if($current_day<$birth_day)
+//					$months--;
+//				if($months){
+//					if($months>1)
+//						$age = $months . ' months';
+//					else
+//						$age = $months . ' month';
+//				}
+//				else{
+//					if($birth_month == $current_month)
+//						$days = $current_day - $birth_day;
+//					else $days = cal_days_in_month(CAL_GREGORIAN, $birth_month, $current_year) + $current_day - $birth_day;
+//					if($days>1)
+//						$age = $days . ' days';
+//					else $age = $days . ' day';
+//				}
+//			}
+//			else{
+//				if($years>1)
+//					$age = $years . ' years';
+//				else $age = $years . ' year';
+//			}
+//		}
+//		return $age;
+//	}
 }
 ?>
