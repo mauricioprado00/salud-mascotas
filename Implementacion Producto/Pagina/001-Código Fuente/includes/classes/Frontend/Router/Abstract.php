@@ -1,6 +1,29 @@
 <?php
 abstract class Frontend_Router_Abstract extends Core_Router_Abstract{
+	private $helper;
+	protected function getHelper(){
+		if(!isset($this->helper)){
+			$this->helper = $this->createHelper();
+		}
+		return $this->helper;
+	}
+	protected function createHelper(){
+		$class = get_class($this);
+		do{
+			$class = explode('_', $class);
+			array_pop($class);
+			array_push($class,'Helper');
+			$class = implode('_', $class);
+			if(class_exists($class)){
+				//die(__FILE__.__LINE__);
+				return new $class();
+			}
+			$class = get_parent_class($class);
+		}while($class);
+		return null;
+	}
 	protected function initialize(){
+		
 	}
 	public function setPageReference($title, $description=''){
 		Core_App::getInstance()

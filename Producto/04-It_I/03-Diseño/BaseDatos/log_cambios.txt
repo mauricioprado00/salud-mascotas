@@ -1,3 +1,7 @@
+27/07/2011 - mauricio
+* cambio campo id_domicilio de tabla perdida, la hago nulleable
+* cambio clave foranea id_domicilio de tabla  perdida, le hago on delete set null
+* ambos cambios para permitir la edición de la perdida, al cambiar de domicilio es necesario eliminar el domicilio anterior y permitir que la fk sea null.
 26/07/2011 - mauricio
 * agrego filas a estadomascota segun digrama de estados
 * cambio la clave foranea id_domicilio en tabla mascota, le hago on delete set null

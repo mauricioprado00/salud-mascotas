@@ -52,11 +52,14 @@ class Frontend_Mascota_Router extends Frontend_Router_Abstract{
 	}
 	protected function _pre_editar_init($paso=1, $id_mascota=null, $preserve_mascota_edicion=false){
 		$object_to_edit = null;
-		if(!$preserve_mascota_edicion || !($object_to_edit = Frontend_Mascota_Helper::getMascotaEdicionFromSession($id_mascota))){
+		if(!$preserve_mascota_edicion){
+			$this->getHelper()->clearSessionVars();
+		}
+		if(!$preserve_mascota_edicion || !($object_to_edit = $this->getHelper()->getMascotaEdicionFromSession($id_mascota))){
 			if(isset($id_mascota)){
-				$object_to_edit = Frontend_Mascota_Helper::getMascotaEdicion($id_mascota);
+				$object_to_edit = $this->getHelper()->getMascotaEdicion($id_mascota);
 				if(!$object_to_edit){
-					Core_Http_Header::Redirect(Frontend_Mascota_Helper::getUrlUsuario(), true);
+					Core_Http_Header::Redirect($this->getHelper()->getUrlUsuario(), true);
 					return false;
 				}
 			}
@@ -66,9 +69,9 @@ class Frontend_Mascota_Router extends Frontend_Router_Abstract{
 		}
 		
 		$domicilio_mascota = null;
-		if(!$preserve_mascota_edicion || !($domicilio_mascota = Frontend_Mascota_Helper::getDomicilioMascotaEdicionFromSession($id_mascota))){
+		if(!$preserve_mascota_edicion || !($domicilio_mascota = $this->getHelper()->getDomicilioMascotaEdicionFromSession($id_mascota))){
 			if($paso==2)
-				$domicilio_mascota = Frontend_Mascota_Helper::getDomicilioEdicion($object_to_edit);
+				$domicilio_mascota = $this->getHelper()->getDomicilioEdicion($object_to_edit);
 			//$domicilio_mascota = $object_to_edit->getDomicilio();
 		}
 		if(!$domicilio_mascota)
@@ -88,19 +91,19 @@ class Frontend_Mascota_Router extends Frontend_Router_Abstract{
 		switch($paso){
 			case 1:{//si el paso está bien cargado redirijo al paso siguiente
 				$object_to_edit = $this->getObjectToEdit();
-				Core_Http_Header::Redirect(Frontend_Mascota_Helper::getUrlEditar($object_to_edit->getId(), 1, 2), true);
+				Core_Http_Header::Redirect($this->getHelper()->getUrlEditar($object_to_edit->getId(), 1, 2), true);
 				return true;
 				break;
 			}
 			case 2:{//si el paso esta bien cargado, guardo domicilio y mascota
 				$object_to_edit = $this->getObjectToEdit();
 				$domicilio_mascota = $this->getDomicilioMascota();
-				$domicilio_mascota_guardada = Frontend_Mascota_Helper::actionAgregarEditarDomicilio($domicilio_mascota, false)?true:false;
+				$domicilio_mascota_guardada = $this->getHelper()->actionAgregarEditarDomicilio($domicilio_mascota, false)?true:false;
 				if($domicilio_mascota_guardada){
-					$mascota_guardada = Frontend_Mascota_Helper::actionAgregarEditarMascota($object_to_edit, false, $domicilio_mascota)?true:false;
+					$mascota_guardada = $this->getHelper()->actionAgregarEditarMascota($object_to_edit, false, $domicilio_mascota)?true:false;
 					if($mascota_guardada){
-						Frontend_Mascota_Helper::clearSessionVars();
-						Core_Http_Header::Redirect(Frontend_Mascota_Helper::getUrlUsuario(), true);
+						$this->getHelper()->clearSessionVars();
+						Core_Http_Header::Redirect($this->getHelper()->getUrlUsuario(), true);
 						return true;
 					}
 				}
@@ -120,21 +123,21 @@ class Frontend_Mascota_Router extends Frontend_Router_Abstract{
 		$object_to_edit = $this->getObjectToEdit();
 		$domicilio_mascota = $this->getDomicilioMascota();
 		if($paso==1){
-			$post = Core_Http_Post::getParameters('Core_Object', Frontend_Mascota_Helper::getUpdatableFields());
+			$post = Core_Http_Post::getParameters('Core_Object', $this->getHelper()->getUpdatableFields());
 			$object_to_edit->loadFromArray($post->getData(), true, true);
 //			header('content-type:text/plain');
 //			var_dump($object_to_edit->getData(), $post->getData());
 //			die(__FILE__.__LINE__);				//$object_to_edit->setPassword2($post->getPassword2());
-			$guardado_en_sesion = Frontend_Mascota_Helper::actionAgregarEditarMascota($object_to_edit, true)?true:false;
+			$guardado_en_sesion = $this->getHelper()->actionAgregarEditarMascota($object_to_edit, true)?true:false;
 			if($guardado_en_sesion){
 //				echo Core_Helper::DebugVars($object_to_edit->getId(), 1, 2);
-//				var_dump(Frontend_Mascota_Helper::getUrlEditar($object_to_edit->getId(), 1, 2));
+//				var_dump($this->getHelper()->getUrlEditar($object_to_edit->getId(), 1, 2));
 //				die(__FILE__.__LINE__);
 				return true;
 //				$return = $this->_editar_step_ok($paso, $id_mascota, $preserve_mascota_edicion);
 //				if(isset($return))
 //					return $return;
-				//Core_Http_Header::Redirect(Frontend_Mascota_Helper::getUrlEditar($object_to_edit->getId(), 1, 2), true);
+				//Core_Http_Header::Redirect($this->getHelper()->getUrlEditar($object_to_edit->getId(), 1, 2), true);
 				//return true;
 //				echo "mascota guardada en sesión";
 //				die(__FILE__.__LINE__);
@@ -143,12 +146,12 @@ class Frontend_Mascota_Router extends Frontend_Router_Abstract{
 			}
 		}
 		elseif($paso==2){
-			$post = Core_Http_Post::getParameters('Core_Object', Frontend_Mascota_Helper::getUpdatableDomicilioFields());
+			$post = Core_Http_Post::getParameters('Core_Object', $this->getHelper()->getUpdatableDomicilioFields());
 			$domicilio_mascota->loadFromArray($post->getData(), false);
 //			header('content-type:text/plain');
 //			var_dump($domicilio_mascota->getData());
 //			die(__FILE__.__LINE__);
-			$guardado_en_sesion = Frontend_Mascota_Helper::actionAgregarEditarDomicilio($domicilio_mascota, true)?true:false;
+			$guardado_en_sesion = $this->getHelper()->actionAgregarEditarDomicilio($domicilio_mascota, true)?true:false;
 			if($guardado_en_sesion){//pasa validaciones
 				return true;
 //				$return = $this->_editar_step_ok($paso, $id_mascota, $preserve_mascota_edicion);
@@ -163,7 +166,7 @@ class Frontend_Mascota_Router extends Frontend_Router_Abstract{
 		if($this->RedirectIfNotLoged())
 			return true;
 		if(!$this->_allowStep($paso)){
-			Core_Http_Header::Redirect(Frontend_Mascota_Helper::getUrlEditar($id_mascota, 1, 1), true);
+			Core_Http_Header::Redirect($this->getHelper()->getUrlEditar($id_mascota, 1, 1), true);
 			return true;
 		}
 		$id_mascota = $id_mascota=='new'?null:$id_mascota;
@@ -174,6 +177,8 @@ class Frontend_Mascota_Router extends Frontend_Router_Abstract{
 		}
 		if(Core_Http_Post::hasParameters()){
 			$handled = $this->_pre_editar_handle_post($paso, $id_mascota, $preserve_mascota_edicion);
+//			var_dump($handled);
+//			die(__FILE__.__LINE__);
 			if(isset($handled)&&$handled){
 				$return = $this->_editar_step_ok($paso, $id_mascota, $preserve_mascota_edicion);
 				if(isset($return))
@@ -208,13 +213,13 @@ class Frontend_Mascota_Router extends Frontend_Router_Abstract{
 //			var_dump(count($fotos_mascotas));
 //			die(__FILE__.__LINE__);
 			$fotos_addedit
-				->setUrlPhoto(Frontend_Mascota_Helper::getUrlPhoto())
+				->setUrlPhoto($this->getHelper()->getUrlPhoto())
 				->setIdMascota($object_to_edit->getId())
 				->setPhotoList($fotos_mascotas)
 			;
 		}
 		elseif($paso==2){
-			$domicilio_usuario = Frontend_Mascota_Helper::getDomicilioUsuario(true);
+			$domicilio_usuario = $this->getHelper()->getDomicilioUsuario(true);
 //			header('content-type:text/plain');
 //			var_dump($domicilio_usuario->getData());
 //			die(__FILE__.__LINE__);

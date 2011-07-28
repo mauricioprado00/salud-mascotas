@@ -208,16 +208,18 @@ class Frontend_Mascota_Helper extends Frontend_Helper{
 			Core_App::getInstance()->addSuccessMessage(self::getInstance()->__t('Mascota guardada en sesión'), true);
 			return true;
 		}
-		if($domicilio_mascota->getMidomicilio()=='si' || !isset($domicilio_mascota)){
-			if(!($id_domicilio = $usuario->getIdDomicilio())){
-				Core_App::getInstance()->addErrorMessage(self::getInstance()->__t("No se pudo registrar la mascota, su domicilio es incorrecto"), true);
-				return false;
+		if(isset($domicilio_mascota)){
+			if($domicilio_mascota->getMidomicilio()=='si' || !isset($domicilio_mascota)){
+				if(!($id_domicilio = $usuario->getIdDomicilio())){
+					Core_App::getInstance()->addErrorMessage(self::getInstance()->__t("No se pudo registrar la mascota, su domicilio es incorrecto"), true);
+					return false;
+				}
+				$mascota->setIdDomicilio($id_domicilio);
 			}
-			$mascota->setIdDomicilio($id_domicilio);
-		}
-		else{
-			//if(!$mascota->getIdDomicilio())
-			$mascota->setIdDomicilio($domicilio_mascota->getId());
+			else{
+				//if(!$mascota->getIdDomicilio())
+				$mascota->setIdDomicilio($domicilio_mascota->getId());
+			}
 		}
 		if(!$mascota->hasId()){/** aca hay que agregar a la base de datos*/
 			$mascota->setIdDueno($usuario->getId());
@@ -320,15 +322,16 @@ class Frontend_Mascota_Helper extends Frontend_Helper{
 				$domicilio_usuario = $usuario->getDomicilio();
 				if($domicilio->getId()!=$domicilio_usuario->getId()){//checkeamos que no sea el de usuario
 					$resultado = $domicilio->delete();//y eliminamos el domicilio actual
-					if($resultado){
-						Core_App::getInstance()->addSuccessMessage(self::getInstance()->__t('Domicilio de la mascota eliminado correctamente'), true);
-					}
-					else{
-						Core_App::getInstance()->addErrorMessage("No se pudo eliminar el domicilio de la mascota");
-						foreach($domicilio->getTranslatedErrors() as $error){
-							Core_App::getInstance()->addErrorMessage($error->getTranslatedDescription());
-						}
-					}
+					$resultado = true;//puede fallar esto, si borro el domicilio de una mascota o una perdida entonces puede ser que ese domicilio este ligadoa otra entidad, que no nos interesa en este punto
+//					if($resultado){
+//						Core_App::getInstance()->addSuccessMessage(self::getInstance()->__t('Domicilio de la mascota eliminado correctamente'), true);
+//					}
+//					else{
+//						Core_App::getInstance()->addErrorMessage("No se pudo eliminar el domicilio de la mascota");
+//						foreach($domicilio->getTranslatedErrors() as $error){
+//							Core_App::getInstance()->addErrorMessage($error->getTranslatedDescription());
+//						}
+//					}
 				}
 				else{
 					$resultado = true;

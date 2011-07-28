@@ -803,7 +803,7 @@ class Core_Object
             case 'set' :
                 //Varien_Profiler::start('SETTER: '.get_class($this).'::'.$method);
                 $key = $this->_underscore(substr($method,3));
-                $result = $this->setData($key, isset($args[0]) ? $args[0] : null);
+                $result = $this->setData($key, isset($args[0]) ? $args[0] : null, isset($args[1]) ? $args[1] : null);
                 //Varien_Profiler::stop('SETTER: '.get_class($this).'::'.$method);
                 return $result;
 

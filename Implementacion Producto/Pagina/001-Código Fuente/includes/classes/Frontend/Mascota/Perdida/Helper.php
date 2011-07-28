@@ -33,18 +33,35 @@ class Frontend_Mascota_Perdida_Helper extends Frontend_Mascota_Helper{
 		);
 	}
 	public static function getPerdidaEdicion($mascota){
-		$perdidas = $mascota->getListPerdida();
-		if(!$perdidas)
-			return null;
-		$perdidas = new Core_Collection($perdidas);
-		$perdidas = $perdidas->addFilterEq('activo', 'si');
-		if(!$perdidas->count())
-			return null;
-		$perdida = $perdidas->getFirst();
-		$perdida->loadNonTableColumn();
-//		var_dump($perdida);
-//		die(__FILE__.__LINE__);
+		static $cache = array();
+		if(!isset($cache[$mascota->getId()])){
+			$perdidas = $mascota->getListPerdida();
+			if(!$perdidas)
+				return null;
+			$perdidas = new Core_Collection($perdidas);
+			$perdidas = $perdidas->addFilterEq('activo', 'si');
+			if(!$perdidas->count())
+				return null;
+			$perdida = $perdidas->getFirst();
+			$perdida->loadNonTableColumn();
+			$cache[$mascota->getId()] = $perdida;
+	//		var_dump($perdida);
+	//		die(__FILE__.__LINE__);
+		}
+		else $perdida = $cache[$mascota->getId()];
 		return $perdida;
+	}
+	public static function getDomicilioEdicion($mascota){
+		$perdida = self::getPerdidaEdicion($mascota);
+		$domicilio = $perdida->getDomicilio();
+		if(!$domicilio)
+			return null;
+		$domicilio->loadNonTableColumn();
+		$user = self::getLogedUser();
+		if($domicilio->getId()==$user->getIdDomicilio()){
+			$domicilio->setMidomicilio('si');
+		}
+		return $domicilio;
 	}
 	public static function getUrlAgregar($preserve_mascota_edicion=0, $paso=1){
 		if($paso==1&&$preserve_mascota_edicion==false)
@@ -64,7 +81,10 @@ class Frontend_Mascota_Perdida_Helper extends Frontend_Mascota_Helper{
 			return null;
 		return self::getUserSessionVar('perdida_mascota_edicion');
 	}
-
+	public static function clearSessionVars(){
+		parent::clearSessionVars();
+		self::setUserSessionVar('perdida_mascota_edicion', null);
+	}
 	public static function actionAgregarEditarPerdida($perdida, $to_session=true, $id_mascota=null, $domicilio_mascota=null){
 		if(!is_a($perdida,'Frontend_Model_Perdida')){
 			$array = $perdida->getData();
@@ -79,6 +99,7 @@ class Frontend_Mascota_Perdida_Helper extends Frontend_Mascota_Helper{
 		if(!$perdida->validateFields() || $errors){
 			Core_App::getInstance()->addErrorMessage(self::getInstance()->__t("No se pudo registrar la perdida"));
 			Core_Helper::LoadValidationTranslation();
+			
 			foreach($perdida->getValidationMessages() as $key=>$messages){
 				foreach($messages as $message){
 					Core_App::getInstance()->addErrorMessage($message);

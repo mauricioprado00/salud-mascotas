@@ -16,19 +16,16 @@ class Frontend_Model_Perdida extends Saludmascotas_Model_Perdida{
 		$this->addAutofilterFieldOutput('extravio_fecha', array('Mysql_Helper','filterDateOutput'));
 		$this
 
-			->setFieldLabel('entrenada','Entrenamiento')
-			->addValidator('entrenada', c(new Zend_Validate_NotEmpty(array('allowWhiteSpace' => true))))
+//			->setFieldLabel('entrenada','Entrenamiento')
+//			->addValidator('entrenada', c(new Zend_Validate_NotEmpty(array('allowWhiteSpace' => true))))
+
+			->setFieldLabel('extravio_fecha','Fecha de Extravío')
+			->addValidator('extravio_fecha', c(new Zend_Validate_NotEmpty(array('allowWhiteSpace' => false))))
+
+			->setFieldLabel('extravio_hora','Hora de Extravío')
+			->addValidator('extravio_hora', c(new Zend_Validate_NotEmpty(array('allowWhiteSpace' => false))))
 		;
 	}
-
-//	public function update($data=null, $use_null_values=false, $match_fields=array('id')){
-//		$updated = parent::update($data,$use_null_values, $match_fields);
-//		return $updated;
-//	}
-//	public function insert($data=null,$use_null_values=false, $get_sql=false){
-//		$inserted = parent::insert($data,$use_null_values, $get_sql);
-//		return $inserted;
-//	}
 	public function loadNonTableColumn(){
 		$time = $this->getData('hora_extravio', null, array());
 		//$time = $this->getHoraExtravio();
@@ -38,6 +35,21 @@ class Frontend_Model_Perdida extends Saludmascotas_Model_Perdida{
 			->setData('extravio_fecha', $time[0], array())
 			->setExtravioHora($time[1])
 		;
+	}
+	public function commitNonTableColumn(){
+		$hora_extravio = $this->getData('extravio_fecha', null, array());
+		$hora_extravio .= ' ' . $this->getExtravioHora();
+		$this->setHoraExtravio($hora_extravio, array());
+	}
+	public function update($data=null, $use_null_values=false, $match_fields=array('id')){
+		$this->commitNonTableColumn();
+		$updated = parent::update($data,$use_null_values, $match_fields);
+		return $updated;
+	}
+	public function insert($data=null,$use_null_values=false, $get_sql=false){
+		$this->commitNonTableColumn();
+		$inserted = parent::insert($data,$use_null_values, $get_sql);
+		return $inserted;
 	}
 	public function getUrlEditar($preserve_mascota_edicion=0, $paso=1){
 		$mascota = $this->getMascota();

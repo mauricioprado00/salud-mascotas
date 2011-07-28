@@ -190,8 +190,6 @@ class Frontend_Model_Mascota extends Saludmascotas_Model_Mascota{
 				return false;
 			}
 		}
-		var_dump($this->getData());
-		die(__FILE__.__LINE__);
 		$inserted = parent::insert($data,$use_null_values, $get_sql);
 		if($inserted){
 			// agrego colores
