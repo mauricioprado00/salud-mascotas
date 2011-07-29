@@ -24,6 +24,13 @@
 				<parent>mascotas_usuario</parent>
 			</action>
 			<action  method="addItem">
+				<name>mascotas_usuario_encontre_mascota</name>
+				<text>Encontré o vi una mascota</text>
+				<link>mascotas/encuentro/agregar</link>
+				<weight>1</weight>
+				<parent>mascotas_usuario</parent>
+			</action>
+			<action  method="addItem">
 				<name>mascotas_usuario_quiero_cruzar</name>
 				<text>Quiero cruzar</text>
 				<link>mascotas/usuario/quiero_cruzar</link>
@@ -40,10 +47,17 @@
 		</reference>
 	</left_menu_usuario>
 	<mascota_usuario_listado>
+		<reference name="html_head">
+			<script>js/jQuery/fancybox/jquery.fancybox-1.3.1.pack.js</script>
+			<css>js/jQuery/fancybox/jquery.fancybox-1.3.1.css</css>
+		</reference>
 		<reference name="contenido">
+			<!--
 			<template template="mascota/usuario/listado2.phtml" />
+			-->
 			<mascota_listado_usuario name="mascota_listado_usuario">
-				<template name="list_entity_template" template="mascota/usuario/listado/item.phtml" />
+				<template name="list_entity_template" template="mascota/usuario/listado/item.phtml">
+				</template>
 			</mascota_listado_usuario>
 		</reference>
 	</mascota_usuario_listado>
@@ -75,8 +89,9 @@
 			<script>js/selector_colores.js</script>
 		</reference>
 		<reference name="contenido">
-			<template name="form_edit" template="mascota/agregar.phtml">
+			<template name="main_form_edit,form_edit" template="mascota/agregar.phtml">
 				<mascota_fotos_addedit name="fotos_addedit" />
+				<template in="mascota_addedit_datos" name="form_edit_opciones_publicacion,form_edit" template="mascota/agregar_opciones_publicacion.phtml" />
 			</template>
 		</reference>
 	</default>
@@ -160,6 +175,27 @@
 			</template>
 		</reference>
 	</mascota_upload_foto>
+	
+	<view_mascota>
+		<reference name="html_head">
+			<script charset="utf8" external="true">http://api.maptp.map24.com/ajax?appkey=FJX5715ae3ff53e4ea286f2a1aab1356X50</script>
+			<script charset="utf8">js/update_address_nn4d.js</script>
+			<script>js/jQuery/fancybox/jquery.fancybox-1.3.1.pack.js</script>
+			<css>js/jQuery/fancybox/jquery.fancybox-1.3.1.css</css>
+		</reference>
+		<reference name="contenido">
+			<template name="form_view" template="mascota/simple_view.phtml">
+				<mascota_view name="view_datos_mascota" template="mascota/preview.phtml" />
+				<domicilio_view name="view_ubicacion" map_type="Static" />
+				<!--
+				
+				<block name="view_posibles_reencuentros" />
+				<template when="accion(mascota_perdida_addedit_publicacion)" name="form_edit_publicacion" template="mascota/perdida/paso4_opciones_publicacion.phtml" />
+				<template when="accion(mascota_encuentro_addedit_publicacion)" name="form_edit_publicacion" template="mascota/encuentro/paso4_opciones_publicacion.phtml" />
+				-->
+			</template>
+		</reference>
+	</view_mascota>
 	<kradkk>
 		<reference name="html_head">
 			<script charset="utf8" external="true">http://api.maptp.map24.com/ajax?appkey=FJX5715ae3ff53e4ea286f2a1aab1356X50</script>

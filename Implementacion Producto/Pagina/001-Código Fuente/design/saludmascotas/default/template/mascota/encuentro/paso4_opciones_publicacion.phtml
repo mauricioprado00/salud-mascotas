@@ -2,6 +2,8 @@
 
 $encuentro = $this->getEncuentro();
 $descripcion = $encuentro->getDescripcion();
+$tiene_mascota = $encuentro->getTieneMascota();
+$estado_mascota = $encuentro->getEstadoMascota();
 $notificacion_email = $encuentro->getNotificacionEmail();
 $mostrar_telefono = $encuentro->getMostrarTelefono();
 $republicar_automaticamente = $encuentro->getRepublicarAutomaticamente();
@@ -16,16 +18,104 @@ $quiere_destacar = $encuentro->getQuiereDestacar();
 						->setId('descripcion')
 						->setName('descripcion')
 						->setInnerHtml(/*htmlentities*/($descripcion))
-	//                                        ->setRows(5)
-	//                                        ->setCols(40)
-	//					->setData('data-campo', '<b>Observaciones</b>')
-	//					->setData('data-validator', '{empty:false}')
-	//                                        ->setData('data-mensaje', 'Debe cargar uno o mas %field separados por comas')
 					;
 					echo $input->getHtml();
 				?> 
 			</div>
 			<div class="opciones_formulario opciones_formulario_encuentro">
+				<div class="opcion_formulario">
+					<div class="holding mostrar_telefono">
+						<?php
+							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+							$input
+								//->setMaxlength(20)
+								->setType('radio')
+								//->setAutocomplete('off')
+								->setTitle('Tengo la mascota en mi casa')
+								//->setClass('datepicker')
+								->setName('tiene_mascota')
+								->setId('tengo_la_mascota')
+								->setValue('si')
+							;
+							if($tiene_mascota=='si')
+								$input->setChecked('checked');
+							echo $input->getHtml();
+						?>
+						<label for="tengo_la_mascota">Tengo la mascota en mi casa</label>
+						<?php
+							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+							$input
+								//->setMaxlength(20)
+								->setType('radio')
+								//->setAutocomplete('off')
+								->setTitle('No la tengo, solo la vi')
+								//->setClass('datepicker')
+								->setName('tiene_mascota')
+								->setId('solo_la_vi')
+								->setValue('no')
+							;
+							if($tiene_mascota=='no')
+								$input->setChecked('checked');
+							echo $input->getHtml();
+						?>
+						<label for="solo_la_vi">No la tengo, solo la vi</label>
+					</div>
+				</div>
+				<div class="opcion_formulario">
+					<div class="holding mostrar_telefono">
+						<?php
+							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+							$input
+								//->setMaxlength(20)
+								->setType('radio')
+								//->setAutocomplete('off')
+								->setTitle('Estaba perdida')
+								//->setClass('datepicker')
+								->setName('estado_mascota')
+								->setId('estaba_perdida')
+								->setValue('perdida')
+							;
+							if($estado_mascota=='perdida')
+								$input->setChecked('checked');
+							echo $input->getHtml();
+						?>
+						<label for="estaba_perdida">Estaba perdida</label>
+						<?php
+							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+							$input
+								//->setMaxlength(20)
+								->setType('radio')
+								//->setAutocomplete('off')
+								->setTitle('Estaba abandonada')
+								//->setClass('datepicker')
+								->setName('estado_mascota')
+								->setId('estaba_abandonada')
+								->setValue('abandonada')
+							;
+							if($estado_mascota=='abandonada')
+								$input->setChecked('checked');
+							echo $input->getHtml();
+						?>
+						<label for="estaba_abandonada">Estaba abandonada</label>
+						<?php
+							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+							$input
+								//->setMaxlength(20)
+								->setType('radio')
+								//->setAutocomplete('off')
+								->setTitle('No lo sé')
+								//->setClass('datepicker')
+								->setName('estado_mascota')
+								->setId('no_se_estado')
+								->setValue('no se')
+							;
+							if($estado_mascota=='no se')
+								$input->setChecked('checked');
+							echo $input->getHtml();
+						?>
+						<label for="no_se_estado">No lo sé</label>
+					</div>
+				</div>
 				<div class="opcion_formulario">
 					<div class="holding notificacion_email">
 						<input type="hidden" name="notificacion_email" value="no">
@@ -93,6 +183,7 @@ $quiere_destacar = $encuentro->getQuiereDestacar();
 						<em>(1 semana de extensión)</em>
 					</div>
 				</div>
+				<?php /** / ?>
 				<div class="opcion_formulario">
 					<div class="holding quiere_destacar">
 						<input type="hidden" name="quiere_destacar" value="no">
@@ -117,4 +208,5 @@ $quiere_destacar = $encuentro->getQuiereDestacar();
 						<a href="#">más información</a>
 					</div>
 				</div>
+				<?php /**/ ?>
 			</div>

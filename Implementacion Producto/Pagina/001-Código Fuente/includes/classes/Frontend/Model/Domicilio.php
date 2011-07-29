@@ -149,11 +149,11 @@ class Frontend_Model_Domicilio extends Saludmascotas_Model_Domicilio{
 	}
 
 	
-	public function insert($data=null,$use_null_values=false, $get_sql=false){
+	public function insertFromUserInput($data=null,$use_null_values=false, $get_sql=false){
 		$this->addLocations();
 		return parent::insert($data,$use_null_values, $get_sql);
 	}
-	public function update($data=null, $use_null_values=false, $match_fields=array('id')){
+	public function updateFromUserInput($data=null, $use_null_values=false, $match_fields=array('id')){
 		$this->addLocations();
 		return parent::update($data,$use_null_values, $match_fields);
 	}

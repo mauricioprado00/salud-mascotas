@@ -4,7 +4,7 @@ class Frontend_Mascota_Block_ListadoUsuario extends Core_Block_List_Abstract{
 		parent::__construct();
 		$this
 			->setTemplate("mascota/usuario/listado.phtml")
-			->setMaxItems(3)
+			->setMaxItems(4)
 		;
 	}
 	private $search_object = null;

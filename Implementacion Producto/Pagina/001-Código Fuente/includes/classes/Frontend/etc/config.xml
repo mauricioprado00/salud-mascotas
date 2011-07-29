@@ -60,8 +60,12 @@
 		<class>Frontend_Block_Selector_TamanoMascota</class>
 	</block>
 	<block>
-		<type>selector_longitud_sexo_mascota</type>
+		<type>selector_sexo_mascota</type>
 		<class>Frontend_Block_Selector_SexoMascota</class>
+	</block>
+	<block>
+		<type>selector_castrado_mascota</type>
+		<class>Frontend_Block_Selector_CastradoMascota</class>
 	</block>
 	<block>
 		<type>selector_longitud_entrenada_mascota</type>

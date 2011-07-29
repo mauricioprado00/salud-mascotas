@@ -804,9 +804,11 @@ class Base_Layout extends Base_Singleton{
 		if($obj->hasName()){
 			$names = explode(',', $obj->getData('name'));
 			$simple_name = trim($names[0]);
+			$obj->setData('name', $simple_name);
 			$obj->setName($simple_name);
 			$this->addByNames($obj, $names);
 			$obj->setNameInLayout($simple_name);
+			//$obj->setData('name', $simple_name);
 			//var_dump($obj->getNameInLayout());
 		}
 		else{

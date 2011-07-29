@@ -41,12 +41,12 @@ class Frontend_Model_Encuentro extends Saludmascotas_Model_Encuentro{
 		$hora_encuentro .= ' ' . $this->getEncuentroHora();
 		$this->setHoraEncuentro($hora_encuentro, array());
 	}
-	public function update($data=null, $use_null_values=false, $match_fields=array('id')){
+	public function updateFromUserInput($data=null, $use_null_values=false, $match_fields=array('id')){
 		$this->commitNonTableColumn();
 		$updated = parent::update($data,$use_null_values, $match_fields);
 		return $updated;
 	}
-	public function insert($data=null,$use_null_values=false, $get_sql=false){
+	public function insertFromUserInput($data=null,$use_null_values=false, $get_sql=false){
 		$this->commitNonTableColumn();
 		$this->setFechaPublicacion(time());
 		$this->setFechaExpiracion(time()+60*60*24*Saludmascotas_Model_Config::findConfigValue('sm/dias_expiracion_encuentro', 7*4/*4 semanas*/));

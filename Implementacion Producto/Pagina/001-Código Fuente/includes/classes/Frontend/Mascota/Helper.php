@@ -22,6 +22,18 @@ class Frontend_Mascota_Helper extends Frontend_Helper{
 			return self::getUrlAgregar($preserve_mascota_edicion, $paso);
 		return 'mascotas/editar/'.$paso.'/'.$id_mascota.'/'.$preserve_mascota_edicion;
 	}
+	public static function getUrlSetParaCruza($id_mascota){
+		return 'mascotas/set_para_cruza/'.$id_mascota;
+	}
+	public static function getUrlSetParaAdoptar($id_mascota){
+		return 'mascotas/set_para_adoptar/'.$id_mascota;
+	}
+	public static function getUrlSetParaVenta($id_mascota){
+		return 'mascotas/set_para_venta/'.$id_mascota;
+	}
+	public static function getUrlSimpleView($id_mascota){
+		return 'mascotas/simple_view/'.$id_mascota;
+	}
 	public static function getEntrenadaMascota(){
 		return array('no','policia','caza','ciego','obediente');
 	}
@@ -31,7 +43,12 @@ class Frontend_Mascota_Helper extends Frontend_Helper{
 	public static function getSexoMascota($include_i_dont_know=false){
 		if(!$include_i_dont_know)
 			return array('hembra', 'macho');
-		return array('hembra', 'macho', 'no sé');
+		return array('hembra', 'macho', 'no se');
+	}
+	public static function getCastradaMascota($include_i_dont_know=false){
+		if(!$include_i_dont_know)
+			return array('si', 'no');
+		return array('si', 'no', 'no se');
 	}
 	public static function esgetSexoMascotaValida($value){
 		return in_array($value, self::getSexoMascota());
@@ -224,7 +241,7 @@ class Frontend_Mascota_Helper extends Frontend_Helper{
 		}
 		if(!$mascota->hasId()){/** aca hay que agregar a la base de datos*/
 			$mascota->setIdDueno($usuario->getId());
-			$resultado = $mascota->insert()?true:false;
+			$resultado = $mascota->insertFromUserInput()?true:false;
 			if($resultado){
 				Core_App::getInstance()->addSuccessMessage(self::getInstance()->__t('Mascota registrada correctamente'), true);
 			}
@@ -236,7 +253,7 @@ class Frontend_Mascota_Helper extends Frontend_Helper{
 			}
 		}
 		else{/** aca hay que actualizar el registro*/
-			$resultado = $mascota->update(null)?true:false;
+			$resultado = $mascota->updateFromUserInput(null)?true:false;
 //			header('content-type:text/plain');
 //			var_dump($mascota);
 //			die(__FILE__.__LINE__);
@@ -291,7 +308,7 @@ class Frontend_Mascota_Helper extends Frontend_Helper{
 			if($domicilio->getId()==$usuario->getIdDomicilio())
 				$domicilio->setId(null);
 			if(!$domicilio->hasId()){/** aca hay que agregar a la base de datos*/
-				$resultado = $domicilio->insert()?true:false;
+				$resultado = $domicilio->insertFromUserInput()?true:false;
 				//echo Core_Helper::DebugVars(get_class($domicilio),$domicilio->getData());
 				if($resultado){
 					
@@ -305,7 +322,7 @@ class Frontend_Mascota_Helper extends Frontend_Helper{
 			}
 			else{/** aca hay que actualizar el registro*/
 				//$actualizada = true;// actualizarEnLaBase()
-				$resultado = $domicilio->update(null)?true:false;
+				$resultado = $domicilio->updateFromUserInput(null)?true:false;
 				//echo Core_Helper::DebugVars(Inta_Db::getInstance()->getLastQuery());
 				if($resultado){
 				}
@@ -351,6 +368,72 @@ class Frontend_Mascota_Helper extends Frontend_Helper{
 //		foreach($colores as $color)
 //			$col->addItem($color, strtolower($color->getColorRgb()));
 //		return $col;
+	}
+	public static function setParaCruza($id_mascota){
+		if(!$id_mascota){
+			Core_App::getInstance()->addErrorMessage(self::getInstance()->__t('Error en la acción, dirección inválida'), true);
+			return false;
+		}
+		//Core_App::getInstance()->addSuccessMessage(self::getInstance()->__t('Domicilio mascota guardada en sesión'), true);
+		$mascota = new Frontend_Model_Mascota();
+		$mascota->setId($id_mascota);
+		if(!$mascota->load()){
+			Core_App::getInstance()->addErrorMessage(self::getInstance()->__t('La mascota no existe'), true);
+			return false;
+		}
+		$nombre = $mascota->getNombre();
+		$mascota->setData(array())->setId($id_mascota);//para evitar updatear todos los campos
+		$mascota->setParaCruza();
+		if(!$mascota->update()){
+			Core_App::getInstance()->addErrorMessage(self::getInstance()->__t('Error en la acción, no se pudo guardar'), true);
+			return false;
+		}
+		Core_App::getInstance()->addSuccessMessage(self::getInstance()->__t('Has agregado a tu mascota <em>'.$nombre.'</em> para cruza'), true);
+		return true;
+	}
+	public static function setParaAdoptar($id_mascota){
+		if(!$id_mascota){
+			Core_App::getInstance()->addErrorMessage(self::getInstance()->__t('Error en la acción, dirección inválida'), true);
+			return false;
+		}
+		//Core_App::getInstance()->addSuccessMessage(self::getInstance()->__t('Domicilio mascota guardada en sesión'), true);
+		$mascota = new Frontend_Model_Mascota();
+		$mascota->setId($id_mascota);
+		if(!$mascota->load()){
+			Core_App::getInstance()->addErrorMessage(self::getInstance()->__t('La mascota no existe'), true);
+			return false;
+		}
+		$nombre = $mascota->getNombre();
+		$mascota->setData(array())->setId($id_mascota);//para evitar updatear todos los campos
+		$mascota->setParaAdoptar();
+		if(!$mascota->update()){
+			Core_App::getInstance()->addErrorMessage(self::getInstance()->__t('Error en la acción, no se pudo guardar'), true);
+			return false;
+		}
+		Core_App::getInstance()->addSuccessMessage(self::getInstance()->__t('Has agregado a tu mascota <em>'.$nombre.'</em> para regalar'), true);
+		return true;
+	}
+	public static function setParaVenta($id_mascota){
+		if(!$id_mascota){
+			Core_App::getInstance()->addErrorMessage(self::getInstance()->__t('Error en la acción, dirección inválida'), true);
+			return false;
+		}
+		//Core_App::getInstance()->addSuccessMessage(self::getInstance()->__t('Domicilio mascota guardada en sesión'), true);
+		$mascota = new Frontend_Model_Mascota();
+		$mascota->setId($id_mascota);
+		if(!$mascota->load()){
+			Core_App::getInstance()->addErrorMessage(self::getInstance()->__t('La mascota no existe'), true);
+			return false;
+		}
+		$nombre = $mascota->getNombre();
+		$mascota->setData(array())->setId($id_mascota);//para evitar updatear todos los campos
+		$mascota->setParaVenta();
+		if(!$mascota->update()){
+			Core_App::getInstance()->addErrorMessage(self::getInstance()->__t('Error en la acción, no se pudo guardar'), true);
+			return false;
+		}
+		Core_App::getInstance()->addSuccessMessage(self::getInstance()->__t('Has agregado a tu mascota <em>'.$nombre.'</em> para vender'), true);
+		return true;
 	}
 }
 ?>

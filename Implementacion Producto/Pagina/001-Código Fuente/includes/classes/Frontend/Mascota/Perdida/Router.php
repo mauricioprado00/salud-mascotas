@@ -308,6 +308,12 @@ class Frontend_Mascota_Perdida_Router extends Frontend_Mascota_Router{
 	}
 	protected function _editar_handle_load_layout($paso=1, $id_mascota=null, $preserve_mascota_edicion=false){
 		$return = parent::_editar_handle_load_layout($paso, $id_mascota, $preserve_mascota_edicion);
+		if($paso==1){
+			$loaded_layout = Core_App::getLoadedLayout();
+			$loaded_layout->getBlock('main_form_edit')
+				->setShowOptionalFields(false)
+			;
+		}
 		if($paso==2){
 			$loaded_layout = Core_App::getLoadedLayout();
 			$perdida = $this->getPerdida();
@@ -321,6 +327,7 @@ class Frontend_Mascota_Perdida_Router extends Frontend_Mascota_Router{
 			$object_to_edit = $this->getObjectToEdit();
 			$fotos_mascotas = $object_to_edit->getListFoto(true);//el true es para que permita pk nula
 			$perdida = $this->getPerdida();
+			$loaded_layout->getBlock('form_edit')->setObjectToEdit($object_to_edit);
 			$view_datos_mascota = $loaded_layout
 				->getBlock('view_datos_mascota')
 				->setMascota($object_to_edit)

@@ -19,6 +19,11 @@ input, textarea {margin: 0;padding: 0;}
 hr {margin: 0;padding: 0;border: 0;color: #000;background-color: #000;height: 1px;}
 /*end css reset*/
 
+a{
+	color:#2276f1;
+	text-decoration:none;
+}
+
 /*empieza body*/
 body{
 	font: 13px/1.5 Helvetica Neue,Arial,Helvetica,'Liberation Sans',FreeSans,sans-serif;
@@ -46,7 +51,7 @@ form.standart p{
 form.standart .share_row{
 	float:left;
 }
-form.standart .holding input, form.standart .holding select {
+form.standart .holding input[type=text], form.standart .holding input[type=password], form.standart .holding select {
 	width:397px;
 	-moz-border-radius:4px;
 	-khtml-border-radius:4px;
@@ -58,6 +63,17 @@ form.standart .holding input, form.standart .holding select {
 	font:19px "Helvetica Neue",Arial,sans-serif;
 	border: 1px solid #CCCCCC !important;
 }
+form.standart textarea{
+	-moz-border-radius:4px;
+	-khtml-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+	margin-bottom:16px;
+	opacity:1!important;
+	font:19px "Helvetica Neue",Arial,sans-serif;
+	border: 1px solid #CCCCCC !important;
+	width:410px;
+}
 form.standart .holding select{
 	/*width:313px;*/
 	width:413px;
@@ -66,7 +82,7 @@ form.standart .holding select.not_selected{
 	color:#999999;
 	font:19px/45px "Helvetica Neue",Arial,sans-serif;
 }
-form.standart .holding.half_size input{
+form.standart .holding.half_size input[type=text], form.standart .holding.half_size input[type=password]{
 	width:185px;
 }
 form.standart .holding.half_size select{
@@ -74,6 +90,7 @@ form.standart .holding.half_size select{
 }
 form.standart .holding.half_size + *{
 	margin-left:10px;
+	max-width: 445px;
 }
 form.standart .holding .holder{
 	font:19px "Helvetica Neue",Arial,sans-serif;
@@ -565,6 +582,9 @@ form .holding .help {
 .wrapper_simple .middle > *{
 	float:none;
 }
+.wrapper_simple .head{
+	z-index:200000;
+}
 .head h1{
 	font-size:25px;
 	font-weight:100;
@@ -640,6 +660,7 @@ form .holding .help {
 		top: 35px;
 		background-color:#EEEEEE;
 		display:none;
+		z-index:1;
 	}
 	.select_colores .paleta li{
 		
@@ -650,7 +671,15 @@ form .holding .help {
 	/*termina selector_colores*/
 	/*comienza listado fotos*/
 .mascota_fotos_addedit ul{
-	
+	width:463px;
+	float:left;
+}
+.mascota_fotos_addedit ul++{
+	clear:both;
+}
+form .mascota_fotos_addedit .help{
+	float:left;
+	display:block;
 }
 .mascota_fotos_addedit li{
 	display:inline-block;
@@ -667,3 +696,143 @@ form .holding .help {
 }
 	/*termina listado fotos*/
 /*termina mascota*/
+
+.listado_mascotas{
+	width:436px;
+}
+.listado_mascotas>li{
+	padding:4px 10px;
+}
+.listado_mascotas>li>*{
+	float:left;
+}
+.listado_mascotas>li.mascota_item_even{
+	background-color:#FFFF7A;
+}
+.listado_mascotas>li .image{
+	margin-right:10px;
+}
+.listado_mascotas>li .column1, .listado_mascotas li .column2{
+	width:165px;
+}
+.listado_mascotas>li .column1{
+	margin-right:5px;
+}
+.listado_mascotas>li .column2{
+	
+}
+.listado_mascotas>li .column2>li>a{
+	font-weight:bold;
+}
+.listado_mascotas>li>ul>li>b{
+	font-weight:bold;
+}
+.listado_mascotas>li>ul>li>em{
+	
+}
+
+.paginas{
+	text-align:center;
+}
+.paginas *{
+	font-size:15px;
+}
+.paginas li, .multilink li{
+	display:inline;
+	color:#999999;
+	font-size:12px;
+	font-weight:normal;
+}
+.paginas li+li:before, .multilink li+li:before{
+	content: "  ·  ";
+}
+
+form.wider .holding input[type=text], form.wider .holding input[type=password], form.wider .holding select{
+	width:423px;/*diff 26px*/	
+}
+form.wider textarea{
+	width:434px;
+}
+form.wider .holding select{
+	width:439px;
+}
+form.wider .holding.half_size input[type=text], form.wider .holding.half_size input[type=password]{
+	width:197px;
+}
+form.wider .select_colores .colores_seleccionados{
+	width:197px;
+}
+form.wider .holding.half_size select{
+	width:213px;
+}
+form.wider .half_size .checkboxholder{
+	float:left;
+	width:219px;
+	display:block;
+}
+form.wider .half_size .checkboxholder label{
+	font:19px "Helvetica Neue",Arial,sans-serif;
+}
+form.wider .half_size .checkboxholder+*{
+	clear:both;
+}
+form.wider h2{
+	width:437px;
+	border-bottom:1px solid #EBEBEB;
+	position:relative;
+}
+form.wider h2 a{
+	position:absolute;
+	right: 0;
+	bottom: 0px;
+	font-size: 13px;
+    line-height: 13px;
+}
+form.wider .maparea{
+	width:439px;
+	height:439px;
+}
+
+.view_mascota{
+	width:437px;
+}
+.view_mascota .view_fotos_mascota{
+	width:183px;
+	float:left;
+	margin-right:3px;
+}
+.view_mascota .view_fotos_mascota li{/*primera foto*/
+	width:183px;
+}
+.view_mascota .view_fotos_mascota li+li{
+	width:auto;
+	height:36px;
+	float:left;
+	margin-left:9px;
+}
+
+.view_mascota .view_datos_mascota{
+	float:left;
+	width:251px;
+}
+.view_mascota .view_datos_mascota .nombre, .view_mascota .view_datos_mascota .sexo{
+	margin-right:5px;
+	width:145px;
+}
+.view_mascota .view_datos_mascota .nombre, .view_mascota .view_datos_mascota .edad, .view_mascota .view_datos_mascota .sexo, .view_mascota .view_datos_mascota .castrado{
+	float:left;
+	clear:right;
+}
+.view_mascota .view_datos_mascota .raza, .view_mascota .view_datos_mascota .sexo{
+	clear:left;
+}
+.view_mascota .view_datos_mascota b{
+	font-weight:bold;
+}
+.view_mascota .view_datos_mascota em{
+	margin-left:2px;
+}
+
+.view_mascota .view_tamano_mascota{
+	float:left;
+}

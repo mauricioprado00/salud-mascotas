@@ -5,22 +5,22 @@ $object_to_edit = $this->getObjectToEdit();
 ?>
 
 <div class="addeditmascota_publicacion">
-	<form class="standart busqueda" name="form1" method="post">
+	<form class="standart wider busqueda" name="form1" method="post">
 		<input type="hidden" name="dummy" value="continuar" />
 		<div>
-			<h2>Datos de Mascota</h2>
+			<h2>Datos de Mascota <a href="<?php print $this->getUrl($object_to_edit->getUrlEncuentroEditar(1, 1)); ?>">Modificar</a></h2>
 			<?php print $this->getChildHtml('view_datos_mascota'); ?>
 		</div>
 		<div>
-			<h2>Ubicación Pérdida</h2>
+			<h2>Ubicación Pérdida <a href="<?php print $this->getUrl($object_to_edit->getUrlEncuentroEditar(1, 2)); ?>">Modificar</a></h2>
 			<?php print $this->getChildHtml('view_ubicacion'); ?>
 		</div>
 		<div>
-			<h2>Posibles coincidencias seleccionadas</h2>
+			<h2>Posibles coincidencias seleccionadas <a href="<?php print $this->getUrl($object_to_edit->getUrlEncuentroEditar(1, 3)); ?>">Modificar</a></h2>
 			<?php print $this->getChildHtml('view_posibles_reencuentros'); ?>
 		</div>
 		<div>
-			<h2>Opciones de Publicación</h2>
+			<h2>Opciones de Publicación <a href="<?php print $this->getUrl($object_to_edit->getUrlEncuentroEditar(1, 4)); ?>">Modificar</a></h2>
 			<?php print $this->getChildHtml('form_edit_publicacion'); ?>
 		</div>
 		<div class="form_row actions_row single_action">

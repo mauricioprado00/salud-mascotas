@@ -2,6 +2,7 @@
 /**
  *@referencia Domicilio(id_domicilio) Frontend_Model_Domicilio(id)
  *@listar Perdida Frontend_Model_Perdida
+ *@listar Encuentro Frontend_Model_Encuentro
 */
 class Frontend_Model_Mascota extends Saludmascotas_Model_Mascota{
 	protected static $class = __CLASS__; 
@@ -36,11 +37,14 @@ class Frontend_Model_Mascota extends Saludmascotas_Model_Mascota{
 			->addValidator('tamano', c(new Zend_Validate_Alpha(array('allowWhiteSpace' => true))))
 
 			->setFieldLabel('sexo','Sexo')
-			->addValidator('sexo', c(new Zend_Validate_Alpha(array('allowWhiteSpace' => true))))
+			->addValidator('sexo', c(new Zend_Validate_NotEmpty(array('allowWhiteSpace' => true))))
 
-			->setFieldLabel('entrenada','Entrenamiento')
-			->addValidator('entrenada', c(new Zend_Validate_NotEmpty(array('allowWhiteSpace' => true))))
-
+			->setFieldLabel('castrado','Castrado')
+			->addValidator('castrado', c(new Zend_Validate_NotEmpty(array('allowWhiteSpace' => true))))
+//
+//			->setFieldLabel('entrenada','Entrenamiento')
+//			->addValidator('entrenada', c(new Zend_Validate_NotEmpty(array('allowWhiteSpace' => true))))
+//
 
 //
 //			->setFieldLabel('localidad','Localidad')
@@ -99,7 +103,9 @@ class Frontend_Model_Mascota extends Saludmascotas_Model_Mascota{
 	}
 //
 //	
-	public function update($data=null, $use_null_values=false, $match_fields=array('id')){
+	public function updateFromUserInput($data=null, $use_null_values=false, $match_fields=array('id')){
+		if(!$this->getEntrenada())
+			$this->setEntrenada(null);
 		if(($raza=$this->getRaza(false)) && ($id_especie=$this->getIdEspecie())){
 			if(!$this->setRazaByName($raza, $id_especie, true)){
 				return false;
@@ -176,7 +182,7 @@ class Frontend_Model_Mascota extends Saludmascotas_Model_Mascota{
 		}
 		return $updated;
 	}
-	public function insert($data=null,$use_null_values=false, $get_sql=false){
+	public function insertFromUserInput($data=null,$use_null_values=false, $get_sql=false){
 		if(!$this->getIdEstadomascota()){
 			$estado = $this->getEstado();
 			if(!$estado || !$this->setEstadoByName($estado))
@@ -185,6 +191,8 @@ class Frontend_Model_Mascota extends Saludmascotas_Model_Mascota{
 		//var_dump($this->getData(),$raza=$this->getRaza(false), $id_especie=$this->getIdEspecie());
 //		var_dump($raza=$this->getRaza(false), $id_especie=$this->getIdEspecie(), $raza=$this->getRaza(false) && $id_especie=$this->getIdEspecie());
 //		die(__FILE__.__LINE__);
+		if(!$this->getEntrenada())
+			$this->setEntrenada(null);
 		if(($raza=$this->getRaza(false)) && ($id_especie=$this->getIdEspecie())){
 			if(!$this->setRazaByName($raza, $id_especie, true)){
 				return false;
@@ -239,6 +247,25 @@ class Frontend_Model_Mascota extends Saludmascotas_Model_Mascota{
 			return Frontend_Mascota_Encuentro_Helper::getUrlEditar($this->getId(), $preserve_mascota_edicion, $paso);
 		return Frontend_Mascota_Helper::getUrlEditar($this->getId(), $preserve_mascota_edicion, $paso);
 	}
+	public function getUrlPerdidaEditar($preserve_mascota_edicion=0, $paso=1){
+		return Frontend_Mascota_Perdida_Helper::getUrlEditar($this->getId(), $preserve_mascota_edicion, $paso);
+	}
+	public function getUrlEncuentroEditar($preserve_mascota_edicion=0, $paso=1){
+		return Frontend_Mascota_Encuentro_Helper::getUrlEditar($this->getId(), $preserve_mascota_edicion, $paso);
+	}
+	public function getUrlSetParaCruza(){
+		return Frontend_Mascota_Helper::getUrlSetParaCruza($this->getId());
+	}
+	public function getUrlSetParaAdoptar(){
+		return Frontend_Mascota_Helper::getUrlSetParaAdoptar($this->getId());
+	}
+	public function getUrlSetParaVenta(){
+		return Frontend_Mascota_Helper::getUrlSetParaVenta($this->getId());
+	}
+	public function getUrlSimpleView(){
+		return Frontend_Mascota_Helper::getUrlSimpleView($this->getId());
+	}
+
 //	public function update($data=null, $use_null_values=false, $match_fields=array('id')){
 //		$this->addLocations();
 //		return parent::update($data,$use_null_values, $match_fields);

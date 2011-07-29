@@ -6,6 +6,7 @@
 * cambio clave foranea id_domicilio de tabla  encuentro, le hago on delete set null
 * elimino campo fecha_encuentro de la tabla encuentro
 * cambio el campo hora_encuentro a tipo DATETIME
+* cambio el campo sexo de la tabla mascota le saco el acento a la opción "no sé"
 27/07/2011 - mauricio
 * cambio campo id_domicilio de tabla perdida, la hago nulleable
 * cambio clave foranea id_domicilio de tabla  perdida, le hago on delete set null

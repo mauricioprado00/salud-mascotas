@@ -5,9 +5,8 @@ $mascota = $this->getEntity();
 //var_dump(get_class($mascota),$mascota->getData());
 //die(__FILE__.__LINE__);
 ?> 
-<div class="mascota_item">
 	<div class="image">
-		<img src="<?php print $this->getUrl($mascota->getUrlImage(70, 78)); ?>" />
+		<img src="<?php print $mascota->getUrlImage(70, 78); ?>" />
 	</div>
 	<ul class="column1">
 		<li>
@@ -30,10 +29,29 @@ $mascota = $this->getEntity();
 	<ul class="column2">
 		<li>
 			<b>Estado:</b>
-			<em><?php print $mascota->getEstadoMascota()->getNombre(); ?></em>
+			<em><?php print $mascota->getEstadoFull(); ?></em>
 		</li>
 		<li>
+			<a class="link_view_mascota" href="<?php print $this->getUrl($mascota->getUrlSimpleView()); ?>">Ver todos los datos</a>
 			<a href="<?php print $this->getUrl($mascota->getUrlEditar()); ?>">Modificar o agregar fotos</a>
+			<ul class="multilink">
+				<?php if($mascota->esEstadoPerdida()): ?> 
+				<li><a href="#no_implementado">Ya lo encontré</a></li>
+				<?php else: ?> 
+					<?php if($mascota->esEstadoConDueno()): ?>
+					<li><a href="<?php print $this->getUrl($mascota->getUrlPerdidaEditar()); ?>">Lo perdí</a></li> 
+						<?php if(!$mascota->esParaCruza()): ?>
+						<li><a href="<?php print $this->getUrl($mascota->getUrlSetParaCruza()); ?>">Quiero cruzarlo</a></li>
+						<?php endif; ?>
+						<?php if(!$mascota->esParaVenta()): ?>
+						<li><a href="<?php print $this->getUrl($mascota->getUrlSetParaVenta()); ?>">Quiero venderlo</a></li>
+						<?php endif; ?>
+					<?php endif; ?> 
+					<?php if(!$mascota->esParaAdoptar() && !$mascota->esEstadoVista()): ?>
+					<li><a href="<?php print $this->getUrl($mascota->getUrlSetParaAdoptar()); ?>">Quiero regalar</a></li>
+					<?php endif; ?>
+				<?php endif; ?>
+			</ul>
 		</li>
 	</ul>
-</div>
+	<div style="clear:both;float:none;"></div>

@@ -41,6 +41,86 @@ class Saludmascotas_Model_Mascota extends Core_Model_Abstract{
 		$this->addAutofilterFieldInput('fecha_nacimiento', array('Mysql_Helper','filterDateInput'));
 		$this->addAutofilterFieldOutput('fecha_nacimiento', array('Mysql_Helper','filterDateOutput'));
 	}
+	public function getEstadoFull(){
+		$estado = array();
+		if($this->esEstadoConDueno()){
+			if($this->esParaVenta()){
+				$estado[] = 'Para venta';
+			}
+			elseif($this->esParaAdoptar()){
+				$estado[] = 'Para adopción';
+			}
+			if($this->esParaCruza()){
+				$estado[] = 'Para cruza';
+			}
+			if(!count($estado)){
+				$estado[] = $this->getEstadoMascota()->getNombre();
+			}
+		}
+		else{
+			$estado[] = $this->getEstadoMascota()->getNombre();
+		}
+		return implode(', ', $estado);
+	}
+	public function setParaCruza($set=true){
+		$this->setData('para_cruza', $set?'si':'no');
+		return $this;
+	}
+	public function setParaAdoptar($set=true){
+		$this->setData('para_adoptar', $set?'si':'no');
+		return $this;
+	}
+	public function setParaVenta($set=true){
+		$this->setData('para_venta', $set?'si':'no');
+		return $this;
+	}
+	public function setPedigree($set=true){
+		$this->setData('pedigree', $set?'si':'no');
+		return $this;
+	}
+	public function setQuiereDestacar($set=true){
+		$this->setData('quiere_destacar', $set?'si':'no');
+		return $this;
+	}
+	public function setDestacado($set=true){
+		$this->setData('destacado', $set?'si':'no');
+		return $this;
+	}
+	public function esParaAdoptar(){
+		return $this->getParaAdoptar()=='si';
+	}
+	public function esParaVenta(){
+		return $this->getParaVenta()=='si';
+	}
+	public function esParaCruza(){
+		return $this->getParaCruza()=='si';
+	}
+	public function esPedigree(){
+		return $this->getPedigree()=='si';
+	}
+	public function esQuiereDestacar(){
+		return $this->getQuiereDestacar()=='si';
+	}
+	public function esDestacado(){
+		return $this->getDestacado()=='si';
+	}
+	public function getUrlImage($max_width=null, $max_height=null){
+		$fotos = $this->getListFoto();
+		if(!$fotos){
+			$foto = new Saludmascotas_Model_FotoMascota();
+			$sp = Core_App::getLayout()->getSkinPath('img/nophoto.png');
+			if(!$sp)
+				return null;
+			$foto->setRuta($sp);
+			$image = new Core_Image_Cache($sp, $max_width, $max_height);
+			return Core_App::getUrlModel()->getUrl($image->getLinkUrl());
+		}
+		else $foto = $fotos[0];
+		if(!isset($max_width)&&!isset($max_height)){
+			return $foto->getUrl();
+		}
+		return $foto->getThumbUrl($max_width, $max_height);
+	}
 	public function setEstadoByName($nombre_estado_mascota){
 		if(!($estado_mascota = Saludmascotas_Model_EstadoMascota::getEstadoByName($nombre_estado_mascota)))
 			return false;
@@ -82,6 +162,9 @@ class Saludmascotas_Model_Mascota extends Core_Model_Abstract{
 	public function esEstadoVista(){
 		return $this->esEstadoByName('vista');
 	}
+	public function esEstadoEncuentro(){
+		return $this->esEstadoVista()||$this->esEstadoEnGuarda();
+	}
 	protected function setRazaByName($nombre_raza, $id_especie, $create_if_needed=false){
 		$raza = new Saludmascotas_Model_Raza();
 		$raza->setNombre($nombre_raza);
@@ -121,6 +204,49 @@ class Saludmascotas_Model_Mascota extends Core_Model_Abstract{
 		list($dia_actual, $mes_actual, $anio_actual) = explode('/', $fecha_actual);
 		
 		return Core_Helper::calculateAgeFormatted($dia_nacimiento, $mes_nacimiento, $anio_nacimiento, $dia_actual, $mes_actual, $anio_actual);
+	}
+	public function smartGetDomicilio(){
+		if($this->esEstadoPerdida()){
+			$perdida = $this->getPerdidaActual(false);
+			if(!$perdida){
+				return null;
+			}
+			return $perdida->getDomicilio();
+		}
+		if($this->esEstadoEncuentro()){
+			$encuentro = $this->getEncuentroActual(false);
+			if(!$encuentro){
+				return null;
+			}
+			return $encuentro->getDomicilio();
+		}
+		return $this->getDomicilio();
+	}
+	public function getEncuentroActual($load_nontabledata=true){
+		$encuentros = $this->getListEncuentro();
+		if(!$encuentros)
+			return null;
+		$encuentros = new Core_Collection($encuentros);
+		$encuentros = $encuentros->addFilterEq('activo', 'si');
+		if(!$encuentros->count())
+			return null;
+		$encuentro = $encuentros->getFirst();
+		if($load_nontabledata)
+			$encuentro->loadNonTableColumn();
+		return $encuentro;
+	}
+	public function getPerdidaActual($load_nontabledata=true){
+		$perdidas = $this->getListPerdida();
+		if(!$perdidas)
+			return null;
+		$perdidas = new Core_Collection($perdidas);
+		$perdidas = $perdidas->addFilterEq('activo', 'si');
+		if(!$perdidas->count())
+			return null;
+		$perdida = $perdidas->getFirst();
+		if($load_nontabledata)
+			$perdida->loadNonTableColumn();
+		return $perdida;
 	}
 	public function getDbTableName() 
 	{

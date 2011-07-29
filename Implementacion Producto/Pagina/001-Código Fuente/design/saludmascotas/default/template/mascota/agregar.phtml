@@ -1,4 +1,17 @@
 <?php //útf8 
+$label_nombre = $this->getLabelNombre();
+if(!isset($label_nombre))
+	$label_nombre = 'Ingresa el nombre de tu mascota';
+$label_edad = $this->getLabelEdad();
+if(!isset($label_edad))
+	$label_edad = 'Ingresa su edad o fecha de nacimiento si la recuerdas';
+$dont_know_options = $this->getDontKnowOptions();
+if(!isset($dont_know_options))
+	$dont_know_options = false;
+$show_optional_fields = $this->getShowOptionalFields();
+if(!isset($show_optional_fields))
+	$show_optional_fields = true;
+
 $object_to_edit = $this->getObjectToEdit();
 
 $nombre = $object_to_edit->getNombre();
@@ -16,18 +29,14 @@ $sexo = $object_to_edit->getSexo();
 $entrenada = $object_to_edit->getEntrenada();
 $pedigree = $object_to_edit->getPedigree();
 $descripcion = $object_to_edit->getDescripcion();
-$perdido = $object_to_edit->getPerdido();
-$para_cruza = $object_to_edit->getParaCruza();
-$para_adoptar = $object_to_edit->getParaAdoptar();
-$para_venta = $object_to_edit->getParaVenta(); 
-$quiere_destacar = $object_to_edit->getQuiereDestacar();
+
 
 $colores_seleccionados = $object_to_edit->getColoresSeleccionados();
 
 ?>
 <div class="addeditmascota_datos">
 	<div class="form_container form_mascota_datos">
-		<form class="standart login" name="form1" method="post">
+		<form class="standart wider login" name="form1" method="post">
 			<div class="textbox">
 				<div class="holding nombre">
 					<?php
@@ -45,7 +54,7 @@ $colores_seleccionados = $object_to_edit->getColoresSeleccionados();
 						//<input type="text" autocomplete="on" title="nombre" name="nombre" id="nombre" value="">
 					?> 
 					<span class="holder">Nombre</span>
-					<span class="help">Ingresa el nombre de tu mascota</span>
+					<span class="help"><?php print $label_nombre; ?></span>
 				</div>
 			</div>
 			<div class="textbox">
@@ -88,7 +97,7 @@ $colores_seleccionados = $object_to_edit->getColoresSeleccionados();
 						-->
 					</div>
 					<span class="holder">Fecha de Nacimiento</span>
-					<span class="help">Ingresa su edad o fecha de nacimiento si la recuerdas</span>
+					<span class="help"><?php print $label_edad; ?></span>
 				</div>
 				<div style="clear:both;"></div>
 			</div>
@@ -401,7 +410,9 @@ $colores_seleccionados = $object_to_edit->getColoresSeleccionados();
 				<div class="holding share_row half_size sexo">
 					<div class="input_autocomplete">
 						<?
-							$selector_sexo = $this->appendBlock('<selector_longitud_sexo_mascota />');
+							$selector_sexo = $this->appendBlock('<selector_sexo_mascota />');
+							if($dont_know_options)
+								$selector_sexo->setIncludeDontKnow(true);
 	//						if(!$id_sexo){
 	//							foreach($selector_sexo->listEntityes() as $entity){
 	//								if($entity->getNombre()=='argentina'){
@@ -443,6 +454,8 @@ $colores_seleccionados = $object_to_edit->getColoresSeleccionados();
 					-->
 				</div>
 				<div class="holding share_row half_size castrado">
+				<?php if(!$dont_know_options): ?> 
+					<div class="checkboxholder">
 					<input type="hidden" name="castrado" value="no">
 					<?php
 						$input = Core::getObject('Core_Html_Tag_Custom', 'input');
@@ -461,13 +474,35 @@ $colores_seleccionados = $object_to_edit->getColoresSeleccionados();
 						echo $input->getHtml();
 					?>
 					<label for="castrado">¿Castrado?</label>
+					</div>
 					<!--
 						<span class="holder">País</span>
 					-->
+				<?php else: ?> 
+					<div class="input_autocomplete">
+						<?
+							$selector_castrado = $this->appendBlock('<selector_castrado_mascota />');
+							//if($dont_know_options)
+								$selector_castrado->setIncludeDontKnow(true);
+							if($castrado)
+								$selector_castrado->setSelectedValue($castrado);
+							echo c($selector_castrado)
+								->void($selector_castrado
+									->getSelectControl()
+										->setName('castrado')
+										->setId('castrado')
+										->setTitle('Castrado')
+								)
+								->toHtml()
+							;
+						?>
+					</div>
+				<?php endif; ?> 
 					<span class="help">Ingresa información sobre su sexo</span>
 				</div>
 				<div style="clear:both;"></div>
 			</div>
+			<?php if($show_optional_fields): ?> 
 			<div class="textbox">
 				<div class="holding share_row half_size entrenada">
 					<div class="input_autocomplete">
@@ -514,6 +549,7 @@ $colores_seleccionados = $object_to_edit->getColoresSeleccionados();
 					-->
 				</div>
 				<div class="holding share_row half_size pedigree">
+					<div class="checkboxholder">
 					<input type="hidden" name="pedigree" value="no">
 					<?php
 						$input = Core::getObject('Core_Html_Tag_Custom', 'input');
@@ -532,10 +568,12 @@ $colores_seleccionados = $object_to_edit->getColoresSeleccionados();
 						echo $input->getHtml();
 					?> 
 					<label for="pedigree">Pedigree</label>
+					</div>
 					<span class="help">Ingresa información sobre su sexo</span>
 				</div>
 				<div style="clear:both;"></div>
 			</div>
+			<?php endif; ?> 
 			<div class="textarea">
 				<?
 					$input = Core::getObject('Core_Html_Tag_Custom', 'textarea');
@@ -553,118 +591,8 @@ $colores_seleccionados = $object_to_edit->getColoresSeleccionados();
 				?> 
 			</div>
 			<?php print $this->getChildHtml('fotos_addedit'); ?>
-			<h4>Opciones de Publicación</h4>
-			<div class="opciones_formulario opciones_formulario_agregar_mascota">
-				<div class="opcion_formulario">
-					<div class="holding perdido">
-						<input type="hidden" name="perdido" value="no">
-						<?php
-							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
-							$input
-								//->setMaxlength(20)
-								->setType('checkbox')
-								//->setAutocomplete('off')
-								->setTitle('¿Está perdido?')
-								//->setClass('datepicker')
-								->setName('perdido')
-								->setId('perdido')
-								->setValue('si')
-							;
-							if($perdido=='si')
-								$input->setChecked('checked');
-							echo $input->getHtml();
-						?>
-						<label for="pedigree">¿Está perdido?</label>
-					</div>
-				</div>
-				<div class="opcion_formulario">
-					<div class="holding longitud_pelaje">
-						<input type="hidden" name="para_cruza" value="no">
-						<?php
-							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
-							$input
-								//->setMaxlength(20)
-								->setType('checkbox')
-								//->setAutocomplete('off')
-								->setTitle('Quiero cruzarlo')
-								//->setClass('datepicker')
-								->setName('para_cruza')
-								->setId('para_cruza')
-								->setValue('si')
-							;
-							if($para_cruza=='si')
-								$input->setChecked('checked');
-							echo $input->getHtml();
-						?>
-						<label for="para_cruza">Quiero cruzarlo</label>
-					</div>
-				</div>
-				<div class="opcion_formulario">
-					<div class="holding para_adoptar">
-						<input type="hidden" name="para_adoptar" value="no">
-						<?php
-							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
-							$input
-								//->setMaxlength(20)
-								->setType('checkbox')
-								//->setAutocomplete('off')
-								->setTitle('Ofrecer para regalar')
-								//->setClass('datepicker')
-								->setName('para_adoptar')
-								->setId('para_adoptar')
-								->setValue('si')
-							;
-							if($para_adoptar=='si')
-								$input->setChecked('checked');
-							echo $input->getHtml();
-						?>
-						<label for="para_adoptar">Ofrecer para regalar</label>
-					</div>
-				</div>
-				<div class="opcion_formulario">
-					<div class="holding para_venta">
-						<input type="hidden" name="para_venta" value="no">
-						<?php
-							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
-							$input
-								//->setMaxlength(20)
-								->setType('checkbox')
-								//->setAutocomplete('off')
-								->setTitle('Ofrecer para vender')
-								//->setClass('datepicker')
-								->setName('para_venta')
-								->setId('para_venta')
-								->setValue('si')
-							;
-							if($para_venta=='si')
-								$input->setChecked('checked');
-							echo $input->getHtml();
-						?>
-						<label for="para_venta">Ofrecer para vender</label>
-					</div>
-					<div class="holding quiere_destacar">
-						<input type="hidden" name="quiere_destacar" value="no">
-						<?php
-							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
-							$input
-								//->setMaxlength(20)
-								->setType('checkbox')
-								//->setAutocomplete('off')
-								->setTitle('Destacar anuncio de venta')
-								//->setClass('datepicker')
-								->setName('quiere_destacar')
-								->setId('quiere_destacar')
-								->setValue('si')
-							;
-							if($quiere_destacar=='si')
-								$input->setChecked('checked');
-							echo $input->getHtml();
-						?>
-						<label for="pedigree">Destacar anuncio de venta</label>
-						<em>(Costo $10)</em>
-					</div>
-				</div>
-			</div>
+			<?php print $this->getChildHtml('form_edit_opciones_publicacion'); ?>
+			
 			
 			<div class="form_row actions_row single_action">
 				<button class="submit button" type="submit">Continuar</button>

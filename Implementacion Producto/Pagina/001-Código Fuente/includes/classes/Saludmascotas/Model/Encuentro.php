@@ -37,6 +37,12 @@ class Saludmascotas_Model_Encuentro extends Core_Model_Abstract{
 		$this->addAutofilterFieldInput('fecha_expiracion', array('Mysql_Helper','filterTimestampInput'));
 		$this->addAutofilterFieldOutput('fecha_expiracion', array('Mysql_Helper','filterTimestampOutput'));
 	}
+	public function esEstadoVista(){
+		return $this->getData('tiene_mascota')=='no';
+	}
+	public function esEstadoEnGuarda(){
+		return $this->getData('tiene_mascota')=='si';
+	}
 	public function getDbTableName() 
 	{
 		return 'sm_encuentro';

@@ -403,7 +403,8 @@ abstract class Core_Block_Abstract extends Core_Object implements Core_IHtmlRend
             if ($sorted) {
                 $children = array();
                 foreach ($this->getSortedChildren() as $childName) {
-                    $children[$childName] = $this->getLayout()->getBlock($childName);
+                    //$children[$childName] = $this->getLayout()->getBlock($childName);
+                    $children[$childName] = $this->_children[$childName];
                 }
             } else {
                 $children = $this->getChild();
@@ -439,7 +440,8 @@ abstract class Core_Block_Abstract extends Core_Object implements Core_IHtmlRend
     {
         $children = array();
         foreach ($this->getSortedChildren() as $childName) {
-            $children[$childName] = $this->getLayout()->getBlock($childName);
+            //$children[$childName] = $this->getLayout()->getBlock($childName);
+            $children[$childName] = $this->_children[$childName];
         }
         return $children;
     }

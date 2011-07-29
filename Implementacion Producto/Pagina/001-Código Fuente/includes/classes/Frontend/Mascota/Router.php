@@ -9,6 +9,10 @@ class Frontend_Mascota_Router extends Frontend_Router_Abstract{
 			,'upload_foto'
 			,'upload_photo'
 			,'ajax_upload_photo'
+			,'set_para_cruza'
+			,'set_para_adoptar'
+			,'set_para_venta'
+			,'simple_view'
 		);
 	}
 	protected function localDispatch(){
@@ -193,10 +197,11 @@ class Frontend_Mascota_Router extends Frontend_Router_Abstract{
 		
 		$loaded_layout = Core_App::getLoadedLayout();
 		if($paso==1){
-			$form_edit = $loaded_layout->getBlock('form_edit');
-			$form_edit
-				->setObjectToEdit($object_to_edit)
-			;
+			foreach($loaded_layout->getBlocks('form_edit') as $form_edit){
+				$form_edit
+					->setObjectToEdit($object_to_edit)
+				;
+			}
 			$fotos_addedit = $loaded_layout->getBlock('fotos_addedit');
 			$usuario = $this->getLogedUser();
 //			$foto_mascota = new Saludmascotas_Model_FotoMascota();
@@ -267,6 +272,57 @@ class Frontend_Mascota_Router extends Frontend_Router_Abstract{
 		if(isset($return))
 			return $return;
 	}
+	protected function set_para_cruza($id_mascota){
+		Frontend_Mascota_Helper::setParaCruza($id_mascota);
+		Core_Http_Header::Redirect(Core_Http_Header::getRequest('referer'));
+	}
+	protected function set_para_adoptar($id_mascota){
+		Frontend_Mascota_Helper::setParaAdoptar($id_mascota);
+		Core_Http_Header::Redirect(Core_Http_Header::getRequest('referer'));
+	}
+	protected function set_para_venta($id_mascota){
+		Frontend_Mascota_Helper::setParaVenta($id_mascota);
+		Core_Http_Header::Redirect(Core_Http_Header::getRequest('referer'));
+	}
+	protected function simple_view($id_mascota){
+		$mascota = new Frontend_Model_Mascota();
+		$mascota->setId($id_mascota);
+		if(!$mascota->load())
+			return false;
+		$mascota->loadNonTableColumn();
+		Core_App::getLayout()
+			->setModo('saludmascotas')
+			->setActions('simple_layout','view_mascota')
+		;
+		$this->setPageReference('Vista de Mascota', '');
+		
+		
+		$loaded_layout = Core_App::getLoadedLayout();
+		$form_view = $loaded_layout->getBlock('form_view')
+			->setObjectToEdit($mascota)
+		;
+		$view_datos_mascota = $loaded_layout->getBlock('view_datos_mascota')
+			->setMascota($mascota)
+			->setPhotoList($mascota->getListFoto())
+		;
+		if($mascota->esEstadoEncuentro()){
+			$encuentro = $mascota->getEncuentroActual();
+			$view_datos_mascota->addExtraData('Fecha Encuentro', $encuentro->getEncuentroFecha());
+		}
+		if($mascota->esEstadoPerdida()){
+			$perdida = $mascota->getPerdidaActual();
+			$view_datos_mascota->addExtraData('Fecha Extravío', $perdida->getExtravioFecha());
+		}
+		$view_datos_mascota->addExtraData('Estado', $mascota->getEstadoFull());
+		$view_ubicacion = $loaded_layout
+			->getBlock('view_ubicacion')
+			->setDomicilio($mascota->smartGetDomicilio())
+		;
+	}
+
+//			,'set_para_cruza'
+//			,'set_para_adoptar'
+//			,'set_para_venta'
 	protected function dispatchNode($nodo){//esto es cuando hay algo despues de la url.
 		echo 'nodo mascotas';
 		die(__FILE__.__LINE__);

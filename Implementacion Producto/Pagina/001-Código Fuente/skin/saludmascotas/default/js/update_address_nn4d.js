@@ -7,11 +7,14 @@
 		id_lgn: null,
 		txt_my_house: '',
 		custom_onload: null,
-		initialize: function( id_lat, id_lgn, id_mapa, txt_my_house, custom_onload ) {
+		map_type:'Applet',
+		initialize: function( id_lat, id_lgn, id_mapa, txt_my_house, custom_onload, map_type ) {
 			this.id_lat = id_lat;
 			this.id_lgn = id_lgn;
 			this.id_mapa = id_mapa;
 			this.txt_my_house = txt_my_house;
+			if(map_type=='Static')
+				this.map_type = 'Static';
 			if( custom_onload )
 				this.custom_onload = custom_onload;
 			//var latlng = new google.maps.LatLng(-34.397, 150.644);
@@ -23,7 +26,7 @@
 			return this;
 		},
 		map24ApiLoaded: function (){
-			Map24.MapApplication.init( { NodeName: this.id_mapa, MapType:'Applet' } );//'Applet'
+			Map24.MapApplication.init( { NodeName: this.id_mapa, MapType:this.map_type } );//'Applet','Static'
 			Map24.MapApplication.Map.addListener( "Map24.Event.MapClick", this.on_click.bind(this) );
 			if( this.custom_onload ){
 				try{

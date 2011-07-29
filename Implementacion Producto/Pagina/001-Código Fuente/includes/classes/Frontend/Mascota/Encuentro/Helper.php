@@ -131,7 +131,7 @@ class Frontend_Mascota_Encuentro_Helper extends Frontend_Mascota_Helper{
 		if(!$encuentro->hasId()){/** aca hay que agregar a la base de datos*/
 			$encuentro->setIdUsuario($usuario->getId());
 			$encuentro->setIdMascota($id_mascota);
-			$resultado = $encuentro->insert()?true:false;
+			$resultado = $encuentro->insertFromUserInput()?true:false;
 			if($resultado){
 				Core_App::getInstance()->addSuccessMessage(self::getInstance()->__t('Encuentro registrada correctamente'), true);
 			}
@@ -143,7 +143,7 @@ class Frontend_Mascota_Encuentro_Helper extends Frontend_Mascota_Helper{
 			}
 		}
 		else{/** aca hay que actualizar el registro*/
-			$resultado = $encuentro->update(null)?true:false;
+			$resultado = $encuentro->updateFromUserInput(null)?true:false;
 //			header('content-type:text/plain');
 //			var_dump($encuentro);
 //			die(__FILE__.__LINE__);

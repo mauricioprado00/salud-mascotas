@@ -130,7 +130,7 @@ class Frontend_Mascota_Perdida_Helper extends Frontend_Mascota_Helper{
 		if(!$perdida->hasId()){/** aca hay que agregar a la base de datos*/
 			$perdida->setIdUsuario($usuario->getId());
 			$perdida->setIdMascota($id_mascota);
-			$resultado = $perdida->insert()?true:false;
+			$resultado = $perdida->insertFromUserInput()?true:false;
 			if($resultado){
 				Core_App::getInstance()->addSuccessMessage(self::getInstance()->__t('Perdida registrada correctamente'), true);
 			}
@@ -142,7 +142,7 @@ class Frontend_Mascota_Perdida_Helper extends Frontend_Mascota_Helper{
 			}
 		}
 		else{/** aca hay que actualizar el registro*/
-			$resultado = $perdida->update(null)?true:false;
+			$resultado = $perdida->updateFromUserInput(null)?true:false;
 //			header('content-type:text/plain');
 //			var_dump($perdida);
 //			die(__FILE__.__LINE__);

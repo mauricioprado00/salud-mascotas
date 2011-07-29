@@ -36,8 +36,11 @@ else{
 			'lng', 
 			'maparea',
 			'My House/Department',
-			null//custom onload
-		)), 1, -1); ?>);	
+			null,//custom onload
+			$this->getMapType()//Applet, Static
+		)), 1, -1); ?>);
+		
+		//mauricioxx	
 
 //	Event.observe(document.getElementById('limpiar_overlays'), 'click', function() {
 //		alert("limpiando overlays");
