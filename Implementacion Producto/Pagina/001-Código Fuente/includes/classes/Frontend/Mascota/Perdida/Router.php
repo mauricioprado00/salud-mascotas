@@ -69,7 +69,9 @@ class Frontend_Mascota_Perdida_Router extends Frontend_Mascota_Router{
 				break;
 			}
 			case 3:{
-				Core_App::getInstance()->addErrorMessage('inicializar mascotas coincidentes elegidas '.__FILE__.__LINE__);
+				$coincidencias = $perdida->getCoincidencias();
+				$this->setCoincidencias($coincidencias);
+				//Core_App::getInstance()->addErrorMessage('inicializar mascotas coincidentes elegidas '.__FILE__.__LINE__);
 				break;
 			}
 			case 4:{

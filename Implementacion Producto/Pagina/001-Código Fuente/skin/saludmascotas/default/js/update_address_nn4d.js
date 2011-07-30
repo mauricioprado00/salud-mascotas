@@ -8,15 +8,17 @@
 		txt_my_house: '',
 		custom_onload: null,
 		map_type:'Applet',
-		initialize: function( id_lat, id_lgn, id_mapa, txt_my_house, custom_onload, map_type ) {
-			this.id_lat = id_lat;
-			this.id_lgn = id_lgn;
-			this.id_mapa = id_mapa;
-			this.txt_my_house = txt_my_house;
-			if(map_type=='Static')
+		initialize: function( params ) {
+			this.id_lat = params.id_lat;
+			this.id_lgn = params.id_lgn;
+			this.id_mapa = params.id_mapa;
+			this.txt_my_house = params.txt_my_house;
+			if(params.map_type=='Static')
 				this.map_type = 'Static';
-			if( custom_onload )
-				this.custom_onload = custom_onload;
+			if(params.location_image_url==null)
+				this.location_image_url = "http://maptpzone.navteq.com/AJAXAPI/images/pin_maparea_home.png";
+			if( params.custom_onload )
+				this.custom_onload = params.custom_onload;
 			//var latlng = new google.maps.LatLng(-34.397, 150.644);
 			//var latlng = new google.maps.LatLng(-31.420575005, -64.50019078);
 			Map24.loadApi( ["core_api", "wrapper_api"] , this.map24ApiLoaded.bind(this) );
@@ -187,7 +189,7 @@
 			return this;
 		},
 		add_house_location: function ( Longitude, Latitude, Description ){
-			return this.add_location( Longitude, Latitude, Description, "http://maptpzone.navteq.com/AJAXAPI/images/pin_maparea_home.png" );
+			return this.add_location( Longitude, Latitude, Description, this.location_image_url);
 		},
 		add_location: function ( Longitude, Latitude, Description, LogoURL ){
 			//Create a new location. 
@@ -196,6 +198,10 @@
 				Latitude: Latitude,
 				Description: Description,
 				LogoURL: LogoURL
+//				,
+//				TooltipContent: '<a href="#hacer_algo">hacer algo</a> <br /> no hace nada sdfsdfsdf<br /> no hace nada sdfsdfsdf<a href="#hacer_otra_cosa">hacer otra cosa</a>',
+//			     TooltipLayout: Map24.MapObject.LAYOUT_BALLOON,
+//			     TooltipSize: Map24.MapObject.SIZE_S
 			});
 			//Commit the location. Only after calling commit() it is possible 
 			//to execute further operations on the location such as hide and show.

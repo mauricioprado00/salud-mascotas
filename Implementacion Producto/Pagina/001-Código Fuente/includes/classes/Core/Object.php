@@ -388,6 +388,23 @@ class Core_Object
 		}
 		return strtr($format, $new_data);
 	}
+	public function getDataStrtrConstants($value, $field_name='', $prefix='{#', $sufix='}'){
+		static $new_data = null;
+		if(!isset($new_data)){
+			$constants = get_defined_constants();
+			$new_data = array();
+			foreach($constants as $idx=>$value){
+				if(!is_object($idx)&&!is_array($value)){
+					$new_data[$prefix.$idx.$sufix] = $value;
+				}
+			}
+		}
+		$format = $this->getData($field_name);
+//		if($format=='http://api.maptp.map24.com/ajax?appkey={#CONF_MAP24_APPKEY}'){
+//			var_dump(strtr($format, $new_data), $format, $new_data);
+//		}
+		return strtr($format, $new_data);
+	}
 	public function resetAutofilterFieldsOutput($key=null){
 		if(!isset($key))
 			$this->_fields_filters_output = null;

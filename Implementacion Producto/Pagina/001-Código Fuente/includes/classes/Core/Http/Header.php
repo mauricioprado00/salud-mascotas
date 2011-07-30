@@ -66,9 +66,28 @@ class Core_Http_Header{
 		header ("Cache-Control: no-cache, must-revalidate"); //no guardar en CACHE
 		header ("Pragma: no-cache");
 	}
+	public static function getallheaders(){
+//		foreach ($_SERVER as $name => $value){
+//			if (substr($name, 0, 5) == 'HTTP_'){
+//				$headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
+//			}
+//		}
+//		return $headers;
+		foreach ($_SERVER as $name => $value){
+			if (substr($name, 0, 5) == 'HTTP_'){
+				$name = str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))));
+				$headers[$name] = $value;
+			} else if ($name == "CONTENT_TYPE") {
+				$headers["Content-Type"] = $value;
+			} else if ($name == "CONTENT_LENGTH") {
+				$headers["Content-Length"] = $value;
+			}
+		}
+		return $headers; 
+	}
 	public static function isNavigator(){
 		$navigators = func_get_args();
-		$headers = getallheaders();
+		$headers = self::getallheaders();
 		foreach($navigators as $navigator){
 			if(strpos(strtolower($headers['User-Agent']), strtolower($navigator))!==false)
 				return true;

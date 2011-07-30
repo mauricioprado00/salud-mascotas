@@ -138,7 +138,7 @@ class Frontend_Usuario_Helper extends Frontend_Helper{
 		$usuario = self::getLogedUser();
 		if(!$domicilio->hasId()){/** aca hay que agregar a la base de datos*/
 			//$domicilio->setFechaAlta(time());
-			$resultado = $domicilio->insert()?true:false;
+			$resultado = $domicilio->insertFromUserInput()?true:false;
 			if($resultado){
 				//$domicilio->restorePrivateData();
 				$usuario->setIdDomicilio($domicilio->getId());
@@ -158,7 +158,7 @@ class Frontend_Usuario_Helper extends Frontend_Helper{
 		}
 		else{/** aca hay que actualizar el registro*/
 			//$actualizada = true;// actualizarEnLaBase()
-			$resultado = $domicilio->update(null)?true:false;
+			$resultado = $domicilio->updateFromUserInput(null)?true:false;
 			//echo Core_Helper::DebugVars(Inta_Db::getInstance()->getLastQuery());
 			if($resultado){
 				//$domicilio->restorePrivateData();

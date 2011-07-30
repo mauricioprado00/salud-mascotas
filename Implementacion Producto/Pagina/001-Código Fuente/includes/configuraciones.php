@@ -72,5 +72,6 @@ else
 		putenv('PHP_PEAR_INSTALL_DIR=' . CFG_PATH_ROOT.CONF_PATH_INCLUDES.'pearlib');
 	}
 	define('ZFLIBPATH',dirname(__FILE__).'/../../ZendFramework/library/');
+	define('CONF_MAP24_APPKEY', 'FJX5715ae3ff53e4ea286f2a1aab1356X50');
 }
 ?>

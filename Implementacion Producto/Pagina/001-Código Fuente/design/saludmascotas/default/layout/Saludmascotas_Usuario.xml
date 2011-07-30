@@ -69,7 +69,7 @@
 	</usuario_update>
 	<usuario_update_address>
 		<reference name="html_head">
-			<script charset="utf8" external="true">http://api.maptp.map24.com/ajax?appkey=FJX5715ae3ff53e4ea286f2a1aab1356X50</script>
+			<script charset="utf8" external="true">http://api.maptp.map24.com/ajax?appkey={#CONF_MAP24_APPKEY}</script>
 			<script charset="utf8">js/update_address_nn4d.js</script>
 			<script charset="utf8">js/select_typeable.js</script>
 		</reference>

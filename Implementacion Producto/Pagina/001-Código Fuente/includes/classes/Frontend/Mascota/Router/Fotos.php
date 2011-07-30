@@ -90,7 +90,7 @@ salida;
 salida;
 	}
 	protected function ajax_upload($jsonp_callback='', $id_mascota=null){
-		$headers = getallheaders();
+		$headers = Core_Http_Header::getallheaders();
 		if(
 			// basic checks
 			isset(

@@ -55,6 +55,8 @@ $midomicilio = $midomicilio=='si'&&!$domicilio_usuario?'no':$midomicilio;
 				</li>
 			</ul>
 		</div>
+		<?php else: ?>
+		<input type="hidden" name="midomicilio" value="no" />
 		<?php endif; ?> 
 		<div class="midomicilio_no_contenido midomicilio_contenido"<?php if($midomicilio=='si'): ?> style="display:none;"<?php endif; ?>>
 		<?php print $this->getChildHtml(); ?> 
