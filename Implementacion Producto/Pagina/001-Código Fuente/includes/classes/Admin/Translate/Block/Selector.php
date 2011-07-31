@@ -10,7 +10,7 @@ class Admin_Translate_Block_Selector extends Admin_Block_Selector{
 	}
     protected function _prepareLayout()
     {
-		$translate = new Inta_Model_Traduccion();
+		$translate = new Saludmascotas_Model_Traduccion();
     	$this
 			->setEntityToList($translate)
 		;

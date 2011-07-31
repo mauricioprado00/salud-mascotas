@@ -220,6 +220,7 @@ input.text {
 	margin-left: 0px;
 }
 
+
 form textarea {
 	
 	border: 1px solid #BFBFBF;
@@ -258,7 +259,39 @@ input.file {
 	input.submit.special	{ background-color: #000000; }
 	
 input.submit:hover 		{ text-decoration: underline; background-color: #333333;}
-form .select					{ padding: 2px; margin: 5px 5px 5px 0px;}
+form .select					{padding: 2px; margin: 5px 5px 5px 0px;}
+form .select_container select{
+	width: 35%;
+	border: 1px solid #BFBFBF;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	padding: 5px;
+}
+/*
+input.text {
+	width: 35%;
+	border: 1px solid #BFBFBF;
+	font-size: 13px;
+	color: #222;
+	padding: 5px;
+	vertical-align: middle;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	margin-top: 5px;
+	margin-right: 0px;
+	margin-bottom: 8px;
+	margin-left: 0px;
+}
+select{
+	width: 35%;
+	border: 1px solid #BFBFBF;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	padding: 5px;
+}*/
 
 /* -----------------------------------
 		FOOTER
@@ -366,3 +399,19 @@ div.wysiwyg ul.panel li a.removeFormat		 { background-position: -80px -64px; }
 div.wysiwyg ul.panel li a.empty				 { background-position: -64px -80px; }
 
 div.wysiwyg iframe { border: 0; clear: left; margin: 0; width: 918px !important; }
+
+.loading_url{
+	background-image:url(../images/loading.gif);
+	height:45px;
+	width:128px;
+}
+.select_container{
+	display:inline;
+}
+
+td>span>input.text{
+	width:350px;
+}
+form td>span>.select_container select {
+	width:362px;
+}

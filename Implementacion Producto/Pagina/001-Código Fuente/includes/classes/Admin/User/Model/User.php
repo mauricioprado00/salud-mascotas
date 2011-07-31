@@ -5,14 +5,16 @@ class Admin_User_Model_User extends Core_Model_User{
 	public function init(){
 		parent::init();
 		$this->setId(null)
-			->setIdAgencia(null)
-			->setActivo(null)
+//			->setIdAgencia(null)
+//			->setActivo(null)
 			->setUsername(null)
 			->setPassword(null)
 			->setNombre(null)
 			->setApellido(null)
-			->setPrivilegios(null)
-			->setUltimoAcceso(null);
+			->setEmail(null)
+//			->setPrivilegios(null)
+//			->setUltimoAcceso(null)
+		;
 	}
 //	public function setData($key, $value=null){
 //		switch($key){
@@ -188,7 +190,7 @@ class Admin_User_Model_User extends Core_Model_User{
 	}
 	public function getDbTableName() 
 	{
-		return 'inta_usuario';
+		return 'sm_administrador';
 	}
 	public function listarPrivilegios(){/*aca habria que hacer un search en otro objeto que maneje los privilegios desde la base*/
 		$privilegios = array(
@@ -206,6 +208,7 @@ class Admin_User_Model_User extends Core_Model_User{
 		return($ret);
 	}
 	public function checkPrivilegio($privilegio, $modo='r'){
+		return true;
 		switch($modo){
 			case 'r':{
 				return(true);
@@ -299,39 +302,39 @@ class Admin_User_Model_User extends Core_Model_User{
 	public function esSuperadmin(){
 		return($this->getPrivilegios()=='777');
 	}
-	private $_agencia = null;
-	public function getAgencia(){
-		if(!$this->hasIdAgencia()||!$this->getIdAgencia())
-			return null;
-		if(!isset($this->_agencia)){
-			$agencia = new Inta_Model_Agencia();
-			$agencia->setId($this->getIdAgencia());
-			if($agencia->load()){
-				$this->_agencia = $agencia;
-			}
-		}
-		return $this->_agencia;
-	}
-	
-	public function getIdAgenciaSeleccionada(){
-		if($id_agencia = $this->getSessionVar(self::SESSION_VAR_AGENCIA_SELECCIONADA)){
-			return $id_agencia;
-		}
-		return $this->getIdAgencia();
-	}
-	public function setIdAgenciaSeleccionada($id_agencia){
-		$this->setSessionVar(self::SESSION_VAR_AGENCIA_SELECCIONADA, $id_agencia);
-	}
-	private $_agencia_seleccionada = null;
-	public function getAgenciaSeleccionada(){
-		if(!isset($this->_agencia_seleccionada)){
-			$agencia = new Inta_Model_Agencia();
-			$agencia->setId($this->getIdAgenciaSeleccionada());
-			if($agencia->load()){
-				$this->_agencia_seleccionada = $agencia;
-			}
-		}
-		return $this->_agencia_seleccionada;
-	}
+//	private $_agencia = null;
+//	public function getAgencia(){
+//		if(!$this->hasIdAgencia()||!$this->getIdAgencia())
+//			return null;
+//		if(!isset($this->_agencia)){
+//			$agencia = new Inta_Model_Agencia();
+//			$agencia->setId($this->getIdAgencia());
+//			if($agencia->load()){
+//				$this->_agencia = $agencia;
+//			}
+//		}
+//		return $this->_agencia;
+//	}
+//	
+//	public function getIdAgenciaSeleccionada(){
+//		if($id_agencia = $this->getSessionVar(self::SESSION_VAR_AGENCIA_SELECCIONADA)){
+//			return $id_agencia;
+//		}
+//		return $this->getIdAgencia();
+//	}
+//	public function setIdAgenciaSeleccionada($id_agencia){
+//		$this->setSessionVar(self::SESSION_VAR_AGENCIA_SELECCIONADA, $id_agencia);
+//	}
+//	private $_agencia_seleccionada = null;
+//	public function getAgenciaSeleccionada(){
+//		if(!isset($this->_agencia_seleccionada)){
+//			$agencia = new Inta_Model_Agencia();
+//			$agencia->setId($this->getIdAgenciaSeleccionada());
+//			if($agencia->load()){
+//				$this->_agencia_seleccionada = $agencia;
+//			}
+//		}
+//		return $this->_agencia_seleccionada;
+//	}
 }
 ?>

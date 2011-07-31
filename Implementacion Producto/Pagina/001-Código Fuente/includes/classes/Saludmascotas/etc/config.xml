@@ -14,4 +14,8 @@
 		<!--<frontend>News.xml</frontend>-->
 		<!--  <email>Email.xml</email> -->
 	</layouts>
+	<translate>
+		<weight>10</weight>
+		<class>Saludmascotas_Translate</class>
+	</translate>
 </global>

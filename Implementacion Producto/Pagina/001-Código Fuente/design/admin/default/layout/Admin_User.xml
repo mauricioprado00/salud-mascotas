@@ -41,12 +41,10 @@
 			name="xml_data_admin_user">
 			<action method="appListFields">
 				<fieldname>id</fieldname>
-				<fieldname>agencia_nombre</fieldname>
 				<fieldname>username</fieldname>
 				<fieldname>nombre</fieldname>
 				<fieldname>apellido</fieldname>
-				<fieldname>activo</fieldname>
-				<fieldname>privilegios</fieldname>
+				<fieldname>email</fieldname>
 				<!--<fieldname>ultimo_acceso</fieldname>-->
 			</action>
 		</block>

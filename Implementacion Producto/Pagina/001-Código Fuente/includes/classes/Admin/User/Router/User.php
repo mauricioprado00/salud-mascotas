@@ -7,7 +7,7 @@ class Admin_User_Router_User extends Core_Router_Abstract{
 		$this->addActions('addEdit');
 		$this->addActions('delete');
 		$this->addActions('login_form');
-		$this->addActions('seleccion_agencia');
+		//$this->addActions('seleccion_agencia');
 	}
 	public function cerrar_sesion(){
 		Admin_User_Model_User::getLogedUser()->logout();
@@ -18,27 +18,27 @@ class Admin_User_Router_User extends Core_Router_Abstract{
 			->setActions('simple','saludmascotas_legacy', 'login_page')
 		;
 	}
-	protected function seleccion_agencia(){
-		if(!Core_Http_Post::hasParameters()){
-			Core_App::getLayout()
-				->setActions('simple','saludmascotas_legacy', 'seleccion_agencia_page')
-			;
-		}
-		else{
-			$post = Core_Http_Post::getParameters('Core_Object');
-			$user = Admin_User_Model_User::getLogedUser();
-//			if($id_agencia_seleccionada = $user->getIdAgenciaSeleccionada()){
-//				var_dump($id_agencia_seleccionada);
-//			}
-			$user->setIdAgenciaSeleccionada($post->getIdAgencia());
-			//$agencia = $user->getAgenciaSeleccionada();
-			$agencia = Admin_Helper::getInstance()->getAgenciaSeleccionada();
-//			var_dump(Core_App::getUrlModel()->getUrl('administrator'));
-//			die();
-			Core_Http_Header::Redirect(Core_App::getUrlModel()->getUrl('administrator'));
-			exit();
-		}
-	}
+//	protected function seleccion_agencia(){
+//		if(!Core_Http_Post::hasParameters()){
+//			Core_App::getLayout()
+//				->setActions('simple','saludmascotas_legacy', 'seleccion_agencia_page')
+//			;
+//		}
+//		else{
+//			$post = Core_Http_Post::getParameters('Core_Object');
+//			$user = Admin_User_Model_User::getLogedUser();
+////			if($id_agencia_seleccionada = $user->getIdAgenciaSeleccionada()){
+////				var_dump($id_agencia_seleccionada);
+////			}
+//			$user->setIdAgenciaSeleccionada($post->getIdAgencia());
+//			//$agencia = $user->getAgenciaSeleccionada();
+//			$agencia = Admin_Helper::getInstance()->getAgenciaSeleccionada();
+////			var_dump(Core_App::getUrlModel()->getUrl('administrator'));
+////			die();
+//			Core_Http_Header::Redirect(Core_App::getUrlModel()->getUrl('administrator'));
+//			exit();
+//		}
+//	}
 	
 	public function ValidarUsuario(){
 		$user = Admin_User_Model_User::getLogedUser();
@@ -60,7 +60,7 @@ class Admin_User_Router_User extends Core_Router_Abstract{
 					$this->login_form();
 					return(true);//evito que continue "routeando"
 				}
-				Core_Http_Header::Redirect(Admin_User_Helper::getInstance()->getUrlSeleccionAgencia());
+				//Core_Http_Header::Redirect(Admin_User_Helper::getInstance()->getUrlSeleccionAgencia());
 				return true;
 			}
 		}

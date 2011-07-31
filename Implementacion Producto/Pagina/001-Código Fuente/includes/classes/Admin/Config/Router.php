@@ -20,7 +20,7 @@ class Admin_Config_Router extends Core_Router_Abstract{
 		}
 	}
 	protected function delete($id_config=null){
-		$permisos = Admin_User_Model_User::getLogedUser()->checkPrivilegio(get_class(new Inta_Model_Config()), 'd');
+		$permisos = Admin_User_Model_User::getLogedUser()->checkPrivilegio(get_class(new Saludmascotas_Model_Config()), 'd');
 		Core_App::getInstance()->clearLastErrorMessages();
 		if(!$permisos){
 			Core_App::getLayout()->addActions('security_restriction');
@@ -36,7 +36,7 @@ class Admin_Config_Router extends Core_Router_Abstract{
 	protected function addEdit($id_config=null){
 		Core_App::getInstance()->clearLastErrorMessages();
 		$guardado = false;
-		$permisos = Admin_User_Model_User::getLogedUser()->checkPrivilegio(get_class(new Inta_Model_Config()), 'w');
+		$permisos = Admin_User_Model_User::getLogedUser()->checkPrivilegio(get_class(new Saludmascotas_Model_Config()), 'w');
 		if(!$permisos){
 			Core_App::getLayout()->addActions('security_restriction');
 			Admin_App::getInstance()->addShieldMessage('No tiene permitido editar Configuraciones.');
@@ -115,9 +115,9 @@ class Admin_Config_Router extends Core_Router_Abstract{
 					if(isset($data[$var])){
 						$varname = 'background/'.$prefijo.'/'.$varpref.$var;
 						$value = $data[$var];
-						$config = Inta_Model_Config::findConfig($varname);
+						$config = Saludmascotas_Model_Config::findConfig($varname);
 						if(!isset($config)){
-							$config = new Inta_Model_Config();
+							$config = new Saludmascotas_Model_Config();
 							$config->setNombre($varname);
 						}
 						$config->setValor($value);
@@ -138,9 +138,9 @@ class Admin_Config_Router extends Core_Router_Abstract{
 						->getBlock('background_'.$posicion);
 				if($background_abajo){
 					$varname_prefix = 'background/'.$posicion.'/';
-					$imagen = Inta_Model_Config::findConfigValue($varname_prefix.'img_imagen');
-					$color = Inta_Model_Config::findConfigValue($varname_prefix.'cpkr_color');
-					$repetir = Inta_Model_Config::findConfigValue($varname_prefix.'chk_repetir_imagen');
+					$imagen = Saludmascotas_Model_Config::findConfigValue($varname_prefix.'img_imagen');
+					$color = Saludmascotas_Model_Config::findConfigValue($varname_prefix.'cpkr_color');
+					$repetir = Saludmascotas_Model_Config::findConfigValue($varname_prefix.'chk_repetir_imagen');
 					
 					$x = new Core_Object();
 					$x

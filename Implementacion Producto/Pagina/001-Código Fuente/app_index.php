@@ -82,6 +82,11 @@ if(1){
 //Core_Server::regenerarClase();
 //die();
 if(true){
+//	header('content-type:text/plain');
+//	$notificacion = new Saludmascotas_Model_Notificacion();
+//	var_dump($notificacion->getData());
+//	$x = new Saludmascotas_Model_View_MascotaEncuentro();
+//	echo $x->searchGetSql();
 	//$x = new Frontend_Model_Domicilio();
 	//$x->setId(9);
 	//var_dump($x->load());

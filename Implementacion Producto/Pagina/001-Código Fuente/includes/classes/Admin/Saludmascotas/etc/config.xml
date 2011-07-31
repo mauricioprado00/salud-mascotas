@@ -1,0 +1,25 @@
+<global>
+	<modules>
+		<!--
+		<Admin_Agencia/>
+		-->
+		<Admin_Saludmascotas_Especie />
+		<Admin_Saludmascotas_Raza />
+		<Admin_Saludmascotas_Usuario />
+	</modules>
+	<routers>
+		<!--<Admin_Router_Admin>administrator</Admin_Router_Admin>-->
+	</routers>
+	<layouts>
+		<!--  
+		<admin>Admin.xml</admin>
+		<admin>Theme.xml</admin>
+		<ajax>Admin_Ajax.xml</ajax>
+		<admin>Simple.xml</admin>
+		-->
+	</layouts>
+	<design>
+		<ajax><![CDATA[admin/saludmascotas/]]></ajax>
+		<admin><![CDATA[admin/saludmascotas/]]></admin>
+	</design>
+</global>

@@ -8,6 +8,7 @@ class Jqgrid_XmlList_ExportHandler_Xlst extends Jqgrid_XmlList_ExportHandler{
 	protected function getConfig(){
 		if(!isset($this->_config)){
 			$json_config = Core_Http_Post::getParameters('Core_Object')->getData('json_config');
+			$json_config = str_replace('"filters":"	}', '"filters":""	}', $json_config);
 			if($config = @json_decode($json_config)){
 				$this->_config = $config;
 			}
@@ -57,6 +58,9 @@ class Jqgrid_XmlList_ExportHandler_Xlst extends Jqgrid_XmlList_ExportHandler{
 			
 			$writer->startElement("columns");
 			foreach($config->grid->colModel as $idx=>$columna){
+				if(is_string($columna->hideinexport)){
+					$columna->hideinexport = $columna->hideinexport=='true'||intval($columna->hideinexport);
+				}
 				if($columna->hideinexport)
 					continue;
 				//$writer->setCData($key, $value);

@@ -1,0 +1,16 @@
+<global>
+	<layouts>
+		<!-- la idea es que se puedan cargar layouts segun el modo 
+			ej: para mostrar pagina normal, para ajax, para print, rss, etc -->
+		<admin>Admin_Saludmascotas_Especie.xml</admin>
+		<admin>Admin_Saludmascotas_Especie_Multimodo.xml</admin>
+		<ajax>Admin_Saludmascotas_Especie_Multimodo.xml</ajax>
+	</layouts>
+	<block>
+		<type>selector_especie</type>
+		<class>Admin_Saludmascotas_Especie_Block_Selector</class>
+	</block>
+	<routers>
+		<Admin_Saludmascotas_Especie_Router>administrator/especie</Admin_Saludmascotas_Especie_Router>
+	</routers>
+</global>

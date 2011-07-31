@@ -27,7 +27,7 @@ class Admin_Translate_Router extends Core_Router_Abstract{
 		}
 	}
 	protected function delete($id_translate=null){
-		$permisos = Admin_User_Model_User::getLogedUser()->checkPrivilegio(get_class(new Inta_Model_Traduccion()), 'd');
+		$permisos = Admin_User_Model_User::getLogedUser()->checkPrivilegio(get_class(new Saludmascotas_Model_Traduccion()), 'd');
 		Core_App::getInstance()->clearLastErrorMessages();
 		if(!$permisos){
 			Core_App::getLayout()->addActions('security_restriction');
@@ -43,7 +43,7 @@ class Admin_Translate_Router extends Core_Router_Abstract{
 	protected function addEdit($id_translate=null){
 		Core_App::getInstance()->clearLastErrorMessages();
 		$guardado = false;
-		$permisos = Admin_User_Model_User::getLogedUser()->checkPrivilegio(get_class(new Inta_Model_Traduccion()), 'w');
+		$permisos = Admin_User_Model_User::getLogedUser()->checkPrivilegio(get_class(new Saludmascotas_Model_Traduccion()), 'w');
 		if(!$permisos){
 			Core_App::getLayout()->addActions('security_restriction');
 			Admin_App::getInstance()->addShieldMessage('No tiene permitido editar Translate.');
@@ -54,7 +54,7 @@ class Admin_Translate_Router extends Core_Router_Abstract{
 		else{
 			$post = Core_Http_Post::hasParameters()?Core_Http_Post::getParameters('Core_Object'):null;
 			$post_translate = $post&&$post->hasTranslate()?$post->GetTranslate(true):null;
-			$translate = new Inta_Model_Traduccion();
+			$translate = new Saludmascotas_Model_Traduccion();
 			if(isset($post_translate)){
 				$translate->loadFromArray($post_translate->getData());
 				//echo Core_Helper::DebugVars($translate->getData());
@@ -102,19 +102,19 @@ class Admin_Translate_Router extends Core_Router_Abstract{
 		$layout = Core_App::getLoadedLayout();
 		$ordenar_translate = $layout->getBlock('ordenar_translate');
 		$ordenar_translate->setIdTranslate($id_translate);
-		$translate = new Inta_Model_Traduccion();
+		$translate = new Saludmascotas_Model_Traduccion();
 		$translatees = $translate->search('orden');
 		$ordenar_translate->setTranslatees($translatees);
 	}
 	protected function setorden($ids){
 		$orden = 0;
-		$translate = new Inta_Model_Traduccion();
+		$translate = new Saludmascotas_Model_Traduccion();
 		if(!$ids)
 			die();
 		foreach(explode(',', $ids) as $id){
 			if(!strlen($id))
 				continue;
-			$translate = new Inta_Model_Traduccion();
+			$translate = new Saludmascotas_Model_Traduccion();
 			$translate->setId($id);
 			if(!$translate->load()){
 				var_dump('cant load '.$id);

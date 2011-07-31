@@ -5,7 +5,8 @@ class Jqgrid_XmlList_ExportHandler_Xlst_Downloader_Excel extends Jqgrid_XmlList_
 		$this->setXslResource('xsl/jqgrid/export_handler/excel.xsl');
 	}
 	public function ExportXml(){
-		header('content-type:application/vnd.ms-excel');
+		//header('content-type:application/vnd.ms-excel');
+		header('content-type:application/xml');
 		$caption = $this->getCaption();
 		$filename = preg_replace('/[^a-zA-Z0-9-_]/', '_', $caption).'.xml';
 		Core_Http_Header::ContentDisposition($filename);

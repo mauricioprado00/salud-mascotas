@@ -4,8 +4,8 @@ class Admin_Translate_Helper extends Core_Singleton{
 		return(self::getInstanceOf(__CLASS__));
 	}
 	public static function actionAgregarEditarTranslate($translate){
-		if(!is_a($translate,'Inta_Model_Traduccion')){
-			$translate = new Inta_Model_Traduccion($translate->getData());
+		if(!is_a($translate,'Saludmascotas_Model_Traduccion')){
+			$translate = new Saludmascotas_Model_Traduccion($translate->getData());
 		}
 		if(!$translate->hasId()){/** aca hay que agregar a la base de datos*/
 			$resultado = $translate->replace()?true:false;
@@ -38,7 +38,7 @@ class Admin_Translate_Helper extends Core_Singleton{
 		}
 	}
 	public static function eliminarTranslate($id_translate){
-		$translate = new Inta_Model_Traduccion();
+		$translate = new Saludmascotas_Model_Traduccion();
 		$translate->setId($id_translate);
 		if(!$translate->load())
 			return false;

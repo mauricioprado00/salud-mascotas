@@ -5,7 +5,7 @@ class Admin_Translate_Block_XmlList extends Jqgrid_Block_XmlList{
 			sidx = columna de ordenacion
 			sord = orden de ordenacion (asc/desc)
 		*/
-		$translate = new Inta_Model_Traduccion();
+		$translate = new Saludmascotas_Model_Traduccion();
 		if($comparator!=null){
 			$translate->setWhere($comparator);
 		}

@@ -32,6 +32,7 @@
 		<Admin_Config/>
 		<Admin_Translate/>
 		<Admin_Prototype/>
+		<Admin_Saludmascotas />
 		<!--</cosas_de_inta>-->
 		<!--<cosas_de_granguia>-->
 <!--		<Admin_Estadistica/>

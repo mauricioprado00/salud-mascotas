@@ -1,6 +1,6 @@
 <layout>
 	<list_admin_user>
-		<reference in="superadmin" name="listado_datos_grid"
+		<reference name="listado_datos_grid"
 			toolbar_edit_url="administrator/user/addEdit,id"
 			toolbar_delete_url="administrator/user/delete,id">
 		</reference>
@@ -26,18 +26,10 @@
 				<sortable>true</sortable>
 			</action>
 			<action named_args="true" method="addColumn">
-				<title>Agencia</title>
-				<name>agencia_nombre</name>
-				<index>agencia_nombre</index>
-				<width>70</width>
-				<align>left</align>
-				<sortable>true</sortable>
-			</action>
-			<action named_args="true" method="addColumn">
 				<title>Username</title>
 				<name>username</name>
 				<index>username</index>
-				<width>200</width>
+				<width>150</width>
 				<align>left</align>
 				<sortable>true</sortable>
 			</action>
@@ -45,7 +37,7 @@
 				<title>Nombre</title>
 				<name>nombre</name>
 				<index>nombre</index>
-				<width>100</width>
+				<width>150</width>
 				<align>left</align>
 				<sortable>true</sortable>
 			</action>
@@ -53,34 +45,18 @@
 				<title>Apellido</title>
 				<name>apellido</name>
 				<index>apellido</index>
-				<width>100</width>
-				<align>left</align>
-				<sortable>true</sortable>
-			</action>
-			<action named_args="true" method="addColumn">
-				<title>Activo</title>
-				<name>activo</name>
-				<index>activo</index>
-				<width>50</width>
-				<align>right</align>
-				<sortable>true</sortable>
-			</action>
-			<action named_args="true" method="addColumn">
-				<title>Privilegios</title>
-				<name>privilegios</name>
-				<index>privilegios</index>
-				<width>80</width>
-				<align>left</align>
-				<sortable>false</sortable>
-			</action><!--
-			<action named_args="true" method="addColumn">
-				<title>Ultimo Acceso</title>
-				<name>ultimo_acceso</name>
-				<index>ultimo_acceso</index>
 				<width>150</width>
 				<align>left</align>
 				<sortable>true</sortable>
-			</action>-->
+			</action>
+			<action named_args="true" method="addColumn">
+				<title>Email</title>
+				<name>email</name>
+				<index>email</index>
+				<width>200</width>
+				<align>left</align>
+				<sortable>true</sortable>
+			</action>
 		</reference>
 	</list_admin_user>
 	<addedit_admin_user>

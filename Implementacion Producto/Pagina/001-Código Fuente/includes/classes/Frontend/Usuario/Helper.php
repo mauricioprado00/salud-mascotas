@@ -227,6 +227,10 @@ class Frontend_Usuario_Helper extends Frontend_Helper{
 	}
 	public static function activateUsuario($usuario, $max_time, $hash){
 		$usuario = self::getUsuario($usuario);
+		if(!$usuario){
+			Core_App::getInstance()->addErrorMessage(self::getInstance()->__t('El usuario no existe o ha sido eliminado.'), true);
+			return;
+		}
 		$username = $usuario->getUsername();
 		if(self::validateActivacionSignature($username, $max_time, $hash)){
 			$activado = $usuario

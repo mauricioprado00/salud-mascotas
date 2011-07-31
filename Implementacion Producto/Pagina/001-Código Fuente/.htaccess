@@ -1,6 +1,5 @@
 Options +FollowSymlinks
 php_value magic_quotes_gpc Off
-php_value session.cookie_lifetime 14400
 php_value session.gc_maxlifetime 14400
 <IfModule mod_rewrite.c>
 	RewriteEngine on
