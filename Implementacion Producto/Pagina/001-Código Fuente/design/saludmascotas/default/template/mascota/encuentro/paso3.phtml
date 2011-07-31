@@ -12,6 +12,7 @@ $object_to_edit = $this->getObjectToEdit();
 		<p>
 			Revísalas cuidadosamente y marca las posibles coincidencias.
 		</p>
+		<?php print $this->getChildHtml(); ?>
 		<input type="hidden" name="dummy" value="continuar" />
 		<div class="form_row actions_row single_action">
 			<button class="submit button" type="submit">Continuar</button>

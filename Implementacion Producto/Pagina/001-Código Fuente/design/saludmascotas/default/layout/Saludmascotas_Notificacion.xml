@@ -1,0 +1,28 @@
+<layout><!-- útf8 -->
+	<usuario_notificaciones_listado>
+		<reference name="html_head">
+			<!--
+			<script>js/jQuery/fancybox/jquery.fancybox-1.3.1.pack.js</script>
+			<css>js/jQuery/fancybox/jquery.fancybox-1.3.1.css</css>
+			-->
+		</reference>
+		<reference name="contenido">
+			<notificacion_listado name="notificacion_listado">
+				<template name="list_entity_template" template="notificacion/listado/item.phtml">
+				</template>
+			</notificacion_listado>
+		</reference>
+	</usuario_notificaciones_listado>
+	<usuario_notificaciones_view>
+		<reference name="html_head">
+			<!--
+			<script>js/jQuery/fancybox/jquery.fancybox-1.3.1.pack.js</script>
+			<css>js/jQuery/fancybox/jquery.fancybox-1.3.1.css</css>
+			-->
+		</reference>
+		<reference name="contenido">
+			<notificacion_view name="notificacion_view">
+			</notificacion_view>
+		</reference>
+	</usuario_notificaciones_view>
+</layout>

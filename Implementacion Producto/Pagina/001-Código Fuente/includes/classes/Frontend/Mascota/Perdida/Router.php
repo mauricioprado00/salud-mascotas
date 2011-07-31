@@ -60,6 +60,17 @@ class Frontend_Mascota_Perdida_Router extends Frontend_Mascota_Router{
 		}
 		if(!$perdida)
 			$perdida = new Frontend_Model_Perdida();
+		
+		
+		if($preserve_mascota_edicion){
+			$coincidencias_seleccionadas = Frontend_Mascota_Perdida_Helper::getCoincidenciasSeleccionadasFromSession($id_mascota);
+			if(!$coincidencias_seleccionadas){
+				$coincidencias_seleccionadas = $perdida->getIdsCoincidenciasSeleccionadas();
+			}
+		}
+		if(!isset($coincidencias_seleccionadas)){
+			$coincidencias_seleccionadas = array();
+		}
 //		echo Core_Helper::DebugVars($perdida->getData());
 //		die(__FILE__.__LINE__);
 
@@ -75,13 +86,15 @@ class Frontend_Mascota_Perdida_Router extends Frontend_Mascota_Router{
 				break;
 			}
 			case 4:{
-//				var_dump($perdida->getData());
-//				die(__FILE__.__LINE__);
+				$coincidencias = $perdida->getCoincidencias($coincidencias_seleccionadas);
+				$this->setCoincidencias($coincidencias);
+				//Core_App::getInstance()->addErrorMessage('inicializar mascotas coincidentes elegidas '.__FILE__.__LINE__);
 				break;
 			}
 		}
 		
 		$this->setPerdida($perdida);
+		$this->setCoincidenciasSeleccionadas($coincidencias_seleccionadas);
 
 		return $return;
 //		$object_to_edit = null;
@@ -156,11 +169,14 @@ class Frontend_Mascota_Perdida_Router extends Frontend_Mascota_Router{
 					$mascota_guardada = $this->getHelper()->actionAgregarEditarMascota($object_to_edit, false, null/* no vamos a modificar el domicilio de la mascota $domicilio_mascota*/)?true:false;
 					if($mascota_guardada){
 						$id_mascota = $object_to_edit;
-						$guardado_en_sesion = Frontend_Mascota_Perdida_Helper::actionAgregarEditarPerdida($perdida, false, $id_mascota, $domicilio_mascota)?true:false;
-						if($guardado_en_sesion){//pasa validaciones
-							$this->getHelper()->clearSessionVars();
-							Core_Http_Header::Redirect(Frontend_Mascota_Perdida_Helper::getUrlUsuario(), true);
-							return true;
+						$guardado = Frontend_Mascota_Perdida_Helper::actionAgregarEditarPerdida($perdida, false, $id_mascota, $domicilio_mascota)?true:false;
+						if($guardado){//pasa validaciones
+							$guardadas = Frontend_Mascota_Perdida_Helper::crearReencuentros($perdida, $this->getCoincidenciasSeleccionadas())?true:false;
+							if($guardadas){
+								$this->getHelper()->clearSessionVars();
+								Core_Http_Header::Redirect(Frontend_Mascota_Perdida_Helper::getUrlUsuario(), true);
+								return true;
+							}
 						}
 //						$this->getHelper()->clearSessionVars();
 //						Core_Http_Header::Redirect($this->getHelper()->getUrlUsuario(), true);
@@ -214,8 +230,10 @@ class Frontend_Mascota_Perdida_Router extends Frontend_Mascota_Router{
 				break;
 			}
 			case 3:{//verificar que las selecciones sean correcta y guardar en sesión
-				Core_App::getInstance()->addErrorMessage('verificar que las selecciones sean correcta y guardar en sesión '.__FILE__.__LINE__);
-				$guardado = true;
+				//Core_App::getInstance()->addErrorMessage('verificar que las selecciones sean correcta y guardar en sesión '.__FILE__.__LINE__);
+				$post = Core_Http_Post::getParameters('Core_Object', array('coincidencias_seleccionadas'));
+				$coincidencias_seleccionadas = $post->getCoincidenciasSeleccionadas();
+				$guardado = Frontend_Mascota_Perdida_Helper::setCoincidenciasSeleccionadasInSession($coincidencias_seleccionadas);
 				if($guardado){
 					return true;
 //					$return = $this->_editar_step_ok($paso, $id_mascota, $preserve_mascota_edicion);
@@ -226,6 +244,10 @@ class Frontend_Mascota_Perdida_Router extends Frontend_Mascota_Router{
 			}
 			case 4:{//verificar la carga de opciones de verificación final
 //				die('verificar la carga de opciones de verificación final'.__FILE__.__LINE__);
+				$post = Core_Http_Post::getParameters('Core_Object', array('coincidencias_seleccionadas'));
+				$coincidencias_seleccionadas = $post->getCoincidenciasSeleccionadas();
+				$guardado = Frontend_Mascota_Perdida_Helper::setCoincidenciasSeleccionadasInSession($coincidencias_seleccionadas);
+				$this->setCoincidenciasSeleccionadas($coincidencias_seleccionadas);
 				$perdida = $this->getPerdida();
 				$post = Core_Http_Post::getParameters('Core_Object', Frontend_Mascota_Perdida_Helper::getUpdatablePerdidaFields());
 				$perdida->loadFromArray($post->getData(), false);
@@ -324,6 +346,14 @@ class Frontend_Mascota_Perdida_Router extends Frontend_Mascota_Router{
 				->setPerdida($perdida);
 			;
 		}
+		if($paso==3){
+			$loaded_layout = Core_App::getLoadedLayout();
+			$show_select_coincidencias = $loaded_layout->getBlock('show_select_coincidencias');
+			$show_select_coincidencias
+				->setCoincidencias($this->getCoincidencias())
+				->setCoincidenciasSeleccionadas($this->getCoincidenciasSeleccionadas())
+			;
+		}
 		if($paso==4){
 			$loaded_layout = Core_App::getLoadedLayout();
 			$object_to_edit = $this->getObjectToEdit();
@@ -340,9 +370,12 @@ class Frontend_Mascota_Perdida_Router extends Frontend_Mascota_Router{
 				->getBlock('view_ubicacion')
 				->setDomicilio($this->getDomicilioMascota())
 			;
+			
 			$view_posibles_reencuentros = $loaded_layout
 				->getBlock('view_posibles_reencuentros')
-				->setPerdida(NULL)
+				->setCoincidencias($this->getCoincidencias())
+				->setCoincidenciasSeleccionadas($this->getCoincidenciasSeleccionadas())
+				//->setPerdida(NULL)
 			;
 			$form_edit_publicacion = $loaded_layout
 				->getBlock('form_edit_publicacion')

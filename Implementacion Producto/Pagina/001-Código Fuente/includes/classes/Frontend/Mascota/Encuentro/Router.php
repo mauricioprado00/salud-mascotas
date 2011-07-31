@@ -39,6 +39,16 @@ class Frontend_Mascota_Encuentro_Router extends Frontend_Mascota_Router{
 		}
 		if(!$encuentro)
 			$encuentro = new Frontend_Model_Encuentro();
+
+		if($preserve_mascota_edicion){
+			$coincidencias_seleccionadas = Frontend_Mascota_Encuentro_Helper::getCoincidenciasSeleccionadasFromSession($id_mascota);
+			if(!$coincidencias_seleccionadas){
+				$coincidencias_seleccionadas = $encuentro->getIdsCoincidenciasSeleccionadas();
+			}
+		}
+		if(!isset($coincidencias_seleccionadas)){
+			$coincidencias_seleccionadas = array();
+		}
 //		echo Core_Helper::DebugVars($encuentro->getData());
 //		die(__FILE__.__LINE__);
 
@@ -48,17 +58,20 @@ class Frontend_Mascota_Encuentro_Router extends Frontend_Mascota_Router{
 				break;
 			}
 			case 3:{
-				Core_App::getInstance()->addErrorMessage('inicializar mascotas coincidentes elegidas '.__FILE__.__LINE__);
+				$coincidencias = $encuentro->getCoincidencias();
+				$this->setCoincidencias($coincidencias);
 				break;
 			}
 			case 4:{
-//				var_dump($encuentro->getData());
+				$coincidencias = $encuentro->getCoincidencias($coincidencias_seleccionadas);
+				$this->setCoincidencias($coincidencias);
 //				die(__FILE__.__LINE__);
 				break;
 			}
 		}
 		
 		$this->setEncuentro($encuentro);
+		$this->setCoincidenciasSeleccionadas($coincidencias_seleccionadas);
 		return $return;
 	}
 	protected function _editar_step_ok($paso=1, $id_mascota=null, $preserve_mascota_edicion=false){
@@ -92,11 +105,14 @@ class Frontend_Mascota_Encuentro_Router extends Frontend_Mascota_Router{
 					$mascota_guardada = $this->getHelper()->actionAgregarEditarMascota($object_to_edit, false, null/* no vamos a modificar el domicilio de la mascota $domicilio_mascota*/)?true:false;
 					if($mascota_guardada){
 						$id_mascota = $object_to_edit;
-						$guardado_en_sesion = Frontend_Mascota_Encuentro_Helper::actionAgregarEditarEncuentro($encuentro, false, $id_mascota, $domicilio_mascota)?true:false;
-						if($guardado_en_sesion){//pasa validaciones
-							$this->getHelper()->clearSessionVars();
-							Core_Http_Header::Redirect(Frontend_Mascota_Encuentro_Helper::getUrlUsuario(), true);
-							return true;
+						$guardado = Frontend_Mascota_Encuentro_Helper::actionAgregarEditarEncuentro($encuentro, false, $id_mascota, $domicilio_mascota)?true:false;
+						if($guardado){//pasa validaciones
+							$guardadas = Frontend_Mascota_Encuentro_Helper::crearReencuentros($encuentro, $this->getCoincidenciasSeleccionadas())?true:false;
+							if($guardadas){
+								$this->getHelper()->clearSessionVars();
+								Core_Http_Header::Redirect(Frontend_Mascota_Encuentro_Helper::getUrlUsuario(), true);
+								return true;
+							}
 						}
 					}
 				}
@@ -134,8 +150,10 @@ class Frontend_Mascota_Encuentro_Router extends Frontend_Mascota_Router{
 				break;
 			}
 			case 3:{//verificar que las selecciones sean correcta y guardar en sesión
-				Core_App::getInstance()->addErrorMessage('verificar que las selecciones sean correcta y guardar en sesión '.__FILE__.__LINE__);
-				$guardado = true;
+				//Core_App::getInstance()->addErrorMessage('verificar que las selecciones sean correcta y guardar en sesión '.__FILE__.__LINE__);
+				$post = Core_Http_Post::getParameters('Core_Object', array('coincidencias_seleccionadas'));
+				$coincidencias_seleccionadas = $post->getCoincidenciasSeleccionadas();
+				$guardado = Frontend_Mascota_Encuentro_Helper::setCoincidenciasSeleccionadasInSession($coincidencias_seleccionadas);
 				if($guardado){
 					return true;
 //					$return = $this->_editar_step_ok($paso, $id_mascota, $preserve_mascota_edicion);
@@ -187,6 +205,14 @@ class Frontend_Mascota_Encuentro_Router extends Frontend_Mascota_Router{
 				->setDontKnowOptions(true)
 			;
 		}
+		if($paso==3){
+			$loaded_layout = Core_App::getLoadedLayout();
+			$show_select_coincidencias = $loaded_layout->getBlock('show_select_coincidencias');
+			$show_select_coincidencias
+				->setCoincidencias($this->getCoincidencias())
+				->setCoincidenciasSeleccionadas($this->getCoincidenciasSeleccionadas())
+			;
+		}
 		if($paso==4){
 			$loaded_layout = Core_App::getLoadedLayout();
 			$object_to_edit = $this->getObjectToEdit();
@@ -205,7 +231,9 @@ class Frontend_Mascota_Encuentro_Router extends Frontend_Mascota_Router{
 			;
 			$view_posibles_reencuentros = $loaded_layout
 				->getBlock('view_posibles_reencuentros')
-				->setEncuentro(NULL)
+				->setCoincidencias($this->getCoincidencias())
+				->setCoincidenciasSeleccionadas($this->getCoincidenciasSeleccionadas())
+				//->setEncuentro(NULL)
 			;
 			$form_edit_publicacion = $loaded_layout
 				->getBlock('form_edit_publicacion')

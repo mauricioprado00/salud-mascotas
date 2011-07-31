@@ -1,3 +1,6 @@
+30/07/2011 - mauricio
+* agrego campo iniciado_por en tabla reencuentro con las opciones "perdida" y "encuentro" para saber quien lo inicia
+* creo tabla notificacion
 28/07/2011 - mauricio
 * agrego campo activo a tabla encuentro
 * agrego campo fecha_publicacion a tabla encuentro

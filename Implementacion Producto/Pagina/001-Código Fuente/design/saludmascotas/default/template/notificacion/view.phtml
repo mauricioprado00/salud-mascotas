@@ -1,0 +1,37 @@
+<?php //es útf8
+
+$notificacion = $this->getNotificacion();
+
+?> 
+<a href="<?php print $this->getUrl(Frontend_Notificacion_Helper::getUrlListado()); ?>">&lt;Volver a bandeja de mensajes</a>
+<div class="notificacion_view">
+	<div class="notificacion">
+		<table>
+			<thead>
+				<tr>
+					<td>
+						<table>
+							<tr>
+								<th>Asunto:</th>
+								<td colspan="3"><?php print $notificacion->getAsuntoFormateado(null); ?></td>
+							</tr>
+							<tr>	
+								<th>De:</th>
+								<td><?php print $notificacion->getFromFormateado(); ?></td>
+								<th>Fecha:</th>
+								<td><?php print $notificacion->getFechaFormateada(false); ?></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<?php print $notificacion->getMensaje(null); ?>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

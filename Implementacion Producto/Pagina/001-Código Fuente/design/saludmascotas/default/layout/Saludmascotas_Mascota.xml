@@ -135,13 +135,19 @@
 	<default when="accion(mascota_perdida_addedit_busqueda)">
 		<reference name="contenido">
 			<template name="form_edit" template="mascota/perdida/paso3.phtml">
-				
+				<template name="show_select_coincidencias" template="mascota/perdida/paso3_select_coincidencias.phtml">
+					<!--<mascota_view name="view_datos_mascota" template="mascota/preview.phtml" />-->
+					<mascota_view name="view_datos_mascota_coincidencia" template="mascota/view/nn4d.phtml" />
+				</template>
 			</template>
 		</reference>
 	</default>
 	<default when="accion(mascota_encuentro_addedit_busqueda)">
 		<reference name="contenido">
 			<template name="form_edit" template="mascota/encuentro/paso3.phtml">
+				<template name="show_select_coincidencias" template="mascota/encuentro/paso3_select_coincidencias.phtml">
+					<mascota_view name="view_datos_mascota_coincidencia" template="mascota/view/nn4d.phtml" />
+				</template>
 			</template>
 		</reference>
 	</default>
@@ -159,7 +165,13 @@
 				</action>
 				<mascota_view name="view_datos_mascota" template="mascota/preview.phtml" />
 				<domicilio_view name="view_ubicacion" />
-				<block name="view_posibles_reencuentros" />
+				<!--<block in="mascota_encuentro_addedit_publicacion" name="view_posibles_reencuentros" />-->
+				<template in="mascota_encuentro_addedit_publicacion" name="view_posibles_reencuentros" template="mascota/encuentro/paso4_select_coincidencias.phtml">
+					<mascota_view name="view_datos_mascota_coincidencia" template="mascota/encuentro/paso4_perdida_preview.phtml" />
+				</template>
+				<template in="mascota_perdida_addedit_publicacion" name="view_posibles_reencuentros" template="mascota/perdida/paso4_select_coincidencias.phtml">
+					<mascota_view name="view_datos_mascota_coincidencia" template="mascota/perdida/paso4_encuentro_preview.phtml" />
+				</template>
 				<template when="accion(mascota_perdida_addedit_publicacion)" name="form_edit_publicacion" template="mascota/perdida/paso4_opciones_publicacion.phtml" />
 				<template when="accion(mascota_encuentro_addedit_publicacion)" name="form_edit_publicacion" template="mascota/encuentro/paso4_opciones_publicacion.phtml" />
 			</template>

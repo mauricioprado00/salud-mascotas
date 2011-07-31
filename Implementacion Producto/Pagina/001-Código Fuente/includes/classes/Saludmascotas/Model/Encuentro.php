@@ -43,6 +43,66 @@ class Saludmascotas_Model_Encuentro extends Core_Model_Abstract{
 	public function esEstadoEnGuarda(){
 		return $this->getData('tiene_mascota')=='si';
 	}
+	public function getCoincidencias($ids=null, $as_collection=true, $limit=null, $start=0, $as_objects=true, $columns=null){
+		$mascota = $this->getMascota();
+		$perdida = new Saludmascotas_Model_View_MascotaPerdida();
+		$wheres = array();
+		
+		if(isset($ids)&&is_array($ids)&&count($ids)){
+			$wheres[] = Db_Helper::in('pe_id', true, $ids);
+		}
+		else{
+			//agrego filtro de estado
+			$wheres[] = Db_Helper::equal('pe_activo','si');
+			
+			//agrego filtro de tiempo
+			$hora_encuentro = $this->getHoraEncuentro(null, array());
+			$wheres[] = Db_Helper::between('pe_hora_extravio', null, $hora_encuentro, true);
+			
+			//agrego filtro de distancia
+			//todo: agregar filtro de distancia, hacer un (barrio== or radio km<X or ciudad==)
+			
+			//agrego restricción de sexo
+			$wheres[] = Db_Helper::in('ma_sexo', true, array('no se', $mascota->getSexo()));
+	
+			//agrego restricción de castrado
+			$wheres[] = Db_Helper::in('ma_castrado', true, array('no se', $mascota->getCastrado()));
+	
+	//todo:descomentar esto, esta comentado solo para testeo
+	//		//agrego restricción que no sea una mascota reportada por el mismo usuario
+	//		$wheres[] = Db_Helper::equal('ma_id_dueno', $mascota->getIdDueno(), false);
+		}
+
+		
+		//seteo las restricciones
+		$perdida->setWhereByArray($wheres);
+//		echo $perdida->searchGetSql();
+//		die(__FILE__.__LINE__);
+		if($as_objects==true)
+			$as_objects = 'Saludmascotas_Model_View_MascotaPerdida';
+		if($as_collection)
+			return new Core_Collection($perdida->search(null, null, $limit, $start, $as_objects, $columns));
+		return ($perdida->search(null, null, $limit, $start, $as_objects, $columns));
+	}
+	public function getCoincidenciasSeleccionadas($as_objects=true){
+		$reencuentro = new Saludmascotas_Model_Reencuentro();
+		$where = array();
+		$where[] = Db_Helper::equal('id_encuentro', $this->getId());
+		$where[] = Db_Helper::equal('iniciado_por','encuentro');
+		$reencuentro->setWhereByArray($where);
+		$reencuentros = $reencuentro->search();
+		if(!$reencuentros)
+			return null;
+		$ids_perdidas = array();
+		foreach($reencuentros as $reencuentro)
+			$ids_perdidas[] = $reencuentro->getIdPerdida();
+		if($as_objects=='ids')
+			return $ids_perdidas;
+		return $this->getCoincidencias($ids_perdidas);
+	}
+	public function getIdsCoincidenciasSeleccionadas(){
+		return $this->getCoincidenciasSeleccionadas('ids');
+	}
 	public function getDbTableName() 
 	{
 		return 'sm_encuentro';

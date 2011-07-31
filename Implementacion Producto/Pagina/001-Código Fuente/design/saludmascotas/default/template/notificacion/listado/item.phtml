@@ -1,0 +1,19 @@
+<?php //es útf8
+
+$notificacion = $this->getEntity();
+$link = $this->getUrl($notificacion->getUrlView());
+//var_dump(get_class($mascota),$mascota->getData());
+//die(__FILE__.__LINE__);
+?> 
+	<td>
+		<a href="<?php print $link; ?>"><?php print $notificacion->getFromFormateado(); ?></a>
+	</td>
+	<td>
+		<a href="<?php print $link; ?>"><b><?php print $notificacion->getAsuntoFormateado(); ?></b><em><?php print $notificacion->getMensajeFormateado(); ?></em></a>
+	</td>
+	<td>
+		<a href="<?php print $link; ?>"><?php print $notificacion->getFechaFormateada(); ?></a>
+	</td>
+	
+	
+	

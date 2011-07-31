@@ -35,6 +35,7 @@ class Frontend_Model_Perdida extends Saludmascotas_Model_Perdida{
 			->setData('extravio_fecha', $time[0], array())
 			->setExtravioHora($time[1])
 		;
+		return $this;
 	}
 	public function commitNonTableColumn(){
 		$hora_extravio = $this->getData('extravio_fecha', null, array());

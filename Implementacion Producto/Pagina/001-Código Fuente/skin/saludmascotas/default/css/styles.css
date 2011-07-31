@@ -836,3 +836,64 @@ form.wider .maparea{
 .view_mascota .view_tamano_mascota{
 	float:left;
 }
+
+/*comienza notificacion*/
+.notificacion_view, .notificacion_usuario_listado_view{
+	margin-top:20px;
+	padding:12px;
+	background-color:black;
+	-moz-border-radius:15px;
+	-khtml-border-radius:15px;
+	-webkit-border-radius:15px;
+	border-radius:15px;
+	-webkit-box-shadow:3px 3px 7px rgba(0, 0, 0, 0.79);
+	-moz-box-shadow:3px 3px 7px rgba(0, 0, 0, 0.79);
+	box-shadow:3px 3px 7px rgba(0, 0, 0, 0.79);
+
+}
+.notificacion_view .notificacion, .notificacion_usuario_listado_view .notificacion_usuario_listado{
+	min-height:500px;
+	background-color:white;
+	padding:5px;
+	width: 488px;
+}
+.notificacion_usuario_listado_view table tbody tr td{
+	
+	vertical-align: middle;
+}
+.notificacion_usuario_listado_view table tbody tr td a{
+	color:black;/*#2276F1*/
+	display: block;
+    height: 100%;
+    padding: 10px 2px;
+}
+.notificacion_usuario_listado_view table tbody tr td a:hover{
+	color:#2276F1;
+}
+.notificacion_usuario_listado_view .notificacion_item_even{
+	background-color: #FFFF7A;
+}
+/*
+.notificacion_usuario_listado_view table tbody tr{
+	border-bottom:1px solid black;
+}
+*/
+.notificacion_usuario_listado_view table tfoot tr{
+	border-top:1px solid black;
+}
+.notificacion_view .notificacion>table>thead>tr, .notificacion_usuario_listado_view .notificacion_usuario_listado>table>thead>tr{
+	border-bottom:1px solid black;
+}
+.notificacion_view .notificacion table th{
+	text-align:right;
+	font-weight:bold;
+}
+.notificacion_view .notificacion>table>tbody td{
+	padding: 20px 10px 10px 10px;
+	background-color: #FFFF7A;
+}
+.notificacion_usuario_listado_view .notificacion_usuario_listado table th{
+	text-align:left;
+	font-weight:bold;
+}
+/*termina notificacion*/

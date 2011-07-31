@@ -65,6 +65,7 @@ class Frontend_Model_Domicilio extends Saludmascotas_Model_Domicilio{
 				}
 			}
 		}
+		return $this;
 	}
 	private function fixName($name){
 		return preg_replace('/\\s+/', ' ', strtolower(trim($name)));

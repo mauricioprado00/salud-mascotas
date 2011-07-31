@@ -1,0 +1,41 @@
+<?php //es útf8
+	$coincidencias = $this->getCoincidencias();
+	$coincidencias_seleccionadas = $this->getCoincidenciasSeleccionadas();
+?> 
+<div class="show_select_coincidencias show_select_coincidencias_paso3">
+<ul><?php
+	
+	$view_mascota = $this->getChild('view_datos_mascota_coincidencia');
+//	$childs = $this->getChild();
+//	var_dump(array_keys($childs));
+//	
+	foreach($coincidencias as $coincidencia ){
+		//$o = c(new Core_Object())->setData($coincidencia->getData());
+		//var_dump($coincidencia->getData('en_id'), $o->getEnId(), get_class($coincidencia));
+		//die(__FILE__.__LINE__);
+		$encuentro = $coincidencia->getEncuentro(new Frontend_Model_Encuentro());
+		$id = $encuentro->getId();
+		$mascota = $coincidencia->getMascota(new Frontend_Model_Mascota())->loadNonTableColumn();
+		$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+		$input
+			//->setMaxlength(20)
+			->setType('checkbox')
+			//->setAutocomplete('off')
+			//->setTitle('Castrado')
+			//->setClass('datepicker')
+			->setName('coincidencias_seleccionadas[]')
+			->setId('coincidencia'.$id)
+			->setValue($id)
+		;
+		if(in_array($id, $coincidencias_seleccionadas))
+			$input->setChecked('checked');
+		echo '<li>';
+		echo $input->getHtml();
+		echo $view_mascota->setMascota($mascota)->toHtml();
+		//echo $this->getChildHtml('view_datos_mascota');
+		echo '</li>';
+	}
+	
+?> 
+</ul>
+</div>

@@ -128,7 +128,7 @@ abstract class Db_Model_Abstract extends Core_Object{
 	}
 	protected function columnsToSelect($columns){
 		foreach($columns as $alias=>$column){
-			if(is_int($alias))
+			if(is_int($alias)||$alias==$column)
 				$columns[$alias] = $this->getDb()->nameToString($column);
 			else//tiene un alias
 				$columns[$alias] = $this->getDb()->nameToString($column).' as '.$this->getDb()->nameToString($alias);

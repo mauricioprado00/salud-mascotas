@@ -10,6 +10,7 @@ $object_to_edit = $this->getObjectToEdit();
 			Antes de continuar con la publicación del anuncio te mostramos las mascotas reportadas como encontradas de la ubicación y período indicado.
 		</p>
 		<p>Revísalas cuidadosamente y si encuentras a tu mascota reclámala.</p>
+		<?php print $this->getChildHtml(); ?>
 		<input type="hidden" name="dummy" value="continuar" />
 		<div class="form_row actions_row single_action">
 			<button class="submit button" type="submit">Continuar</button>

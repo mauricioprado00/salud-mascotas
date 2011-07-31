@@ -17,11 +17,14 @@ abstract class Db_Model_View_Abstract extends Db_Model_Abstract{
 			$alias = $fieldname;
 		$attrname = implode('_', explode('.', $alias));
 		$this->attrname_to_fieldname[$attrname] = $fieldname;
-		$this->setData($attrname, null);
+		$this->setTableColumn($attrname);//$this->setData($attrname, null);
 		return($this);
 	}
 	private $from_parts = array();
 	private $tables = array();
+	protected function hasTables(){
+		return count($this->tables);
+	}
 	protected function setTables($tablename, $join_condition=null, $alias=null, $join_method='left'){
 		$tabledata = array('tablename'=>$tablename,'join_condition'=>$join_condition,'join_method'=>$join_method);
 		if($alias===null){

@@ -35,6 +35,7 @@ class Frontend_Model_Encuentro extends Saludmascotas_Model_Encuentro{
 			->setData('encuentro_fecha', $time[0], array())
 			->setEncuentroHora($time[1])
 		;
+		return $this;
 	}
 	public function commitNonTableColumn(){
 		$hora_encuentro = $this->getData('encuentro_fecha', null, array());

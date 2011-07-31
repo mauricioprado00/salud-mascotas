@@ -100,6 +100,7 @@ class Frontend_Model_Mascota extends Saludmascotas_Model_Mascota{
 		$this->setColoresSeleccionados($colores_seleccionados);
 //		var_dump($colores_seleccionados);
 //		die(__FILE__.__LINE__);
+		return $this;
 	}
 //
 //	

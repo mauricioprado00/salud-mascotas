@@ -594,21 +594,32 @@ class Core_Object
      * Convert object attributes to array
      *
      * @param  array $arrAttributes array of required attributes
+     * @param string $only_prefixed
+     * @param boolean $remove_prefix
      * @return array
      */
-    public function __toArray(array $arrAttributes = array())
+    public function __toArray(array $arrAttributes = array(), $only_prefixed=false, $remove_prefix=true)
     {
         if (empty($arrAttributes)) {
             return $this->_data;
         }
-
         $arrRes = array();
+        $prefix_len = $only_prefixed!==false?strlen($only_prefixed):null;
         foreach ($arrAttributes as $attribute) {
+        	$newattribute = $attribute;
+        	if($only_prefixed!==false){
+	        	if(strpos($attribute, $only_prefixed)===false){
+					continue;
+				}
+				if($remove_prefix){
+					$newattribute = substr($attribute, $prefix_len);
+				}
+			}
             if (isset($this->_data[$attribute])) {
-                $arrRes[$attribute] = $this->_data[$attribute];
+                $arrRes[$newattribute] = $this->_data[$attribute];
             }
             else {
-                $arrRes[$attribute] = null;
+                $arrRes[$newattribute] = null;
             }
         }
         return $arrRes;
@@ -618,11 +629,24 @@ class Core_Object
      * Public wrapper for __toArray
      *
      * @param array $arrAttributes
+     * @param string $only_prefixed
+     * @param boolean $remove_prefix
      * @return array
      */
-    public function toArray(array $arrAttributes = array())
+    public function toArray(array $arrAttributes = array(), $only_prefixed=false, $remove_prefix=true)
     {
-        return $this->__toArray($arrAttributes);
+        return $this->__toArray($arrAttributes, $only_prefixed, $remove_prefix);
+    }
+    /**
+     * Public wrapper for __toArray
+     *
+     * @param string $only_prefixed
+     * @param boolean $remove_prefix
+     * @return array
+     */
+    public function toArrayAll($only_prefixed=false, $remove_prefix=true)
+    {
+        return $this->__toArray(array_keys($this->_data), $only_prefixed, $remove_prefix);
     }
 
     /**
@@ -797,7 +821,7 @@ class Core_Object
             case 'get' :
                 //Varien_Profiler::start('GETTER: '.get_class($this).'::'.$method);
                 $key = $this->_underscore(substr($method,3));
-                $data = $this->getData($key, isset($args[0]) ? $args[0] : null);
+                $data = $this->getData($key, isset($args[0]) ? $args[0] : null, isset($args[1]) ? $args[1] : null);
                 //Varien_Profiler::stop('GETTER: '.get_class($this).'::'.$method);
                 return $data;
             case 'Get' :

@@ -84,10 +84,118 @@ class Frontend_Mascota_Encuentro_Helper extends Frontend_Mascota_Helper{
 			return null;
 		return self::getUserSessionVar('encuentro_mascota_edicion');
 	}
+	public static function setCoincidenciasSeleccionadasInSession($coincidencias_seleccionadas){
+		if($coincidencias_seleccionadas){
+			$nuevas = array();
+			foreach($coincidencias_seleccionadas as $coincidencia_seleccionada)
+				if($coincidencia_seleccionada)
+					$nuevas[] = $coincidencia_seleccionada;
+			$coincidencias_seleccionadas = $nuevas;
+		}
+		return self::setUserSessionVar('coincidencias_seleccionadas', $coincidencias_seleccionadas);
+	}
+	public static function getCoincidenciasSeleccionadasFromSession($id_mascota=null){
+		if(self::getUserSessionVar('id_mascota_edicion') != $id_mascota)
+			return null;
+		return self::getUserSessionVar('coincidencias_seleccionadas');
+	}
 	public static function clearSessionVars(){
 		parent::clearSessionVars();
 		self::setUserSessionVar('encuentro_mascota_edicion', null);
+		self::setUserSessionVar('coincidencias_seleccionadas', null);
 	}
+	public static function enviarNotificacionReencuentro($reencuentro, $id_mascota=null){
+		$usuario = self::getLogedUser();
+		$id_usuario = $usuario->getId();
+		$id_encuentro = $reencuentro->getIdEncuentro();
+		$id_perdida = $reencuentro->getIdPerdida();
+		$id_reencuentro = $reencuentro->getId();
+		if(!isset($id_mascota)){
+			if($id_encuentro){
+				$encuentro = new Saludmascotas_Model_Encuentro();
+				$encuentro->setId($id_encuentro);
+				if($encuentro->load()){
+					$id_mascota = $encuentro->getIdMascota();
+				}
+			}
+		}
+		if(!isset($id_mascota)){
+			if($id_perdida){
+				$perdida = new Saludmascotas_Model_Perdida();
+				$perdida->setId($id_perdida);
+				if($perdida->load()){
+					$id_mascota = $perdida->getIdMascota();
+				}
+			}
+		}
+		
+		$mensaje = 'alguien ha marcado tu perdidax como posible coincidencia de su mascota encuentro alguien ha marcado tu perdidax como posible coincidencia de su mascota encuentro alguien ha marcado tu perdidax como posible coincidencia de su mascota encuentro';
+		$asunto = 'alguien ha marcado tu perdidax como posible coincidencia de su mascota encuentro';
+		$asunto_type = 'notificacion_reencuentro_encuentro';
+		
+		$notificacion = new Saludmascotas_Model_Notificacion();
+		$notificacion
+			->setIdUsuarioTo($id_usuario)
+			->setIdEncuentro($id_encuentro)
+			->setIdPerdida($id_perdida)
+			->setIdReencuentro($id_reencuentro)
+			->setIdMascota($id_mascota)
+			->setHora(time())
+			->setMensaje($mensaje)
+			->setAsunto($asunto)
+			->setAsuntoType($asunto_type)
+		;
+//		header('content-type:text/plain');
+//		var_dump($notificacion->getData());
+//		die(__FILE__.__LINE__);
+		if($notificacion->insert()){
+			Core_App::getInstance()->addErrorMessage("Notificacion guardada", true);
+			$notificacion->fromSelf();
+			return $notificacion->enviar();
+		}
+		Core_App::getInstance()->addErrorMessage("No se pudo enviar notificación", true);
+		foreach($notificacion->getTranslatedErrors() as $error){
+			Core_App::getInstance()->addErrorMessage($error->getTranslatedDescription(), true);
+		}
+		return false;
+	}
+	public static function crearReencuentros($encuentro, $coincidencias_seleccionadas){
+		$return = true;
+		$coincidencias_seleccionadas_previas = $encuentro->getIdsCoincidenciasSeleccionadas();
+		if($coincidencias_seleccionadas){
+			$usuario = self::getLogedUser();
+			$id_usuario = $usuario;
+			$id_encuentro = $encuentro->getId();
+			foreach($coincidencias_seleccionadas as $id_perdida){
+				if($coincidencias_seleccionadas_previas && in_array($id_perdida, $coincidencias_seleccionadas_previas))
+					continue;
+				$reencuentro = new Saludmascotas_Model_Reencuentro();
+				$reencuentro
+					->setIdEncuentro($id_encuentro)
+					->setIdPerdida($id_perdida)
+					->setIdUsuario($id_usuario)
+					->setConfirmado(false)
+					->setHoraReencuentro(time())
+					->setIniciadoPor('encuentro')
+				;
+				$resultado = $reencuentro->insert();
+				if($resultado){
+					Core_App::getInstance()->addSuccessMessage(self::getInstance()->__t('Reencuentro Iniciado Correctamente'), true);
+					self::enviarNotificacionReencuentro($reencuentro, $encuentro->getIdMascota());
+				}
+				else{
+					$return = false;
+					Core_App::getInstance()->addErrorMessage("No se pudo registrar el reencuentro");
+					foreach($encuentro->getTranslatedErrors() as $error){
+						Core_App::getInstance()->addErrorMessage($error->getTranslatedDescription());
+					}
+				}
+
+			}
+		}
+		return $return;
+	}
+
 	public static function actionAgregarEditarEncuentro($encuentro, $to_session=true, $id_mascota=null, $domicilio_mascota=null){
 		if(!is_a($encuentro,'Frontend_Model_Encuentro')){
 			$array = $encuentro->getData();
