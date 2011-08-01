@@ -82,7 +82,18 @@ if(1){
 //Core_Server::regenerarClase();
 //die();
 if(true){
-//	header('content-type:text/plain');
+	header('content-type:text/plain');
+	
+//	$reencuentro = new Saludmascotas_Model_View_MascotaReencuentro();
+//	$reencuentro->setMaId(1);
+//	
+//	var_dump($reencuentro->getMaId());
+//	die(__FILE__.__LINE__);
+//	$reencuentro->setWhere(Db_Helper::equal('ma_id'));
+//	echo $reencuentro->searchGetSql();
+//	echo "\n<br />\n";
+//	$reencuentro = new Saludmascotas_Model_View_MascotaReencuentro();
+//	echo $reencuentro->searchGetSql();
 //	$notificacion = new Saludmascotas_Model_Notificacion();
 //	var_dump($notificacion->getData());
 //	$x = new Saludmascotas_Model_View_MascotaEncuentro();

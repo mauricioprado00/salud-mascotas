@@ -10,6 +10,7 @@ class Saludmascotas_Model_Reencuentro extends Core_Model_Abstract{
 		parent::init();
 		$this->setTableColumn(
 			'id'
+			,'activo'
 			,'hora_reencuentro'
 			,'descripcion'
 			,'confirmado'
@@ -29,6 +30,13 @@ class Saludmascotas_Model_Reencuentro extends Core_Model_Abstract{
 	}
 	public function esConfirmado(){
 		return $this->getConfirmado()=='si';
+	}
+	public function setActivo($set=true){
+		$this->setData('activo', $set?'si':'no');
+		return $this;
+	}
+	public function esActivo(){
+		return $this->getActivo()=='si';
 	}
 	public function getDbTableName() 
 	{

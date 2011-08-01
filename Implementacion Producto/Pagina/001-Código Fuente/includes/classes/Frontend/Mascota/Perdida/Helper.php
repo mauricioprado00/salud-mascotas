@@ -83,7 +83,7 @@ class Frontend_Mascota_Perdida_Helper extends Frontend_Mascota_Helper{
 			return null;
 		return self::getUserSessionVar('perdida_mascota_edicion');
 	}
-	public static function setCoincidenciasSeleccionadasInSession($coincidencias_seleccionadas){
+	public static function setCoincidenciasSeleccionadasInSession(&$coincidencias_seleccionadas){
 		if($coincidencias_seleccionadas){
 			$nuevas = array();
 			foreach($coincidencias_seleccionadas as $coincidencia_seleccionada)
@@ -91,6 +91,8 @@ class Frontend_Mascota_Perdida_Helper extends Frontend_Mascota_Helper{
 					$nuevas[] = $coincidencia_seleccionada;
 			$coincidencias_seleccionadas = $nuevas;
 		}
+		if(!isset($coincidencias_seleccionadas))
+			$coincidencias_seleccionadas = array();
 		return self::setUserSessionVar('coincidencias_seleccionadas', $coincidencias_seleccionadas);
 	}
 	public static function getCoincidenciasSeleccionadasFromSession($id_mascota=null){
@@ -161,10 +163,11 @@ class Frontend_Mascota_Perdida_Helper extends Frontend_Mascota_Helper{
 	public static function crearReencuentros($perdida, $coincidencias_seleccionadas){
 		$return = true;
 		$coincidencias_seleccionadas_previas = $perdida->getIdsCoincidenciasSeleccionadas();
+		$coincidencias_agregadas = array();
+		$id_perdida = $perdida->getId();
 		if($coincidencias_seleccionadas){
 			$usuario = self::getLogedUser();
 			$id_usuario = $usuario;
-			$id_perdida = $perdida->getId();
 			foreach($coincidencias_seleccionadas as $id_encuentro){
 				if($coincidencias_seleccionadas_previas && in_array($id_encuentro, $coincidencias_seleccionadas_previas))
 					continue;
@@ -190,6 +193,27 @@ class Frontend_Mascota_Perdida_Helper extends Frontend_Mascota_Helper{
 					}
 				}
 
+			}
+		}
+		if($coincidencias_seleccionadas_previas){
+			$coincidencias_a_eliminar = array_diff($coincidencias_seleccionadas_previas, $coincidencias_seleccionadas);
+			if($coincidencias_a_eliminar && count($coincidencias_a_eliminar)){
+				foreach($coincidencias_a_eliminar as $id_encuentro){
+					$reencuentro = new Saludmascotas_Model_Reencuentro();
+					$reencuentro
+						->setIdPerdida($id_perdida)
+						->setIdEncuentro($id_encuentro)
+					;
+					if($reencuentro->delete()){
+						Core_App::getInstance()->addSuccessMessage(self::getInstance()->__t('Reencuentro Eliminado Correctamente'), true);
+					}
+					else{
+						Core_App::getInstance()->addErrorMessage(self::getInstance()->__t('No se pudo eliminar el reencuentro'), true);
+						foreach($reencuentro->getTranslatedErrors() as $error){
+							Core_App::getInstance()->addErrorMessage($error->getTranslatedDescription(), true);
+						}
+					}
+				}
 			}
 		}
 		return $return;

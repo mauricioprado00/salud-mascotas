@@ -2,6 +2,12 @@
 	$coincidencias = $this->getCoincidencias();
 	$coincidencias_seleccionadas = $this->getCoincidenciasSeleccionadas();
 ?> 
+
+<?php if(!$coincidencias): ?> 
+<div class="show_select_coincidencias show_select_coincidencias_paso4">
+	<h3>No has seleccionado posibles mascotas</h3>
+</div>
+<?php return; endif; ?> 
 <div class="show_select_coincidencias show_select_coincidencias_paso4">
 <ul><?php
 	

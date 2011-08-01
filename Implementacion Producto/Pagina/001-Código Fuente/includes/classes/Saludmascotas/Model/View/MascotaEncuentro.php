@@ -10,7 +10,7 @@ class Saludmascotas_Model_View_MascotaEncuentro extends Saludmascotas_Db_Model_V
 		$domicilio = new Saludmascotas_Model_Domicilio();
 		$view
 			->addTableByModel($encuentro, null, 'en', true)
-			->addTableByModel($mascota, 'en.id = ma.id', 'ma', true)
+			->addTableByModel($mascota, 'en.id_mascota = ma.id', 'ma', true)
 			->addTableByModel($raza, 'ra.id = ma.id_raza', 'ra', true)
 			->addTableByModel($domicilio, 'do.id = en.id_domicilio', 'do', true)
 		;

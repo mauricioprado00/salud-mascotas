@@ -277,7 +277,7 @@ abstract class Db_Model_Abstract extends Core_Object{
 			$class = get_class($this);
 		if(!isset(self::$_relation_data[$class])){
 			$parent_class = get_parent_class($class);
-			if($parent_class!='Core_Model_Abstract'){
+			if(!in_array($parent_class, array('Core_Model_Abstract', 'Db_Model_View_Abstract'))){
 				$relation_data = $this->_getClassRelationsData($parent_class);//herencia de informacion
 			}
 			else $relation_data = array();
@@ -285,6 +285,7 @@ abstract class Db_Model_Abstract extends Core_Object{
 			$reflection = new Zend_Server_Reflection();
 			
 			if($doc_comment = $reflection->reflectClass($class)->getDocComment()){
+
 				$re = '/@referencia\s+(?P<relation>[A-Za-z0-9_]+)\s*\(\s*(?P<fk>[A-Za-z0-9_]+)\s*\)\s+(?P<class>[A-Za-z0-9_]+)\s*\(\s*(?P<pk>[A-Za-z0-9_]+)\s*\)/';
 				if(preg_match_all($re, $doc_comment, $matches)){
 					foreach($matches[0] as $idx=>$match){
@@ -442,7 +443,7 @@ abstract class Db_Model_Abstract extends Core_Object{
 		return $this->_list_type_objects[$list_type];
 	}
 
-	
+	private $debug = false;
     public function __call($method, $args)
     {
     	switch (substr($method, 0, 3)) {

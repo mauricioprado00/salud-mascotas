@@ -42,7 +42,7 @@ class Frontend_Mascota_Encuentro_Router extends Frontend_Mascota_Router{
 
 		if($preserve_mascota_edicion){
 			$coincidencias_seleccionadas = Frontend_Mascota_Encuentro_Helper::getCoincidenciasSeleccionadasFromSession($id_mascota);
-			if(!$coincidencias_seleccionadas){
+			if(!isset($coincidencias_seleccionadas)){
 				$coincidencias_seleccionadas = $encuentro->getIdsCoincidenciasSeleccionadas();
 			}
 		}
@@ -63,7 +63,14 @@ class Frontend_Mascota_Encuentro_Router extends Frontend_Mascota_Router{
 				break;
 			}
 			case 4:{
-				$coincidencias = $encuentro->getCoincidencias($coincidencias_seleccionadas);
+				//incluyo perdidas seleccionadas actualmente y en otros registros
+				$ids_coincidencias = $encuentro->getIdsCoincidenciasSeleccionadas();
+				if($ids_coincidencias)
+					$ids_coincidencias = array_merge(array_diff($ids_coincidencias, $coincidencias_seleccionadas), $coincidencias_seleccionadas);
+				else $ids_coincidencias = $coincidencias_seleccionadas;
+				if($ids_coincidencias)
+					$coincidencias = $encuentro->getCoincidencias($ids_coincidencias);
+				else $coincidencias = null;
 				$this->setCoincidencias($coincidencias);
 //				die(__FILE__.__LINE__);
 				break;

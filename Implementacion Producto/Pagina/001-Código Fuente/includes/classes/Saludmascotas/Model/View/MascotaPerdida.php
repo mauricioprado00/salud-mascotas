@@ -10,7 +10,7 @@ class Saludmascotas_Model_View_MascotaPerdida extends Saludmascotas_Db_Model_Vie
 		$domicilio = new Saludmascotas_Model_Domicilio();
 		$view
 			->addTableByModel($perdida, null, 'pe', true)
-			->addTableByModel($mascota, 'pe.id = ma.id', 'ma', true)
+			->addTableByModel($mascota, 'pe.id_mascota = ma.id', 'ma', true)
 			->addTableByModel($raza, 'ra.id = ma.id_raza', 'ra', true)
 			->addTableByModel($domicilio, 'do.id = pe.id_domicilio', 'do', true)
 		;
