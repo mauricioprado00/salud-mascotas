@@ -1,0 +1,38 @@
+<?php //es útf8
+$reencuentros = $this->getReencuentros();
+
+?>
+
+<?php if(!isset($reencuentros)||!$reencuentros->count()): ?> 
+<h3>No has seleccionado posibles encuentros como coincidencias</h3>
+<?php return; endif; ?> 
+<div class="reencuentros_seleccionados reencuentro_encuentro_view">
+	<ul>
+		<?php foreach($reencuentros as $reencuentro): ?> 
+		<li>
+			<?php
+			$encuentro = $reencuentro->getEncuentro();
+			echo $this->getChild('encuentro_view')
+				->setEncuentro($encuentro)
+				->setReencuentro($reencuentro)
+				->toHtml()
+			;
+			?> 
+		</li>
+		<?php endforeach; ?> 
+	</ul>
+</div>
+<script type="text/javascript">
+<!--
+	jQuery('.link_view_mascota')
+		.fancybox({
+			'width': 460,
+			'height':490,
+	        'autoDimensions':true,
+	        'transitionIn':'none',
+			'transitionOut':'none',
+			'type':'iframe'
+		})
+	;
+-->
+</script>

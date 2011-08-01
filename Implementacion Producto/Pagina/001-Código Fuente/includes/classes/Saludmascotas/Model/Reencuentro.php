@@ -38,6 +38,20 @@ class Saludmascotas_Model_Reencuentro extends Core_Model_Abstract{
 	public function esActivo(){
 		return $this->getActivo()=='si';
 	}
+	public function getNombreCompleto(){
+		if($this->hasIdUsuario()){
+			$usuario = $this->getUsuario();
+			return $usuario->getNombre(). ' '. $usuario->getApellido();
+		}
+		return $this->getNombre();
+	}
+	public function getTelefono(){
+		if($this->hasIdEncuentro() && $encuentro = $this->getEncuentro()){
+			if($encuentro->getMostrarTelefono() && $usuario = $this->getUsuario()){
+				return trim($usuario->getTelefono());
+			}
+		}
+	}
 	public function getDbTableName() 
 	{
 		return 'sm_reencuentro';

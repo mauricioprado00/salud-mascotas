@@ -36,7 +36,7 @@ class Saludmascotas_Model_Notificacion extends Core_Model_Abstract{
 	{
 		return 'sm_notificacion';
 	}
-	public function enviar(){
+	public function enviar($email_to=null, $nombre_to=null){
 		$email_from = $this->mailer->From;
 		$nombre_from = $this->mailer->FromName;
 		if(!$email_from){
@@ -51,10 +51,14 @@ class Saludmascotas_Model_Notificacion extends Core_Model_Abstract{
 				else $this->fromSelf();
 			}
 		}
-		$usuario_to = $this->getUsuarioTo();
-		if(!$usuario_to)
-			return false;
-		$this->AddAddress($usuario_to->getEmail(), $usuario_to->getNombre().' '.$usuario_to->getApellido());
+		if(!isset($email_to)){
+			$usuario_to = $this->getUsuarioTo();
+			if(!$usuario_to)
+				return false;
+			$email_to = $usuario_to->getEmail();
+			$nombre_to = $usuario_to->getNombre().' '.$usuario_to->getApellido();
+		}
+		$this->AddAddress($email_to, $nombre_to);
 		return $this->_enviar($this->getMensaje(), $this->getAsunto());
 	}
 	//metodos de email

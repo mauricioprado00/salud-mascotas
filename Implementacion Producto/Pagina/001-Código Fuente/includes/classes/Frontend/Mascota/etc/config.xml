@@ -2,6 +2,7 @@
 	<modules>
 		<Frontend_Mascota_Perdida />
 		<Frontend_Mascota_Encuentro />
+		<Frontend_Mascota_Reencuentro />
 	</modules>
 	<routers>
 		<Frontend_Mascota_Router>mascotas</Frontend_Mascota_Router>

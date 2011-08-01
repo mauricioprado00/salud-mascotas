@@ -79,6 +79,7 @@ abstract class Core_Router_Abstract extends Core_Object{
 			}
 			
 			$request_path = array_shift(explode('?', $request_path));
+			Core_App::getInstance()->setCurrentUrl($request_path);
 		}
 		$this->request_path = $request_path;
 		if($this->request_path)
@@ -156,6 +157,9 @@ abstract class Core_Router_Abstract extends Core_Object{
 	}
 	protected function localDispatch(){
 		//echo "<!-- Despachando ".$this->request_path." desde ".get_class($this)." -->\n";
+	}
+	protected function redirect($url, $app_url=true){
+		return Core_Http_Header::Redirect($url, $app_url);
 	}
 }
 /*

@@ -58,6 +58,8 @@ class Frontend_Mascota_Encuentro_Router extends Frontend_Mascota_Router{
 				break;
 			}
 			case 3:{
+				Core_App::getInstance()->setMascotaParam($object_to_edit);
+				$encuentro->commitNonTableColumn();
 				$coincidencias = $encuentro->getCoincidencias();
 				$this->setCoincidencias($coincidencias);
 				break;
@@ -69,7 +71,7 @@ class Frontend_Mascota_Encuentro_Router extends Frontend_Mascota_Router{
 					$ids_coincidencias = array_merge(array_diff($ids_coincidencias, $coincidencias_seleccionadas), $coincidencias_seleccionadas);
 				else $ids_coincidencias = $coincidencias_seleccionadas;
 				if($ids_coincidencias)
-					$coincidencias = $encuentro->getCoincidencias($ids_coincidencias);
+					$coincidencias = $encuentro->setCoincidencias($ids_coincidencias);
 				else $coincidencias = null;
 				$this->setCoincidencias($coincidencias);
 //				die(__FILE__.__LINE__);

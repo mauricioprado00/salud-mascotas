@@ -56,6 +56,7 @@ abstract class Frontend_Router_Abstract extends Core_Router_Abstract{
 		return false;
 	}
 	protected function RedirectIfNotLoged(){
+		Core_App::getSession()->setVar('return_to', Core_App::getInstance()->getCurrentUrl(), 'unlogged_data');
 		$logeado = Frontend_Usuario_Model_User::getLogedUser();
 		if(!$logeado){
 			Core_Http_Header::Redirect(Frontend_Usuario_Helper::getUrlLogin(), true);

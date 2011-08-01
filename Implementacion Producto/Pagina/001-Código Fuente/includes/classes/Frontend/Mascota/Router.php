@@ -46,7 +46,7 @@ class Frontend_Mascota_Router extends Frontend_Router_Abstract{
 //			->getBlock('form_edit')//$x = $this->getObjectToEdit();
 //			->setObjectToEdit($object_to_edit)
 //		;
-		$this->setActiveLeftMenu('mascotas_usuario');
+		$this->setActiveLeftMenu('mascotas_usuario_mis_mascotas');
 	}
 	protected function agregar($paso=1, $preserve_mascota_edicion=false){
 		return $this->editar($paso, 'new', $preserve_mascota_edicion);
@@ -244,7 +244,7 @@ class Frontend_Mascota_Router extends Frontend_Router_Abstract{
 		$this->_editar_handle_setActiveLeftMenu($paso, $id_mascota, $preserve_mascota_edicion);
 	}
 	protected function _editar_handle_setActiveLeftMenu(){
-		$this->setActiveLeftMenu('mascotas_usuario');
+		$this->setActiveLeftMenu('mascotas_usuario_mis_mascotas');
 	}
 	protected function _editar_handle_init_layout($paso=1, $id_mascota=null, $preserve_mascota_edicion=false){
 		$this->setPageReference('Registrar', 'Mi mascota');
@@ -295,7 +295,6 @@ class Frontend_Mascota_Router extends Frontend_Router_Abstract{
 			->setActions('simple_layout','view_mascota')
 		;
 		$this->setPageReference('Vista de Mascota', '');
-		
 		
 		$loaded_layout = Core_App::getLoadedLayout();
 		$form_view = $loaded_layout->getBlock('form_view')

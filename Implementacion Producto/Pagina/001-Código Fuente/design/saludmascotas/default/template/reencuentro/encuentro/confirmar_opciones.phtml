@@ -1,0 +1,45 @@
+<?php //es útf8
+
+
+?>
+<?php /** /?>
+			<div class="textarea">
+				<?
+					$input = Core::getObject('Core_Html_Tag_Custom', 'textarea');
+					$input
+						->setId('descripcion')
+						->setName('descripcion')
+						->setInnerHtml($descripcion)
+	//                                        ->setRows(5)
+	//                                        ->setCols(40)
+	//					->setData('data-campo', '<b>Observaciones</b>')
+	//					->setData('data-validator', '{empty:false}')
+	//                                        ->setData('data-mensaje', 'Debe cargar uno o mas %field separados por comas')
+					;
+					echo $input->getHtml();
+				?> 
+			</div>
+<?php /**/?>
+			<div class="opciones_formulario opciones_formulario_perdida">
+				<div class="opcion_formulario">
+					<div class="holding notificacion_email">
+						<?php
+							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+							$input
+								//->setMaxlength(20)
+								->setType('checkbox')
+								//->setAutocomplete('off')
+								->setTitle('Ya encontre mi mascota, dar de baja el anuncio')
+								//->setClass('datepicker')
+								->setName('baja')
+								->setId('baja')
+								->setValue('si')
+							;
+//							if($notificacion_email=='si')
+//								$input->setChecked('checked');
+							echo $input->getHtml();
+						?>
+						<label for="pedigree">Ya encontre mi mascota, dar de baja el anuncio</label>
+					</div>
+				</div>
+			</div>

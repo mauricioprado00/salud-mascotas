@@ -261,6 +261,18 @@ class Saludmascotas_Model_Mascota extends Core_Model_Abstract{
 		;
 		return $reencuentro->searchCount();
 	}
+	public function getReencuentros($iniciado_por=null){
+		$wheres = array(Db_Helper::equal('ma_id'));
+		if(isset($iniciado_por)){
+			$wheres[] = Db_Helper::equal('re_iniciado_por', $iniciado_por);
+			$wheres[] = Db_Helper::equal('re_activo','si');
+		}
+		$reencuentro = c(new Saludmascotas_Model_View_MascotaReencuentro())
+			->setMaId($this->getId())
+			->setWhereByArray($wheres)
+		;
+		return $reencuentro->searchCount();
+	}
 	public function getDbTableName() 
 	{
 		return 'sm_mascota';

@@ -52,7 +52,7 @@ $mascota = $this->getEntity();
 					<?php endif; ?>
 				<?php endif; ?>
 				<?php if($mascota->hasReencuentros()): ?> 
-				<li><a href="#no_implementado">Confirmaciones Pendientes</a></li>	
+				<li><a href="<?php print $this->getUrl($mascota->getUrlConfirmacionesPendientes()); ?>">Confirmaciones Pendientes</a></li>	
 				<?php endif; ?> 
 			</ul>
 		</li>

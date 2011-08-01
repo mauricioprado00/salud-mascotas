@@ -80,6 +80,8 @@ class Frontend_Mascota_Perdida_Router extends Frontend_Mascota_Router{
 				break;
 			}
 			case 3:{
+				Core_App::getInstance()->setMascotaParam($object_to_edit);
+				$perdida->commitNonTableColumn();
 				$coincidencias = $perdida->getCoincidencias();
 				$this->setCoincidencias($coincidencias);
 				//Core_App::getInstance()->addErrorMessage('inicializar mascotas coincidentes elegidas '.__FILE__.__LINE__);
@@ -91,6 +93,8 @@ class Frontend_Mascota_Perdida_Router extends Frontend_Mascota_Router{
 				if($ids_coincidencias)
 					$ids_coincidencias = array_merge(array_diff($ids_coincidencias, $coincidencias_seleccionadas), $coincidencias_seleccionadas);
 				else $ids_coincidencias = $coincidencias_seleccionadas;
+//				var_dump($ids_coincidencias, $coincidencias_seleccionadas);
+//				die(__FILE__.__LINE__);
 				if($ids_coincidencias)
 					$coincidencias = $perdida->getCoincidencias($ids_coincidencias);
 				else $coincidencias = null;
@@ -377,7 +381,7 @@ class Frontend_Mascota_Perdida_Router extends Frontend_Mascota_Router{
 				->getBlock('view_ubicacion')
 				->setDomicilio($this->getDomicilioMascota())
 			;
-			
+
 			$view_posibles_reencuentros = $loaded_layout
 				->getBlock('view_posibles_reencuentros')
 				->setCoincidencias($this->getCoincidencias())

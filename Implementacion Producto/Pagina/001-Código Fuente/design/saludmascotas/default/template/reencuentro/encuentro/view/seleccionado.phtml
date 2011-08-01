@@ -1,0 +1,55 @@
+<?
+$encuentro = $this->getEncuentro();
+$reencuentro = $this->getReencuentro();
+
+			$texto = 'El usuario <b>' . $reencuentro->getNombreCompleto() . '</b>';
+			if($encuentro){
+				if($encuentro->getTieneMascota()){
+					$texto .= ' <b>tiene una mascota</b> que podría ser tuya ';
+				}
+				else{
+					$texto .= ' <b>ha visto una mascota</b> que podría ser tuya ';
+				}
+			}
+			if($reencuentro->esConfirmado()){
+				$texto .= ' y <b>ha confirmado</b> la coincidencia';
+			}
+			else{
+				$texto .= ' pero todavía <b>no ha confirmado</b> la coincidencia';
+			}
+			$texto .= '.';
+			if($telefono = $reencuentro->getTelefono()){
+				$texto .= ' Puedes contactarte con el telefonicamente a ' . htmlentities($telefono). '.';
+			}
+
+			$p = new Core_Html_Tag_Custom('p');
+			$p->setInnerHtml($texto);
+			echo $p->getHtml();
+
+			$descripcion = trim($reencuentro->getDescripcion());
+			if(isset($encuentro)){
+				$mascota = c(new Frontend_Model_Mascota())
+					->setData($encuentro->getMascota()->getData())
+					->loadNonTableColumn()
+				;
+				
+				$modo = $this->getModo();
+				$mascota_preview = c($this->getLayout()->getBlock('mascota_preview_'.$modo))
+					->setMascota($mascota)
+				;
+				if($modo=='full'){
+					$mascota_preview->setPhotoList($mascota->getListFoto());
+				}
+				echo $mascota_preview->toHtml();
+			}
+			
+			if($descripcion){
+				$p = new Core_Html_Tag_Custom('p');
+				$p->setInnerHtml($descripcion);
+				echo $p->getHtml();
+			}
+			if($this->getWithLink()){?> 
+			<a class="link_view_mascota" href="<?php print $this->getUrl($mascota->getUrlSimpleView()); ?>">Ver todos los datos</a><?
+				
+			}
+?>

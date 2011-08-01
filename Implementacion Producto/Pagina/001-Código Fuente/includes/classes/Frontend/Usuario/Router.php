@@ -7,22 +7,22 @@ class Frontend_Usuario_Router extends Frontend_Router_Abstract{
 			'logout','update','update_address','update_password'//registrado
 		);
 	}
-	protected function RedirectIfLoged(){
-		$logeado = Frontend_Usuario_Model_User::getLogedUser();
-		if($logeado){
-			Core_Http_Header::Redirect(Frontend_Usuario_Helper::getUrl(), true);
-			return true;
-		}
-		return false;
-	}
-	protected function RedirectIfNotLoged(){
-		$logeado = Frontend_Usuario_Model_User::getLogedUser();
-		if(!$logeado){
-			Core_Http_Header::Redirect(Frontend_Usuario_Helper::getUrlLogin(), true);
-			return true;
-		}
-		return false;
-	}
+//	protected function RedirectIfLoged(){
+//		$logeado = Frontend_Usuario_Model_User::getLogedUser();
+//		if($logeado){
+//			Core_Http_Header::Redirect(Frontend_Usuario_Helper::getUrl(), true);
+//			return true;
+//		}
+//		return false;
+//	}
+//	protected function RedirectIfNotLoged(){
+//		$logeado = Frontend_Usuario_Model_User::getLogedUser();
+//		if(!$logeado){
+//			Core_Http_Header::Redirect(Frontend_Usuario_Helper::getUrlLogin(), true);
+//			return true;
+//		}
+//		return false;
+//	}
 	protected function localDispatch(){
 		//esta es la home
 //		Core_App::getLayout()
@@ -57,7 +57,10 @@ class Frontend_Usuario_Router extends Frontend_Router_Abstract{
 				$email_or_user = $data->getUsername();
 			}
 			else{
-				Core_Http_Header::Redirect(Frontend_Usuario_Helper::getUrl(), true);
+				$return_to = Core_App::getSession()->getVar('return_to', 'unlogged_data');
+				if(!$return_to)
+					$return_to = Frontend_Usuario_Helper::getUrl();
+				$this->Redirect($return_to);
 				return true;
 			}
 		}

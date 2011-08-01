@@ -45,7 +45,7 @@ $fecha_encuentro = date('d/m/Y', $fecha_encuentro);
 					//->setAutocomplete('off')
 					//->setTitle('Castrado')
 					//->setClass('datepicker')
-					->setName('coincidencias_seleccionadas[]')
+					->setName('coincidencias_seleccionadas['.$id.']')
 					->setId('coincidencia'.$id)
 					->setValue($id)
 				;
@@ -62,7 +62,7 @@ $fecha_encuentro = date('d/m/Y', $fecha_encuentro);
 					//->setAutocomplete('off')
 					//->setTitle('Castrado')
 					//->setClass('datepicker')
-					->setName('coincidencias_seleccionadas[]')
+					->setName('coincidencias_seleccionadas['.$id.']')
 					->setId('nocoincidencia'.$id)
 					->setValue('')
 				;

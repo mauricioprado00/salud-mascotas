@@ -3,6 +3,7 @@
  *@referencia Domicilio(id_domicilio) Saludmascotas_Model_Domicilio(id)
  *@referencia Mascota(id_mascota) Saludmascotas_Model_Mascota(id)
  *@referencia Usuario(id_usuario) Saludmascotas_Model_User(id)
+ *@listar Reencuentro Saludmascotas_Model_Reencuentro
 */
 // *@listar Foto Saludmascotas_Model_FotoMascota
 // *@listar Color Saludmascotas_Model_ColorMascota
@@ -36,7 +37,6 @@ class Saludmascotas_Model_Perdida extends Core_Model_Abstract{
 		$this->addAutofilterFieldOutput('fecha_expiracion', array('Mysql_Helper','filterTimestampOutput'));
 	}
 	public function getCoincidencias($ids=null, $as_collection=true, $limit=null, $start=0, $as_objects=true, $columns=null){
-		$mascota = $this->getMascota();
 		$encuentro = new Saludmascotas_Model_View_MascotaEncuentro();
 		$wheres = array();
 		
@@ -54,11 +54,21 @@ class Saludmascotas_Model_Perdida extends Core_Model_Abstract{
 			//agrego filtro de distancia
 			//todo: agregar filtro de distancia, hacer un (barrio== or radio km<X or ciudad==)
 			
-			//agrego restricción de sexo
-			$wheres[] = Db_Helper::in('ma_sexo', true, array('no se', $mascota->getSexo()));
-	
-			//agrego restricción de castrado
-			$wheres[] = Db_Helper::in('ma_castrado', true, array('no se', $mascota->getCastrado()));
+			$mascota = $this->getMascota();
+			if(!$mascota){
+				$mascota = Core_App::getInstance()->getMascotaParam($mascota);
+			}
+
+			if($mascota){
+				//agrego restricción de sexo
+				if($mascota->getSexo()!='no se')
+					$wheres[] = Db_Helper::in('ma_sexo', true, array('no se', $mascota->getSexo()));
+		
+				//agrego restricción de castrado
+				if($mascota->getCastrado()!='no se')
+					$wheres[] = Db_Helper::in('ma_castrado', true, array('no se', $mascota->getCastrado()));
+			}
+
 	
 	//todo:descomentar esto, esta comentado solo para testeo
 	//		//agrego restricción que no sea una mascota reportada por el mismo usuario

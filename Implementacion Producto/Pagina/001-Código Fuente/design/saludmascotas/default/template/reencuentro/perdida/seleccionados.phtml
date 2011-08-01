@@ -1,0 +1,38 @@
+<?php //es útf8
+$reencuentros = $this->getReencuentros();
+
+?>
+
+<?php if(!isset($reencuentros)||!$reencuentros->count()): ?> 
+<h3>No has seleccionado posibles perdidas como coincidencias</h3>
+<?php return; endif; ?> 
+<div class="reencuentros_seleccionados reencuentro_perdida_view">
+	<ul>
+		<?php foreach($reencuentros as $reencuentro): ?> 
+		<li>
+			<?php
+			$perdida = $reencuentro->getPerdida();
+			echo $this->getChild('perdida_view')
+				->setPerdida($perdida)
+				->setReencuentro($reencuentro)
+				->toHtml()
+			;
+			?> 
+		</li>
+		<?php endforeach; ?> 
+	</ul>
+</div>
+<script type="text/javascript">
+<!--
+	jQuery('.link_view_mascota')
+		.fancybox({
+			'width': 460,
+			'height':490,
+	        'autoDimensions':true,
+	        'transitionIn':'none',
+			'transitionOut':'none',
+			'type':'iframe'
+		})
+	;
+-->
+</script>
