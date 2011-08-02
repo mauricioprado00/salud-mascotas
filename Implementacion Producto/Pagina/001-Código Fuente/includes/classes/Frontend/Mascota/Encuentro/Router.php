@@ -47,7 +47,7 @@ class Frontend_Mascota_Encuentro_Router extends Frontend_Mascota_Router{
 			}
 		}
 		else{
-			$coincidencias_seleccionadas = $perdida->getIdsCoincidenciasSeleccionadas();
+			$coincidencias_seleccionadas = $encuentro->getIdsCoincidenciasSeleccionadas();
 		}
 		if(!isset($coincidencias_seleccionadas)){
 			$coincidencias_seleccionadas = array();
