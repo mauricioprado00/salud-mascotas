@@ -54,19 +54,21 @@ class Frontend_Mascota_Perdida_Router extends Frontend_Mascota_Router{
 		
 		$perdida = null;
 		if(!$preserve_mascota_edicion || !($perdida = Frontend_Mascota_Perdida_Helper::getPerdidaEdicionFromSession($id_mascota))){
-			if(in_array($paso, array(2,4)))
+			if(in_array($paso, array(2,4))||!$preserve_mascota_edicion)
 				$perdida = Frontend_Mascota_Perdida_Helper::getPerdidaEdicion($object_to_edit);
 			//$perdida = $object_to_edit->getPerdida();
 		}
 		if(!$perdida)
 			$perdida = new Frontend_Model_Perdida();
 		
-		
 		if($preserve_mascota_edicion){
 			$coincidencias_seleccionadas = Frontend_Mascota_Perdida_Helper::getCoincidenciasSeleccionadasFromSession($id_mascota);
 			if(!isset($coincidencias_seleccionadas)){
 				$coincidencias_seleccionadas = $perdida->getIdsCoincidenciasSeleccionadas();
 			}
+		}
+		else{
+			$coincidencias_seleccionadas = $perdida->getIdsCoincidenciasSeleccionadas();
 		}
 		if(!isset($coincidencias_seleccionadas)){
 			$coincidencias_seleccionadas = array();

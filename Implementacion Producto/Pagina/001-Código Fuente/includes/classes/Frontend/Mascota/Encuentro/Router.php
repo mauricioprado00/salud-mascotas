@@ -33,7 +33,7 @@ class Frontend_Mascota_Encuentro_Router extends Frontend_Mascota_Router{
 		
 		$encuentro = null;
 		if(!$preserve_mascota_edicion || !($encuentro = Frontend_Mascota_Encuentro_Helper::getEncuentroEdicionFromSession($id_mascota))){
-			if(in_array($paso, array(2,4)))
+			if(in_array($paso, array(2,4))||!$preserve_mascota_edicion)
 				$encuentro = Frontend_Mascota_Encuentro_Helper::getEncuentroEdicion($object_to_edit);
 			//$encuentro = $object_to_edit->getEncuentro();
 		}
@@ -45,6 +45,9 @@ class Frontend_Mascota_Encuentro_Router extends Frontend_Mascota_Router{
 			if(!isset($coincidencias_seleccionadas)){
 				$coincidencias_seleccionadas = $encuentro->getIdsCoincidenciasSeleccionadas();
 			}
+		}
+		else{
+			$coincidencias_seleccionadas = $perdida->getIdsCoincidenciasSeleccionadas();
 		}
 		if(!isset($coincidencias_seleccionadas)){
 			$coincidencias_seleccionadas = array();
