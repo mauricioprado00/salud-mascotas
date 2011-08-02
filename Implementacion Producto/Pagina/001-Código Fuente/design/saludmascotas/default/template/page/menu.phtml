@@ -2,7 +2,7 @@
 <?php
 $items = $this->getOrderedItems();
 ?>
-<ul class="left_menu"><?php 
+<ul class="<?php print $this->getHtmlClass(); ?>"><?php 
 	foreach($items as $item){?> 
 	<li<?php if($item->getActive()){?> class="active"<?php }?>>
 		<a href="<?php print $this->getUrl($item->getLink()); ?>"><?php print $item->getText(); ?></a><?php

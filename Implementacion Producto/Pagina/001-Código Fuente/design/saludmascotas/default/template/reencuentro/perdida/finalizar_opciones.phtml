@@ -1,0 +1,27 @@
+<?php //es útf8
+
+
+?>
+			<div class="opciones_formulario opciones_formulario_encuentro">
+				<div class="opcion_formulario">
+					<div class="holding notificacion_email">
+						<?php
+							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+							$input
+								//->setMaxlength(20)
+								->setType('checkbox')
+								//->setAutocomplete('off')
+								->setTitle('Tambien quiero eliminar mi mascota de la página')
+								//->setClass('datepicker')
+								->setName('baja')
+								->setId('baja')
+								->setValue('si')
+							;
+//							if($notificacion_email=='si')
+//								$input->setChecked('checked');
+							echo $input->getHtml();
+						?>
+						<label for="pedigree">Tambien quiero eliminar mi mascota de la página</label>
+					</div>
+				</div>
+			</div>

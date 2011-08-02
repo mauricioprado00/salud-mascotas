@@ -6,6 +6,9 @@ class Frontend_Mascota_Helper extends Frontend_Helper{
 	public static function getUrlUsuario($numero_pag=null){
 		return 'mascotas/usuario'.($numero_pag?'/'.$numero_pag:'');
 	}
+	public static function getUrlEncontre($numero_pag=null){
+		return 'mascotas/encontre'.($numero_pag?'/'.$numero_pag:'');
+	}
 	public static function getUrlUploadPhoto($ajax=false, $jsonp_callback='', $id_mascota=null){
 		return 'mascotas/fotos/'.($ajax?'ajax_':'').'upload'.($jsonp_callback?'/'.$jsonp_callback:'').($id_mascota?'/'.$id_mascota:'');
 	}

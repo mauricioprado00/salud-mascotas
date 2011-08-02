@@ -72,6 +72,7 @@ $descripcion = $mascota->getDescripcion();
 	</div>
 	<div style="clear:both;"></div>
 </div>
+<?php if($fotos_mascota): ?> 
 <script type="text/javascript">
 <!--
 	jQuery('#<?php print $id; ?> .view_fotos_mascota li a')
@@ -85,3 +86,4 @@ $descripcion = $mascota->getDescripcion();
 	;
 -->
 </script>
+<?php endif; ?> 

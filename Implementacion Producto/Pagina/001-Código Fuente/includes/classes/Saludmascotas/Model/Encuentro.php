@@ -38,6 +38,13 @@ class Saludmascotas_Model_Encuentro extends Core_Model_Abstract{
 		$this->addAutofilterFieldInput('fecha_expiracion', array('Mysql_Helper','filterTimestampInput'));
 		$this->addAutofilterFieldOutput('fecha_expiracion', array('Mysql_Helper','filterTimestampOutput'));
 	}
+	public function setActivo($set=true){
+		$this->setData('activo', $set?'si':'no');
+		return $this;
+	}
+	public function esActivo(){
+		return $this->getActivo()=='si';
+	}
 	public function esEstadoVista(){
 		return $this->getData('tiene_mascota')=='no';
 	}

@@ -5,6 +5,8 @@ class Frontend_Mascota_Reencuentro_Router extends Frontend_Router_Abstract{
 		$this->addActions(
 			'confirmaciones_pendientes'
 			,'confirmar'
+			,'encontre_mi_mascota'
+			,'encontre_su_dueno'
 		);
 	}
 	protected function confirmaciones_pendientes($id_mascota){
@@ -162,5 +164,105 @@ class Frontend_Mascota_Reencuentro_Router extends Frontend_Router_Abstract{
 //		var_dump($post->getBaja(), get_class($perdida), get_class($encuentro));
 //		die(__FILE__.__LINE__);
 	}
+	protected function encontre_mi_mascota($id_mascota){
+		return $this->finalizar_anuncio($id_mascota);
+	}
+	protected function encontre_su_dueno($id_mascota){
+		return $this->finalizar_anuncio($id_mascota);
+	}
+	private function finalizar_anuncio($id_mascota){
+		$this->RedirectIfNotLoged();
+		$mascota = $this->getHelper()->getMascota($id_mascota);
+		if(!isset($mascota)){
+			return $this->Redirect(Frontend_Mascota_Helper::getUrlUsuario());
+		}
+		$mascota->loadNonTableColumn();
+		$fotos = $mascota->getListFoto();
+		
+//		$reencuentro = $this->getHelper()->getReencuentro($id_reencuentro);
+//		if(!isset($reencuentro)){
+//			return $this->Redirect(Frontend_Mascota_Helper::getUrlUsuario());
+//		}
+
+		$handle = '';
+		if($mascota->esEstadoPerdida()){
+			$perdida = $this->getHelper()->getPerdida($mascota/*, $reencuentro*/);
+			if(!isset($perdida)){
+				return $this->Redirect(Frontend_Mascota_Helper::getUrlUsuario());
+			}
+			$handle = 'perdida';
+		}
+		else{//$mascota->esEstadoEncuentro();
+			$encuentro = $this->getHelper()->getEncuentro($mascota/*, $reencuentro*/);
+			if(!isset($encuentro)){
+				return $this->Redirect(Frontend_Mascota_Helper::getUrlUsuario());
+			}
+			$handle = 'encuentro';
+		}
+		
+		if(Core_Http_Post::hasParameters()){
+			$return = $this->finalizar_anuncio_post(Core_Http_Post::getParameters('Core_Object'), $mascota/*, $reencuentro*/, $perdida, $encuentro);
+			if(isset($return)){
+				return $return;
+			}
+		}
+
+		
+		Core_App::getInstance()->setPagina($numero_pag);
+		$this->setPageReference('Reencuentro', 'confirmar');
+		Core_App::getLayout()
+			->setModo('saludmascotas')
+			->addAction('reencuentro_finalizar')
+			->addAction('reencuentro_finalizar_'.$handle);
+		;
+		$this->showLeftMenu('usuario');
+		
+		//loaded layout
+		$loaded_layout = Core_App::getLoadedLayout();
+		$view_datos_mascota = $loaded_layout->getBlock('view_datos_mascota')
+			->setMascota($mascota)
+		;
+		if($handle=='perdida'){
+			$view_datos_mascota_perdida = $loaded_layout->getBlock('view_datos_mascota')
+				->setMascota($mascota)
+				//->setPhotoList($fotos)
+			;
+//			$encuentro = $reencuentro->getEncuentro();
+//			$encuentro_view = $loaded_layout->getBlock('encuentro_view')
+//				->setEncuentro($encuentro)
+//				->setReencuentro($reencuentro)
+//			;
+		}
+		elseif($handle=='encuentro'){
+			$view_datos_mascota_encuentro = $loaded_layout->getBlock('view_datos_mascota')
+				->setMascota($mascota)
+				//->setPhotoList($fotos)
+			;
+//			$perdida = $reencuentro->getPerdida();
+//			$perdida_view = $loaded_layout->getBlock('perdida_view')
+//				->setPerdida($perdida)
+//				->setReencuentro($reencuentro)
+//			;
+		}
+		$this->setActiveLeftMenu('mascotas_usuario_mis_mascotas');
+	}
+	private function finalizar_anuncio_post($post, $mascota/*, $reencuentro*/, $perdida=null, $encuentro=null){
+		if(isset($perdida)){
+			$baja_mascota = $post->getBaja()?true:false;
+			$result = $this->getHelper()->finalizarPerdida($baja_mascota, $perdida, $mascota);
+			if($result){
+				$this->Redirect(Frontend_Mascota_Helper::getUrlUsuario());
+				return true;
+			}
+		}
+		elseif(isset($encuentro)){
+			$result = $this->getHelper()->finalizarEncuentro($encuentro, $mascota);
+			if($result){
+				$this->Redirect(Frontend_Mascota_Helper::getUrlUsuario());
+				return true;
+			}
+		}
+//		die(__FILE__.__LINE__);
+	} 
 }
 ?>

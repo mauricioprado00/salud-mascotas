@@ -36,7 +36,7 @@ $mascota = $this->getEntity();
 			<a href="<?php print $this->getUrl($mascota->getUrlEditar()); ?>">Modificar o agregar fotos</a>
 			<ul class="multilink">
 				<?php if($mascota->esEstadoPerdida()): ?> 
-				<li><a href="#no_implementado">Ya lo encontré</a></li>
+				<li><a href="<?php print $this->getUrl($mascota->getUrlFinalizarAnuncio()); ?>">Ya lo encontré</a></li>
 				<?php else: ?> 
 					<?php if($mascota->esEstadoConDueno()): ?>
 					<li><a href="<?php print $this->getUrl($mascota->getUrlPerdidaEditar()); ?>">Lo perdí</a></li> 
@@ -47,12 +47,17 @@ $mascota = $this->getEntity();
 						<li><a href="<?php print $this->getUrl($mascota->getUrlSetParaVenta()); ?>">Quiero venderlo</a></li>
 						<?php endif; ?>
 					<?php endif; ?> 
-					<?php if(!$mascota->esParaAdoptar() && !$mascota->esEstadoVista()): ?>
+					<?php if(!$mascota->esParaAdoptar() && !$mascota->esEstadoVista()): ?> 
 					<li><a href="<?php print $this->getUrl($mascota->getUrlSetParaAdoptar()); ?>">Quiero regalar</a></li>
+					<?php endif; ?> 
+					<?php if($mascota->esEstadoEncuentro()): ?> 
+					<li><a href="<?php print $this->getUrl($mascota->getUrlFinalizarAnuncio()); ?>">Finalizar anuncio</a></li>
 					<?php endif; ?>
 				<?php endif; ?>
+				<?php if(!$mascota->esEstadoConDueno()): ?>
 				<?php if($mascota->hasReencuentros()): ?> 
 				<li><a href="<?php print $this->getUrl($mascota->getUrlConfirmacionesPendientes()); ?>">Confirmaciones Pendientes</a></li>	
+				<?php endif; ?>
 				<?php endif; ?> 
 			</ul>
 		</li>

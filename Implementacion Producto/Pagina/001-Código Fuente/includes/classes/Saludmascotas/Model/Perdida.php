@@ -36,6 +36,13 @@ class Saludmascotas_Model_Perdida extends Core_Model_Abstract{
 		$this->addAutofilterFieldInput('fecha_expiracion', array('Mysql_Helper','filterTimestampInput'));
 		$this->addAutofilterFieldOutput('fecha_expiracion', array('Mysql_Helper','filterTimestampOutput'));
 	}
+	public function setActivo($set=true){
+		$this->setData('activo', $set?'si':'no');
+		return $this;
+	}
+	public function esActivo(){
+		return $this->getActivo()=='si';
+	}
 	public function getCoincidencias($ids=null, $as_collection=true, $limit=null, $start=0, $as_objects=true, $columns=null){
 		$encuentro = new Saludmascotas_Model_View_MascotaEncuentro();
 		$wheres = array();

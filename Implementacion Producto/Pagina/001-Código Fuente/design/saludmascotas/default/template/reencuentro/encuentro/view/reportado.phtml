@@ -3,7 +3,7 @@ $encuentro = $this->getEncuentro();
 $reencuentro = $this->getReencuentro();
 
 			$encuentro = $reencuentro->getEncuentro();
-			$texto = 'El usuario <b>' . $reencuentro->getNombreCompleto() . '</b>';
+			$texto = 'El usuario <b>' . $reencuentro->getNombreCompleto() . '</b> ha indicado que ';
 			if($encuentro){
 				if($encuentro->getTieneMascota()){
 					$texto .= ' <b>tiene una mascota</b> que podría ser tuya ';

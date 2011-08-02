@@ -46,7 +46,7 @@
 			</action>
 		</reference>
 	</left_menu_usuario>
-	<mascota_usuario_listado>
+	<default when="accion(mascota_usuario_listado,mascota_encontre_listado)">
 		<reference name="html_head">
 			<script>js/jQuery/fancybox/jquery.fancybox-1.3.1.pack.js</script>
 			<css>js/jQuery/fancybox/jquery.fancybox-1.3.1.css</css>
@@ -55,12 +55,38 @@
 			<!--
 			<template template="mascota/usuario/listado2.phtml" />
 			-->
-			<mascota_listado_usuario name="mascota_listado_usuario">
+			<block type="Frontend/Menu" name="mascotas_usuario_tab" html_class="mascotas_usuario_tab">
+				<action  method="addItem">
+					<name>mascotas_usuario_tab_mis_mascotas</name>
+					<text>Mis mascotas</text>
+					<link>mascotas/usuario</link>
+					<weight>1</weight>
+					<parent></parent>
+				</action>
+				<action  method="addItem">
+					<name>mascotas_usuario_tab_encontradas</name>
+					<text>Que encontré</text>
+					<link>mascotas/encontre</link>
+					<weight>1</weight>
+					<parent></parent>
+				</action>
+				<action in="mascota_usuario_listado" method="setActive">
+					<name>mascotas_usuario_tab_mis_mascotas</name>
+				</action>
+				<action in="mascota_encontre_listado" method="setActive">
+					<name>mascotas_usuario_tab_encontradas</name>
+				</action>
+			</block>
+			<mascota_listado_usuario in="mascota_usuario_listado" name="mascota_listado_usuario">
 				<template name="list_entity_template" template="mascota/usuario/listado/item.phtml">
 				</template>
 			</mascota_listado_usuario>
+			<mascota_listado_encontre in="mascota_encontre_listado" name="mascota_listado_encontre">
+				<template name="list_entity_template" template="mascota/usuario/listado/item.phtml">
+				</template>
+			</mascota_listado_encontre>
 		</reference>
-	</mascota_usuario_listado>
+	</default>
 	<mascota_addedit>
 	<!--
 		<reference name="html_head">

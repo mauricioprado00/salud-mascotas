@@ -2,7 +2,8 @@
 //$object_to_edit = $this->getObjectToEdit();
 ?>
 <div class="form_container form_mascota_usuario_listado">
-	<form class="standart login" name="form1" method="post" action="<?php print $this->getUrl(Frontend_Mascota_Helper::getUrlAgregar()); ?>">
+	<form class="standart wider login" name="form1" method="post" action="<?php print $this->getUrl(Frontend_Mascota_Helper::getUrlAgregar()); ?>">
+		<?php /** / ?>
 		<div class="textbox">
 			<div class="holding <?php //share_row half_size ?>provincia">
 				<div class="input_autocomplete">
@@ -47,6 +48,7 @@
 				<span class="help">Filtrar por nombre o descripción</span>
 			</div>
 		</div>
+		<?php /**/ ?>
 		<ul class="listado_mascotas">
 			<?php while($this->moveNext()): ?> 
 			<?php $class = $this->getCurrentRelativeIndex()%2?'pair':'even'; ?>

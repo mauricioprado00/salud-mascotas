@@ -39,7 +39,7 @@
 				<mascota_view name="view_datos_mascota" template="mascota/preview.phtml" />
 				<mascota_view name="mascota_preview_short" template="mascota/preview_short.phtml" />
 				<mascota_view name="mascota_preview_full" template="mascota/preview.phtml" />
-				<template name="encuentro_view" template="reencuentro/encuentro/view/seleccionado.phtml" modo="full" with_link="true" />
+				<template name="encuentro_view" template="reencuentro/encuentro/view/reportado.phtml" modo="full" with_link="true" />
 				<template name="opciones_confirmacion" template="reencuentro/encuentro/confirmar_opciones.phtml" />
 			</template>
 		</reference>
@@ -54,9 +54,37 @@
 				<mascota_view name="view_datos_mascota" template="mascota/preview.phtml" />
 				<mascota_view name="mascota_preview_short" template="mascota/preview_short.phtml" />
 				<mascota_view name="mascota_preview_full" template="mascota/preview.phtml" />
-				<template name="perdida_view" template="reencuentro/perdida/view/seleccionado.phtml" modo="full" with_link="true" />
+				<template name="perdida_view" template="reencuentro/perdida/view/reportado.phtml" modo="full" with_link="true" />
 				<template name="opciones_confirmacion" template="reencuentro/perdida/confirmar_opciones.phtml" />
 			</template>
 		</reference>
 	</reencuentro_confirmar_encuentro>
+	<reencuentro_finalizar_perdida>
+	<!--
+		<reference name="html_head">
+			<script>js/jQuery/fancybox/jquery.fancybox-1.3.1.pack.js</script>
+			<css>js/jQuery/fancybox/jquery.fancybox-1.3.1.css</css>
+		</reference>
+					 -->
+		<reference name="contenido">
+			<template name="finalizar" template="reencuentro/perdida/finalizar.phtml">
+				<mascota_view name="view_datos_mascota" template="mascota/preview.phtml" />
+				<template name="opciones_finalizar" template="reencuentro/perdida/finalizar_opciones.phtml" />
+			</template>
+		</reference>
+	</reencuentro_finalizar_perdida>
+	<reencuentro_finalizar_encuentro>
+	<!--
+		<reference name="html_head">
+			<script>js/jQuery/fancybox/jquery.fancybox-1.3.1.pack.js</script>
+			<css>js/jQuery/fancybox/jquery.fancybox-1.3.1.css</css>
+		</reference>
+					 -->
+		<reference name="contenido">
+			<template name="finalizar" template="reencuentro/encuentro/finalizar.phtml">
+				<mascota_view name="view_datos_mascota" template="mascota/preview.phtml" />
+				<template name="opciones_finalizar" template="reencuentro/encuentro/finalizar_opciones.phtml" />
+			</template>
+		</reference>
+	</reencuentro_finalizar_encuentro>
 </layout>

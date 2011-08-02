@@ -1,0 +1,45 @@
+<?php //es útf8
+
+?>
+<div class="reencuentro_perdida_finalizar">
+	<form class="standart wider busqueda" name="form1" method="post">
+		<input type="hidden" name="dummy" value="continuar" />
+		<p>Si ya has encontrado al dueño de la mascota o no quieres continuar publicandola puedes finalizar el anuncio de encuentro con este formulario.<br />Te presentamos los datos nuevamente:</p>
+		<div>
+			<h2>Datos de Mascota</h2>
+			<?php print $this->getChildHtml('view_datos_mascota'); ?>
+		</div>
+		<?/** /?>
+		<div>
+			<h2>Datos de Mascota Coincidente a Confirmar</h2>
+			<?php print $this->getChildHtml('perdida_view'); ?>
+		</div>
+		
+		<div>
+			<h2>Opciones de confirmación</h2>
+			<?php print $this->getChildHtml('opciones_finalizar'); ?>
+		</div>
+		<?/**/?>
+		<div class="form_row actions_row single_action">
+			<button class="submit button" type="submit">Finalizar encuentro</button>
+			<ul>
+				<li><a href="#">algun link</a></li>
+			</ul>
+		</div>
+	</form>
+</div>
+<?php return; ?> 
+<script type="text/javascript">
+<!--
+	jQuery('.link_view_mascota')
+		.fancybox({
+			'width': 460,
+			'height':490,
+	        'autoDimensions':true,
+	        'transitionIn':'none',
+			'transitionOut':'none',
+			'type':'iframe'
+		})
+	;
+-->
+</script>

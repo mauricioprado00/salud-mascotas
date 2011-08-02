@@ -62,6 +62,13 @@ class Saludmascotas_Model_Mascota extends Core_Model_Abstract{
 		}
 		return implode(', ', $estado);
 	}
+	public function setActiva($set=true){
+		$this->setData('activa', $set?'si':'no');
+		return $this;
+	}
+	public function esActiva(){
+		return $this->getActiva()=='si';
+	}
 	public function setParaCruza($set=true){
 		$this->setData('para_cruza', $set?'si':'no');
 		return $this;

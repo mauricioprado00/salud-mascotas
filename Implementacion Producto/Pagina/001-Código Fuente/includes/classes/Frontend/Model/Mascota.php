@@ -269,6 +269,18 @@ class Frontend_Model_Mascota extends Saludmascotas_Model_Mascota{
 	public function getUrlConfirmacionesPendientes(){
 		return Frontend_Mascota_Reencuentro_Helper::getUrlConfirmacionesPendientes($this->getId());
 	}
+	public function getUrlFinalizarAnuncio(){
+		if($this->esEstadoPerdida()){
+			return $this->getUrlFinalizarAnuncioPerdida();
+		}
+		return $this->getUrlFinalizarAnuncioEncuentro();
+	}
+	public function getUrlFinalizarAnuncioPerdida(){
+		return Frontend_Mascota_Reencuentro_Helper::getUrlFinalizarAnuncioPerdida($this->getId());
+	}
+	public function getUrlFinalizarAnuncioEncuentro(){
+		return Frontend_Mascota_Reencuentro_Helper::getUrlFinalizarAnuncioEncuentro($this->getId());
+	}
 
 //	public function update($data=null, $use_null_values=false, $match_fields=array('id')){
 //		$this->addLocations();

@@ -698,7 +698,7 @@ form .mascota_fotos_addedit .help{
 /*termina mascota*/
 
 .listado_mascotas{
-	width:436px;
+	width:439px;
 }
 .listado_mascotas>li{
 	padding:4px 10px;
@@ -729,6 +729,9 @@ form .mascota_fotos_addedit .help{
 }
 .listado_mascotas>li>ul>li>em{
 	
+}
+.listado_mascotas > li > .link_confirmar_reencuentro{
+	float:none;
 }
 
 .paginas{
@@ -791,6 +794,13 @@ form.wider h2 a{
 form.wider .maparea{
 	width:439px;
 	height:439px;
+}
+
+form.wider .actions_row{
+	width:429px;
+}
+form.wider .single_action input, form.wider .single_action button{
+	width:429px;
 }
 
 .view_mascota{
@@ -897,3 +907,93 @@ form.wider .maparea{
 	font-weight:bold;
 }
 /*termina notificacion*/
+.mascotas_usuario_tab{
+	height:39px;
+	display:block;
+	margin-top:20px;
+	/*
+	
+	padding:13px 10px;
+	background-image:url(../img/menu_bg.png);
+	background-repeat:repeat-x;
+	background-color:red;
+	background-position:0 100%;
+	min-height: 425px;
+	width:214px;
+	-moz-border-radius:15px;
+	-khtml-border-radius:15px;
+	-webkit-border-radius:15px;
+	border-radius:15px;
+	-webkit-box-shadow:3px 3px 7px rgba(0, 0, 0, 0.79);
+	-moz-box-shadow:3px 3px 7px rgba(0, 0, 0, 0.79);
+	box-shadow:3px 3px 7px rgba(0, 0, 0, 0.79);
+	*/
+}
+.mascotas_usuario_tab>li{
+	display:block;
+	float:left;
+}
+.mascotas_usuario_tab>li>a{
+	
+	margin:0;
+	overflow:hidden;
+	*display:inline;
+	*zoom:1;
+	
+	background:#FFC63E url(../img/buttons/bg-btn-gray.png) repeat-x 0 0;
+	border-color:#c6c6c6 #c6c6c6 #868686;
+	border-style:solid;
+	border-width:1px;
+	color:#000;
+	text-shadow:3px 3px 4px rgba(255,255,255,0.8);
+	/*
+	grises
+	
+	border:1px solid #fa2;
+	
+	text-shadow:0 1px 0 rgba(0, 0, 0, 0.1), 0 -1px 0 rgba(0, 0, 0, 0.1), 1px 0 0 rgba(0, 0, 0, 0.1), -1px 0 0 rgba(0, 0, 0, 0.1), 0 2px 0 #FFEE66, 2px 0 0 #FFEE66;
+
+	*/
+	display:block;
+	-webkit-border-radius:8px 8px 0px 0px;
+	-khtml-border-radius:8px 8px 0px 0px;
+	-moz-border-radius:8px 8px 0px 0px;
+	border-radius:8px 8px 0px 0px;
+	text-decoration:none;
+	text-align:left;
+	font:bold 17px Helvetica Neue,Arial,Sans-serif;
+	cursor:pointer;
+	/*
+	-moz-box-shadow:0 1px 0 #fff;
+	-webkit-box-shadow:0 1px 0 #fff;
+	box-shadow:0 1px 0 #fff;
+	*/
+	padding:8px 8px 8px 8px;
+	/*width:164px;*/
+}
+.mascotas_usuario_tab>li.active>a, .mascotas_usuario_tab>li>a:hover{
+	background:#FFC63E url(../img/buttons/bg-btn-yellow3.png) repeat-x 0 0;
+	border:1px solid #fa2;
+	text-shadow:0 1px 0 rgba(0, 0, 0, 0.1), 0 -1px 0 rgba(0, 0, 0, 0.1), 1px 0 0 rgba(0, 0, 0, 0.1), -1px 0 0 rgba(0, 0, 0, 0.1), 0 2px 0 #FFEE66, 2px 0 0 #FFEE66;
+	/*text-shadow:0 1px 0 #fe6;*/
+	/*0 1px 0 rgba(0, 0, 0, 0.1), 0 -1px 0 rgba(0, 0, 0, 0.1), 1px 0 0 rgba(0, 0, 0, 0.1), -1px 0 0 rgba(0, 0, 0, 0.1)*/
+}
+.mascotas_usuario_tab>li>a:hover{
+	color:#333;
+
+}
+.mascotas_usuario_tab>li>a:focus,.mascotas_usuario_tab>li.active>a:hover{
+	background-position:0 -5px;
+	color:#111;
+}
+/*
+.mascotas_usuario_tab>li+li{
+	margin-top:10px;
+}*/
+
+.form_mascota_usuario_listado form{
+	margin:0;
+}
+/*comienza mascota_usuario listados*/
+
+/*termina mascota_usuario listados*/

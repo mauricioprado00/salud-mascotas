@@ -1,5 +1,5 @@
 <?php
-class Frontend_Mascota_Reencuentro_HelperUno extends Frontend_Mascota_Helper{
+class Frontend_Mascota_Reencuentro_HelperEncuentro extends Frontend_Mascota_Helper{
 	protected static function confirmarReencuentro($reencuentro){
 		//$reencuentro->setConfirmado(true);
 		$resultado = $reencuentro->update(array('confirmado'=>'si'))?true:false;
@@ -8,9 +8,9 @@ class Frontend_Mascota_Reencuentro_HelperUno extends Frontend_Mascota_Helper{
 			return true;
 		}
 		else{
-			Core_App::getInstance()->addErrorMessage("No se pudo confirmar el reencuentro");
+			Core_App::getInstance()->addErrorMessage("No se pudo confirmar el reencuentro", true);
 			foreach($perdida->getTranslatedErrors() as $error){
-				Core_App::getInstance()->addErrorMessage($error->getTranslatedDescription());
+				Core_App::getInstance()->addErrorMessage($error->getTranslatedDescription(), true);
 			}
 		}
 		return false;
@@ -19,13 +19,13 @@ class Frontend_Mascota_Reencuentro_HelperUno extends Frontend_Mascota_Helper{
 		$resultado = $encuentro->update(array('activo'=>'no'))?true:false;
 		if($resultado){
 			Core_App::getInstance()->addSuccessMessage(self::getInstance()->__t('El anuncio de encuentro ha sido dado de baja'), true);
-			self::eliminarReencuentrosEncuentroNoConfirmados($encuentro);
+			self::eliminarReencuentrosEncuentro($encuentro);
 			return true;
 		}
 		else{
-			Core_App::getInstance()->addErrorMessage("No se pudo dar de baja el anuncio de encuentro");
+			Core_App::getInstance()->addErrorMessage("No se pudo dar de baja el anuncio de encuentro", true);
 			foreach($perdida->getTranslatedErrors() as $error){
-				Core_App::getInstance()->addErrorMessage($error->getTranslatedDescription());
+				Core_App::getInstance()->addErrorMessage($error->getTranslatedDescription(), true);
 			}
 		}
 		return false;
@@ -38,13 +38,16 @@ class Frontend_Mascota_Reencuentro_HelperUno extends Frontend_Mascota_Helper{
 		$update['id_estadomascota'] = $id_estadomascota;
 		$resultado = $mascota->update($update)?true:false;
 		if($resultado){
-			Core_App::getInstance()->addSuccessMessage(self::getInstance()->__t('Se ha cambiado el estado de la mascota'), true);
+			if(!isset($update['activa']) || $update['activa']=='si')
+				Core_App::getInstance()->addSuccessMessage(self::getInstance()->__t('Se ha cambiado el estado de la mascota'), true);
+			else 
+				Core_App::getInstance()->addSuccessMessage(self::getInstance()->__t('Se ha eliminado la mascota'), true);
 			return true;
 		}
 		else{
-			Core_App::getInstance()->addErrorMessage("No se pudo cambiar el estado de la mascota");
+			Core_App::getInstance()->addErrorMessage("No se pudo cambiar el estado de la mascota", true);
 			foreach($perdida->getTranslatedErrors() as $error){
-				Core_App::getInstance()->addErrorMessage($error->getTranslatedDescription());
+				Core_App::getInstance()->addErrorMessage($error->getTranslatedDescription(), true);
 			}
 		}
 		return false;
@@ -56,6 +59,19 @@ class Frontend_Mascota_Reencuentro_HelperUno extends Frontend_Mascota_Helper{
 		self::enviarNotificacionReencuentroEncuentroConfirmado($reencuentro, $mascota->getId());
 		if(!$baja_anuncio)
 			return true;
+		if(!self::darBajaEncuentro($encuentro))
+			return false;
+		if(!self::actualizarMascotaConDueno($mascota, array('activa'=>'no')))
+			return false;
+		return true;
+	}
+	public static function finalizarEncuentro($encuentro, $mascota){
+//		$resultado = self::confirmarReencuentro($reencuentro);
+//		if(!$resultado)
+//			return false;
+//		self::enviarNotificacionReencuentroEncuentroConfirmado($reencuentro, $mascota->getId());
+//		if(!$baja_anuncio)
+//			return true;
 		if(!self::darBajaEncuentro($encuentro))
 			return false;
 		if(!self::actualizarMascotaConDueno($mascota, array('activa'=>'no')))
@@ -121,18 +137,31 @@ class Frontend_Mascota_Reencuentro_HelperUno extends Frontend_Mascota_Helper{
 		}
 		return false;
 	}
-	private function eliminarReencuentrosEncuentroNoConfirmados($encuentro){
+	private function eliminarReencuentrosEncuentro($encuentro){
 		$reencuentro = c(new Saludmascotas_Model_Reencuentro())
 			->setWhere(
-				Db_Helper::equal('id_encuentro', $encuentro->getId()), 
-				Db_Helper::equal('confirmado','no')
+				Db_Helper::equal('id_encuentro', $encuentro->getId())
+				//,Db_Helper::equal('confirmado','no')
 			)
 		;
 		$reencuentros = $reencuentro->search('iniciado_por', 'asc', null, null, get_class($reencuentro));
 		foreach($reencuentros as $reencuentro){
+			if($reencuentro->esConfirmado()){//si esta confirmado
+				$perdida = $reencuentro->getPerdida();//corroboro la perdida
+				if(isset($perdida)){
+					if($encuentro->esActivo()){//este activo
+						continue;//y no lo borro para permitir seguirlo viendo a dicho usuario
+					}
+				}
+			}
 			$reencuentro->update(array('activo'=>'no'));
 			if($reencuentro->getIniciadoPor()=='perdida'){
-				self::enviarNotificacionReencuentroEncuentroEliminado($reencuentro);
+				if($reencuentro->esConfirmado()){
+					
+				}
+				else{
+					self::enviarNotificacionReencuentroEncuentroEliminado($reencuentro);
+				}
 			}
 		}
 	}

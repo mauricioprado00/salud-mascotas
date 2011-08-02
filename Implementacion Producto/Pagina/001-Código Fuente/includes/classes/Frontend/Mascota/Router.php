@@ -4,6 +4,7 @@ class Frontend_Mascota_Router extends Frontend_Router_Abstract{
 		parent::initialize();
 		$this->addActions(
 			'usuario'
+			,'encontre'
 			,'agregar'
 			,'editar'
 			,'upload_foto'
@@ -38,6 +39,24 @@ class Frontend_Mascota_Router extends Frontend_Router_Abstract{
 		Core_App::getLayout()
 			->setModo('saludmascotas')
 			->addAction('mascota_usuario_listado')
+		;
+		$this->showLeftMenu('usuario');
+		
+		//loaded layout
+//		Core_App::getLoadedLayout()
+//			->getBlock('form_edit')//$x = $this->getObjectToEdit();
+//			->setObjectToEdit($object_to_edit)
+//		;
+		$this->setActiveLeftMenu('mascotas_usuario_mis_mascotas');
+	}
+	protected function encontre($numero_pag=0){
+		if($this->RedirectIfNotLoged())
+			return true;
+		Core_App::getInstance()->setPagina($numero_pag);
+		$this->setPageReference('Mascotas', 'que encontré');
+		Core_App::getLayout()
+			->setModo('saludmascotas')
+			->addAction('mascota_encontre_listado')
 		;
 		$this->showLeftMenu('usuario');
 		

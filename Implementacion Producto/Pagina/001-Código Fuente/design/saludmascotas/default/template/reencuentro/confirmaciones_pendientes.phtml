@@ -1,5 +1,6 @@
-<?php
+<?php //es útf8
 $mascota = $this->getMascota();
+$es_perdida = $mascota->esEstadoPerdida();
 ?>
 <div class="reencuentro_confirmaciones_pendientes">
 	<form class="standart wider busqueda" name="form1" method="post">
@@ -17,11 +18,10 @@ $mascota = $this->getMascota();
 			<?php print $this->getChildHtml('reencuentros_reportados'); ?>
 		</div>
 		<div class="form_row actions_row single_action">
-			<!--
-			<button class="submit button" type="submit">Publicar Anuncio</button>
-			-->
+			<a href="<?php print $this->getUrl($mascota->getUrlEditar()); ?>"><button class="submit button" type="button">Modificar anuncio o buscar nuevas coincidencias</button></a>
 			<ul>
-				<li><a href="#">algun link</a></li>
+				<li><a href="<?php print $this->getUrl($mascota->getUrlFinalizarAnuncio()); ?>">
+				<?php print $es_perdida?'ya encontre mi mascota ':'ya encontre a su dueño'; ?> (eliminar anuncio)</a></li>
 			</ul>
 		</div>
 	</form>
