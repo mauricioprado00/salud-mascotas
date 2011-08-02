@@ -97,6 +97,7 @@ class Saludmascotas_Model_Encuentro extends Core_Model_Abstract{
 		$where = array();
 		$where[] = Db_Helper::equal('id_encuentro', $this->getId());
 		$where[] = Db_Helper::equal('iniciado_por','encuentro');
+		$where[] = Db_Helper::equal('activo','si');
 		$reencuentro->setWhereByArray($where);
 		$reencuentros = $reencuentro->search();
 		if(!$reencuentros)

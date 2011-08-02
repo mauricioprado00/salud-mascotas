@@ -91,6 +91,7 @@ class Saludmascotas_Model_Perdida extends Core_Model_Abstract{
 		$where = array();
 		$where[] = Db_Helper::equal('id_perdida', $this->getId());
 		$where[] = Db_Helper::equal('iniciado_por','perdida');
+		$where[] = Db_Helper::equal('activo','si');
 		$reencuentro->setWhereByArray($where);
 		$reencuentros = $reencuentro->search();
 		if(!$reencuentros)

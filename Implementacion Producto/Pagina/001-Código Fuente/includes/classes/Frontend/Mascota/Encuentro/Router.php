@@ -71,8 +71,10 @@ class Frontend_Mascota_Encuentro_Router extends Frontend_Mascota_Router{
 					$ids_coincidencias = array_merge(array_diff($ids_coincidencias, $coincidencias_seleccionadas), $coincidencias_seleccionadas);
 				else $ids_coincidencias = $coincidencias_seleccionadas;
 				if($ids_coincidencias)
-					$coincidencias = $encuentro->setCoincidencias($ids_coincidencias);
+					$coincidencias = $encuentro->getCoincidencias($ids_coincidencias);
 				else $coincidencias = null;
+//				header('content-type:text/plain');
+//				var_dump($coincidencias);
 				$this->setCoincidencias($coincidencias);
 //				die(__FILE__.__LINE__);
 				break;

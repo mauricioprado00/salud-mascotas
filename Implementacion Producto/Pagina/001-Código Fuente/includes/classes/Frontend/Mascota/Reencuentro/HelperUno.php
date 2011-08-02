@@ -1,6 +1,6 @@
 <?php
 class Frontend_Mascota_Reencuentro_HelperUno extends Frontend_Mascota_Helper{
-	private static function confirmarReencuentro($reencuentro){
+	protected static function confirmarReencuentro($reencuentro){
 		//$reencuentro->setConfirmado(true);
 		$resultado = $reencuentro->update(array('confirmado'=>'si'))?true:false;
 		if($resultado){
@@ -30,7 +30,7 @@ class Frontend_Mascota_Reencuentro_HelperUno extends Frontend_Mascota_Helper{
 		}
 		return false;
 	}
-	private static function actualizarMascotaConDueno($mascota, $update=null){
+	protected static function actualizarMascotaConDueno($mascota, $update=null){
 		if(!isset($update))
 			$update = array();
 		$mascota->setEstadoConDueno();
