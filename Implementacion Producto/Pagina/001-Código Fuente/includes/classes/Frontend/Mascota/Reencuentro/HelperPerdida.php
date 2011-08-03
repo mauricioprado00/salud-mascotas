@@ -78,18 +78,33 @@ class Frontend_Mascota_Reencuentro_HelperPerdida extends Frontend_Mascota_Reencu
 		return true;
 	}
 	public static function enviarNotificacionReencuentroPerdidaConfirmado($reencuentro, $id_mascota=null){
-		$mensaje = 'alguien ha confirmado una mascota de tu encuentro';
-		$asunto = 'alguien ha confirmado una mascota de tu encuentro';
+		$asunto = 'Confirmación coincidencia en Encuentro';
 		$asunto_type = 'notificacion_reencuentro_perdida_confirmado';
+		$asunto = 'Alguien ha confirmado una mascota de tu encuentro';
 		if($reencuentro->getIdEncuentro()){
 //			$usuario = self::getLogedUser();
 //			$id_usuario = $usuario->getId();			
 			$encuentro = $reencuentro->getEncuentro();
+			$id_mascota_encuentro = $encuentro->getIdMascota();
+			$url_vista_confirmaciones_pendientes = Frontend_Mascota_Reencuentro_Helper::getUrlConfirmacionesPendientes($id_mascota_encuentro);
+			$url_finalizar = Frontend_Mascota_Reencuentro_Helper::getUrlFinalizarAnuncioEncuentro($id_mascota_encuentro);
+			$url_vista_confirmaciones_pendientes = Core_App::getUrlModel()->getUrl($url_vista_confirmaciones_pendientes);
+			$url_finalizar = Core_App::getUrlModel()->getUrl($url_finalizar);
 			$usuario = $encuentro->getUsuario();
 			$id_usuario = $usuario->getId();
 			$id_encuentro = $reencuentro->getIdEncuentro();
 			$id_perdida = $reencuentro->getIdPerdida();
 			$id_reencuentro = $reencuentro->getId();
+
+			$mensaje = <<<asunto
+Alguien ha confirmado tu perdida como coincidencia de su mascota encontrada.<br />
+puedes ver esta y todas las demas confirmaciones de tu publicación haciendo <a href="$url_vista_confirmaciones_pendientes">click aquí</a> o copiar y pegar esta direccion en tu navegador<br />
+$url_vista_confirmaciones_pendientes
+<br />
+o puedes finalizar el anuncio haciendo <a href="$url_finalizar">click aquí</a> o copiando y pegando la siguiente url en el navegador<br />
+$url_finalizar
+<br />
+asunto;
 
 			$notificacion = new Saludmascotas_Model_Notificacion();
 			$notificacion

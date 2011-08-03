@@ -1,8 +1,9 @@
 <?
 $encuentro = $this->getEncuentro();
+$usuario = $encuentro->getUsuario();
 $reencuentro = $this->getReencuentro();
 
-			$texto = 'El usuario <b>' . $reencuentro->getNombreCompleto() . '</b>';
+			$texto = 'El usuario <b>' . $usuario->getNombre() .' '.$usuario->getApellido() . '</b>';
 			if($encuentro){
 				if($encuentro->getTieneMascota()){
 					$texto .= ' <b>tiene una mascota</b> que podría ser tuya ';

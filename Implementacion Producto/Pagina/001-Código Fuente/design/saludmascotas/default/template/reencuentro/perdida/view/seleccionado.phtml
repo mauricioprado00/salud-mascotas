@@ -1,8 +1,9 @@
 <?
 $perdida = $this->getPerdida();
+$usuario = $perdida->getUsuario();
 $reencuentro = $this->getReencuentro();
 
-			$texto = 'Has seleccionado una mascota del usuario <b>' . $reencuentro->getNombreCompleto() . '</b> como posible dueño';
+			$texto = 'Has seleccionado una mascota del usuario <b>' . $usuario->getNombre() .' '.$usuario->getApellido() . '</b> como posible dueño';
 //			if($perdida){
 //				if($perdida->getTieneMascota()){
 //					$texto .= ' <b>tiene una mascota</b> que podría ser tuya ';

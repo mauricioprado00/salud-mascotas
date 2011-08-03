@@ -140,14 +140,13 @@ class Frontend_Mascota_Perdida_Helper extends Frontend_Mascota_Helper{
 		$asunto = 'Coincidencia en Encuentro';
 		$mensaje = <<<asunto
 Alguien ha marcado tu encuentro como posible coincidencia de su mascota perdida.<br />
-Puedes ver y confirmar dicha coincidencia aqui:<br />
+Puedes ver y confirmar dicha coincidencia haciendo <a href="$url_confirmar">click aquí</a> o copiando y pegando el siguiente enlace en tu navegador:<br />
 $url_confirmar
 <br />
-o ver todas las demas confirmaciones pendientes para tu publicación
+o ver todas las demas confirmaciones pendientes para tu publicación haciendo <a href="$url_vista_confirmaciones_pendientes">click aqui</a> o copiando y pegando el siguiente enlace en tu navegador:
 $url_vista_confirmaciones_pendientes
 <br />
 asunto;
-		$mensaje = utf8_decode($mensaje);
 		$asunto_type = 'notificacion_reencuentro_perdida';
 		
 		$notificacion = new Saludmascotas_Model_Notificacion();

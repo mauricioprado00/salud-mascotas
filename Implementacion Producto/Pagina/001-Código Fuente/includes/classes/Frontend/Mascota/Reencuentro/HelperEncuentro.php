@@ -1,4 +1,4 @@
-<?php
+<?php//es 煤tf8
 class Frontend_Mascota_Reencuentro_HelperEncuentro extends Frontend_Mascota_Helper{
 	protected static function confirmarReencuentro($reencuentro){
 		//$reencuentro->setConfirmado(true);
@@ -79,18 +79,33 @@ class Frontend_Mascota_Reencuentro_HelperEncuentro extends Frontend_Mascota_Help
 		return true;
 	}
 	public static function enviarNotificacionReencuentroEncuentroConfirmado($reencuentro, $id_mascota=null){
-		$mensaje = 'alguien ha confirmado ver o tener la mascota que has perdido';
-		$asunto = 'alguien ha confirmado ver o tener la mascota que has perdido';
+		$asunto = 'Confirmaci贸n coincidencia en Perdida';
 		$asunto_type = 'notificacion_reencuentro_encuentro_confirmado';
+		$asunto = 'Alguien ha confirmado una mascota de tu perdida';
 		if($reencuentro->getIdPerdida()){
 //			$usuario = self::getLogedUser();
 //			$id_usuario = $usuario->getId();			
 			$perdida = $reencuentro->getPerdida();
+			$id_mascota_perdida = $perdida->getIdMascota();
+			$url_vista_confirmaciones_pendientes = Frontend_Mascota_Reencuentro_Helper::getUrlConfirmacionesPendientes($id_mascota_perdida);
+			$url_finalizar = Frontend_Mascota_Reencuentro_Helper::getUrlFinalizarAnuncioPerdida($id_mascota_perdida);
+			$url_vista_confirmaciones_pendientes = Core_App::getUrlModel()->getUrl($url_vista_confirmaciones_pendientes);
+			$url_finalizar = Core_App::getUrlModel()->getUrl($url_finalizar);
 			$usuario = $perdida->getUsuario();
 			$id_usuario = $usuario->getId();
 			$id_perdida = $reencuentro->getIdPerdida();
 			$id_encuentro = $reencuentro->getIdEncuentro();
 			$id_reencuentro = $reencuentro->getId();
+			
+			$mensaje = <<<asunto
+Alguien ha confirmado tu perdida como coincidencia de su mascota encontrada.<br />
+puedes ver esta y todas las demas confirmaciones de tu publicaci贸n haciendo <a href="$url_vista_confirmaciones_pendientes">click aqu铆</a> o copiar y pegar esta direccion en tu navegador<br />
+$url_vista_confirmaciones_pendientes
+<br />
+o puedes finalizar el anuncio haciendo <a href="$url_finalizar">click aqu铆</a> o copiando y pegando la siguiente url en el navegador<br />
+$url_finalizar
+<br />
+asunto;
 
 			$notificacion = new Saludmascotas_Model_Notificacion();
 			$notificacion
@@ -110,7 +125,7 @@ class Frontend_Mascota_Reencuentro_HelperEncuentro extends Frontend_Mascota_Help
 				$notificacion->enviar();
 				return true;
 			}
-			Core_App::getInstance()->addErrorMessage("No se pudo enviar notificaci髇", true);
+			Core_App::getInstance()->addErrorMessage("No se pudo enviar notificaci贸n", true);
 			foreach($notificacion->getTranslatedErrors() as $error){
 				Core_App::getInstance()->addErrorMessage($error->getTranslatedDescription(), true);
 			}	
@@ -131,7 +146,7 @@ class Frontend_Mascota_Reencuentro_HelperEncuentro extends Frontend_Mascota_Help
 				Core_App::getInstance()->addSuccessMessage("Notificacion enviada", true);
 			}
 			else{
-				Core_App::getInstance()->addErrorMessage("No se pudo enviar notificaci髇", true);
+				Core_App::getInstance()->addErrorMessage("No se pudo enviar notificaci贸n", true);
 			}
 			return $enviado;
 		}
@@ -198,7 +213,7 @@ class Frontend_Mascota_Reencuentro_HelperEncuentro extends Frontend_Mascota_Help
 				$notificacion->enviar();
 				return true;
 			}
-//			Core_App::getInstance()->addErrorMessage("No se pudo enviar notificaci髇", true);
+//			Core_App::getInstance()->addErrorMessage("No se pudo enviar notificaci贸n", true);
 //			foreach($notificacion->getTranslatedErrors() as $error){
 //				Core_App::getInstance()->addErrorMessage($error->getTranslatedDescription(), true);
 //			}	
@@ -219,7 +234,7 @@ class Frontend_Mascota_Reencuentro_HelperEncuentro extends Frontend_Mascota_Help
 				Core_App::getInstance()->addSuccessMessage("Notificacion enviada", true);
 			}
 			else{
-				Core_App::getInstance()->addErrorMessage("No se pudo enviar notificaci髇", true);
+				Core_App::getInstance()->addErrorMessage("No se pudo enviar notificaci贸n", true);
 			}
 			return $enviado;
 		}
