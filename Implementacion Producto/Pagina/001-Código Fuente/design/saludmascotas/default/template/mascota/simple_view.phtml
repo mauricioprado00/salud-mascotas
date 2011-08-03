@@ -11,9 +11,15 @@ $object_to_edit = $this->getObjectToEdit();
 			<h2>Datos de Mascota</h2>
 			<?php print $this->getChildHtml('view_datos_mascota'); ?>
 		</div>
+		<?php /** ///NN4D disabled ?>
 		<div>
 			<h2>Ubicación</h2>
 			<?php print $this->getChildHtml('view_ubicacion'); ?>
+		</div>
+		<?php /**///NN4D disabled ?>
+		<div>
+			<h2>Ubicación</h2>
+			<?php print $this->getChildHtml('gmap_view_ubicacion'); ?>
 		</div>
 		<?php /** / ?>
 		<div>

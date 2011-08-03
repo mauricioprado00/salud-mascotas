@@ -159,20 +159,66 @@
 		</reference>
 	</default>
 	<default when="accion(mascota_perdida_addedit_busqueda)">
+		<reference name="html_head">
+			<script charset="utf8" external="true"><![CDATA[http://maps.googleapis.com/maps/api/js?sensor=true&key={#CONF_GMAPS_APPKEY}]]></script>
+			<script>js/gmap.js</script>
+			<script>js/coincidencias.js</script>
+		</reference>
 		<reference name="contenido">
 			<template name="form_edit" template="mascota/perdida/paso3.phtml">
 				<template name="show_select_coincidencias" template="mascota/perdida/paso3_select_coincidencias.phtml">
 					<!--<mascota_view name="view_datos_mascota" template="mascota/preview.phtml" />-->
-					<mascota_view name="view_datos_mascota_coincidencia" template="mascota/view/nn4d.phtml" />
+					<!--<mascota_view name="view_datos_mascota_coincidencia" template="mascota/view/nn4d.phtml" />-->
+					<mascota_view name="view_datos_mascota_coincidencia" template="mascota/view/coincidencia_gmap.phtml" />
+					<domicilio_gmap_view name="gmap_view_ubicacion" zoom="15">
+						<action method="addIconType">
+							<name>yellow</name>
+							<file>img/pin/pin_yellow.png</file>
+							<hotspot>bottom,right</hotspot>
+						</action>
+						<action method="addIconType">
+							<name>green</name>
+							<file>img/pin/pin_green.png</file>
+							<hotspot>bottom,right</hotspot>
+						</action>
+						<action method="addIconType">
+							<name>red</name>
+							<file>img/pin/pin_red.png</file>
+							<hotspot>bottom,right</hotspot>
+						</action>
+					</domicilio_gmap_view>
 				</template>
 			</template>
 		</reference>
 	</default>
 	<default when="accion(mascota_encuentro_addedit_busqueda)">
+		<reference name="html_head">
+			<script charset="utf8" external="true"><![CDATA[http://maps.googleapis.com/maps/api/js?sensor=true&key={#CONF_GMAPS_APPKEY}]]></script>
+			<script>js/gmap.js</script>
+			<script>js/coincidencias.js</script>
+		</reference>
 		<reference name="contenido">
 			<template name="form_edit" template="mascota/encuentro/paso3.phtml">
 				<template name="show_select_coincidencias" template="mascota/encuentro/paso3_select_coincidencias.phtml">
-					<mascota_view name="view_datos_mascota_coincidencia" template="mascota/view/nn4d.phtml" />
+					<!--<mascota_view name="view_datos_mascota_coincidencia" template="mascota/view/nn4d.phtml" /> -->
+					<mascota_view name="view_datos_mascota_coincidencia" template="mascota/view/coincidencia_gmap.phtml" />
+					<domicilio_gmap_view name="gmap_view_ubicacion" zoom="15">
+						<action method="addIconType">
+							<name>yellow</name>
+							<file>img/pin/pin_yellow.png</file>
+							<hotspot>bottom,right</hotspot>
+						</action>
+						<action method="addIconType">
+							<name>green</name>
+							<file>img/pin/pin_green.png</file>
+							<hotspot>bottom,right</hotspot>
+						</action>
+						<action method="addIconType">
+							<name>red</name>
+							<file>img/pin/pin_red.png</file>
+							<hotspot>bottom,right</hotspot>
+						</action>
+					</domicilio_gmap_view>
 				</template>
 			</template>
 		</reference>
@@ -216,15 +262,28 @@
 	
 	<view_mascota>
 		<reference name="html_head">
+		<!-- NN4D disabled
 			<script charset="utf8" external="true">http://api.maptp.map24.com/ajax?appkey={#CONF_MAP24_APPKEY}</script>
 			<script charset="utf8">js/update_address_nn4d.js</script>
+			-->
+			<script charset="utf8" external="true"><![CDATA[http://maps.googleapis.com/maps/api/js?sensor=true&key={#CONF_GMAPS_APPKEY}]]></script>
+			<script>js/gmap.js</script>
 			<script>js/jQuery/fancybox/jquery.fancybox-1.3.1.pack.js</script>
 			<css>js/jQuery/fancybox/jquery.fancybox-1.3.1.css</css>
 		</reference>
 		<reference name="contenido">
 			<template name="form_view" template="mascota/simple_view.phtml">
 				<mascota_view name="view_datos_mascota" template="mascota/preview.phtml" />
+				<!-- NN4D disabled
 				<domicilio_view name="view_ubicacion" map_type="Static" />
+				-->
+				<domicilio_gmap_view name="gmap_view_ubicacion,view_ubicacion" pin_file="img/pin/pin_black.png" pin_hotspot="bottom,right" zoom="15">
+					<action method="addIconType">
+						<name>yellow</name>
+						<file>img/pin/pin_yellow.png</file>
+						<hotspot>bottom,right</hotspot>
+					</action>
+				</domicilio_gmap_view>
 				<!--
 				
 				<block name="view_posibles_reencuentros" />

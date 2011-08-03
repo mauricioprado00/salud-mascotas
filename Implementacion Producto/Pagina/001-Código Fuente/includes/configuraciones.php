@@ -73,5 +73,8 @@ else
 	}
 	define('ZFLIBPATH',dirname(__FILE__).'/../../ZendFramework/library/');
 	define('CONF_MAP24_APPKEY', 'FJX5715ae3ff53e4ea286f2a1aab1356X50');
+	define('CONF_GMAPS_APPKEY', 'ABQIAAAAKENOc8YHJVLSb2T5siO_WRRI_dZmxT_lvf5qO6Udg29WQ8WPHxQkKuOmI4YdESx3ZhQqHpCdaTrKbA');
+	//http://maps.google.com/maps/geo?q=1600+Amphitheatre+Parkway,+Mountain+View,+CA&output=json&oe=utf8&sensor=true_or_false&key=ABQIAAAAKENOc8YHJVLSb2T5siO_WRRI_dZmxT_lvf5qO6Udg29WQ8WPHxQkKuOmI4YdESx3ZhQqHpCdaTrKbA
+	//www.saludmascotas.com.ar define('CONF_GMAPS_APPKEY', 'ABQIAAAAKENOc8YHJVLSb2T5siO_WRQ8ne26DyBQuBQas01YiO0ymxME8xRKexO61GCe6T7YVrDyFBzM8fdI6A');
 }
 ?>

@@ -1,4 +1,5 @@
 <?
+ini_set('precision',25); //para floats largos
 //printf("cookie: %s, gc: %s", ini_get('session.cookie_lifetime'), ini_get('session.gc_maxlifetime'));die(__FILE__.__LINE__);
 //sleep(3);
 //time_nanosleep(0, 500000000);

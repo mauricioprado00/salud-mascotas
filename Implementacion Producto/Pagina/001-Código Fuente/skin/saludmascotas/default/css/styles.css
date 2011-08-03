@@ -994,6 +994,7 @@ form.wider .single_action input, form.wider .single_action button{
 .form_mascota_usuario_listado form{
 	margin:0;
 }
-/*comienza mascota_usuario listados*/
+.show_select_coincidencias_paso3 ul{
+	display:none;
+}
 
-/*termina mascota_usuario listados*/

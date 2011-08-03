@@ -1,0 +1,56 @@
+<?php /* es útf8 */
+
+if($domicilio = $this->getDomicilio()){
+	$lat = $domicilio->getLat()/60;
+	$lng = $domicilio->getLng()/60;
+}
+else{
+	$lat = $lng = '';
+}
+
+$mapa_config = array(
+	'maparea'=>'gmap_maparea',
+);
+$js_object_name = $this->getJsObjectName();
+if($lat&&$lng){
+	$mapa_config = array_merge($mapa_config, array(
+		'lat'=>$lat,
+		'lng'=>$lng,
+		'gmap_options'=>(object)array(
+			'zoom'=>intval($this->getZoom()),
+		)
+	));
+}
+
+//echo'<pre>';
+//var_dump($this->getPinConfig());
+//echo'</pre>';
+?>
+<div class="domicilio_view">
+    <a name="mapa"></a>
+	<DIV id="gmap_maparea" class="maparea"></DIV>
+	<div id="geocodingresults" class="geocodingresults"></div>
+	<div id="coordinates"></div>
+</div>
+<script type="text/javascript">
+(function(){
+	jQuery(function(){
+		<?php print $js_object_name; ?> = new mapaGmap().init(<?php print json_encode($mapa_config); ?>);
+		<?php foreach($this->getIconTypesConfig() as $name=>$config): ?> 
+		<?php print $js_object_name; ?>.addIconType(<?php print json_encode(array(
+			'icon'=>$config,
+			'name'=>$name,
+		)) ?>);
+		<?php endforeach; ?> 
+		<?php if($lat&&$lng): ?> 
+		var marker_id = <?php print $js_object_name; ?>.addMarker(<?php print json_encode(array(
+			'lat'=>$lat/60,
+			'lng'=>$lng/60,
+			'title'=>'mascota',
+			'icon'=>'normal',//
+		)); ?>); 
+		<?php endif; ?> 
+	});
+})();
+</script>
+		

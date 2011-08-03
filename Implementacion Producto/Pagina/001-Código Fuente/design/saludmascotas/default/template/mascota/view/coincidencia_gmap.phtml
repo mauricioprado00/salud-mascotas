@@ -1,0 +1,62 @@
+<?php //es útf8
+
+$mascota = $this->getMascota();
+//$fotos_mascota = $this->getPhotoList();
+//$perdida = $this->getPerdida();
+$extra_data = $this->getExtraData();
+//$foto_principal = array_shift($fotos_mascota);
+
+//datos
+$nombre = $mascota->getNombre();
+$edad = $mascota->calcularEdad();
+$sexo = $mascota->getSexo();
+$castrado = ucfirst($mascota->getCastrado());
+$raza = $mascota->getRaza(false);
+$manto = $mascota->getManto();
+$largo = $mascota->getLongitudPelaje();
+$manto = $manto->getNombre() . ', ' . $largo->getNombre();
+$nombres_colores = Saludmascotas_Model_Color::getNombresColoresFromRgb($mascota->getColoresSeleccionados());
+if($nombres_colores){
+	$nombres_colores = implode(', ', $nombres_colores);
+	$manto .= ', ' . $nombres_colores;
+}
+$descripcion = $mascota->getDescripcion();
+
+?>
+<div class="infowindow_content">
+<img src="<?php print $mascota->getUrlImage(70, null); ?>" />
+	<ul>
+	<?php if($extra_data && $extra_data->count()): ?>
+	<?php foreach($extra_data as $extra_data_item): ?> 
+		<li>
+			<b><?php print $extra_data_item->getLabel(); ?>:</b><em><?php print $extra_data_item->getText(); ?></em>
+		</li>
+	<?php endforeach; ?>
+	<?php endif; ?>  
+		<li>
+			<b>Nombre</b>:<em><?php print $nombre; ?></em>
+		</li>
+		<li>
+			<b>Edad</b>:<em><?php print $edad; ?></em>
+		</li>
+		<li>
+			<b>Sexo</b>:<em><?php print $sexo; ?></em>
+		</li>
+		<li>
+			<b>Castrado</b>:<em><?php print $castrado; ?></em>
+		</li>
+		<li>
+			<b>Raza</b>:<em><?php print $raza; ?></em>
+		</li>
+		<li>
+			<b>Manto</b>:<em><?php print $manto; ?></em>
+		</li>
+		<li>
+			<b>Descripcion</b>:<em><?php print $descripcion; ?></em>
+		</li>
+	</ul>
+	<div>
+		<?php print $mascota->getTamano(); ?> 
+	</div>
+	<div style="clear:both;"></div>
+</div>

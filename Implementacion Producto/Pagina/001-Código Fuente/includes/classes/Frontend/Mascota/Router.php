@@ -332,9 +332,8 @@ class Frontend_Mascota_Router extends Frontend_Router_Abstract{
 			$view_datos_mascota->addExtraData('Fecha Extravío', $perdida->getExtravioFecha());
 		}
 		$view_datos_mascota->addExtraData('Estado', $mascota->getEstadoFull());
-		$view_ubicacion = $loaded_layout
-			->getBlock('view_ubicacion')
-			->setDomicilio($mascota->smartGetDomicilio())
+		foreach($loaded_layout->getBlocks('view_ubicacion') as $view_ubicacion)
+			$view_ubicacion->setDomicilio($mascota->smartGetDomicilio())
 		;
 	}
 

@@ -81,6 +81,10 @@
 		<class>Frontend_Block_Domicilio_View</class>
 	</block>
 	<block>
+		<type>domicilio_gmap_view</type>
+		<class>Frontend_Block_Domicilio_GmapView</class>
+	</block>
+	<block>
 		<type>domicilio_selector</type>
 		<class>Frontend_Block_Domicilio_Selector</class>
 	</block>
