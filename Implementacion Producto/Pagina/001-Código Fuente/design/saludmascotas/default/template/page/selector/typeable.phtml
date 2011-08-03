@@ -18,7 +18,7 @@ if(!$this->hasEntityToList()||!$this->getEntityToList()){?>
 	$c = $this->getSelectControl();
 ?> 
 <div class="select_typeable" id="<?php print $control_id = uniqid(); ?>">
-	<input type="text" autocomplete="off" value="<?php print htmlentities($text); ?>" />
+	<input type="text" autocomplete="off" value="<?php print htmlentities(utf8_decode($text)); ?>" />
 	<div class="dropdown_button"></div>
 	<ul class="options"></ul><?php
 	echo $c

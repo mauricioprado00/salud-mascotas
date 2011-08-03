@@ -107,7 +107,14 @@ class Frontend_Mascota_Encuentro_Helper extends Frontend_Mascota_Helper{
 		self::setUserSessionVar('coincidencias_seleccionadas', null);
 	}
 	public static function enviarNotificacionReencuentro($reencuentro, $id_mascota=null){
-		$usuario = self::getLogedUser();
+		//$usuario = self::getLogedUser();
+		$perdida = $reencuentro->getPerdida();
+		$id_mascota_perdida = $perdida->getIdMascota();
+		$url_vista_confirmaciones_pendientes = Frontend_Mascota_Reencuentro_Helper::getUrlConfirmacionesPendientes($id_mascota_perdida);
+		$url_confirmar = Frontend_Mascota_Reencuentro_Helper::getUrlConfirmar($id_mascota_perdida, $reencuentro->getId());
+		$url_vista_confirmaciones_pendientes = Core_App::getUrlModel()->getUrl($url_vista_confirmaciones_pendientes);
+		$url_confirmar = Core_App::getUrlModel()->getUrl($url_confirmar);
+		$usuario = $perdida->getUsuario();
 		$id_usuario = $usuario->getId();
 		$id_encuentro = $reencuentro->getIdEncuentro();
 		$id_perdida = $reencuentro->getIdPerdida();
@@ -131,8 +138,17 @@ class Frontend_Mascota_Encuentro_Helper extends Frontend_Mascota_Helper{
 			}
 		}
 		
-		$mensaje = 'alguien ha marcado tu perdidax como posible coincidencia de su mascota encuentro alguien ha marcado tu perdidax como posible coincidencia de su mascota encuentro alguien ha marcado tu perdidax como posible coincidencia de su mascota encuentro';
-		$asunto = 'alguien ha marcado tu perdidax como posible coincidencia de su mascota encuentro';
+		$asunto = 'Coincidencia en Perdida';
+		$mensaje = <<<asunto
+Alguien ha marcado tu perdida como posible coincidencia de su mascota encontrada.<br />
+Puedes ver y confirmar dicha coincidencia aqui:<br />
+$url_confirmar
+<br />
+o ver todas las demas confirmaciones pendientes para tu publicación
+$url_vista_confirmaciones_pendientes
+<br />
+asunto;
+		$mensaje = utf8_decode($mensaje);
 		$asunto_type = 'notificacion_reencuentro_encuentro';
 		
 		$notificacion = new Saludmascotas_Model_Notificacion();
