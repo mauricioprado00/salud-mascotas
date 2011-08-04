@@ -1,3 +1,5 @@
+04/08/2011 - mauricio
+* hago nulleable el campo id_usuario de la tabla reencuentro
 31/07/2011 - mauricio
 * agrego campo activo a tabla reencuentro (para marcar si el usuario a quien va dirigida la confirmación ya lo vio y selecciono una opcion en el campo confirmado)
 30/07/2011 - mauricio

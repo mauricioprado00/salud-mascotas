@@ -10,6 +10,7 @@
 		<reference name="contenido">
 			<template name="mascota_encuentro_listado" template="mascota/encuentro/listado/listado.phtml">
 				<mascota_view name="view_datos_mascota" template="mascota/preview.phtml" />
+				<template name="reportar" template="mascota/encuentro/listado/reportar.phtml" />
 				<!--<domicilio_view name="view_ubicacion" />-->
 				<template name="map_swicher" template="mascota/encuentro/listado/map_swicher.phtml" image_type_visto="it_yellow" image_type_no_visto="it_red">
 					<domicilio_gmap_view name="view_ubicacion" pin_file="img/pin/pin_black.png" pin_hotspot="bottom,right" zoom="15">

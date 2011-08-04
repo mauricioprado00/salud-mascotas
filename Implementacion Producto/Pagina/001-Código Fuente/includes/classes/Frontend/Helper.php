@@ -18,5 +18,8 @@ class Frontend_Helper extends Core_Helper{
 		$usuario = self::getLogedUser();
 		return $usuario->getSessionVar($varname, $contexts);
 	}
+	protected static function getSession(){
+		return Frontend_Session::getInstance();
+	}
 }
 ?>

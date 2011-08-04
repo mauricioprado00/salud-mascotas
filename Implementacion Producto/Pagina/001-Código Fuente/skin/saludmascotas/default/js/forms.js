@@ -1,6 +1,6 @@
 (function(){
 	function handle_click_holder(){
-		jQuery(this).parents('.holding').find('input').focus();
+		jQuery(this).parents('.holding').find('input,textarea').focus();
 	}
 	function handle_change_input(){
 		var that = this;
@@ -18,7 +18,7 @@
 	};
 	jQuery(document).ready(function(){
 		jQuery('.holder').click(handle_click_holder);
-		jQuery('form .holding input').change(handle_change_input).mouseup(handle_change_input).keyup(handle_change_input).change();
+		jQuery('form .holding input, form .holding textarea').change(handle_change_input).mouseup(handle_change_input).keyup(handle_change_input).change();
 		jQuery('.holding select').change(handle_change_select).change();
 	});
 })();
