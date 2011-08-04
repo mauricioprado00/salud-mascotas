@@ -1,9 +1,8 @@
 <global>
 	<modules>
-		<Frontend_Mascota_Encuentro_Listado />
 	</modules>
 	<routers>
-		<Frontend_Mascota_Encuentro_Router>mascotas/encuentro</Frontend_Mascota_Encuentro_Router>
+		<Frontend_Mascota_Encuentro_Listado_Router>mascotas/encuentros</Frontend_Mascota_Encuentro_Listado_Router>
 	</routers>
 	<!--
 	<block>
@@ -14,8 +13,6 @@
 	<design>
 	</design>
 	<layouts>
-	<!--
-		<saludmascotas>Saludmascotas_Mascota.xml</saludmascotas>
-	-->
+		<saludmascotas>Saludmascotas_Mascota_Encuentro_Listado.xml</saludmascotas>
 	</layouts>
 </global>
