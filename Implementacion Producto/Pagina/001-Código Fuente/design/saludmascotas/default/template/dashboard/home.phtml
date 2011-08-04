@@ -1,0 +1,26 @@
+<?php //útf8
+//$object_to_edit = $this->getObjectToEdit();
+
+
+?>
+
+<div class="dashboard_home">
+		<div>
+			<h2>Últimas consultas</h2>
+			<img src="<?php print $this->getSkinUrl('img/maquetacion/dashboard_comentarios.png'); ?>" />
+		</div>
+		<div>
+			<h2>Mascotas Perdidas</h2>
+			<em>¿Has visto alguna? Ayuda a su dueño a encontrarla</em>
+			<div class="dashboard_home_content">
+				<?php print $this->getChildHtml('random_perdida'); ?>
+			</div>
+		</div>
+		<div>
+			<h2>Mascotas Encontradas</h2>
+			<em>¿Es tuya? Mascotas que los usuarios de la comunidad han reportado</em>
+			<div class="dashboard_home_content">
+				<?php print $this->getChildHtml('random_encuentro'); ?>
+			</div>
+		</div>
+</div>

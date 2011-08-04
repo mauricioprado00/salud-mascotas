@@ -44,8 +44,8 @@ class Core_Router_Main extends Core_Router_Abstract{
 		
 		/*<estadisticas>*/
 //		Granguia_Model_Contador::ContarAccesoSesion(Core_Server::getRemoteAddr(), $this->request_path);
-//		if(Core_Session::getVarMulticontext('session_contada',array('contador_estadisticas'))==null){
-//			Core_Session::setVarMulticontext('session_contada','1',array('contador_estadisticas'));
+//		if(Core_Session::getInstance()->getVarMulticontext('session_contada',array('contador_estadisticas'))==null){
+//			Core_Session::getInstance()->setVarMulticontext('session_contada','1',array('contador_estadisticas'));
 //			Granguia_Model_Contador::ContarInicioSesion(Core_Server::getRemoteAddr());	
 //		}
 //		if(in_array('barrio',Core_App::getLayout()->getActions())){

@@ -1,0 +1,72 @@
+<layout><!-- útf8 -->
+
+	<left_menu_dashboard>
+		<reference name="left_menu">
+			<action method="addItem">
+				<name>dashboard_actualidad</name>
+				<text>Actualidad</text>
+				<link></link>
+				<weight>0</weight>
+				<parent></parent>
+			</action>
+			<action  method="addItem">
+				<name>dashboard_consultas</name>
+				<text>Consultas</text>
+				<link>no_implementado</link>
+				<weight>1</weight>
+				<parent></parent>
+			</action>
+			<action  method="addItem">
+				<name>dashboard_mascotas</name>
+				<text>Mascotas</text>
+				<link>no_implementado</link>
+				<weight>2</weight>
+				<parent></parent>
+			</action>
+			<action  method="addItem">
+				<name>dashboard_anuncios</name>
+				<text>Anuncios</text>
+				<link>no_implementado</link>
+				<weight>3</weight>
+				<parent></parent>
+			</action>
+			
+			<action  method="addItem">
+				<name>dashboard_mascotas_perdidas</name>
+				<text>Perdidas</text>
+				<link>no_implementado</link>
+				<weight>0</weight>
+				<parent>dashboard_mascotas</parent>
+			</action>
+			<action  method="addItem">
+				<name>dashboard_mascotas_encontradas</name>
+				<text>Encontradas</text>
+				<link>no_implementado</link>
+				<weight>1</weight>
+				<parent>dashboard_mascotas</parent>
+			</action>
+			<action  method="addItem">
+				<name>dashboard_mascotas_para_cruzar</name>
+				<text>Para cruzar</text>
+				<link>no_implementado</link>
+				<weight>0</weight>
+				<parent>dashboard_mascotas</parent>
+			</action>
+			<action  method="addItem">
+				<name>dashboard_mascotas_para_adoptar</name>
+				<text>Para adoptar</text>
+				<link>no_implementado</link>
+				<weight>0</weight>
+				<parent>dashboard_mascotas</parent>
+			</action>
+		</reference>
+	</left_menu_dashboard>
+	<dashboard>
+		<reference name="contenido">
+			<template name="dashboard" template="dashboard/home.phtml">
+				<random_perdida name="random_perdida" max_items="10" fill_width="449"/>
+				<random_encuentro name="random_encuentro" max_items="10" fill_width="449"/>
+			</template>
+		</reference>
+	</dashboard>
+</layout>

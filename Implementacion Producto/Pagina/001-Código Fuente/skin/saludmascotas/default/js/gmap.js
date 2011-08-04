@@ -77,6 +77,13 @@
 		    this.markers.push(marker);
 		    return this.markers.length-1;
 		},
+		addMarkerListener: function(marker_id, event, callback){
+			var marker = this.markers[marker_id];
+			if(marker==null)
+				return false;
+			google.maps.event.addListener(marker, 'click', callback);
+			return true;
+		},
 		addInfoWindow: function(marker_id, contentString){
 			var that = this;
 			var marker = this.markers[marker_id];

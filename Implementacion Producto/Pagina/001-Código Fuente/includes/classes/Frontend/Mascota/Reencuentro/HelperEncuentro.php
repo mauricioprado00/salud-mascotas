@@ -1,4 +1,4 @@
-<?php//es útf8
+<?php //es útf8
 class Frontend_Mascota_Reencuentro_HelperEncuentro extends Frontend_Mascota_Helper{
 	protected static function confirmarReencuentro($reencuentro){
 		//$reencuentro->setConfirmado(true);

@@ -46,6 +46,8 @@ class Frontend_Block_Domicilio_GmapView extends Core_Block_Template{
 		if(!$pin_file)
 			return null;
 		$pin_url = $this->getSkinUrl($pin_file);
+//		var_dump($pin_url);
+//		die(__FILE__.__LINE__);
 		$pin_file_loc = $this->getSkinPath($pin_file);
 		list($width, $height) = getimagesize($pin_file_loc);
 		if(!$width||!$height)

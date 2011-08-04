@@ -2,21 +2,38 @@
 class Core_Session extends Base_Singleton{
 //	public static function getConfig(){
 //		$args = func_get_args();
-//		return(call_user_method('_getConfig', self::getInstance(), $x = $args));
+//		return(call_user_method('_getConfig', $this->getInstance(), $x = $args));
 //	}
 //	private function _getConfig(){
 //		return($this->config);
 //	}
 
   /**
-   * Core_Session::getVar($varname,$context='global',...mas contextos)
+   * Core_Session::getInstance()->getInstance()->getVar($varname,$context='global',...mas contextos)
    *
    * @param mixed $varname nombre de la variable
    * @param mixed $context contexto en el que se llama
    * @return valor de la variable (null si no existe o si estan mal los parametros)
    */
-	public static function listContextVars($context='global'){
+	private $contexts;
+	public function __construct(){
+		$this->setDefaultContexts(CFG_PATH_ROOT,'global');
+	}
+	protected function setDefaultContexts(){
 		$contexts = func_get_args();
+		$this->contexts = $contexts;
+	}
+	protected function addDefaultContexts(){
+		$contexts = func_get_args();
+		$this->contexts = array_merge($this->contexts, $contexts); 
+	}
+	protected function getDefaultContexts(){
+		return $this->contexts;
+	}
+	public function listContextVars($context=null){
+		$contexts = func_get_args();
+		if(!count($contexts))
+			$contexts = $this->getDefaultContexts();
 		if(count($contexts)==1&&is_array($contexts[0]))
 			$contexts = $contexts[0];
 		$values = &$_SESSION;
@@ -27,9 +44,11 @@ class Core_Session extends Base_Singleton{
 		}
 		return(array_keys($values));
 	}
-	public static function listContextValues($modo='array', $context='global'){
+	public function listContextValues($modo='array', $context=null){
 		$contexts = func_get_args();
 		$contexts = array_slice($contexts, 1);
+		if(!count($contexts))
+			$contexts = $this->getDefaultContexts();
 		if(count($contexts)==1&&is_array($contexts[0]))
 			$contexts = $contexts[0];
 		$values = &$_SESSION;
@@ -45,7 +64,7 @@ class Core_Session extends Base_Singleton{
 				foreach($values as $varname=>$value){
 					$ret[] = array(
 						'varname'=>$varname,
-						'value'=>self::getVarMulticontext($varname, $contexts)
+						'value'=>$this->getVarMulticontext($varname, $contexts)
 					);
 				}
 				break;
@@ -55,25 +74,26 @@ class Core_Session extends Base_Singleton{
 				foreach($values as $varname=>$value){
 					$oret = new Core_Object();
 					$oret->setVarname($varname);
-					$oret->setValue(self::getVarMulticontext($varname, $contexts));
-					//$oret->setData($varname, self::getVarMulticontext($varname, $contexts));
+					$oret->setValue($this->getVarMulticontext($varname, $contexts));
+					//$oret->setData($varname, $this->getVarMulticontext($varname, $contexts));
 					$ret[] = $oret;
 				}
 			}
 		}
 		return($ret);
 	}
-	public static function getVar($varname, $context='global'){
-		if(isset($context)&&is_string($context)){
+	public function getVar($varname, $context=null){
+		//if(isset($context)&&is_string($context)){
 			$args = func_get_args();
 			$contexts = array_slice($args, 1);
-			return(self::getVarMulticontext($varname, $contexts));
-		}
+			return($this->getVarMulticontext($varname, $contexts));
+		//}
 		return(null);
 	}
-	public static function getVarMulticontext($varname, $contexts=array()){
-		if(!is_array($contexts)||!count($contexts))
-			return(null);
+	public function getVarMulticontext($varname, $contexts=array()){
+		if(!is_array($contexts)||!count($contexts)){
+			$contexts = $this->getDefaultContexts();
+		}
 		if($varname!=null)
 			$contexts = array_merge($contexts, array($varname));
 		$values = &$_SESSION;
@@ -87,25 +107,27 @@ class Core_Session extends Base_Singleton{
 		return(unserialize($values));
 	}
   /**
-   * Core_Session::setVar()
+   * Core_Session::getInstance()->setVar()
    *
    * @param mixed $varname nombre de la variable
    * @param mixed $value valor a setear
    * @param string $context contexto en el que se llama
    * @return true si esta bien, false si no
    */
-	public static function setVar($varname, $value, $context='global'){
-		if(isset($context)&&is_string($context)){
+	public function setVar($varname, $value, $context=null){
+		//if(isset($context)&&is_string($context)){
 			/*if(is_object($value))*/
 			$args = func_get_args();
 			$contexts = array_slice($args, 2);
-			return(self::setVarMulticontext($varname, $value, $contexts));
-		}
+			return($this->setVarMulticontext($varname, $value, $contexts));
+		//}
 		return(false);
 	}
-	public static function setVarMulticontext($varname, $value, $contexts=array()){
-		if(!is_array($contexts)||!count($contexts))
-			return(null);
+	public function setVarMulticontext($varname, $value, $contexts=array()){
+		if(!is_array($contexts)||!count($contexts)){
+			$contexts = $this->getDefaultContexts();
+			//var_dump($contexts);
+		}
 		if($varname!=null)
 			$contexts = array_merge($contexts, array($varname));
 		$parent_context = null;
@@ -135,7 +157,6 @@ class Core_Session extends Base_Singleton{
 	public function getId(){
 		return session_id();
 	}
-
 	public function getInstance(){
 		return(self::getInstanceOf(__CLASS__));
 	}

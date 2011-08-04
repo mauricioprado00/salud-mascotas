@@ -111,7 +111,7 @@ class Saludmascotas_Model_Mascota extends Core_Model_Abstract{
 	public function esDestacado(){
 		return $this->getDestacado()=='si';
 	}
-	public function getUrlImage($max_width=null, $max_height=null){
+	public function getLinkUrlImage($max_width=null, $max_height=null){
 		$fotos = $this->getListFoto();
 		if(!$fotos){
 			$foto = new Saludmascotas_Model_FotoMascota();
@@ -120,13 +120,37 @@ class Saludmascotas_Model_Mascota extends Core_Model_Abstract{
 				return null;
 			$foto->setRuta($sp);
 			$image = new Core_Image_Cache($sp, $max_width, $max_height);
-			return Core_App::getUrlModel()->getUrl($image->getLinkUrl());
+			return ($image->getLinkUrl());
 		}
 		else $foto = $fotos[0];
 		if(!isset($max_width)&&!isset($max_height)){
-			return $foto->getUrl();
+			return $foto->getLinkUrl();
 		}
-		return $foto->getThumbUrl($max_width, $max_height);
+		return $foto->getThumbLinkUrl($max_width, $max_height);
+	}
+	public function getFileImage($max_width=null, $max_height=null){
+		return CFG_PATH_ROOT . '/' . $this->getLinkUrlImage($max_width, $max_height);
+	}
+	public function getSizeImage($max_width=null, $max_height=null){
+		return getimagesize($this->getFileImage($max_width, $max_height));
+	}
+	public function getUrlImage($max_width=null, $max_height=null){
+		return Core_App::getUrlModel()->getUrl($this->getLinkUrlImage($max_width, $max_height));
+//		$fotos = $this->getListFoto();
+//		if(!$fotos){
+//			$foto = new Saludmascotas_Model_FotoMascota();
+//			$sp = Core_App::getLayout()->getSkinPath('img/nophoto.png');
+//			if(!$sp)
+//				return null;
+//			$foto->setRuta($sp);
+//			$image = new Core_Image_Cache($sp, $max_width, $max_height);
+//			return Core_App::getUrlModel()->getUrl($image->getLinkUrl());
+//		}
+//		else $foto = $fotos[0];
+//		if(!isset($max_width)&&!isset($max_height)){
+//			return $foto->getUrl();
+//		}
+//		return $foto->getThumbUrl($max_width, $max_height);
 	}
 	public function setEstadoByName($nombre_estado_mascota){
 		if(!($estado_mascota = Saludmascotas_Model_EstadoMascota::getEstadoByName($nombre_estado_mascota)))

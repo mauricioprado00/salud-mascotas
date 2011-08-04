@@ -1,7 +1,7 @@
 <?php /*es útf8*/
-class Frontend_Router extends Core_Router_Abstract{
+class Frontend_Router extends Frontend_Router_Abstract{
 	protected function initialize(){
-		//$this->addActions('algo');
+		$this->addActions('dashboard');
 	}
 	protected function localDispatch(){
 		//esta es la home
@@ -11,6 +11,23 @@ class Frontend_Router extends Core_Router_Abstract{
 		;
 		//die(__FILE__.__LINE__);
 		return true;
+	}
+	protected function dashboard(){
+		$this->setPageReference('Actualidad', 'en la comunidad');
+		Core_App::getLayout()
+			->setModo('saludmascotas')
+			->addAction('dashboard')
+		;
+		$this->showLeftMenu('dashboard');
+//		var_dump(Core_App::getLayout()->getActions());
+//		die(__FILE__.__LINE__);
+		
+		//loaded layout
+//		Core_App::getLoadedLayout()
+//			->getBlock('form_edit')//$x = $this->getObjectToEdit();
+//			->setObjectToEdit($object_to_edit)
+//		;
+		$this->setActiveLeftMenu('dashboard_actualidad');
 	}
 	protected function dispatchNode(){//esto es cuando hay algo despues de la url.
 		//var_dump(func_get_args());

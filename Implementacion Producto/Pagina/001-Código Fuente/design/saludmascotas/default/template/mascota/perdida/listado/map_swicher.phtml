@@ -1,0 +1,26 @@
+<?php //útf8
+
+
+	$gmap_view_ubicacion = $this->getChild('view_ubicacion');
+	$map_js_object_name = $gmap_view_ubicacion->getJsObjectName();
+
+?>
+
+<div class="map_swicher">
+	<?php print $this->getChildHtml(); ?> 
+</div>
+
+<script type="text/javascript">
+<!--
+	jQuery(function(){
+		var sc = (new listadoMapSwicher()).init(<?php print json_encode(array(
+			'map_js_object_name'=>$map_js_object_name,
+			'base_url'=>$this->getBaseUrl(),
+			'domicilios'=>$this->getDomicilios(),
+			'domicilios_vistos'=>$this->getDomiciliosVistos(),
+			'image_type_visto'=>$this->getImageTypeVisto(),
+			'image_type_no_visto'=>$this->getImageTypeNoVisto(),
+		)); ?>);
+	});
+-->
+</script>

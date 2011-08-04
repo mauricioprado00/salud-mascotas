@@ -1,6 +1,9 @@
 <?php
 abstract class Frontend_Router_Abstract extends Core_Router_Abstract{
 	private $helper;
+	protected function getSession(){
+		return Frontend_Session::getInstance();
+	}
 	protected function getHelper(){
 		if(!isset($this->helper)){
 			$this->helper = $this->createHelper();

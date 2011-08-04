@@ -1,0 +1,36 @@
+<layout><!-- útf8 -->
+	<mascotas_perdidas>
+		<reference name="html_head">
+			<script>js/jQuery/fancybox/jquery.fancybox-1.3.1.pack.js</script>
+			<css>js/jQuery/fancybox/jquery.fancybox-1.3.1.css</css>
+			<script charset="utf8" external="true"><![CDATA[http://maps.googleapis.com/maps/api/js?sensor=true&key={#CONF_GMAPS_APPKEY}]]></script>
+			<script>js/gmap.js</script>
+			<script>js/listado_map_swicher.js</script>
+		</reference>
+		<reference name="contenido">
+			<template name="mascota_perdida_listado" template="mascota/perdida/listado/listado.phtml">
+				<mascota_view name="view_datos_mascota" template="mascota/preview.phtml" />
+				<!--<domicilio_view name="view_ubicacion" />-->
+				<template name="map_swicher" template="mascota/perdida/listado/map_swicher.phtml" image_type_visto="it_yellow" image_type_no_visto="it_red">
+					<domicilio_gmap_view name="view_ubicacion" pin_file="img/pin/pin_black.png" pin_hotspot="bottom,right" zoom="15">
+						<action method="addIconType">
+							<name>yellow</name>
+							<file>img/pin/pin_yellow.png</file>
+							<hotspot>bottom,right</hotspot>
+						</action>
+						<action method="addIconType">
+							<name>green</name>
+							<file>img/pin/pin_green.png</file>
+							<hotspot>bottom,right</hotspot>
+						</action>
+						<action method="addIconType">
+							<name>red</name>
+							<file>img/pin/pin_red.png</file>
+							<hotspot>bottom,right</hotspot>
+						</action>
+					</domicilio_gmap_view>
+				</template>
+			</template>
+		</reference>
+	</mascotas_perdidas>
+</layout>

@@ -4,7 +4,12 @@ class Mysql_Helper extends Core_Singleton{
 		return(self::getInstanceOf(__CLASS__));
 	}
 	public static function nameToString($name){
-		return preg_replace('/[A-Za-z0-9_]+/','`$0`', $name);
+		$return = preg_replace('/[A-Za-z0-9_]+/','`$0`', $name);
+		$return = strtr($return, array(
+			'`rand`()'=>'rand()',
+			'`RAND`()'=>'RAND()'
+		));
+		return $return;
 		$name = explode('.', $name);
 		foreach($name as $idx=>$name_part){
 			$name[$idx] = '`'.$name_part.'`';//$this->getDb()->nameToString($column_part);

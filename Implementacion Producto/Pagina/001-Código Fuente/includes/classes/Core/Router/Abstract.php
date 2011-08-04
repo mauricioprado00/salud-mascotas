@@ -153,7 +153,8 @@ abstract class Core_Router_Abstract extends Core_Object{
 		/* por ultimo vamos al dispatch por defecto aca podriamos ir al 404 */
 		//var_dump(get_class($this));
 		//echo "$action localDispatch\n";
-		return($this->localDispatch());
+		return call_user_method_array('localDispatch', $this, $this->arr_request_path);
+		//return($this->localDispatch());
 	}
 	protected function localDispatch(){
 		//echo "<!-- Despachando ".$this->request_path." desde ".get_class($this)." -->\n";

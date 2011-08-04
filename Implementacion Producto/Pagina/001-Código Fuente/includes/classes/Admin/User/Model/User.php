@@ -43,14 +43,14 @@ class Admin_User_Model_User extends Core_Model_User{
 		$this->resetData();
 		$this->setUsername($username);
 		$this->load();
-		Core_Session::setVar('CKFINDER_ALLOWED', '1', 'CKFINDER');
-		//Core_Session::setVar('BASEURL', Core_App::getUrlModel()->getUrl('skin/uploads'), 'CKFINDER');
+		Core_Session::getInstance()->setVar('CKFINDER_ALLOWED', '1', 'CKFINDER');
+		//Core_Session::getInstance()->setVar('BASEURL', Core_App::getUrlModel()->getUrl('skin/uploads'), 'CKFINDER');
 		$baseUrl = trim(Core_App::getUrlModel()->getUrl(CONF_SUBPATH_UPLOADS),'/');
 		//$baseUrl = Core_App::getUrlModel()->cleanUrl($baseUrl);
-		Core_Session::setVar('BASEURL', $baseUrl, 'CKFINDER');
-		//Core_Session::setVar('BASEURL', $baseUrl='skin/uploads', 'CKFINDER');
-		Core_Session::setVar('BASEDIR', $baseDir=CFG_PATH_ROOT.CONF_PATH_UPLOADS, 'CKFINDER');
-		$ResourceType = Core_Session::getVar('RESOURCETYPES', 'CKFINDER');
+		Core_Session::getInstance()->setVar('BASEURL', $baseUrl, 'CKFINDER');
+		//Core_Session::getInstance()->setVar('BASEURL', $baseUrl='skin/uploads', 'CKFINDER');
+		Core_Session::getInstance()->setVar('BASEDIR', $baseDir=CFG_PATH_ROOT.CONF_PATH_UPLOADS, 'CKFINDER');
+		$ResourceType = Core_Session::getInstance()->getVar('RESOURCETYPES', 'CKFINDER');
 		if(!$ResourceType)
 			$ResourceType = array();
 		$ResourceType['Images'] = Array(
@@ -109,11 +109,11 @@ class Admin_User_Model_User extends Core_Model_User{
 				'allowedExtensions' => 'bmp,gif,jpeg,jpg,png',
 				'deniedExtensions' => ''
 		);
-		Core_Session::setVar('RESOURCETYPES',$ResourceType, 'CKFINDER');
+		Core_Session::getInstance()->setVar('RESOURCETYPES',$ResourceType, 'CKFINDER');
 
 	}
 	protected function onEndSession(){
-		Core_Session::setVar(null, null, 'CKFINDER');
+		Core_Session::getInstance()->setVar(null, null, 'CKFINDER');
 	}
 	function validate(&$username, $password){
 		/*consultar la base de datos*/

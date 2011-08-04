@@ -8,7 +8,7 @@ class Core_MessageContainer extends Core_Object{
 	public function __construct($enable_session=false, $session_context=null){
 		$session_context = isset($session_context)?$session_context:'default';
 		$this->session_context = $session_context;
-		$session_messages = Core_Session::getVarMulticontext('session_messages', array(__CLASS__, $session_context));
+		$session_messages = Core_Session::getInstance()->getVarMulticontext('session_messages', array(__CLASS__, $session_context));
 		$this->setSessionMessages($session_messages);
 	}
 	function addMessage($message, $to_session=false){
@@ -38,7 +38,7 @@ class Core_MessageContainer extends Core_Object{
 	private function _addMessage($message, $tipo, $to_session=false){
 		if($to_session){
 			$this->appSessionMessages(array($tipo,$message));
-			Core_Session::setVarMulticontext('session_messages', $this->getSessionMessages(), array(__CLASS__, $this->session_context));
+			Core_Session::getInstance()->setVarMulticontext('session_messages', $this->getSessionMessages(), array(__CLASS__, $this->session_context));
 		}
 		else
 			$this->appMessages(array($tipo,$message));
@@ -84,7 +84,7 @@ class Core_MessageContainer extends Core_Object{
 			if($clear_session_messages_in_object)
 				$this->unsetData('session_messages');
 			if($clear_session_messages_in_session){
-				Core_Session::setVarMulticontext('session_messages', null, array(__CLASS__, $this->session_context));
+				Core_Session::getInstance()->setVarMulticontext('session_messages', null, array(__CLASS__, $this->session_context));
 			}	
 		}
 		$arr_messages[] = $this->getData('messages');

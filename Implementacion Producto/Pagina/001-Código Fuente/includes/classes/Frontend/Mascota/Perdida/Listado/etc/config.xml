@@ -1,9 +1,8 @@
 <global>
 	<modules>
-		<Frontend_Mascota_Perdida_Listado />
 	</modules>
 	<routers>
-		<Frontend_Mascota_Perdida_Router>mascotas/perdida</Frontend_Mascota_Perdida_Router>
+		<Frontend_Mascota_Perdida_Listado_Router>mascotas/perdidas</Frontend_Mascota_Perdida_Listado_Router>
 	</routers>
 	<!--
 	<block>
@@ -14,8 +13,6 @@
 	<design>
 	</design>
 	<layouts>
-	<!--
-		<saludmascotas>Saludmascotas_Mascota.xml</saludmascotas>
-	-->
+		<saludmascotas>Saludmascotas_Mascota_Perdida_Listado.xml</saludmascotas>
 	</layouts>
 </global>

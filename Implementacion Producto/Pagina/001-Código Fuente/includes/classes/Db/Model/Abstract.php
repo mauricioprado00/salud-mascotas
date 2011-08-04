@@ -143,6 +143,11 @@ abstract class Db_Model_Abstract extends Core_Object{
     public function searchGetSql($order_by=null, $order_dir='ASC', $limit=null, $start=0, $as_objects=true, $columns=null){
         return($this->search($order_by, $order_dir, $limit, $start, $as_objects, $columns, true));
     }
+    protected function resolveOrderBy($order_by, $order_dir){
+		$order_by = $order_by!==null?($this->getWhere()->getFieldName($order_by)):null;//traduce el campo de un alias a el verdaro campo
+		$order_by = $order_by!==null?' ORDER BY '.$this->getDb()->nameToString($order_by).($order_dir&&in_array(trim(strtoupper($order_dir)),array('ASC','DESC'))?' '.$order_dir:''):'';
+		return $order_by;
+	}
 	public function search($order_by=null, $order_dir='ASC', $limit=null, $start=0, $as_objects=true, $columns=null){
         $args = func_get_args();
         $get_sql = isset($args[6])&&$args[6];
@@ -155,8 +160,7 @@ abstract class Db_Model_Abstract extends Core_Object{
 			$str_where = $this->getWhere()->toString($this->getTableData(),$this->getAttrToFieldTranslationTable());
 		}
 		//$order = $order_by?' order by '.($this->db->valueToString($order_by)):'';
-		$order_by = $order_by!==null?($this->getWhere()->getFieldName($order_by)):null;//traduce el campo de un alias a el verdaro campo
-		$order_by = $order_by!==null?' ORDER BY '.$this->getDb()->nameToString($order_by).($order_dir&&in_array(trim(strtoupper($order_dir)),array('ASC','DESC'))?' '.$order_dir:''):'';
+		$order_by = $this->resolveOrderBy($order_by, $order_dir);
 		$group_by = $this->getGroupBy();
 		//$limit = $limit!==null&&$start!==null&&$start>0?(' limit '.$this->getDb()->valueToString($start).', '.$this->getDb()->valueToString($limit)):'';
 		$limit = $limit!==null&&$start!==null&&$start>=0&&$limit>0?(' limit '.($start+0).', '.($limit+0)):'';

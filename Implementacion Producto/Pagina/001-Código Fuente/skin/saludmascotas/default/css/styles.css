@@ -998,3 +998,39 @@ form.wider .single_action input, form.wider .single_action button{
 	display:none;
 }
 
+/*comienza dashboard*/
+.dashboard_home{
+	width:533px;
+}
+.middle .dashboard_home h2{
+	border-bottom:1px solid #EBEBEB;
+	position:relative;
+	font-size: 26px;
+    font-weight: bold;
+    line-height: 26px;
+    margin: 21px 0 0 0;
+}
+.middle .dashboard_home em{
+	color:#636363;
+	font-weight:bold;
+	margin-left:4px;
+	font-size:12px;
+}
+.middle .dashboard_home h2 a{
+	position:absolute;
+	right: 0;
+	bottom: 0px;
+	font-size: 13px;
+    line-height: 13px;
+}
+.dashboard_home_content{
+	margin:0 17px;
+}
+.random_mascotas{
+	text-align: justify;
+	width:499px;
+}
+.random_mascotas li{
+	display:inline;
+}
+/*termina dashboard*/

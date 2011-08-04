@@ -12,6 +12,7 @@ $mapa_config = array(
 	'maparea'=>'gmap_maparea',
 );
 $js_object_name = $this->getJsObjectName();
+//var_dump($lat&&$lng,$lat,$lng, $domicilio->getData());
 if($lat&&$lng){
 	$mapa_config = array_merge($mapa_config, array(
 		'lat'=>$lat,
@@ -44,8 +45,8 @@ if($lat&&$lng){
 		<?php endforeach; ?> 
 		<?php if($lat&&$lng): ?> 
 		var marker_id = <?php print $js_object_name; ?>.addMarker(<?php print json_encode(array(
-			'lat'=>$lat/60,
-			'lng'=>$lng/60,
+			'lat'=>$lat,
+			'lng'=>$lng,
 			'title'=>'mascota',
 			'icon'=>'normal',//
 		)); ?>); 
