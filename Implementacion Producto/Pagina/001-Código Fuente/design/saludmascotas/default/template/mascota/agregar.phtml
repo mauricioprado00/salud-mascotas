@@ -290,6 +290,19 @@ $colores_seleccionados = $object_to_edit->getColoresSeleccionados();
 			</div>
 			<div class="select">
 				<div class="holding tamano">
+					<div id="selector_tamano"></div>
+					<script type="text/javascript">
+					<!--
+					jQuery(function(){
+						var selector = new selectorTamanoMascota().init(<?php print json_encode(array(
+							'id_container'=>'selector_tamano',
+							'id_selector_tamano'=>'tamano',
+							'id_selector_especie'=>'id_especie',
+							'valid_options'=>array(1)
+						)); ?>);
+					})
+					-->
+					</script>
 					<div class="input_autocomplete">
 						<?
 							$selector_tamano = $this->appendBlock('<selector_longitud_tamano_mascota />');

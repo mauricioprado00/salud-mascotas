@@ -57,7 +57,7 @@ class Frontend_Mascota_Helper extends Frontend_Helper{
 		return in_array($value, self::getSexoMascota());
 	}
 	public static function getTamanoMascota(){
-		return array('extra small', 'small', 'medium', 'big');
+		return array('extra_small'=>'muy pequeña', 'small'=>'pequeña', 'medium'=>'normal', 'big'=>'grande');
 	}
 	public static function esgetTamanoMascotaValida($value){
 		return in_array($value, self::getTamanoMascota());

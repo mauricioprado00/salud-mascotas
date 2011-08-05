@@ -46,7 +46,7 @@ $reencuentro = $this->getReencuentro();
 			
 			if($descripcion){
 				$p = new Core_Html_Tag_Custom('p');
-				$p->setInnerHtml($descripcion);
+				$p->setInnerHtml(htmlentities(utf8_decode($descripcion)));
 				echo $p->getHtml();
 			}
 ?>

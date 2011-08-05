@@ -22,7 +22,7 @@ $mascotas = $this->getMascotas();
 	}
 	?>
 	<li>
-		<a href="#no_implementado">
+		<a href="<?php print $this->getUrl($mascota->getUrlListadoEncuentro()); ?>">
 			<img src="<?php print $mascota->getUrlImage(0, 100); ?>" title="Mascota Encontrada: <?php print htmlentities(utf8_encode($mascota->getNombre())); ?>" />
 		</a>
 	</li>
@@ -39,6 +39,6 @@ $mascotas = $this->getMascotas();
 		<a href="#no_implementado">Quiero adoptar</a>
 	</li>
 	<li>
-		<a href="#no_implementado">Ver todas las mascotas encontradas</a>
+		<a href="<?php print $this->getUrl(Frontend_Mascota_Encuentro_Listado_Helper::getUrl()); ?>">Ver todas las mascotas encontradas</a>
 	</li>
 </ul>

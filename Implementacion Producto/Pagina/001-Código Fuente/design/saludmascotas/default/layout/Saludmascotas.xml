@@ -18,7 +18,7 @@
 				<wrapper html_class="wrapper">
 					<wrapper html_class="head">
 						<wrapper html_class="head_center">
-							<wrapper html_class="head_logo" />
+							<template name="head_logo" template="page/head/logo.phtml" />
 							<wrapper html_class="head_content">
 								<block name="head_content">
 									<template template="page/head/search.phtml" />
@@ -73,7 +73,7 @@
 				<wrapper html_class="wrapper">
 					<wrapper html_class="head">
 						<wrapper html_class="head_center">
-							<wrapper html_class="head_logo" />
+							<template name="head_logo" template="page/head/logo.phtml" />
 							<wrapper html_class="head_content">
 								<block name="head_content">
 									<template template="page/head/search.phtml" />

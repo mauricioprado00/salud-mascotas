@@ -4,6 +4,7 @@ class Frontend_Router extends Frontend_Router_Abstract{
 		$this->addActions('dashboard');
 	}
 	protected function localDispatch(){
+		Core_App::getSession()->setVar('return_to', Frontend_Helper::getUrlDashboard(), 'unlogged_data');
 		//esta es la home
 		Core_App::getLayout()
 			->setModo('saludmascotas_legacy')

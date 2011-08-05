@@ -21,7 +21,7 @@ $mascotas = $this->getMascotas();
 	}
 	?>
 	<li>
-		<a href="#no_implementado">
+		<a href="<?php print $this->getUrl($mascota->getUrlListadoPerdida()); ?>">
 			<img src="<?php print $mascota->getUrlImage(0, 100); ?>" title="Mascota Perdida: <?php print htmlentities(utf8_encode($mascota->getNombre())); ?>" />
 		</a>
 	</li>
@@ -35,6 +35,6 @@ $mascotas = $this->getMascotas();
 		<a href="<?php print $this->getUrl(Frontend_Mascota_Perdida_Helper::getUrlAgregar()); ?>">Perdí mi mascota</a>
 	</li>
 	<li>
-		<a href="#no_implementado">Ver todas las mascotas perdidas</a>
+		<a href="<?php print $this->getUrl(Frontend_Mascota_Perdida_Listado_Helper::getUrl()); ?>">Ver todas las mascotas perdidas</a>
 	</li>
 </ul>

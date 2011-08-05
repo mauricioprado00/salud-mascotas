@@ -11,8 +11,8 @@ class Frontend_Block_Selector_TamanoMascota extends Core_Block_Selector{
 	public function getAllOptions(){
 		$values = Frontend_Mascota_Helper::getTamanoMascota();
 		$return = array();
-		foreach($values as $value){
-			$return[] = c(new Core_Object)->setId($value)->setNombre($value);
+		foreach($values as $value=>$label){
+			$return[] = c(new Core_Object)->setId($value)->setNombre($label);
 		}
 		return $return;
 	}

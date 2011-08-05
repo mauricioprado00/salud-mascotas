@@ -1,17 +1,23 @@
 <?php //útf8 ?>
-<form method="post" class="standart signup signup-btn" action="https://twitter.com/signup">
+<form method="post" class="standart signup signup-btn" action="<?php print Frontend_Usuario_Helper::getUrlRegister(); ?>">
   <div class="holding name">
-    <input type="text" maxlength="20" name="user[name]" value="" autocomplete="off">
-    <span class="holder">Nombre completo</span>
+    <input type="text" maxlength="20" name="nombre" value="" autocomplete="off">
+    <span class="holder">Nombre</span>
+  </div>
+  <div class="holding apellido">
+    <input type="text" maxlength="20" name="apellido" value="" autocomplete="off">
+    <span class="holder">Apellido</span>
   </div>
   <div class="holding email">
-    <input type="text" name="user[email]" value="" autocomplete="off">
+    <input type="text" name="email" value="" autocomplete="off">
     <span class="holder">Correo electrónico</span>
   </div>
+  <!--
   <div class="holding password">
-    <input type="password" name="user[user_password]" value="">
+    <input type="password" name="password" value="">
     <span class="holder">Contraseña</span>
   </div>
+  -->
   
   <input type="hidden" name="context" value="front">
   <input type="submit" value="Regístrate" class="promotional submit button">

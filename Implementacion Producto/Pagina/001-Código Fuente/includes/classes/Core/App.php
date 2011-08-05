@@ -79,7 +79,7 @@ class Core_App extends Core_Singleton{
 			return;
 		session_start();
 		$this->initialized = true;
-		$this->setVersion('1.2.0.1.2');
+		$this->setVersion('0.1.0.0.0');
 		$this->config = new Core_Config();
 		self::setData('message_container', new Core_MessageContainer());
 //		$nodo = new Granguia_Model_Nodo();

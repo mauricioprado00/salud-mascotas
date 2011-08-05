@@ -72,6 +72,14 @@ class Frontend_Mascota_Reencuentro_HelperEncuentro extends Frontend_Mascota_Help
 //		self::enviarNotificacionReencuentroEncuentroConfirmado($reencuentro, $mascota->getId());
 //		if(!$baja_anuncio)
 //			return true;
+		$id_domicilio = $encuentro->getIdDomicilio();
+		if(!isset($id_domicilio)){
+			$usuario = self::getLogedUser();
+			$id_domicilio = $usuario->getIdDomicilio();
+		}
+		if(isset($id_domicilio)){
+			$mascota->setIdDomicilio($id_domicilio)->update();
+		}
 		if(!self::darBajaEncuentro($encuentro))
 			return false;
 		if(!self::actualizarMascotaConDueno($mascota, array('activa'=>'no')))
@@ -79,7 +87,6 @@ class Frontend_Mascota_Reencuentro_HelperEncuentro extends Frontend_Mascota_Help
 		return true;
 	}
 	public static function enviarNotificacionReencuentroEncuentroConfirmado($reencuentro, $id_mascota=null){
-		$asunto = 'Confirmación coincidencia en Perdida';
 		$asunto_type = 'notificacion_reencuentro_encuentro_confirmado';
 		$asunto = 'Alguien ha confirmado una mascota de tu perdida';
 		if($reencuentro->getIdPerdida()){
@@ -131,6 +138,7 @@ asunto;
 			}	
 		}
 		else{
+			$asunto = 'El usuario que reporto la mascota encontrada ha confirmado que es tu mascota';
 			$email_to = $reencuentro->getEmail();
 			$nombre_to = $reencuentro->getNombre();
 			if(!$email_to)
@@ -141,7 +149,7 @@ asunto;
 				->setMensaje($mensaje)
 				->setAsunto($asunto)
 			;
-			$enviado = $notificaion->enviar($email_to, $nombre_to);
+			$enviado = $notificacion->enviar($email_to, $nombre_to);
 			if($enviado){
 				Core_App::getInstance()->addSuccessMessage("Notificacion enviada", true);
 			}
@@ -181,11 +189,11 @@ asunto;
 		}
 	}
 	public static function enviarNotificacionReencuentroEncuentroEliminado($reencuentro){
-		$mensaje = 'Una mascota coincidente de tu perdida no era correcta, ha sido resuelta';
 		$asunto = 'Una mascota coincidente de tu perdida no era correcta, ha sido resuelta';
 		$asunto_type = 'notificacion_reencuentro_encuentro_eliminado';
 		//var_dump($reencuentro->getData());
 		if($reencuentro->getIdPerdida()){
+			$mensaje = 'Una mascota que seleccionaste como coincidente en tu anuncio de perdida no era correcta, esta mascota fué devuelta a su dueño';
 //			$usuario = self::getLogedUser();
 //			$id_usuario = $usuario->getId();			
 			$perdida = $reencuentro->getPerdida();
@@ -219,6 +227,7 @@ asunto;
 //			}	
 		}
 		else{
+			$mensaje = 'El reclamo que hiciste sobre la mascota encontrada no era correcto, esta mascota fué devuelta a su dueño';
 			$email_to = $reencuentro->getEmail();
 			$nombre_to = $reencuentro->getNombre();
 			if(!$email_to)
@@ -229,7 +238,7 @@ asunto;
 				->setMensaje($mensaje)
 				->setAsunto($asunto)
 			;
-			$enviado = $notificaion->enviar($email_to, $nombre_to);
+			$enviado = $notificacion->enviar($email_to, $nombre_to);
 			if($enviado){
 				Core_App::getInstance()->addSuccessMessage("Notificacion enviada", true);
 			}

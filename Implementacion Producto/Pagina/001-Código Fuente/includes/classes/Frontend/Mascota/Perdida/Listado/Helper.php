@@ -3,6 +3,9 @@ class Frontend_Mascota_Perdida_Listado_Helper extends Frontend_Helper{
 	public static function getUrl($pagina=0){
 		return 'mascotas/perdidas' . ($pagina?'/'.intval($pagina):'');
 	}
+	public static function getUrlMascota($id_mascota){
+		return 'mascotas/perdidas/mascota/'.$id_mascota;
+	}
 	public static function getUpdatableFields(){
 		return array(
 			'nombre'
@@ -43,13 +46,42 @@ class Frontend_Mascota_Perdida_Listado_Helper extends Frontend_Helper{
 		//die(__FILE__.__LINE__);
 		return $return;
 	}
-	public static function getIdsMascotasPerdidas($restart=false){
+	public static function getIdsMascotasPerdidas($restart=false, $id_mascota=null){
 		if($restart||self::getSession()->getVar('mascotas_perdidas_listado_ids_mascotas')==null){
-			$mascota_perdida = new Saludmascotas_Model_View_MascotaPerdida();
-			$mascotas_perdidas = $mascota_perdida->search('rand()', 'ASC', null, 0, get_class($mascota_perdida));
 			$ids_mascotas_perdidas = array();
 			$ids_domicilios = array();
 			$domicilios = array();
+			$mascota_perdida = new Saludmascotas_Model_View_MascotaPerdida();
+			$where = array();
+			$where[] = Db_Helper::equal('pe_activo','si');
+			$where[] = Db_Helper::equal('ma_activa','si');
+			if(isset($id_mascota)){
+				$where[] = Db_Helper::equal('ma_id', $id_mascota, false);
+				$mascota = new Frontend_Model_Mascota();
+				$mascota->setId($id_mascota);
+				if($mascota->load()){
+					if($mascota->esEstadoPerdida()||$mascota->esEstadoConDueno()){
+						if($mascota->esEstadoConDueno()){
+							Core_App::getInstance()->addErrorMessage('La mascota ya fué encontrada');
+							if($domicilio = $mascota->getDomicilio()){
+								$ids_mascotas_perdidas[] = $id_mascota;
+								$ids_domicilios[] = $domicilio;
+								$domicilios[] = $domicilio->getData();
+							}
+						}
+						elseif(($perdida = $mascota->getPerdidaActual()) && ($domicilio = $perdida->getDomicilio())){
+							$ids_mascotas_perdidas[] = $id_mascota;
+							$ids_domicilios[] = $domicilio;
+							$domicilios[] = $domicilio->getData();
+						}
+					}
+					else{
+						Core_App::getInstance()->addErrorMessage('La mascota no se encuentra perdida');
+					}
+				}
+			}
+			$mascota_perdida->setWhereByArray($where);
+			$mascotas_perdidas = $mascota_perdida->search('rand()', 'ASC', null, 0, get_class($mascota_perdida));
 			foreach($mascotas_perdidas as $mascota_perdida){
 				$ids_mascotas_perdidas[] = $mascota_perdida->getMaId();
 				$ids_domicilios[] = $mascota_perdida->getDoId();

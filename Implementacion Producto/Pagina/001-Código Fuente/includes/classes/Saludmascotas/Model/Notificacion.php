@@ -74,6 +74,7 @@ class Saludmascotas_Model_Notificacion extends Core_Model_Abstract{
 		$fromname = 'mauricio prado';
 		$this->setFrom($fromemail, $fromname);
 		//return $this->AddAddresses($emails, true);
+		return $this;
 	}
 	private function _enviar($contenido, $subject=null, $altBody=null){
 		return $this->Send(utf8_decode($contenido), utf8_decode($subject), $altBody);

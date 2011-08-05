@@ -3,6 +3,9 @@ class Frontend_Mascota_Encuentro_Listado_Helper extends Frontend_Helper{
 	public static function getUrl($pagina=0){
 		return 'mascotas/encuentros' . ($pagina?'/'.intval($pagina):'');
 	}
+	public static function getUrlMascota($id_mascota){
+		return 'mascotas/encuentros/mascota/'.$id_mascota;
+	}
 	public static function getUpdatableFields(){
 		return array(
 			'nombre'
@@ -43,13 +46,42 @@ class Frontend_Mascota_Encuentro_Listado_Helper extends Frontend_Helper{
 		//die(__FILE__.__LINE__);
 		return $return;
 	}
-	public static function getIdsMascotasEncuentros($restart=false){
+	public static function getIdsMascotasEncuentros($restart=false, $id_mascota=null){
 		if($restart||self::getSession()->getVar('mascotas_encuentros_listado_ids_mascotas')==null){
-			$mascota_encuentro = new Saludmascotas_Model_View_MascotaEncuentro();
-			$mascotas_encuentros = $mascota_encuentro->search('rand()', 'ASC', null, 0, get_class($mascota_encuentro));
 			$ids_mascotas_encuentros = array();
 			$ids_domicilios = array();
 			$domicilios = array();
+			$mascota_encuentro = new Saludmascotas_Model_View_MascotaEncuentro();
+			$where = array();
+			$where[] = Db_Helper::equal('en_activo','si');
+			$where[] = Db_Helper::equal('ma_activa','si');
+			if(isset($id_mascota)){
+				$where[] = Db_Helper::equal('ma_id', $id_mascota, false);
+				$mascota = new Frontend_Model_Mascota();
+				$mascota->setId($id_mascota);
+				if($mascota->load()){
+					if($mascota->esEstadoEncuentro()||$mascota->esEstadoConDueno()){
+						if($mascota->esEstadoConDueno()){
+							Core_App::getInstance()->addErrorMessage('La mascota ya fué devuelta');
+							if($domicilio = $mascota->getDomicilio()){
+								$ids_mascotas_encuentros[] = $id_mascota;
+								$ids_domicilios[] = $domicilio;
+								$domicilios[] = $domicilio->getData();
+							}
+						}
+						elseif(($perdida = $mascota->getEncuentroActual()) && ($domicilio = $perdida->getDomicilio())){
+							$ids_mascotas_encuentros[] = $id_mascota;
+							$ids_domicilios[] = $domicilio;
+							$domicilios[] = $domicilio->getData();
+						}
+					}
+					else{
+						Core_App::getInstance()->addErrorMessage('No es una mascota encontrada');
+					}
+				}
+			}
+			$mascota_encuentro->setWhereByArray($where);
+			$mascotas_encuentros = $mascota_encuentro->search('rand()', 'ASC', null, 0, get_class($mascota_encuentro));
 			foreach($mascotas_encuentros as $mascota_encuentro){
 				$ids_mascotas_encuentros[] = $mascota_encuentro->getMaId();
 				$ids_domicilios[] = $mascota_encuentro->getDoId();

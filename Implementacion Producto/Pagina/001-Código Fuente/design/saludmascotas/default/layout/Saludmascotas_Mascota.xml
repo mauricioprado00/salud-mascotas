@@ -107,6 +107,7 @@
 			<script>js/file_upload.js</script>
 			<script>js/jsDate.js</script>
 			<script>js/calcular_edad.js</script>
+			<script>js/selector_tamano_mascota.js</script>
 			<!--
 			<script>colorpicker/js/colorpicker.js</script>
 			<css>colorpicker/css/colorpicker.css</css>

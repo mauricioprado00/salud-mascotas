@@ -76,7 +76,8 @@ class Frontend_Usuario_Router extends Frontend_Router_Abstract{
 	}
 	public function logout(){
 		Frontend_Usuario_Helper::logout();
-		Core_Http_Header::Redirect(Frontend_Usuario_Helper::getUrlLogin(), true);
+		$this->redirect(Frontend_Helper::getUrlDashboard());
+//		Core_Http_Header::Redirect(Frontend_Usuario_Helper::getUrlLogin(), true);
 		return true;
 	}
 	protected function register(){

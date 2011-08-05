@@ -3,11 +3,16 @@ class Frontend_Mascota_Encuentro_Listado_Router extends Frontend_Router_Abstract
 	protected function initialize(){
 		parent::initialize();
 		$this->addActions(
-			'pagina'
+			'pagina',
+			'mascota'
 		);
 	}
 	protected function localDispatch($numero_pag=0){
 		return $this->pagina($numero_pag);
+	}
+	protected function mascota($id_mascota){
+		$ids_mascotas_encuentros = $this->getHelper()->getIdsMascotasEncuentros(true, $id_mascota);
+		return $this->pagina(0);
 	}
 	protected function pagina($numero_pag=0){
 		$ids_mascotas_encuentros = $this->getHelper()->getIdsMascotasEncuentros();

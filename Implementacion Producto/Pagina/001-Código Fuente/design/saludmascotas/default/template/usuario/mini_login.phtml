@@ -1,6 +1,5 @@
 <div id="mini_login">
-
-	<form class="signin" name="form1" method="post">
+	<form class="signin" name="form1" method="post" action="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlLogin()); ?>">
 		<div class="textbox">
 			<div class="holding username">
 				<input type="text" autocomplete="on" title="Nombre de usuario o correo electr&oacute;nico" name="username" id="username" value="">

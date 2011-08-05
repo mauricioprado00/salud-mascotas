@@ -34,14 +34,14 @@
 			<action  method="addItem">
 				<name>dashboard_mascotas_perdidas</name>
 				<text>Perdidas</text>
-				<link>no_implementado</link>
+				<link>mascotas/perdidas</link>
 				<weight>0</weight>
 				<parent>dashboard_mascotas</parent>
 			</action>
 			<action  method="addItem">
 				<name>dashboard_mascotas_encontradas</name>
 				<text>Encontradas</text>
-				<link>no_implementado</link>
+				<link>mascotas/encuentros</link>
 				<weight>1</weight>
 				<parent>dashboard_mascotas</parent>
 			</action>
@@ -49,14 +49,14 @@
 				<name>dashboard_mascotas_para_cruzar</name>
 				<text>Para cruzar</text>
 				<link>no_implementado</link>
-				<weight>0</weight>
+				<weight>2</weight>
 				<parent>dashboard_mascotas</parent>
 			</action>
 			<action  method="addItem">
 				<name>dashboard_mascotas_para_adoptar</name>
 				<text>Para adoptar</text>
 				<link>no_implementado</link>
-				<weight>0</weight>
+				<weight>3</weight>
 				<parent>dashboard_mascotas</parent>
 			</action>
 		</reference>

@@ -1047,3 +1047,83 @@ form.wider .two_actions input+input, form.wider .two_actions button+button{
 	display:none;
 }
 /*termina listado mascotas perdidas/encontradas*/
+
+/*comienza selector tamano*/
+#selector_tamano{
+	width:423px;
+}
+#selector_tamano .selector_tamano_option{
+	height:100%;
+	float:left;
+	cursor:pointer;
+}
+#selector_tamano.selector_tamano_1{/* perro */
+	background-image:url('../img/selector_tamano/perro_sizes.png');
+	height:132px;
+	width:399px;
+}
+.selector_tamano_1 .selector_tamano_option{
+}
+.selector_tamano_1 .selector_tamano_option:hover, .selector_tamano_1 .selector_tamano_option.selected{
+	background-image: url('../img/selector_tamano/perro_sizes.png');
+	background-position:0 100%;
+
+}
+.selector_tamano_1 .selector_tamano_option_extra_small{
+	width:78px;
+}
+.selector_tamano_1 .selector_tamano_option_extra_small:hover, .selector_tamano_1 .selector_tamano_option_extra_small.selected{
+	background-position:0 100%;
+}
+.selector_tamano_1 .selector_tamano_option_small{
+	width:95px;
+}
+.selector_tamano_1 .selector_tamano_option_small:hover, .selector_tamano_1 .selector_tamano_option_small.selected{
+	background-position:-78px 100%;
+}
+.selector_tamano_1 .selector_tamano_option_medium{
+	width:106px;
+}
+.selector_tamano_1 .selector_tamano_option_medium:hover, .selector_tamano_1 .selector_tamano_option_medium.selected{
+	background-position:-173px 100%;
+}
+.selector_tamano_1 .selector_tamano_option_big{
+	width:120px;
+}
+.selector_tamano_1 .selector_tamano_option_big:hover, .selector_tamano_1 .selector_tamano_option_big.selected{
+	background-position:-279px 100%;
+}
+/*termina selector tamano*/
+/*comienza algo*/
+.view_mascota_preview .view_tamano_mascota{
+	
+}
+.view_mascota_preview .view_tamano_mascota_1{
+	width:243px;
+	height:80px;
+	background-image:url('../img/selector_tamano/view_perro_sizes.png');
+}
+.view_mascota_preview .view_tamano_mascota_1 .view_tamano_mascota_option{
+	background-image:url('../img/selector_tamano/view_perro_sizes.png');
+	height:100%;
+}
+.view_mascota_preview .view_tamano_mascota_1 .view_tamano_mascota_option_extra_small{
+    background-position: 0 100%;
+    width: 45px;
+}
+.view_mascota_preview .view_tamano_mascota_1 .view_tamano_mascota_option_small{
+    background-position: -50px 100%;
+    margin-left: 50px;
+    width: 56px;
+}
+.view_mascota_preview .view_tamano_mascota_1 .view_tamano_mascota_option_medium{
+    background-position: -106px 100%;
+    margin-left: 106px;
+    width: 61px;
+}
+.view_mascota_preview .view_tamano_mascota_1 .view_tamano_mascota_option_big{
+    background-position: -174px 100%;
+    margin-left: 174px;
+    width: 69px;
+}
+/*termina algo*/

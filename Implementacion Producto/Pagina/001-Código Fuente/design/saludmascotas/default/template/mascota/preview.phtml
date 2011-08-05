@@ -20,6 +20,9 @@ $nombres_colores = implode(', ', $nombres_colores);
 $manto .= ', ' . $nombres_colores;
 $descripcion = $mascota->getDescripcion();
 
+		$id_especie = $mascota->getIdEspecie();
+		$tamano = $mascota->getTamano();
+
 ?>
 <div class="view_mascota view_mascota_preview" id="<?php print ($id = 'view'.uniqid())?>">
 <?php if($fotos_mascota): ?>
@@ -67,8 +70,14 @@ $descripcion = $mascota->getDescripcion();
 			<b>Descripcion</b>:<em><?php print $descripcion; ?></em>
 		</li>
 	</ul>
-	<div class="view_tamano_mascota">
-		<?php print $mascota->getTamano(); ?> 
+	<div class="view_tamano_mascota view_tamano_mascota_<?php print $id_especie?>">
+		<?php 
+		if($id_especie==1){
+			$class = 'view_tamano_mascota_option view_tamano_mascota_option_' . preg_replace('/\s+/', '_', strtolower($tamano));
+			echo '<div class="'.$class.'"></div>';
+		}
+		else print $tamano;
+		?> 
 	</div>
 	<div style="clear:both;"></div>
 </div>

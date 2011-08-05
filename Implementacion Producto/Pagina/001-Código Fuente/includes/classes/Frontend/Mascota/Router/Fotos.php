@@ -35,7 +35,7 @@ class Frontend_Mascota_Router_Fotos extends Frontend_Router_Abstract{
 		$dir = CFG_PATH_ROOT.'/'.CONF_SUBPATH_UPLOADS.$user_dir;
 		if(!file_exists($dir))
 			mkdir($dir);
-		$file_name = md5(time().$key).'.'.$ext;
+		$file_name = md5(microtime(true).$key.rand()).'.'.$ext;
 		return array($dir.'/'.$file_name, $user_dir.'/'.$file_name);
 	}
 	protected function upload($jsonp_callback='', $id_mascota=null){

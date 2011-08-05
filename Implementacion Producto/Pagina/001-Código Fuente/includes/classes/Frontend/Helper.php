@@ -1,5 +1,8 @@
 <?php
 class Frontend_Helper extends Core_Helper{
+	public static function getUrlDashboard(){
+		return 'dashboard';
+	}
 	protected static function getLogedUser(){
 		return Frontend_Usuario_Model_User::getLogedUser();
 	}
