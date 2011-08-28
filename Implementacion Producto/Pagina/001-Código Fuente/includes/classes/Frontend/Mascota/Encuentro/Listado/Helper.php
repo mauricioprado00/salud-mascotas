@@ -1,5 +1,8 @@
 <?php //es útf8
 class Frontend_Mascota_Encuentro_Listado_Helper extends Frontend_Helper{
+	public function getInstance(){
+		return self::getInstanceOf(__CLASS__);
+	}
 	public static function getUrl($pagina=0){
 		return 'mascotas/encuentros' . ($pagina?'/'.intval($pagina):'');
 	}

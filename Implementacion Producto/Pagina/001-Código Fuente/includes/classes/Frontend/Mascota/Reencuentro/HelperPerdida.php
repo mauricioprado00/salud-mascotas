@@ -1,5 +1,8 @@
 <?php //es útf8
 class Frontend_Mascota_Reencuentro_HelperPerdida extends Frontend_Mascota_Reencuentro_HelperEncuentro{
+	public function getInstance(){
+		return self::getInstanceOf(__CLASS__);
+	}
 //	movida a HelperUno
 //	private static function confirmarReencuentro($reencuentro){
 //		//$reencuentro->setConfirmado(true);

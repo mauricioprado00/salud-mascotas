@@ -1,0 +1,37 @@
+<?php
+
+$step = Core_App::getInstance()->getStep();
+//$perdida = in_array('mascota_perdida_addedit', Core_App::getLayout()->getActions());
+//$class = $perdida?'stepping_progress_perdida':'stepping_progress_encuentro';
+//$class = 'stepping_progress_mascota';
+//$url_helper = $perdida?Frontend_Mascota_Perdida_Helper::getInstance():Frontend_Mascota_Encuentro_Helper::getInstance();
+$url_helper = Frontend_Mascota_Helper::getInstance();
+$id_mascota = Core_App::getInstance()->getMascota()->getId();
+
+ ?>
+<div class="stepping stepping_mascota">
+	<div class="stepping_progress stepping_progress_<?php print $step; ?>">
+	<?php for($i=0; $i<4; $i++): ?>
+		<?php if($step>($i+1)): ?>
+		<a href="<?php print $this->getUrl($url_helper->getUrlEditar($id_mascota, 1, $i+1)); ?>">
+		<?php endif; ?>
+		<?php switch($i): 
+		case 0: ?>
+		<div class="step step_1">
+			<h1>Paso 1</h1>
+			<em>Datos mascota</em>
+		</div>
+		<?php break; ?>
+		<?php case 1: ?>
+		<div class="step step_2">
+			<h1>Paso 2</h1>
+			<em>Ubicación Pérdida</em>
+		</div>
+		<?php break; ?>
+		<?php endswitch; ?>
+		<?php if($step>($i+1)): ?>
+		</a>
+		<?php endif; ?>
+	<?php endfor; ?>
+	</div>
+</div>

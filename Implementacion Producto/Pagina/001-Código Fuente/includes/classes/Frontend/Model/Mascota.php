@@ -16,31 +16,31 @@ class Frontend_Model_Mascota extends Saludmascotas_Model_Mascota{
 			->addValidator('nombre', c(new Zend_Validate_Alpha(array('allowWhiteSpace' => true))))
 
 			->setFieldLabel('edad','Edad')
-			->addValidator('edad', c(new Zend_Validate_NotEmpty(array('allowWhiteSpace' => true))))
+			->addValidator('edad', c(new Zend_Validate_NotEmpty()))
 
 			->setFieldLabel('fecha_nacimiento','Fecha de Nacimiento')
-			->addValidator('fecha_nacimiento', c(new Zend_Validate_NotEmpty(array('format' => 'dd/mm/yyyy'))))
+			->addValidator('fecha_nacimiento', c(new Zend_Validate_NotEmpty()))
 
 			->setFieldLabel('id_especie','Especie')
-			->addValidator('id_especie', c(new Zend_Validate_NotEmpty(array('allowWhiteSpace' => true))))
+			->addValidator('id_especie', c(new Zend_Validate_NotEmpty()))
 
 			->setFieldLabel('raza','Raza')
 			->addValidator('raza', c(new Zend_Validate_Alpha(array('allowWhiteSpace' => true))))
 
 			->setFieldLabel('id_manto','Manto')
-			->addValidator('id_manto', c(new Zend_Validate_NotEmpty(array('allowWhiteSpace' => true))))
+			->addValidator('id_manto', c(new Zend_Validate_NotEmpty()))
 
 			->setFieldLabel('id_longitud_pelaje','Longitud Pelaje')
-			->addValidator('id_longitud_pelaje', c(new Zend_Validate_NotEmpty(array('allowWhiteSpace' => true))))
+			->addValidator('id_longitud_pelaje', c(new Zend_Validate_NotEmpty()))
 
 			->setFieldLabel('tamano','Tamaño')
-			->addValidator('tamano', c(new Zend_Validate_Alpha(array('allowWhiteSpace' => true))))
+			->addValidator('tamano', c(new Zend_Validate_NotEmpty()))
 
 			->setFieldLabel('sexo','Sexo')
-			->addValidator('sexo', c(new Zend_Validate_NotEmpty(array('allowWhiteSpace' => true))))
+			->addValidator('sexo', c(new Zend_Validate_NotEmpty()))
 
 			->setFieldLabel('castrado','Castrado')
-			->addValidator('castrado', c(new Zend_Validate_NotEmpty(array('allowWhiteSpace' => true))))
+			->addValidator('castrado', c(new Zend_Validate_NotEmpty()))
 //
 //			->setFieldLabel('entrenada','Entrenamiento')
 //			->addValidator('entrenada', c(new Zend_Validate_NotEmpty(array('allowWhiteSpace' => true))))

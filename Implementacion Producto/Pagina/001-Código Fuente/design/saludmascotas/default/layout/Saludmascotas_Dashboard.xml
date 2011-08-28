@@ -39,7 +39,7 @@
 				<parent>dashboard_mascotas</parent>
 			</action>
 			<action  method="addItem">
-				<name>dashboard_mascotas_encontradas</name>
+				<name>dashboard_mascotas_encuentros</name>
 				<text>Encontradas</text>
 				<link>mascotas/encuentros</link>
 				<weight>1</weight>

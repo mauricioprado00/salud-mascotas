@@ -500,7 +500,34 @@ form .button{
 .left_menu>li+li{
 	margin-top:10px;
 }
-
+.left_menu > li > ul{
+	margin: 8px;
+	border:1px solid #FFAA22;
+	background-color: #FFEE66;
+	padding:2px 0px 2px 8px;
+}
+.left_menu > li > ul > li{
+	
+}
+.left_menu > li > ul > li a{
+	color:black;
+	font-size:14px;
+	display:block;
+}
+.left_menu > li > ul > li.active{
+	
+}
+.left_menu > li > ul > li.active a{
+	
+}
+.left_menu > li > ul > li a:hover, .left_menu > li > ul > li.active a{
+	font-weight:bold;
+}
+.left_menu > li > ul > li:hover a:before{
+	content:'>';
+	margin-left:-9px;
+	position:absolute;
+}
 
 .middle .bottom{
 	clear:both;
@@ -1002,8 +1029,137 @@ form.wider .two_actions input+input, form.wider .two_actions button+button{
 	margin:0;
 }
 .show_select_coincidencias_paso3>ul{
-	display:none;
+	/*display:none;*/
 }
+/*
+.show_select_coincidencias_paso3>ul .infowindow_content{
+	width: 439px;
+}
+.show_select_coincidencias_paso3>ul .infowindow_content>*{
+	float: left;
+}
+.show_select_coincidencias_paso3>ul .infowindow_content>img{
+	margin-right: 10px;
+}
+.show_select_coincidencias_paso3>ul .infowindow_content b{
+	font-weight: bold;
+}
+*/
+/*comienza paso3 coincidencias*/
+.show_select_coincidencias_paso3>ul>li{
+	padding:10px 0;
+}
+.show_select_coincidencias_paso3>ul>li+li{
+	border-top:1px solid #BEBEBE;
+}
+.addeditmascota_busqueda .domicilio_view{clear:both;}
+.addeditmascota_busqueda .domicilio_view .embeeded_mascota_content{
+	padding-right:15px;
+}
+.addeditmascota_busqueda .domicilio_view .embeeded_mascota_content .view_mascota{
+	width: 305px;
+}
+.addeditmascota_busqueda .domicilio_view .embeeded_mascota_content .view_mascota .view_datos_mascota{
+	width: 200px;
+}
+.addeditmascota_busqueda .domicilio_view .embeeded_mascota_content .view_mascota .view_fotos_mascota, .addeditmascota_busqueda .domicilio_view .embeeded_mascota_content .view_mascota .view_fotos_mascota li, .addeditmascota_busqueda .domicilio_view .embeeded_mascota_content .view_mascota .view_fotos_mascota li img{
+	max-width:90px;
+}
+.addeditmascota_busqueda .domicilio_view .embeeded_mascota_content .view_mascota .view_datos_mascota .nombre, .addeditmascota_busqueda .domicilio_view .embeeded_mascota_content .view_mascota .view_datos_mascota .sexo{
+	width:115px;	
+}
+.ubicar_en_mapa{
+	cursor:pointer;
+	background-image:url("../img/pin/globe-icon.png");
+	background-repeat:no-repeat;
+	background-position:100% 0;
+	padding-right: 33px;
+	line-height:32px;
+	padding-top:20px;
+}
+/*termina paso3 coincidencias*/
+
+/*comienza stepping*/
+.stepping{
+	margin-top:5px;
+	width:439px;
+	height:50px;
+}
+.stepping a{
+	color:black;
+}
+.stepping .step{
+	float:left;
+	height:50px;
+	padding: 0 7px 0 7px;
+	
+}
+.stepping .step h1{
+	font-weight:bold;
+	font-size:16px;
+}
+.stepping .step em{
+	font-size:11px;
+	font-weight:bold;
+}
+.stepping_progress{
+	background-repeat:no-repeat;
+	width:439px;
+	height:50px;
+}
+	/*comienza específico perdida/encuentro*/
+	.stepping_encuentro_perdida{
+		background-image:url("../img/progress/bk-perdida-encuentro.png");
+	}
+	.stepping_encuentro_perdida .stepping_progress{
+		background-image:url("../img/progress/progress-perdida-encuentro.png");
+	}
+	.stepping_encuentro_perdida .step_1{
+		width:85px;
+	}
+	.stepping_encuentro_perdida .step_2{
+		width:114px;
+	}
+	.stepping_encuentro_perdida .step_3{
+		width:108px;
+	}
+	.stepping_encuentro_perdida .step_4{
+		width:76px;
+	}
+	.stepping_encuentro_perdida .stepping_progress_1{
+		background-position:-352px 0;
+	}
+	.stepping_encuentro_perdida .stepping_progress_2{
+		background-position:-224px 0;
+	}
+	.stepping_encuentro_perdida .stepping_progress_3{
+		background-position:-102px 0;
+	}
+	.stepping_encuentro_perdida .stepping_progress_4{
+		background-position:0 0;
+	}
+	/*termina específico perdida/encuentro*/
+	/*comienza específico mascota*/
+	.stepping_mascota{
+		background-color:#E3E3E3;
+	}
+	.stepping_mascota .step_1{
+		width:213px;
+	}
+	.stepping_mascota .step_2{
+		width:198px;
+	}
+	.stepping_mascota .stepping_progress_1{
+		background-position:-224px 0;
+	}
+	.stepping_mascota .stepping_progress_2{
+		background-position:0 0;
+	}
+	.stepping_mascota .stepping_progress{
+		background-image:url("../img/progress/progress-perdida-encuentro.png");
+	}
+	/*termina específico mascota*/
+/*termina stepping*/
 
 /*comienza dashboard*/
 .dashboard_home{

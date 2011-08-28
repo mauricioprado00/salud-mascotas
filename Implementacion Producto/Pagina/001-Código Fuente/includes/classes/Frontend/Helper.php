@@ -1,5 +1,8 @@
 <?php
 class Frontend_Helper extends Core_Helper{
+	public function getInstance(){
+		return self::getInstanceOf(__CLASS__);
+	}
 	public static function getUrlDashboard(){
 		return 'dashboard';
 	}

@@ -10,7 +10,7 @@
 		icon_types:{},
 		infowindows:[],
 		gmapopt:{
-			zoom:10,
+			zoom:14,
 			center:new google.maps.LatLng(-1884.95593220339010000000/60, -3869.95999999995900000000/60),
 			mapTypeId: google.maps.MapTypeId.HYBRID//HYBRID,ROADMAP,SATELLITE,TERRAIN
 		},
@@ -117,6 +117,12 @@
 			var marker = this.markers[marker_id];
 			infowindow.close();
 			infowindow.open(this.map, marker);
+		},
+		setCenter: function(lat, lng){
+			return this.map.setCenter(new google.maps.LatLng(lat, lng));
+		},
+		setZoom: function(zoom){
+			return this.map.setZoom(zoom);
 		}
 	}
 })();

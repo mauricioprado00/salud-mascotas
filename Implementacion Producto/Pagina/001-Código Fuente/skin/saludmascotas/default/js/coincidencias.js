@@ -33,6 +33,12 @@
 				lat = new Number(lat)+0;
 				var lng = jQuery(this).find('input.lng').val();
 				lng = new Number(lng)+0;
+				var map_center_link = jQuery('<a></a>')
+					.text('Ubicar en Mapa')
+					.click(that.ubicar_en_mapa.bind(that, lat, lng))
+					.addClass('ubicar_en_mapa')
+					.appendTo(item)
+				;
 				var icon_type = jQuery(this).find('input.icon_type').val();
 //				window.console.log('agregando', {
 //					lat: lat,
@@ -52,6 +58,14 @@
 				that.markers_ids[idx] = marker_id;
 				that.rows[marker_id] = this;
 			});
+		},
+		ubicar_en_mapa: function(lat, lng){
+			this.mapaGmap.setCenter(lat,lng);
+			var base = window.location.href.split('#')[0];
+			window.location.href = base+'#';
+			window.location.href = base+'#mapa';
+			this.mapaGmap.setZoom(16);
+			jQuery('html,body').scrollTop(jQuery('html,body').scrollTop()-45);
 		},
 		createLinks: function(o,id){
 			var jqcheckbox = jQuery(o).find('input[type=checkbox]');

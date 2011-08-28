@@ -255,3 +255,9 @@ a.promotional:hover,a.promotional:focus,input.promotional:hover,input.promotiona
 	float: right;
 }
 /*FIN HOME*/
+
+
+/*deshabilitar registro en home*/
+.home_right .signup .holding{display:none;}
+.home a.promotional, .home input.promotional{float:none;}
+/*deshabilitar registro en home*/

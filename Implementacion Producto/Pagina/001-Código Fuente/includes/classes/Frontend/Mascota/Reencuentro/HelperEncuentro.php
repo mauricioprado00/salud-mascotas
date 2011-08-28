@@ -1,5 +1,8 @@
 <?php //es útf8
 class Frontend_Mascota_Reencuentro_HelperEncuentro extends Frontend_Mascota_Helper{
+	public function getInstance(){
+		return self::getInstanceOf(__CLASS__);
+	}
 	protected static function confirmarReencuentro($reencuentro){
 		//$reencuentro->setConfirmado(true);
 		$resultado = $reencuentro->update(array('confirmado'=>'si'))?true:false;

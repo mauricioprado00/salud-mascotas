@@ -1,5 +1,8 @@
 <?php //es útf8
 class Frontend_Mascota_Reencuentro_Helper extends Frontend_Mascota_Reencuentro_HelperPerdida{
+	public function getInstance(){
+		return self::getInstanceOf(__CLASS__);
+	}
 	public static function getUrlFinalizarAnuncioPerdida($id_mascota){
 		return 'mascotas/reencuentro/encontre_mi_mascota/'.$id_mascota;
 	}

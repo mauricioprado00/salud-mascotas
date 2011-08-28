@@ -1,5 +1,8 @@
 <?php //es útf8
 class Frontend_Mascota_Encuentro_Helper extends Frontend_Mascota_Helper{
+	public function getInstance(){
+		return self::getInstanceOf(__CLASS__);
+	}
 //	public static function getUrl(){
 //		return 'mascotas';
 //	}
@@ -183,7 +186,7 @@ asunto;
 		$id_encuentro = $encuentro->getId();
 		if($coincidencias_seleccionadas){
 			$usuario = self::getLogedUser();
-			$id_usuario = $usuario;
+			$id_usuario = $usuario->getId();
 			foreach($coincidencias_seleccionadas as $id_perdida){
 				if($coincidencias_seleccionadas_previas && in_array($id_perdida, $coincidencias_seleccionadas_previas))
 					continue;

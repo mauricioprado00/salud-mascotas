@@ -56,10 +56,15 @@
 	
 			echo '<li>';
 			echo $input->getHtml();
+			echo '<label for="coincidencia'.$id.'">&nbsp;&nbsp;Creo que podría ser esta</label>';
+			echo '<div style="display:none;">';
 			echo $lat->getHtml();
 			echo $lng->getHtml();
 			echo $icon_type->getHtml();
+			echo '</div>';
+			echo '<div class="infowindow_content"><div class="embeeded_mascota_content">';
 			echo $view_mascota->setMascota($mascota)->toHtml();
+			echo '</div></div>';
 			//echo $this->getChildHtml('view_datos_mascota');
 			echo '</li>';
 		}

@@ -745,7 +745,7 @@ class Core_Object
      * @param  string $valueSeparator
      * @return string
      */
-    public function __toString(array $arrAttributes = array(), $valueSeparator=',')
+    public function ___toString(array $arrAttributes = array(), $valueSeparator=',')
     {
         $arrData = $this->toArray($arrAttributes);
         return implode($valueSeparator, $arrData);

@@ -30,7 +30,25 @@ else{
 	*/?>
 	<div id="coordinates"></div>
 </div>
+<ul class="ubicadores">
+	<li>
+		<a data-lat="-1884.905084745763" data-lng="-3870.1177777777375">Ubicar Encuentro</a>
+	</li>
+	<li>
+		<a data-lat="-1884.6859322033897" data-lng="-3870.3533333332925">Ubicar Pérdida</a>
+	</li>
+</ul>
 <script type="text/javascript">
+(function(){
+	jQuery(function(){
+		jQuery('.ubicadores li a').css('cursor','pointer').click(function(){
+			var lat = jQuery(this).attr('data-lat');
+			var lng = jQuery(this).attr('data-lng');
+			jQuery('#lat').val(lat);
+			jQuery('#lng').val(lng);
+		});
+	});
+})();
 (function(){
 	function on_add_my_house( Longitude, Latitude ){
 		//window.console.log( Longitude, Latitude, 'on_add_my_house' );

@@ -74,6 +74,7 @@ class Frontend_Mascota_Router extends Frontend_Router_Abstract{
 		return !($paso>2 || $paso<1);
 	}
 	protected function _pre_editar_init($paso=1, $id_mascota=null, $preserve_mascota_edicion=false){
+		Core_App::getInstance()->setStep($paso);
 		$object_to_edit = null;
 		if(!$preserve_mascota_edicion){
 			$this->getHelper()->clearSessionVars();
@@ -90,6 +91,7 @@ class Frontend_Mascota_Router extends Frontend_Router_Abstract{
 				$object_to_edit = new Frontend_Model_Mascota();
 			}
 		}
+		Core_App::getInstance()->setMascota($object_to_edit);
 		
 		$domicilio_mascota = null;
 		if(!$preserve_mascota_edicion || !($domicilio_mascota = $this->getHelper()->getDomicilioMascotaEdicionFromSession($id_mascota))){
@@ -273,6 +275,7 @@ class Frontend_Mascota_Router extends Frontend_Router_Abstract{
 		Core_App::getLayout()
 			->setModo('saludmascotas')
 			->addAction('mascota_addedit')
+			->addAction('mascota_addedit_step_'.$paso)
 			->addAction('mascota_addedit_' . $handle);
 		;
 		$this->showLeftMenu('usuario');	

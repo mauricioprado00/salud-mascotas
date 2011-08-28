@@ -1,5 +1,19 @@
 <layout><!-- útf8 -->
-
+	<mascota_addedit>
+		<reference name="contenido">
+			<template name="stepping" template="mascota/stepping.phtml" before=""/>
+		</reference>
+	</mascota_addedit>
+	<mascota_perdida_addedit>
+		<reference name="contenido">
+			<template name="stepping" template="mascota/perdida/stepping.phtml" before=""/>
+		</reference>
+	</mascota_perdida_addedit>
+	<mascota_encuentro_addedit>
+		<reference name="contenido">
+			<template name="stepping" template="mascota/perdida/stepping.phtml" before=""/>
+		</reference>
+	</mascota_encuentro_addedit>
 	<left_menu_usuario>
 		<reference name="left_menu">
 			<action method="addItem">
@@ -170,7 +184,8 @@
 				<template name="show_select_coincidencias" template="mascota/perdida/paso3_select_coincidencias.phtml">
 					<!--<mascota_view name="view_datos_mascota" template="mascota/preview.phtml" />-->
 					<!--<mascota_view name="view_datos_mascota_coincidencia" template="mascota/view/nn4d.phtml" />-->
-					<mascota_view name="view_datos_mascota_coincidencia" template="mascota/view/coincidencia_gmap.phtml" />
+					<!--<mascota_view name="view_datos_mascota_coincidencia" template="mascota/view/coincidencia_gmap.phtml" />-->
+					<mascota_view name="view_datos_mascota_coincidencia" template="mascota/preview.phtml" />
 					<domicilio_gmap_view name="gmap_view_ubicacion" zoom="15">
 						<action method="addIconType">
 							<name>yellow</name>
@@ -202,7 +217,9 @@
 			<template name="form_edit" template="mascota/encuentro/paso3.phtml">
 				<template name="show_select_coincidencias" template="mascota/encuentro/paso3_select_coincidencias.phtml">
 					<!--<mascota_view name="view_datos_mascota_coincidencia" template="mascota/view/nn4d.phtml" /> -->
-					<mascota_view name="view_datos_mascota_coincidencia" template="mascota/view/coincidencia_gmap.phtml" />
+					<!--<mascota_view name="view_datos_mascota_coincidencia" template="mascota/view/coincidencia_gmap.phtml" />-->
+					<mascota_view name="view_datos_mascota_coincidencia" template="mascota/preview.phtml" />
+					
 					<domicilio_gmap_view name="gmap_view_ubicacion" zoom="15">
 						<action method="addIconType">
 							<name>yellow</name>

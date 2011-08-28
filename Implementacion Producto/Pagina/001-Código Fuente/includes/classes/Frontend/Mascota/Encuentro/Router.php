@@ -58,6 +58,9 @@ class Frontend_Mascota_Encuentro_Router extends Frontend_Mascota_Router{
 		switch($paso){
 			case 1:{
 				$this->getObjectToEdit()->setEstadoEnGuarda();//todo:aca va el estado en guarda o en vista default, aunque se deberia cambiar con los checks
+				if(!$object_to_edit->getNombre()){
+					$object_to_edit->setNombre('sin nombre');
+				}
 				break;
 			}
 			case 3:{
@@ -118,13 +121,16 @@ class Frontend_Mascota_Encuentro_Router extends Frontend_Mascota_Router{
 				if($domicilio_mascota_guardada){
 					$mascota_guardada = $this->getHelper()->actionAgregarEditarMascota($object_to_edit, false, null/* no vamos a modificar el domicilio de la mascota $domicilio_mascota*/)?true:false;
 					if($mascota_guardada){
-						$id_mascota = $object_to_edit;
+						$id_mascota = $object_to_edit->getId();
 						$guardado = Frontend_Mascota_Encuentro_Helper::actionAgregarEditarEncuentro($encuentro, false, $id_mascota, $domicilio_mascota)?true:false;
 						if($guardado){//pasa validaciones
 							$guardadas = Frontend_Mascota_Encuentro_Helper::crearReencuentros($encuentro, $this->getCoincidenciasSeleccionadas())?true:false;
 							if($guardadas){
 								$this->getHelper()->clearSessionVars();
-								Core_Http_Header::Redirect(Frontend_Mascota_Encuentro_Helper::getUrlUsuario(), true);
+								if($object_to_edit->hasReencuentros())
+									Core_Http_Header::Redirect($object_to_edit->getUrlConfirmacionesPendientes(), true);
+								else
+									Core_Http_Header::Redirect(Frontend_Mascota_Encuentro_Helper::getUrlUsuario(), true);
 								return true;
 							}
 						}
@@ -188,8 +194,10 @@ class Frontend_Mascota_Encuentro_Router extends Frontend_Mascota_Router{
 				$id_mascota = $object_to_edit->getId();
 				$guardado_en_sesion = Frontend_Mascota_Encuentro_Helper::actionAgregarEditarEncuentro($encuentro, true, $id_mascota)?true:false;
 				if($guardado_en_sesion){//pasa validaciones
-					
-					$object_to_edit->setEstadoVista();
+					if($post->getData('tiene_mascota')=='si')
+						$object_to_edit->setEstadoEnGuarda();
+					else
+						$object_to_edit->setEstadoVista();
 					return true;
 				}
 			}
@@ -267,6 +275,7 @@ class Frontend_Mascota_Encuentro_Router extends Frontend_Mascota_Router{
 		Core_App::getLayout()
 			->setModo('saludmascotas')
 			->addAction('mascota_encuentro_addedit')
+			->addAction('mascota_encuentro_addedit_step_'.$paso)
 			->addAction('mascota_encuentro_addedit_' . $handle);
 		;
 		$this->showLeftMenu('usuario');	

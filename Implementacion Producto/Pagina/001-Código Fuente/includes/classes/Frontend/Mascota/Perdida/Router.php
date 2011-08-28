@@ -181,13 +181,17 @@ class Frontend_Mascota_Perdida_Router extends Frontend_Mascota_Router{
 				if($domicilio_mascota_guardada){
 					$mascota_guardada = $this->getHelper()->actionAgregarEditarMascota($object_to_edit, false, null/* no vamos a modificar el domicilio de la mascota $domicilio_mascota*/)?true:false;
 					if($mascota_guardada){
-						$id_mascota = $object_to_edit;
+//var_dump($id_mascota);die(__FILE__.__LINE__);
+						$id_mascota = $object_to_edit->getId();
 						$guardado = Frontend_Mascota_Perdida_Helper::actionAgregarEditarPerdida($perdida, false, $id_mascota, $domicilio_mascota)?true:false;
 						if($guardado){//pasa validaciones
 							$guardadas = Frontend_Mascota_Perdida_Helper::crearReencuentros($perdida, $this->getCoincidenciasSeleccionadas())?true:false;
 							if($guardadas){
 								$this->getHelper()->clearSessionVars();
-								Core_Http_Header::Redirect(Frontend_Mascota_Perdida_Helper::getUrlUsuario(), true);
+								if($object_to_edit->hasReencuentros())
+									Core_Http_Header::Redirect($object_to_edit->getUrlConfirmacionesPendientes(), true);
+								else
+									Core_Http_Header::Redirect(Frontend_Mascota_Encuentro_Helper::getUrlUsuario(), true);
 								return true;
 							}
 						}
@@ -454,6 +458,7 @@ class Frontend_Mascota_Perdida_Router extends Frontend_Mascota_Router{
 		Core_App::getLayout()
 			->setModo('saludmascotas')
 			->addAction('mascota_perdida_addedit')
+			->addAction('mascota_perdida_addedit_step_'.$paso)
 			->addAction('mascota_perdida_addedit_' . $handle);
 		;
 		$this->showLeftMenu('usuario');	

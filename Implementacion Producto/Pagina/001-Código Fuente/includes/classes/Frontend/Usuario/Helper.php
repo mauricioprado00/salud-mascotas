@@ -1,5 +1,8 @@
 <?php //es útf8
 class Frontend_Usuario_Helper extends Frontend_Helper{
+	public function getInstance(){
+		return self::getInstanceOf(__CLASS__);
+	}
 	public static function getUrl(){
 		return 'user';
 	}
@@ -80,13 +83,20 @@ class Frontend_Usuario_Helper extends Frontend_Helper{
 			return false;
 		}
 		$usuario->unsetData('password2');
+		if(SM_USER_ACTIVATION)
+			$usuario->setActivo('no');
+		else $usuario->setActivo('si');
 		if(!$usuario->hasId()){/** aca hay que agregar a la base de datos*/
 			$usuario->setFechaAlta(time());
 			$resultado = $usuario->insert()?true:false;
 			if($resultado){
 				Core_App::getInstance()->addSuccessMessage(self::getInstance()->__t('Usuario registrado correctamente'), true);
-				Core_App::getInstance()->addSuccessMessage(self::getInstance()->__t('Revisa tu email para continuar con la activación de usuario'), true);
+				if(SM_USER_ACTIVATION)
+					Core_App::getInstance()->addSuccessMessage(self::getInstance()->__t('Revisa tu email para continuar con la activación de usuario'), true);
+				else{
+					Core_App::getInstance()->addSuccessMessage(self::getInstance()->__t('Ya puedes ingresar al sistema con tu usuario y password'), true); 
 				self::actionEnviarCorreoRegistro($usuario);
+				}
 			}
 			else{
 				Core_App::getInstance()->addErrorMessage("No se pudo registrar el usuario");
