@@ -1,3 +1,5 @@
+11/09/2011 - mauricio
+agrego tablas de adopción (20110911_tablas_adopcion.sql)
 04/08/2011 - mauricio
 * hago nulleable el campo id_usuario de la tabla reencuentro
 31/07/2011 - mauricio
