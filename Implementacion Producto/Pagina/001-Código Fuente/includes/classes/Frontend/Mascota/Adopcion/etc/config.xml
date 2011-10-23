@@ -1,0 +1,15 @@
+<global>
+	<modules>
+		<Frontend_Mascota_Adopcion_Oferta />
+		<Frontend_Mascota_Adopcion_Solicitud />
+		<Frontend_Mascota_Adopcion_Conciliacion />
+	</modules>
+	<routers>
+		<Frontend_Mascota_Adopcion_Router>mascotas/adopcion</Frontend_Mascota_Adopcion_Router>
+	</routers>
+	<design>
+	</design>
+	<layouts>
+		<saludmascotas>Saludmascotas_Adopcion.xml</saludmascotas>
+	</layouts>
+</global>

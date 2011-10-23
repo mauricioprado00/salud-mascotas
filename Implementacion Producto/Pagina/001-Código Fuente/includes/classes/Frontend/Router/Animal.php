@@ -10,6 +10,7 @@ class Frontend_Router_Animal extends Frontend_Router_Abstract{
 	protected function searchRaza(){
 		$post = Core_Http_Post::getParameters('Core_Object');
 		$resultados = array();
+		$resultados[] = 'sin raza';
 		$especie = new Saludmascotas_Model_Especie();
 		$especie->setId($post->getText());
 		if($especie->load()){

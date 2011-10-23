@@ -25,4 +25,9 @@
 			</notificacion_view>
 		</reference>
 	</usuario_notificaciones_view>
+	<usuario_notificaciones_eliminar>
+		<reference name="notificacion_view">
+			<template name="form_eliminar_notificacion" template="notificacion/view/eliminar.phtml" />
+		</reference>
+	</usuario_notificaciones_eliminar>
 </layout>

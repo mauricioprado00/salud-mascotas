@@ -48,6 +48,9 @@ class Frontend_Model_Notificacion extends Saludmascotas_Model_Notificacion{
 	public function getUrlView(){
 		return Frontend_Notificacion_Helper::getUrlView($this->getId());
 	}
+	public function getUrlEliminar($confirmar=false){
+		return Frontend_Notificacion_Helper::getUrlEliminar($this->getId(), $confirmar);
+	}
 }
 
 ?>

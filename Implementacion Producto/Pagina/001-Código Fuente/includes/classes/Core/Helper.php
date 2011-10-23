@@ -294,5 +294,16 @@ class Core_Helper extends Core_Singleton{
 //		}
 //		return $age;
 //	}
+	public function setArrayDefaultValue(&$array, $default_value){
+		foreach($array as &$value)
+			if(!isset($value))
+				$value = $default_value;
+	}
+	public function coalesce(){
+		$args = func_get_args();
+		foreach($args as $arg)
+			if(isset($arg))
+				return $arg;
+	}
 }
 ?>

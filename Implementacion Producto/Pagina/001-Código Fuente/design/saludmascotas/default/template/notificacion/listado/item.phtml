@@ -2,11 +2,13 @@
 
 $notificacion = $this->getEntity();
 $link = $this->getUrl($notificacion->getUrlView());
+$link_eliminar = $this->getUrl($notificacion->getUrlEliminar());
 //var_dump(get_class($mascota),$mascota->getData());
 //die(__FILE__.__LINE__);
 ?> 
 	<td>
 		<a href="<?php print $link; ?>"><?php print $notificacion->getFromFormateado(); ?></a>
+		<a class="notificacion_action eliminar_notificacion" href="<?php print $link_eliminar; ?>">Eliminar</a>
 	</td>
 	<td>
 		<a href="<?php print $link; ?>"><b><?php print $notificacion->getAsuntoFormateado(); ?></b><em><?php print $notificacion->getMensajeFormateado(); ?></em></a>

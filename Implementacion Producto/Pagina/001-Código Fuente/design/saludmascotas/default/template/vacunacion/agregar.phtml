@@ -1,0 +1,146 @@
+<?php //útf8
+$actions = $this->getLayout()->getActions();
+$fecha_inicio = $this->getObjectToEdit()->getFechaInicio();
+$fecha_fin = $this->getObjectToEdit()->getFechaFin();
+$texto = $this->getObjectToEdit()->getTexto();
+?>
+<div class="addeditvacunacion_datos">
+	<div class="form_container form_vacunacion_datos">
+		<form class="standart wider login" name="form1" method="post">
+			<div class="textbox">
+				<div class="holding share_row half_size fecha_inicio">
+					<div class="input_autocomplete">
+						<?php
+							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+							$input
+								->setMaxlength(20)
+								->setType('text')
+								->setAutocomplete('off')
+								->setTitle('Fecha de Inicio')
+								->setClass('datepicker')
+								->setName('fecha_inicio')
+								->setId('fecha_inicio')
+								->setValue(date('d/m/Y', $fecha_inicio))
+							;
+							echo $input->getHtml();
+						?>
+						<!--<input type="text" autocomplete="off" title="fecha_inicio" name="fecha_inicio" id="fecha_inicio" value="">
+						<div class="dropdown_button"></div>
+						-->
+					</div>
+					<span class="holder">Fecha de Inicio</span>
+				</div>
+				<div class="holding share_row half_size fecha_fin">
+					<div class="input_autocomplete">
+						<?php
+							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+							$input
+								->setMaxlength(20)
+								->setType('text')
+								->setAutocomplete('off')
+								->setTitle('Fecha de Fin')
+								->setClass('datepicker')
+								->setName('fecha_fin')
+								->setId('fecha_fin')
+								->setValue(date('d/m/Y', $fecha_fin))
+							;
+							echo $input->getHtml();
+						?>
+						<!--<input type="text" autocomplete="off" title="fecha_fin" name="fecha_fin" id="fecha_fin" value="">
+						<div class="dropdown_button"></div>
+						-->
+					</div>
+					<span class="holder">Fecha de Fin</span>
+					<span class="help">Fechas del evento</span>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+			<div class="textarea">
+				<div class="holding">
+					<?
+						$input = Core::getObject('Core_Html_Tag_Custom', 'textarea');
+						$input
+							->setId('texto')
+							->setName('texto')
+							->setInnerHtml(/*htmlentities*/($texto))
+		//                                        ->setRows(5)
+		//                                        ->setCols(40)
+		//					->setData('data-campo', '<b>Observaciones</b>')
+		//					->setData('data-validator', '{empty:false}')
+		//                                        ->setData('data-mensaje', 'Debe cargar uno o mas %field separados por comas')
+						;
+						echo $input->getHtml();
+					?>
+					<span class="help">Descripcion <br />(tipos de vacunas, etc)<br /><br /><br /></span>
+				</div>
+				
+				 
+			</div>
+			<div>
+				<?php print $this->getChildHtml(); ?>
+			</div>
+			<div class="form_row actions_row single_action">
+				<button class="submit button" type="submit">Continuar</button>
+				<?php if($this->getLinks()): ?>
+				<ul>
+					<?php foreach($this->getLinks() as $link): ?>
+					<li>
+						<a href="<?php print $this->getUrl($link->getUrl()); ?>"><?php print htmlentities(utf8_decode($link->getLabel())); ?></a>
+					</li> 
+					<?php endforeach; ?> 
+				</ul>
+				<?php endif; ?>
+			</div>
+		</form>
+		<script type="text/javascript">
+		<!--
+		jQuery(document).ready(function(){
+			jQuery('.datepicker').datepicker({ dateFormat: 'dd/mm/yy', changeYear: true, minDate: new Date() });
+//			jQuery('.timepicker').timepicker({
+//			    // Options
+//			    timeSeparator: ':',           // The character to use to separate hours and minutes. (default: ':')
+//			    showLeadingZero: true,        // Define whether or not to show a leading zero for hours < 10. (default: true)
+//			    showMinutesLeadingZero: true, // Define whether or not to show a leading zero for minutes < 10. (default: true)
+//			    showPeriod: false,            // Define whether or not to show AM/PM with selected time. (default: false)
+//			    showPeriodLabels: true,       // Define if the AM/PM labels on the left are displayed. (default: true)
+//			    periodSeparator: ' ',         // The character to use to separate the time from the time period.
+//			    altField: '#alternate_input', // Define an alternate input to parse selected time to
+//			    defaultTime: '12:34',         // Used as default time when input field is empty or for inline timePicker
+//			                                  // (set to 'now' for the current time, '' for no highlighted time, default value: now)
+//			
+//			    zIndex: null,                 // Overwrite the default zIndex used by the time picker
+//			
+//			    // trigger options
+//			    showOn: 'focus',              // Define when the timepicker is shown.
+//			                                  // 'focus': when the input gets focus, 'button' when the button trigger element is clicked,
+//			                                  // 'both': when the input gets focus and when the button is clicked.
+//			    button: null,                 // jQuery selector that acts as button trigger. ex: '#trigger_button'
+//			
+//			    // Localization
+//			    hourText: 'Hora',             // Define the locale text for "Hours"
+//			    minuteText: 'Minuto',         // Define the locale text for "Minute"
+//			    amPmText: ['AM', 'PM'],       // Define the locale text for periods
+//			
+//			    // Events
+////			    onSelect: onSelectCallback,   // Define a callback function when an hour / minutes is selected.
+////			    onClose: onCloseCallback,     // Define a callback function when the timepicker is closed.
+////			    onHourShow: onHourShow,       // Define a callback to enable / disable certain hours. ex: function onHourShow(hour)
+////			    onMinuteShow: onMinuteShow,   // Define a callback to enable / disable certain minutes. ex: function onMinuteShow(hour, minute)
+//			
+//			    // custom hours and minutes
+//			    hours: {
+//			        starts: 0,                  // first displayed hour
+//			        ends: 23                    // last displayed hour
+//			    },
+//			    minutes: {
+//			        starts: 0,                  // first displayed minute
+//			        ends: 55,                   // last displayed minute
+//			        interval: 5                 // interval of displayed minutes
+//			    },
+//			    rows: 4                         // number of rows for the input tables, minimum 2, makes more sense if you use multiple of 2
+//			});
+		});
+		-->
+		</script>
+	</div>
+</div>      

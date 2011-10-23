@@ -1,4 +1,7 @@
-<?php //útf8 
+<?php //útf8
+$actions = $this->getLayout()->getActions();
+$es_adopcion_solicitud = $this->getLayout()->hasActions('mascota_adopcion_solicitud_addedit');
+ 
 $label_nombre = $this->getLabelNombre();
 if(!isset($label_nombre))
 	$label_nombre = 'Ingresa el nombre de tu mascota';

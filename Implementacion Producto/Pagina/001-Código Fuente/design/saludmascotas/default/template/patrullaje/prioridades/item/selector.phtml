@@ -1,0 +1,9 @@
+<?php
+$barrio = $this->getParentBlock()->getParentBlock()->getEntity();
+$selected_default = $this->getSelectedDefault()=='true';
+?>
+<div>
+	<input type="checkbox" name="selector_barrio[]" value="<?php print $barrio->getId(); ?>"<?php if($selected_default)echo ' checked="checked"'; ?>/>
+	<a href="#" class="selector_barrio"<?php if($selected_default)echo ' style="display:none;"'; ?>>Seleccionar</a>
+	<a href="#" class="deselector_barrio"<?php if($selected_default)echo ' style="display:block;"'; ?>>No Seleccionar</a>
+</div>

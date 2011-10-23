@@ -4,6 +4,7 @@ $notificacion = $this->getNotificacion();
 
 ?> 
 <a href="<?php print $this->getUrl(Frontend_Notificacion_Helper::getUrlListado()); ?>">&lt;Volver a bandeja de mensajes</a>
+<?php print $this->getChildHtml(); ?>
 <div class="notificacion_view">
 	<div class="notificacion">
 		<table>

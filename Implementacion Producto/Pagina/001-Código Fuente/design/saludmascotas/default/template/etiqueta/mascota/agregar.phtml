@@ -1,0 +1,47 @@
+<?php //útf8 
+//$object_to_edit = $this->getObjectToEdit();
+
+
+?>
+<div class="form_container form_barrio_patrullaje_prioridades <?php print $this->getHtmlClass(); ?>">
+	<form class="standart wider login" name="form1" method="post" action="">
+		<input type="hidden" name="return_to" value="<?php print $this->getReturnTo(); ?>" />
+		<?php print $this->getChildHtml('view_datos_mascota'); ?>
+		<div class="textbox">
+			<div class="holding nombre">
+				<div class="input_autocomplete">
+					<?php
+						$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+						$input
+							->setMaxlength(20)
+							->setType('text')
+							->setAutocomplete('off')
+							->setTitle('Etiqueta')
+							//->setClass('nombre')
+							->setName('nombre')
+							->setId('nombre')
+							//->setValue(date('d/m/Y'))
+						;
+						echo $input->getHtml();
+					?>
+				</div>
+				<span class="holder">Nombre de Etiqueta</span>
+			</div>
+		</div>
+		<div class="textbox">
+			<div class="holding selector_etiqueta">
+				<div class="input_autocomplete">
+					<?php print $this->getChildHtml('selector_etiquetas'); ?>
+				</div>
+			</div>
+		</div>
+		<?php if($this->getShowAddButton()!==false): ?>
+		<div class="form_row actions_row single_action">
+			<button class="submit button" type="submit">Agregar etiqueta</button>
+			<ul>
+				<a href="<?php print $this->getReturnTo(); ?>">Volver</a>
+			</ul>
+		</div>
+		<?php endif; ?>
+	</form>
+</div>

@@ -4,7 +4,8 @@ class Frontend_Usuario_Router extends Frontend_Router_Abstract{
 		$this->addActions(
 			'login','recover','register',//no registrado
 			'activate',//no activado
-			'logout','update','update_address','update_password'//registrado
+			'logout','update','update_address','update_password',//registrado
+			'searchVeterinaria'
 		);
 	}
 //	protected function RedirectIfLoged(){
@@ -292,6 +293,28 @@ class Frontend_Usuario_Router extends Frontend_Router_Abstract{
 			}
 		}
 		return true;
+	}
+	protected function searchVeterinaria(){
+		$post = Core_Http_Post::getParameters('Core_Object');
+		$resultados = array();
+		$usuario = new Saludmascotas_Model_User();
+		$usuario->setWhere(
+			Db_Helper::like('nombre','%',null,'%'),
+			Db_Helper::equal('tipo','veterinaria')
+		);
+		$usuario->setNombre($post->getText());
+		$usuarios = $usuario->search();
+		//echo $usuario->searchGetSql();
+		foreach($usuarios as $usuario){
+			$resultados[] = array('id'=>$usuario->getId(), 'text'=>$usuario->getNombre());
+		}
+
+		echo json_encode(array(
+			'resultados'=>$resultados,
+		));
+		die();
+		return true;
+		die(__FILE__.__LINE__);
 	}
 }
 ?>

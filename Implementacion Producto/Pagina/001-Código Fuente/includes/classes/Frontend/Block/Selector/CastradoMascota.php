@@ -9,7 +9,7 @@ class Frontend_Block_Selector_CastradoMascota extends Core_Block_Selector{
 		;
 	}
 	public function getAllOptions(){
-		$values = Frontend_Mascota_Helper::getCastradaMascota($this->getIncludeDontKnow()?true:false);
+		$values = Frontend_Mascota_Helper::getCastradaMascota($this->getIncludeDontKnow()?true:false, $this->setIncludeDontCare()?true:false);
 		$return = array();
 		foreach($values as $value){
 			$return[] = c(new Core_Object)->setId($value)->setNombre($value);

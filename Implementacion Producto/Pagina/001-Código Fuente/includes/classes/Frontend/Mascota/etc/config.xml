@@ -3,6 +3,8 @@
 		<Frontend_Mascota_Perdida />
 		<Frontend_Mascota_Encuentro />
 		<Frontend_Mascota_Reencuentro />
+		<Frontend_Mascota_Adopcion />
+		<Frontend_Mascota_Castracion />
 	</modules>
 	<routers>
 		<Frontend_Mascota_Router>mascotas</Frontend_Mascota_Router>
@@ -19,6 +21,14 @@
 	<block>
 		<type>mascota_listado_encontre</type>
 		<class>Frontend_Mascota_Block_ListadoEncontre</class>
+	</block>
+	<block>
+		<type>mascota_listado_quiero_adoptar</type>
+		<class>Frontend_Mascota_Block_ListadoAdopcion</class>
+	</block>
+	<block>
+		<type>mascota_listado_quiero_cruzar</type>
+		<class>Frontend_Mascota_Block_ListadoCruza</class>
 	</block>
 	<block>
 		<type>mascota_view</type>

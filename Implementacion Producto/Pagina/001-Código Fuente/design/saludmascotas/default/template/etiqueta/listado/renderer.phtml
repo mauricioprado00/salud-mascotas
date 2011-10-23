@@ -1,0 +1,18 @@
+<?php //útf8
+$etiqueta = $this->getEtiqueta();
+$childs = $etiqueta->getChilds();
+
+?>
+<li>
+	<div class="filtro_etiqueta">
+		<a href="?et=<?php print $etiqueta->getId(); ?>"><?php print $etiqueta->getNombre(); ?></a>
+		<a class="eliminar_etiqueta" href="<?php print $this->getUrl($etiqueta->getUrlEliminar()); ?>"></a>
+	</div>
+	<?php if($childs): ?> 
+	<ul><?php
+		foreach($childs as $child)
+			print $this->getParentBlock()->renderEtiqueta($child);
+		?>
+	</ul>
+	<?php endif; ?>
+</li>

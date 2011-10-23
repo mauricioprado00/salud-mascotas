@@ -3,13 +3,15 @@
  *@referencia Domicilio(id_domicilio) Frontend_Model_Domicilio(id)
  *@listar Perdida Frontend_Model_Perdida
  *@listar Encuentro Frontend_Model_Encuentro
+ *@listar AdopcionOferta Frontend_Model_AdopcionOferta
+ *@listar AdopcionSolicitud Frontend_Model_AdopcionSolicitud
 */
 class Frontend_Model_Mascota extends Saludmascotas_Model_Mascota{
 	protected static $class = __CLASS__; 
 	public function _construct(){
 		parent::_construct();
 		//artificiales
-		$this->setNonTableColumn('edad', 'id_especie', 'raza', 'cantidad_colores', 'perdido', 'colores_seleccionados', 'estado');
+		$this->setNonTableColumn('edad', 'edad_hasta', 'id_especie', 'raza', 'cantidad_colores', 'perdido', 'colores_seleccionados', 'estado');
 //		$this->setNonTableColumn('id_pais', 'provincia', 'localidad', 'barrio');
 		$this
 			->setFieldLabel('nombre','Nombre')
@@ -85,6 +87,7 @@ class Frontend_Model_Mascota extends Saludmascotas_Model_Mascota{
 	public function loadNonTableColumn(){
 		//$this->setNonTableColumn('edad', 'id_especie', 'raza', 'cantidad_colores', 'perdido', 'colores_seleccionados');
 		$this->setEdad($this->calcularEdad());
+		$this->setEdadHasta($this->calcularEdadHasta());
 		$raza = $this->getRaza();
 		$this->setIdEspecie($raza->getIdEspecie());
 		$this->setRaza($raza->getNombre());
@@ -128,6 +131,7 @@ class Frontend_Model_Mascota extends Saludmascotas_Model_Mascota{
 			$colores_seleccionados = $this->getColoresSeleccionados();
 			
 			//agrego colores que faltan
+			if($colores_seleccionados)
 			foreach($colores_seleccionados as $color_seleccionado){
 				if($colores_agregados){
 					$color_agregado = $colores_agregados->addFilterEq('color_rgb',$color_seleccionado);
@@ -204,21 +208,22 @@ class Frontend_Model_Mascota extends Saludmascotas_Model_Mascota{
 			// agrego colores
 			$colors = Saludmascotas_Model_Color::getColorsAsCollection();
 			$colores_seleccionados = $this->getColoresSeleccionados();
-			foreach($colores_seleccionados as $color_seleccionado){
-				$color = $colors->addFilterEq('color_rgb',$color_seleccionado);
-				//var_dump($color && $color->count());
-				if($color && $color->count()){//el color existe en la paleta
-					$color = $color->getFirst();
-					$color_mascota = new Saludmascotas_Model_ColorMascota();
-					$color_mascota
-						->setIdMascota($this->getId())
-						->setIdColor($color->getId())
-					;
-					$color_mascota
-						->insert()
-					;
+			if($colores_seleccionados)
+				foreach($colores_seleccionados as $color_seleccionado){
+					$color = $colors->addFilterEq('color_rgb',$color_seleccionado);
+					//var_dump($color && $color->count());
+					if($color && $color->count()){//el color existe en la paleta
+						$color = $color->getFirst();
+						$color_mascota = new Saludmascotas_Model_ColorMascota();
+						$color_mascota
+							->setIdMascota($this->getId())
+							->setIdColor($color->getId())
+						;
+						$color_mascota
+							->insert()
+						;
+					}
 				}
-			}
 			
 			//agrego fotos
 			$usuario = Frontend_Usuario_Model_User::getLogedUser();
@@ -246,6 +251,10 @@ class Frontend_Model_Mascota extends Saludmascotas_Model_Mascota{
 			return Frontend_Mascota_Perdida_Helper::getUrlEditar($this->getId(), $preserve_mascota_edicion, $paso);
 		elseif($this->esEstadoEnGuarda()||$this->esEstadoVista())
 			return Frontend_Mascota_Encuentro_Helper::getUrlEditar($this->getId(), $preserve_mascota_edicion, $paso);
+		elseif($this->esEstadoAdopcionOferta())
+			return Frontend_Mascota_Adopcion_Oferta_Helper::getUrlEditar($this->getId(), $preserve_mascota_edicion, $paso);
+		elseif($this->esEstadoAdopcionSolicitud())
+			return Frontend_Mascota_Adopcion_Solicitud_Helper::getUrlEditar($this->getId(), $preserve_mascota_edicion, $paso);
 		return Frontend_Mascota_Helper::getUrlEditar($this->getId(), $preserve_mascota_edicion, $paso);
 	}
 	public function getUrlPerdidaEditar($preserve_mascota_edicion=0, $paso=1){
@@ -254,20 +263,33 @@ class Frontend_Model_Mascota extends Saludmascotas_Model_Mascota{
 	public function getUrlEncuentroEditar($preserve_mascota_edicion=0, $paso=1){
 		return Frontend_Mascota_Encuentro_Helper::getUrlEditar($this->getId(), $preserve_mascota_edicion, $paso);
 	}
+	public function getUrlAdopcionOfertaEditar($preserve_mascota_edicion=0, $paso=1){
+		return Frontend_Mascota_Adopcion_Oferta_Helper::getUrlEditar($this->getId(), $preserve_mascota_edicion, $paso);
+	}
+	public function getUrlAdopcionSolicitudEditar($preserve_mascota_edicion=0, $paso=1){
+		return Frontend_Mascota_Adopcion_Solicitud_Helper::getUrlEditar($this->getId(), $preserve_mascota_edicion, $paso);
+	}
 	public function getUrlSetParaCruza(){
 		return Frontend_Mascota_Helper::getUrlSetParaCruza($this->getId());
 	}
 	public function getUrlSetParaAdoptar(){
+		return Frontend_Mascota_Adopcion_Oferta_Helper::getUrlAgregarAdopcionOfertaAutomaticamente($this->getId());
 		return Frontend_Mascota_Helper::getUrlSetParaAdoptar($this->getId());
 	}
 	public function getUrlSetParaVenta(){
 		return Frontend_Mascota_Helper::getUrlSetParaVenta($this->getId());
+	}
+	public function getUrlSetParaCastracion($cancelar=false, $notificar_usuario=false){
+		return Frontend_Mascota_Castracion_Helper::getUrlSetParaCastracion($this->getId(), $cancelar, $notificar_usuario);
 	}
 	public function getUrlSimpleView(){
 		return Frontend_Mascota_Helper::getUrlSimpleView($this->getId());
 	}
 	public function getUrlConfirmacionesPendientes(){
 		return Frontend_Mascota_Reencuentro_Helper::getUrlConfirmacionesPendientes($this->getId());
+	}
+	public function getUrlAdopcionConciliacionesPendientes(){
+		return Frontend_Mascota_Adopcion_Conciliacion_Helper::getUrlConfirmacionesPendientes($this->getId());
 	}
 	public function getUrlFinalizarAnuncio(){
 		if($this->esEstadoPerdida()){
@@ -281,6 +303,18 @@ class Frontend_Model_Mascota extends Saludmascotas_Model_Mascota{
 	public function getUrlFinalizarAnuncioEncuentro(){
 		return Frontend_Mascota_Reencuentro_Helper::getUrlFinalizarAnuncioEncuentro($this->getId());
 	}
+	public function getUrlFinalizarAnuncioAdopcion(){
+		if($this->esEstadoAdopcionOferta()){
+			return $this->getUrlFinalizarAnuncioAdopcionOferta();
+		}
+		return $this->getUrlFinalizarAnuncioAdopcionSolicitud();
+	}
+	public function getUrlFinalizarAnuncioAdopcionOferta(){
+		return Frontend_Mascota_Adopcion_Conciliacion_Helper::getUrlFinalizarAnuncioAdopcionOferta($this->getId());
+	}
+	public function getUrlFinalizarAnuncioAdopcionSolicitud(){
+		return Frontend_Mascota_Adopcion_Conciliacion_Helper::getUrlFinalizarAnuncioAdopcionSolicitud($this->getId());
+	}
 	public function getUrlListado(){
 		if($this->esEstadoPerdida()){
 			return $this->getUrlListadoPerdida();
@@ -292,6 +326,9 @@ class Frontend_Model_Mascota extends Saludmascotas_Model_Mascota{
 	}
 	public function getUrlListadoEncuentro(){
 		return Frontend_Mascota_Encuentro_Listado_Helper::getUrlMascota($this->getId());
+	}
+	public function getUrlConfirmarCastracion(){
+		return Frontend_Mascota_Castracion_Helper::getUrlConfirmarCastracion($this->getId());
 	}
 
 //	public function update($data=null, $use_null_values=false, $match_fields=array('id')){

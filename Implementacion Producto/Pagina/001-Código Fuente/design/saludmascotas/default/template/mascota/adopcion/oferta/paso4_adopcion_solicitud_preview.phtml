@@ -1,0 +1,76 @@
+<?php //es útf8
+$coincidencia = $this->getCoincidencia();
+$mascota = $this->getMascota();
+$adopcion_solicitud = $this->getAdopcionSolicitud();
+$id = $adopcion_solicitud->getId();
+$seleccionada = $this->getSeleccionada();
+$fecha_adopcion_solicitud = $adopcion_solicitud->getFechaPublicacion();
+$fecha_adopcion_solicitud = date('d/m/Y', $fecha_adopcion_solicitud);
+//var_dump(get_class($mascota),$mascota->getData());
+//die(__FILE__.__LINE__);
+?> 
+	<div class="image">
+		<img src="<?php print $mascota->getUrlImage(70, 78); ?>" />
+	</div>
+	<ul class="column1">
+		<li>
+			<b>Nombre:</b>
+			<em><?php print $mascota->getNombre(); ?></em>
+		</li>
+		<li>
+			<b>Sexo:</b>
+			<em><?php print $mascota->getSexo(); ?></em>
+		</li>
+		<li>
+			<b>Edad:</b>
+			<em><?php print $mascota->calcularEdad(); ?></em>
+		</li>
+		<li>
+			<b>Raza:</b>
+			<em><?php print $mascota->getRaza()->getNombre(); ?></em>
+		</li>
+	</ul>
+	<ul class="column2">
+		<li>
+			<b>Fecha de Solicitud de Adopcion:</b>
+			<em><?php print $fecha_adopcion_solicitud; ?></em>
+		</li>
+		<li>
+			<a class="link_view_mascota" href="<?php print $this->getUrl($mascota->getUrlSimpleView()); ?>">Ver todos los datos</a>
+			<?php
+				$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+				$input
+					//->setMaxlength(20)
+					->setType('radio')
+					//->setAutocomplete('off')
+					//->setTitle('Castrado')
+					//->setClass('datepicker')
+					->setName('coincidencias_seleccionadas['.$id.']')
+					->setId('coincidencia'.$id)
+					->setValue($id)
+				;
+				if($seleccionada)
+					$input->setChecked('checked');
+				echo $input->getHtml();
+			?> 
+			<label for="<?php print 'coincidencia'.$id; ?>">Puede ser</label>
+			<?php
+				$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+				$input
+					//->setMaxlength(20)
+					->setType('radio')
+					//->setAutocomplete('off')
+					//->setTitle('Castrado')
+					//->setClass('datepicker')
+					->setName('coincidencias_seleccionadas['.$id.']')
+					->setId('nocoincidencia'.$id)
+					->setValue('')
+				;
+				if(!$seleccionada)
+					$input->setChecked('checked');
+				echo $input->getHtml();
+			?> 
+			<label for="<?php print 'nocoincidencia'.$id; ?>">No es</label>
+		</li>
+	</ul>
+	<div style="clear:both;float:none;"></div>

@@ -45,6 +45,7 @@
 				<weight>1</weight>
 				<parent>dashboard_mascotas</parent>
 			</action>
+			<!--
 			<action  method="addItem">
 				<name>dashboard_mascotas_para_cruzar</name>
 				<text>Para cruzar</text>
@@ -56,6 +57,14 @@
 				<name>dashboard_mascotas_para_adoptar</name>
 				<text>Para adoptar</text>
 				<link>no_implementado</link>
+				<weight>3</weight>
+				<parent>dashboard_mascotas</parent>
+			</action>
+			-->
+			<action  method="addItem">
+				<name>dashboard_vacunacion_consulta</name>
+				<text>Vacunaciones</text>
+				<link>vacunacion/consultar</link>
 				<weight>3</weight>
 				<parent>dashboard_mascotas</parent>
 			</action>

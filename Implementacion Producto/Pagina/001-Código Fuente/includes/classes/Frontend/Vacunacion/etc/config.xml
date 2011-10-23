@@ -1,0 +1,39 @@
+<global>
+	<modules>
+<!--
+		<Frontend_Mascota_Adopcion_Oferta />
+		<Frontend_Mascota_Adopcion_Solicitud />
+		<Frontend_Mascota_Adopcion_Conciliacion />
+-->
+	</modules>
+	<routers>
+		<Frontend_Vacunacion_Router>vacunacion</Frontend_Vacunacion_Router>
+	</routers>
+	<block>
+		<type>vacunacion_cronograma_view</type>
+		<class>Frontend_Vacunacion_Block_Cronograma</class>
+	</block>
+	<block>
+		<type>vacunacion_agregar</type>
+		<class>Frontend_Vacunacion_Block_Agregar</class>
+	</block>
+	<block>
+		<type>vacunacion_consultar_view</type>
+		<class>Frontend_Vacunacion_Block_Consultar</class>
+	</block>
+	<!--
+	<block>
+		<type>mascota_vacunacion_listado_pendientes</type>
+		<class>Frontend_Mascota_Vacunacion_Block_ListadoPendientes</class>
+	</block>
+	<block>
+		<type>mascota_vacunacion_listado_asignadas</type>
+		<class>Frontend_Mascota_Vacunacion_Block_ListadoAsignadas</class>
+	</block>
+	-->
+	<design>
+	</design>
+	<layouts>
+		<saludmascotas>Saludmascotas_Vacunacion.xml</saludmascotas>
+	</layouts>
+</global>

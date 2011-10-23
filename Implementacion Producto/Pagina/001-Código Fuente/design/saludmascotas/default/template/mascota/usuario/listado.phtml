@@ -1,8 +1,11 @@
 <?php //útf8 
 //$object_to_edit = $this->getObjectToEdit();
+
+$list_entity_template = $this->getChild('list_entity_template');
+
 ?>
 <div class="form_container form_mascota_usuario_listado">
-	<form class="standart wider login" name="form1" method="post" action="<?php print $this->getUrl(Frontend_Mascota_Helper::getUrlAgregar()); ?>">
+	<form class="standart wider login" name="form1" method="post" action="<?php print $this->getUrlNuevaMascota(); ?>">
 		<?php /** / ?>
 		<div class="textbox">
 			<div class="holding <?php //share_row half_size ?>provincia">
@@ -49,12 +52,14 @@
 			</div>
 		</div>
 		<?php /**/ ?>
-		<ul class="listado_mascotas">
+		<ul class="listado_entidad listado_mascotas">
 			<?php while($this->moveNext()): ?> 
 			<?php $class = $this->getCurrentRelativeIndex()%2?'pair':'even'; ?>
-			<li class="mascota_item mascota_item_<?php print $class; ?>"><?php print $this->entityToHtml(); ?></li>
+			<li class="listado_entidad_item mascota_item listado_entidad_item_<?php print $class; ?>"><?php print $this->entityToHtml(); ?></li>
 			<?php endwhile; ?>
-			
+			<?php if(!$this->searchCount()): ?> 
+			<li class="listado_entidad_item listado_entidad_item_even">No hay mascotas</li>
+			<?php endif; ?>
 			<?php if($this->getCantidadPaginas()>1):?>
 			<?php $pagination_info = $this->getPaginationInfo($this->getPagina(), $this->getCantidadPaginas(), 4, 2); ?>
 			<ul class="paginas">
@@ -79,12 +84,18 @@
 		</ul>
 		
 		
-		
+		<?php if($this->getShowAddButton()!==false): ?>
 		<div class="form_row actions_row single_action">
 			<button class="submit button" type="submit">Nueva Mascota</button>
+			<?php if($this->getLinks()): ?>
 			<ul>
-				<li><a href="">Algún link</a></li>
+				<?php foreach($this->getLinks() as $link): ?>
+				<li>
+					<a href="<?php print $this->getUrl($link->getUrl()); ?>"><?php print htmlentities(utf8_decode($link->getLabel())); ?></a>
+				</li> 
+				<?php endforeach; ?> 
 			</ul>
+			<?php endif; ?>
 			<!--
 			<ul>
 				<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlServiceConditions()); ?>">Condiciones de Servicio</a></li>
@@ -95,6 +106,7 @@
 			</ul>
 			-->
 		</div>
+		<?php endif; ?>
 	</form>
 </div>      
 <script type="text/javascript">
@@ -111,3 +123,23 @@
 	;
 -->
 </script>
+<?php if($list_entity_template->getShowSectionSpaLinkCastracion()):?> 
+<script type="text/javascript">
+	<!--
+		jQuery(document).ready(function(){
+			jQuery('.datepicker').datepicker({ dateFormat: 'dd/mm/yy', changeYear: true, minDate: new Date() });
+		});
+		var c = new asginar_castracion();
+		c.init(<?php print json_encode(array(
+			'url'=>$this->getUrl(Frontend_Mascota_Castracion_Helper::getUrlAsignarCastracion()),
+			'select_elements'=>'.asignar_castracion'
+		)); ?>);
+		var c = new finalizar_castracion();
+		c.init(<?php print json_encode(array(
+			'url'=>$this->getUrl(Frontend_Mascota_Castracion_Helper::getUrlFinalizarCastracion()),
+			'select_elements'=>'.finalizar_castracion'
+		)); ?>);
+	//-->
+</script>
+
+<?php endif; ?> 

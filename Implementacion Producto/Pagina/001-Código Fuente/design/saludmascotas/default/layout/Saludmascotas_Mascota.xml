@@ -44,19 +44,40 @@
 				<weight>1</weight>
 				<parent>mascotas_usuario</parent>
 			</action>
-			<action  method="addItem">
+			<action  method="addItem" in="tipo_usuario_normal">
 				<name>mascotas_usuario_quiero_cruzar</name>
 				<text>Quiero cruzar</text>
 				<link>mascotas/usuario/quiero_cruzar</link>
 				<weight>2</weight>
 				<parent>mascotas_usuario</parent>
 			</action>
-			<action  method="addItem">
+			<action  method="addItem" in="tipo_usuario_normal">
 				<name>mascotas_usuario_quiero_adoptar</name>
 				<text>Quiero adoptar</text>
-				<link>mascotas/usuario/quiero_adoptar</link>
+				<link>mascotas/quiero_adoptar</link>
 				<weight>3</weight>
 				<parent>mascotas_usuario</parent>
+			</action>
+			<action  method="addItem" in="tipo_usuario_spa">
+				<name>mascotas_castraciones_pendientes</name>
+				<text>Castraciones</text>
+				<link>mascotas/castracion/pendientes</link>
+				<weight>4</weight>
+				<parent>mascotas_usuario</parent>
+			</action>
+			<action  method="addItem" in="tipo_usuario_spa">
+				<name>mascotas_vacunacion_cronograma</name>
+				<text>Vacunacion</text>
+				<link>vacunacion/cronograma</link>
+				<weight>5</weight>
+				<parent>mascotas_usuario</parent>
+			</action>
+			<action  method="addItem" in="tipo_usuario_spa">
+				<name>patrullaje_prioridades</name>
+				<text>Patrullaje</text>
+				<link>patrullaje/regenerar_prioridades</link>
+				<weight>6</weight>
+				<parent></parent>
 			</action>
 		</reference>
 	</left_menu_usuario>
@@ -69,7 +90,7 @@
 			<!--
 			<template template="mascota/usuario/listado2.phtml" />
 			-->
-			<block type="Frontend/Menu" name="mascotas_usuario_tab" html_class="mascotas_usuario_tab">
+			<block type="Frontend/Menu" name="mascotas_usuario_tab" html_class="tab_interno mascotas_usuario_tab">
 				<action  method="addItem">
 					<name>mascotas_usuario_tab_mis_mascotas</name>
 					<text>Mis mascotas</text>
@@ -92,11 +113,17 @@
 				</action>
 			</block>
 			<mascota_listado_usuario in="mascota_usuario_listado" name="mascota_listado_usuario">
-				<template name="list_entity_template" template="mascota/usuario/listado/item.phtml">
+				<action method="addLink">
+					<url>mascotas/adopcion/oferta/agregar</url>
+					<label>Ofrecer Adopcion</label>
+				</action>
+				<template name="list_entity_template" template="mascota/usuario/listado/item.phtml" show_link_confirmar_castracion="si">
+					<template name="list_entity_pluggin_castracion" template="mascota/usuario/listado/item/castracion.phtml"/>
 				</template>
 			</mascota_listado_usuario>
-			<mascota_listado_encontre in="mascota_encontre_listado" name="mascota_listado_encontre">
+			<mascota_listado_encontre in="mascota_encontre_listado" name="mascota_listado_encontre" show_link_confirmar_castracion="si">
 				<template name="list_entity_template" template="mascota/usuario/listado/item.phtml">
+					<template name="list_entity_pluggin_castracion" template="mascota/usuario/listado/item/castracion.phtml"/>
 				</template>
 			</mascota_listado_encontre>
 		</reference>
@@ -138,8 +165,13 @@
 	</default>
 	<default when="accion(mascota_addedit_domicilio, mascota_perdida_addedit_domicilio, mascota_encuentro_addedit_domicilio)">
 		<reference name="html_head">
+		<!--
 			<script charset="utf8" external="true">http://api.maptp.map24.com/ajax?appkey={#CONF_MAP24_APPKEY}</script>
 			<script charset="utf8">js/update_address_nn4d.js</script>
+		-->
+			<script charset="utf8" external="true"><![CDATA[http://maps.googleapis.com/maps/api/js?sensor=true&key={#CONF_GMAPS_APPKEY}]]></script>
+			<script>js/gmap.js</script>
+
 			<script charset="utf8">js/select_typeable.js</script>
 			<script charset="utf8">js/addedit_mascota_paso2.js</script>
 		</reference>
@@ -147,7 +179,10 @@
 			<template name="addedit_paso2_form" template="mascota/agregar_paso2.phtml">
 				<domicilio_selector name="domicilio_selector,form_edit">
 					<template name="form_edit" template="mascota/agregar_paso2_otro_domicilio.phtml">
+						<!--
 						<location_selector_nn4d name="location_selector" />
+						-->
+						<location_selector_gmap name="location_selector" zoom="15" />
 					</template>
 				</domicilio_selector>
 			</template>
@@ -243,8 +278,10 @@
 	</default>
 	<default when="accion(mascota_perdida_addedit_publicacion, mascota_encuentro_addedit_publicacion)">
 		<reference name="html_head">
-			<script charset="utf8" external="true">http://api.maptp.map24.com/ajax?appkey={#CONF_MAP24_APPKEY}</script>
-			<script charset="utf8">js/update_address_nn4d.js</script>
+			<!--<script charset="utf8" external="true">http://api.maptp.map24.com/ajax?appkey={#CONF_MAP24_APPKEY}</script>
+			<script charset="utf8">js/update_address_nn4d.js</script>-->
+			<script charset="utf8" external="true"><![CDATA[http://maps.googleapis.com/maps/api/js?sensor=true&key={#CONF_GMAPS_APPKEY}]]></script>
+			<script>js/gmap.js</script>
 			<script>js/jQuery/fancybox/jquery.fancybox-1.3.1.pack.js</script>
 			<css>js/jQuery/fancybox/jquery.fancybox-1.3.1.css</css>
 		</reference>
@@ -254,7 +291,7 @@
 					<template>mascota/encuentro/paso4.phtml</template>
 				</action>
 				<mascota_view name="view_datos_mascota" template="mascota/preview.phtml" />
-				<domicilio_view name="view_ubicacion" />
+				<domicilio_view name="view_ubicacion" zoom="15" />
 				<!--<block in="mascota_encuentro_addedit_publicacion" name="view_posibles_reencuentros" />-->
 				<template in="mascota_encuentro_addedit_publicacion" name="view_posibles_reencuentros" template="mascota/encuentro/paso4_select_coincidencias.phtml">
 					<mascota_view name="view_datos_mascota_coincidencia" template="mascota/encuentro/paso4_perdida_preview.phtml" />
@@ -313,11 +350,13 @@
 	</view_mascota>
 	<kradkk>
 		<reference name="html_head">
-			<script charset="utf8" external="true">http://api.maptp.map24.com/ajax?appkey={#CONF_MAP24_APPKEY}</script>
-			<script charset="utf8">js/update_address_nn4d.js</script>
+			<!--<script charset="utf8" external="true">http://api.maptp.map24.com/ajax?appkey={#CONF_MAP24_APPKEY}</script>
+			<script charset="utf8">js/update_address_nn4d.js</script>-->
+			<script charset="utf8" external="true"><![CDATA[http://maps.googleapis.com/maps/api/js?sensor=true&key={#CONF_GMAPS_APPKEY}]]></script>
+			<script>js/gmap.js</script>
 		</reference>
 		<reference name="contenido">
-			<domicilio_view name="view_ubicacion" />
+			<domicilio_view name="view_ubicacion" zoom="15" />
 		</reference>
 	</kradkk>
 	<kradkk_embeeder>

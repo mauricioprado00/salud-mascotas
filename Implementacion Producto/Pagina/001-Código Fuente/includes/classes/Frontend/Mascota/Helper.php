@@ -12,6 +12,12 @@ class Frontend_Mascota_Helper extends Frontend_Helper{
 	public static function getUrlEncontre($numero_pag=null){
 		return 'mascotas/encontre'.($numero_pag?'/'.$numero_pag:'');
 	}
+	public static function getUrlQuieroAdoptar($numero_pag=null){
+		return 'mascotas/quiero_adoptar'.($numero_pag?'/'.$numero_pag:'');
+	}
+	public static function getUrlQuieroCruzar($numero_pag=null){
+		return 'mascotas/quiero_cruzar'.($numero_pag?'/'.$numero_pag:'');
+	}
 	public static function getUrlUploadPhoto($ajax=false, $jsonp_callback='', $id_mascota=null){
 		return 'mascotas/fotos/'.($ajax?'ajax_':'').'upload'.($jsonp_callback?'/'.$jsonp_callback:'').($id_mascota?'/'.$id_mascota:'');
 	}
@@ -46,21 +52,41 @@ class Frontend_Mascota_Helper extends Frontend_Helper{
 	public static function esgetEntrenadaMascotaValida($value){
 		return in_array($value, self::getEntrenadaMascota());
 	}
-	public static function getSexoMascota($include_i_dont_know=false){
-		if(!$include_i_dont_know)
-			return array('hembra', 'macho');
-		return array('hembra', 'macho', 'no se');
+	public static function getSexoMascota($include_i_dont_know=false, $include_i_dont_care=false){
+//		if(!$include_i_dont_know)
+//			return array('hembra', 'macho');
+//		return array('hembra', 'macho', 'no se');
+		$options = array('hembra', 'macho');
+		if($include_i_dont_know)
+			$options[] = 'no se';
+		if($include_i_dont_care)
+			$options[] = 'no importa';
+		return $options;
 	}
-	public static function getCastradaMascota($include_i_dont_know=false){
-		if(!$include_i_dont_know)
-			return array('si', 'no');
-		return array('si', 'no', 'no se');
+	public static function getCastradaMascota($include_i_dont_know=false, $include_i_dont_care=false){
+		$options = array('si','no');
+		if($include_i_dont_know)
+			$options[] = 'no se';
+		if($include_i_dont_care)
+			$options[] = 'no importa';
+		return $options;
+		//	return array('si', 'no');
+		//return array('si', 'no', 'no se');
 	}
 	public static function esgetSexoMascotaValida($value){
 		return in_array($value, self::getSexoMascota());
 	}
-	public static function getTamanoMascota(){
-		return array('extra_small'=>'muy pequeña', 'small'=>'pequeña', 'medium'=>'normal', 'big'=>'grande');
+	public static function getTamanoMascota($tamano=null){
+		$arr = array('extra_small'=>'muy pequeña', 'small'=>'pequeña', 'medium'=>'normal', 'big'=>'grande');
+		if(isset($tamano)){
+			if(isset($arr[$tamano])){
+				return $arr[$tamano];
+			}
+			else{
+				return 'inválido';
+			}
+		}
+		return $arr;
 	}
 	public static function esgetTamanoMascotaValida($value){
 		return in_array($value, self::getTamanoMascota());
@@ -80,6 +106,7 @@ class Frontend_Mascota_Helper extends Frontend_Helper{
 			//,'destacada'
 			,'entrenada'
 			,'fecha_nacimiento'
+			,'fecha_nacimiento_hasta'
 			,'nombre'
 			,'para_adoptar'
 			,'para_cruza'
@@ -98,6 +125,7 @@ class Frontend_Mascota_Helper extends Frontend_Helper{
 			
 			//campos frontend
 			,'edad'
+			,'edad_hasta'
 			,'id_especie'
 			,'raza'
 			,'cantidad_colores'
@@ -201,20 +229,23 @@ class Frontend_Mascota_Helper extends Frontend_Helper{
 		}
 		return $domicilio;
 	}
-	public static function actionAgregarEditarMascota($mascota, $to_session=true, $domicilio_mascota=null){
+	public static function actionAgregarEditarMascota($mascota, $to_session=true, $domicilio_mascota=null, $validar_colores=true){
 		if(!is_a($mascota,'Frontend_Model_Mascota')){
 			$array = $mascota->getData();
 			$mascota = new Frontend_Model_Mascota();
 			$mascota->loadFromArray($array);
 		}
 		$errors = array();
-		if(!$mascota->getCantidadColores()){
-			$errors[] = 'Debe seleccionar los <b>colores</b>';
+		if($validar_colores){
+			if(!$mascota->getCantidadColores()){
+				$errors[] = 'Debe seleccionar los <b>colores</b>';
+			}
 		}
 		
 		if(!$mascota->validateFields() || $errors){
 			Core_App::getInstance()->addErrorMessage(self::getInstance()->__t("No se pudo registrar la mascota"));
 			Core_Helper::LoadValidationTranslation();
+			//var_dump($mascota->getValidationMessages());
 			if($mascota->getValidationMessages())
 				foreach($mascota->getValidationMessages() as $key=>$messages){
 					foreach($messages as $message){
@@ -411,7 +442,10 @@ class Frontend_Mascota_Helper extends Frontend_Helper{
 		}
 		$nombre = $mascota->getNombre();
 		$mascota->setData(array())->setId($id_mascota);//para evitar updatear todos los campos
-		$mascota->setParaAdoptar();
+		$mascota
+			->setParaAdoptar()
+			->setEstadoAdopcionOferta()
+		;
 		if(!$mascota->update()){
 			Core_App::getInstance()->addErrorMessage(self::getInstance()->__t('Error en la acción, no se pudo guardar'), true);
 			return false;

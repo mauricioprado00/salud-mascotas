@@ -5,15 +5,20 @@
 	window.select_typeable = function(){
 	}
 	window.select_typeable.prototype = {
+		prev_val: null,
 		jqcontrol: null,
 		jqoptions: null,
 		jqdropdown_button: null,
 		jqselect: null,
 		jqinput: null,
+		jqvalue_holder: null,
 		parent_loader:null,
 		url_search: null,
 		aditional_data: null,
 		recently_loaded: 0,
+		use_on_keyup: false,
+		use_on_blur: true,
+		use_on_change: true,
 		init: function(params){
 			if(window.select_typeable.registered_items == null){
 				window.select_typeable.registered_items = [];
@@ -28,7 +33,8 @@
 			this.jqoptions = this.jqcontrol.find('ul.options');
 			this.jqdropdown_button = this.jqcontrol.find('.dropdown_button');
 			this.jqselect = this.jqcontrol.find('select');
-			this.jqinput = this.jqcontrol.find('input');
+			this.jqinput = this.jqcontrol.find('input.typeable');
+			this.jqvalue_holder = this.jqcontrol.find('.value_holder');
 			this.jqinput.attr('name', this.jqselect.attr('name'));
 			this.jqinput.attr('id', this.jqselect.attr('id'));
 			this.jqinput.attr('title', this.jqselect.attr('title'));
@@ -36,6 +42,10 @@
 			this.jqselect.removeAttr('id');
 			this.jqselect.removeAttr('title');
 			this.parent_loader = params.parent_loader;
+			this.use_on_keyup = params.use_on_keyup;
+			this.use_on_blur = params.use_on_blur;
+			this.use_on_change = params.use_on_change;
+			//window.console.log(this.use_on_keyup);
 //			this.jqinput.hover(function(){
 //				that.addClass('actashover');
 //			})
@@ -45,7 +55,12 @@
 			var tagName = this.getParentLoader().get(0).tagName.toLowerCase();
 			if(tagName=='input'){
 				var handler = this.on_search.bindAsEventListener(this,'input');
-				this.getParentLoader().blur(handler).change(handler);	
+				if(this.use_on_blur)
+					this.getParentLoader().blur(handler).change(handler);
+				if(this.use_on_keyup)
+					this.getParentLoader().keyup(handler);	
+				if(this.use_on_change)
+					this.getParentLoader().change(handler);
 			}
 			else if(tagName=='select'){
 				this.getParentLoader().change(this.on_search.bindAsEventListener(this,'select'));
@@ -134,6 +149,10 @@
 		},
 		handle_input_keyup: function(e){
 			var val = this.jqinput.val();
+			if(this.jqvalue_holder.length){
+				if(this.prev_val!=val)
+					this.jqvalue_holder.val(null);
+			}
 			this.jqoptions.find('li').each(function(){
 				try{
 				if(jQuery(this).text().split(val).length==1)
@@ -145,6 +164,7 @@
 			});
 			this.jqcontrol.addClass('select_typeable_typing')
 			//this.show_options();
+			this.prev_val = val;
 		},
 		contador_search: 0,
 		on_search: function( event, type ){
@@ -201,6 +221,8 @@
 			//window.console.log(data);
 		},
 		getParentLoader: function(){
+			if(!this.parent_loader)
+				return null;
 			//window.console.log(jQuery('#'+this.parent_loader), this.parent_loader);
 			return jQuery('#'+this.parent_loader);
 		},
@@ -232,11 +254,23 @@
 //			window.console.log(array);
 			jQuery(array).each(function(idx, el){
 //				window.console.log(el);
-				jqli = jQuery('<li></li>').text(el);
+				var text = el;
+				var id = null;
+				if(typeof(text)=='object'){
+					text = el.text;
+					id = el.id;
+				}
+				jqli = jQuery('<li></li>').text(text);
 				jqli.appendTo(that.jqoptions);
 				jqli
 					.click(function(){
-						that.jqinput.val(jQuery(this).text()).change();
+						that.jqinput.val(jQuery(this).text());
+						that.prev_val = text;
+						if(that.use_on_change)
+							that.jqinput.change();
+						if(id&&that.jqvalue_holder.length){
+							that.jqvalue_holder.val(id);
+						}
 						that.hide_options();
 						return false;
 					})

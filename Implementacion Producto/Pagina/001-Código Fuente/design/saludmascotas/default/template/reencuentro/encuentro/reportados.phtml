@@ -7,9 +7,9 @@ $id_mascota_perdida = $mascota_perdida->getId();
 <?php if(!isset($reencuentros)||!$reencuentros->count()): ?> 
 <h3>Nadie ha reportado coincidencias</h3>
 <?php return; endif; ?> 
-<ul class="listado_mascotas listado_mascotas_reencuentros_reportados listado_mascotas_reencuentros_reportados_encuentro">
+<ul class="listado_entidad listado_mascotas listado_mascotas_reencuentros_reportados listado_mascotas_reencuentros_reportados_encuentro">
 	<?php foreach($reencuentros as $idx=>$reencuentro): $class = $idx%2?'pair':'even'; ?> 
-	<li class="mascota_item mascota_item_<?php print $class; ?>">
+	<li class="listado_entidad_item mascota_item listado_entidad_item_<?php print $class; ?>">
 		<?php
 		$encuentro = $reencuentro->getEncuentro();
 		echo $this->getChild('encuentro_view')

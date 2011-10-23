@@ -3,4 +3,8 @@
 		<type>location_selector_nn4d</type>
 		<class>Maps_Block_LocationSelectorNn4d</class>
 	</block>
+	<block>
+		<type>location_selector_gmap</type>
+		<class>Maps_Block_LocationSelectorGmap</class>
+	</block>
 </global>

@@ -772,7 +772,26 @@ class Core_Object
         }
         return $str;
     }
-
+	public function appData($key, $value){
+		$args = func_get_args();
+		array_shift($args);
+		//$key = $this->_underscore(substr($method,3));
+		$data = $this->getData($key, isset($arg) ? $arg : null);
+		if($data === null){
+			$data = array();
+		}
+		if(is_array($data)){
+			foreach($args as $arg){
+				array_push($data, $arg);
+			}
+		}
+		elseif(is_string($data)){
+			foreach($args as $arg){
+				$data .= $arg;
+			}
+		}
+		$result = $this->setData($key, $data);
+	}
     /**
      * Set/Get attribute wrapper
      *

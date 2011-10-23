@@ -84,6 +84,11 @@
 			google.maps.event.addListener(marker, 'click', callback);
 			return true;
 		},
+		removeMarker: function(marker_id){
+			var that = this;
+			var marker = this.markers[marker_id];
+			marker.setMap(null);
+		},
 		addInfoWindow: function(marker_id, contentString){
 			var that = this;
 			var marker = this.markers[marker_id];
@@ -123,6 +128,33 @@
 		},
 		setZoom: function(zoom){
 			return this.map.setZoom(zoom);
+		},
+		addClickHandler: function(listener){
+			google.maps.event.addListener(this.map, 'click', listener.bindAsEventListener());
+			return this;
+		},
+		addClickHandlerChoose: function(params){
+			this.addClickHandler(this.choose_point.bind(null,this,params));
+			return this;
+		},
+		choose_point: function(_this, params, point){
+			params.jqlat.val(point.latLng.lat()*60);
+			params.jqlng.val(point.latLng.lng()*60);
+			_this.addSelectionMarker(point.latLng.lat(), point.latLng.lng());
+//			window.console.log(this);
+//			window.console.log(arguments);
+		},
+		my_seleccion_marker: null,
+		addSelectionMarker: function(lat, lng){
+			if(this.my_seleccion_marker!=null){
+				this.removeMarker(this.my_seleccion_marker);
+			}
+			return this.my_seleccion_marker = this.addMarker({
+				lat: lat,
+				lng: lng,
+				title:'ubicacion',
+				icon:'normal'
+			});
 		}
 	}
 })();

@@ -16,8 +16,10 @@ class Frontend_Mascota_Block_ListadoEncontre extends Frontend_Mascota_Block_List
 			$wheres = array(
 				Db_Helper::equal('id_dueno'),
 				Db_Helper::equal('activa','si'),
+				Db_Helper::equal('estado_adopcion','no'),
 				Db_Helper::in('id_estadomascota', true, $estados),
 			);
+			$this->addFilters($wheres);
 			$usuario = Frontend_Usuario_Model_User::getLogedUser();
 			$this->search_object->setIdDueno($usuario->getId());
 			$this->search_object->setWhereByArray($wheres);
@@ -29,6 +31,9 @@ class Frontend_Mascota_Block_ListadoEncontre extends Frontend_Mascota_Block_List
 	}
 	protected function getUrlPagina($pagina=null){
 		return $this->getUrl(Frontend_Mascota_Helper::getUrlEncontre($pagina));
+	}
+	public function getUrlNuevaMascota(){
+		return $this->getUrl(Frontend_Mascota_Encuentro_Helper::getUrlAgregar());
 	}
 }
 ?>

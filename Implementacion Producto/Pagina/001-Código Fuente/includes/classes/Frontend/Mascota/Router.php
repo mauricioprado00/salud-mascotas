@@ -5,6 +5,7 @@ class Frontend_Mascota_Router extends Frontend_Router_Abstract{
 		$this->addActions(
 			'usuario'
 			,'encontre'
+			,'quiero_adoptar'
 			,'agregar'
 			,'editar'
 			,'upload_foto'
@@ -67,6 +68,24 @@ class Frontend_Mascota_Router extends Frontend_Router_Abstract{
 //		;
 		$this->setActiveLeftMenu('mascotas_usuario_mis_mascotas');
 	}
+	protected function quiero_adoptar($numero_pag=0){
+		if($this->RedirectIfNotLoged())
+			return true;
+		Core_App::getInstance()->setPagina($numero_pag);
+		$this->setPageReference('Mascotas', 'a adoptar');
+		Core_App::getLayout()
+			->setModo('saludmascotas')
+			->addAction('mascota_quiero_adoptar_listado')
+		;
+		$this->showLeftMenu('usuario');
+		
+		//loaded layout
+//		Core_App::getLoadedLayout()
+//			->getBlock('form_edit')//$x = $this->getObjectToEdit();
+//			->setObjectToEdit($object_to_edit)
+//		;
+		$this->setActiveLeftMenu('mascotas_usuario_quiero_adoptar');
+	}
 	protected function agregar($paso=1, $preserve_mascota_edicion=false){
 		return $this->editar($paso, 'new', $preserve_mascota_edicion);
 	}
@@ -101,6 +120,10 @@ class Frontend_Mascota_Router extends Frontend_Router_Abstract{
 		}
 		if(!$domicilio_mascota)
 			$domicilio_mascota = new Frontend_Model_Domicilio();
+//		if($paso==2){
+//	var_dump($domicilio_mascota->getData());
+//		die(__FILE__.__LINE__);
+//		}
 //		echo Core_Helper::DebugVars($object_to_edit->getData(),$domicilio_mascota->getData());
 //		die(__FILE__.__LINE__);
 		switch($paso){
@@ -238,11 +261,12 @@ class Frontend_Mascota_Router extends Frontend_Router_Abstract{
 			$fotos_mascotas = $object_to_edit->getListFoto(true);//el true es para que permita pk nula
 //			var_dump(count($fotos_mascotas));
 //			die(__FILE__.__LINE__);
-			$fotos_addedit
-				->setUrlPhoto($this->getHelper()->getUrlPhoto())
-				->setIdMascota($object_to_edit->getId())
-				->setPhotoList($fotos_mascotas)
-			;
+			if($fotos_addedit)
+				$fotos_addedit
+					->setUrlPhoto($this->getHelper()->getUrlPhoto())
+					->setIdMascota($object_to_edit->getId())
+					->setPhotoList($fotos_mascotas)
+				;
 		}
 		elseif($paso==2){
 			$domicilio_usuario = $this->getHelper()->getDomicilioUsuario(true);

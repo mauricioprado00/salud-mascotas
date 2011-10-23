@@ -1,0 +1,35 @@
+<global>
+	<modules>
+<!--
+		<Frontend_Mascota_Adopcion_Oferta />
+		<Frontend_Mascota_Adopcion_Solicitud />
+		<Frontend_Mascota_Adopcion_Conciliacion />
+-->
+	</modules>
+	<routers>
+		<Frontend_Etiqueta_Router>etiqueta</Frontend_Etiqueta_Router>
+	</routers>
+	<block>
+		<type>listado_etiquetas</type>
+		<class>Frontend_Etiqueta_Block_Listado</class>
+	</block>
+	<block>
+		<type>listado_usuario_etiqueta_agregar</type>
+		<class>Frontend_Etiqueta_Block_Listado_Usuario_Item_Agregar</class>
+	</block>
+	<!--
+	<block>
+		<type>mascota_etiqueta_listado_pendientes</type>
+		<class>Frontend_Mascota_Etiqueta_Block_ListadoPendientes</class>
+	</block>
+	<block>
+		<type>mascota_etiqueta_listado_asignadas</type>
+		<class>Frontend_Mascota_Etiqueta_Block_ListadoAsignadas</class>
+	</block>
+	-->
+	<design>
+	</design>
+	<layouts>
+		<saludmascotas>Saludmascotas_Etiqueta.xml</saludmascotas>
+	</layouts>
+</global>

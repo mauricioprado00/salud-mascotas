@@ -1,0 +1,29 @@
+<global>
+	<modules>
+<!--
+		<Frontend_Mascota_Adopcion_Oferta />
+		<Frontend_Mascota_Adopcion_Solicitud />
+		<Frontend_Mascota_Adopcion_Conciliacion />
+-->
+	</modules>
+	<routers>
+		<Frontend_Mascota_Castracion_Router>mascotas/castracion</Frontend_Mascota_Castracion_Router>
+	</routers>
+	<block>
+		<type>mascota_castracion_listado_pendientes</type>
+		<class>Frontend_Mascota_Castracion_Block_ListadoPendientes</class>
+	</block>
+	<block>
+		<type>mascota_castracion_listado_asignadas</type>
+		<class>Frontend_Mascota_Castracion_Block_ListadoAsignadas</class>
+	</block>
+	<block>
+		<type>mascota_castracion_listado_realizadas</type>
+		<class>Frontend_Mascota_Castracion_Block_ListadoRealizadas</class>
+	</block>
+	<design>
+	</design>
+	<layouts>
+		<saludmascotas>Saludmascotas_Castracion.xml</saludmascotas>
+	</layouts>
+</global>

@@ -40,6 +40,13 @@ abstract class Db_Model_Table_Abstract extends Db_Model_Abstract{
 		}
 		return $this;
 	}
+	public function removeValidators(){
+		$args = func_get_args();
+		foreach($args as $field){
+			if(isset($this->_validator_chains[$field]))
+				unset($this->_validator_chains[$field]);
+		}
+	}
 	public function validateFields(){
 		$valid = true;
 		foreach($this->_validator_chains as $field=>$validatorChain){

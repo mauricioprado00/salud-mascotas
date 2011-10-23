@@ -1,0 +1,35 @@
+<?php
+$config = Saludmascotas_Model_Patrullaje::getConfiguraciones();
+$max_dias = $config['patrullaje/met2/max_dias'];
+$barrio = $this->getParentBlock()->getParentBlock()->getEntity();
+$dias_ultima_visita = $barrio->getCantidadDiasUltimaVisita();
+$cantidad_avistamientos = $barrio->getCantidadAvistamientos($max_dias);
+$cantidad_perdidas = $barrio->getCantidadPerdidas($max_dias);
+$cantidad_en_guarda = $barrio->getCantidadEnGuarda($max_dias);
+?>
+<li class="informacion_adicional_barrio">
+
+<div>
+	<a href="#" class="mas_info switch_info">Mas Información</a>
+	<a href="#" class="menos_info switch_info">Menos Información</a>
+	<ul class="mas_informacion">
+		<li>
+			<b>Última visita:</b>
+			<em><?php print $dias_ultima_visita.' días'; ?></em>
+		</li>
+		<li>
+			<b>Avistamientos:</b>
+			<em><?php print $cantidad_avistamientos; ?></em>
+		</li>
+		<li>
+			<b>Pérdidas:</b>
+			<em><?php print $cantidad_perdidas; ?></em>
+		</li>
+		<li>
+			<b>En guarda:</b>
+			<em><?php print $cantidad_en_guarda; ?></em>
+		</li>
+	</ul>
+</div>
+
+</li>

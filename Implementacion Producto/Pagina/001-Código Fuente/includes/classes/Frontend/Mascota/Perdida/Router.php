@@ -451,7 +451,7 @@ class Frontend_Mascota_Perdida_Router extends Frontend_Mascota_Router{
 		$this->setActiveLeftMenu('mascotas_usuario_perdi_mi_mascota');
 	}
 	protected function _editar_handle_init_layout($paso=1, $id_mascota=null, $preserve_mascota_edicion=false){
-		$this->setPageReference('Perdí mi mascota', 'Publicar anuncio');
+		$this->setPageReference('Ofertar mascota', 'Publicar anuncio');
 		$handle_type = !isset($id_mascota)||$id_mascota=='new'||!$id_mascota?'nueva':'existente';
 		$handle = array(1=>'datos',2=>'domicilio',3=>'busqueda',4=>'publicacion');
 		$handle = $handle[$paso];

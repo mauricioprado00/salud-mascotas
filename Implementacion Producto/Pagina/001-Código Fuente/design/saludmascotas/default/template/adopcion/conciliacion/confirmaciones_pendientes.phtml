@@ -1,0 +1,31 @@
+<?php //es útf8
+$mascota = $this->getMascota();
+$es_adopcion_oferta = $mascota->esEstadoAdopcionOferta();
+//var_dump($es_adopcion_oferta, ($mascota->getUrlAdopcionSolicitudEditar(0, 1)));
+?>
+<div class="adopcion_conciliacion_confirmaciones_pendientes">
+	<form class="standart wider busqueda" name="form1" method="post">
+		<input type="hidden" name="dummy" value="continuar" />
+		<div>
+			<h2>Datos de Mascota <a href="<?php print $es_adopcion_oferta?$this->getUrl($mascota->getUrlAdopcionOfertaEditar(0, 1)):$this->getUrl($mascota->getUrlAdopcionSolicitudEditar(0, 1)); ?>">Modificar</a></h2>
+			<?php print $this->getChildHtml('view_datos_mascota'); ?>
+		</div>
+		<div>
+			<h2>Posibles coincidencias que has seleccionado<a href="<?php print $es_adopcion_oferta?$this->getUrl($mascota->getUrlAdopcionOfertaEditar(0, 3)):$this->getUrl($mascota->getUrlAdopcionSolicitudEditar(0, 3)); ?>">Modificar</a></h2>
+			<?php print $this->getChildHtml('adopcion_conciliacions_seleccionados'); ?>
+		</div>
+		<div>
+			<h2>Coincidencias reportadas por usuario</h2>
+			<?php print $this->getChildHtml('adopcion_conciliacions_reportados'); ?>
+		</div>
+		<div class="form_row actions_row single_action">
+			<a href="<?php print $this->getUrl($mascota->getUrlEditar()); ?>"><button class="submit button" type="button">Modificar anuncio o buscar nuevas coincidencias</button></a>
+			<ul>
+				<li>
+				<a href="<?php print $this->getUrl($mascota->getUrlFinalizarAnuncioAdopcion()); ?>">
+				<?php print $es_adopcion_oferta?'ya entregé la mascota ':'no quiero adoptar'; ?> (eliminar anuncio)</a>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>

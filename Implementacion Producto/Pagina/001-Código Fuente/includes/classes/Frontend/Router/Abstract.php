@@ -67,8 +67,58 @@ abstract class Frontend_Router_Abstract extends Core_Router_Abstract{
 		}
 		return false;
 	}
+	protected function RedirectIfNotSpa(){
+		if($this->RedirectIfNotLoged())
+			return true;
+		$logeado = Frontend_Usuario_Model_User::getLogedUser();
+		if(!$logeado->esTipoSpa()){
+			Core_Http_Header::Redirect('/', true);
+			return true;
+		}
+		return false;
+	}
 	protected function getLogedUser(){
 		return Frontend_Usuario_Model_User::getLogedUser();
+	}
+	private static $initialized_onthrought = false;
+	public function onThrought($force=false){
+		if(self::$initialized_onthrought)
+			return;
+		$this->initialize_onthrought();
+		self::$initialized_onthrought = true;
+	}
+	public function initialize_onthrought($force=false){
+		$user = Frontend_Usuario_Model_User::getLogedUser();
+		if(!$user)
+			return;
+		$tipo = $user->getTipo();
+		if(!$tipo)
+			return;
+		Core_App::getLayout()
+			->addActions('tipo_usuario_'.$tipo);
+//			var_dump('tipo_usuario_'.$tipo);
+//			die(__FILE__.__LINE__);
+		return;
+//		static $called;if($called&&!$force)return($this);$called=true;
+//		if($user = Admin_User_Model_User::getLogedUser()){
+//			if($user->esSuperadmin()){
+//				Core_App::getLayout()
+//					->addActions('superadmin');
+//			}	
+//		}
+//		if(Admin_App::getInstance()->getModoAjax()){
+//			Core_App::getLayout()
+//				->addActions('modo_ajax');
+//		}
+//		else{
+//			Core_App::getLayout()
+//				->removeActions('modo_ajax');
+//		}
+//		Core_App::getLayout()
+//			->setModo('admin')
+////			->addDesignPaths('admin', 'admin/default/')
+////			->addDesignPaths('admin', 'visualadmin/default/')
+//		;
 	}
 }
 ?>

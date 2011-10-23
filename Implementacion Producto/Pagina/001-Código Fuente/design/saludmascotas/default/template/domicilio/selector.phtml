@@ -47,11 +47,11 @@ $midomicilio = $midomicilio=='si'&&!$domicilio_usuario?'no':$midomicilio;
 		<div class="midomicilio_si_contenido midomicilio_contenido"<?php if($midomicilio=='no'): ?> style="display:none;"<?php endif; ?>>
 			<ul>
 				<li>
-					<strong>País</strong>: <em><?php print htmlentities($domicilio_usuario->getPais())?></em>
-					<strong>Provincia</strong>: <em><?php print htmlentities($domicilio_usuario->getProvincia())?></em>
-					<strong>Localidad</strong>: <em><?php print htmlentities($domicilio_usuario->getLocalidad())?></em>
-					<strong>Barrio</strong>: <em><?php print htmlentities($domicilio_usuario->getBarrio())?></em>
-					<strong>Domicilio</strong>: <em><?php print htmlentities($domicilio_usuario->getCalleNumero())?></em>
+					<strong>País</strong>: <em><?php print htmlentities(utf8_decode($domicilio_usuario->getPais()))?></em>
+					<strong>Provincia</strong>: <em><?php print htmlentities(utf8_decode($domicilio_usuario->getProvincia()))?></em>
+					<strong>Localidad</strong>: <em><?php print htmlentities(utf8_decode($domicilio_usuario->getLocalidad()))?></em>
+					<strong>Barrio</strong>: <em><?php print htmlentities(utf8_decode($domicilio_usuario->getBarrio()->getNombre()))?></em>
+					<strong>Domicilio</strong>: <em><?php print htmlentities(utf8_decode($domicilio_usuario->getCalleNumero()))?></em>
 				</li>
 			</ul>
 		</div>

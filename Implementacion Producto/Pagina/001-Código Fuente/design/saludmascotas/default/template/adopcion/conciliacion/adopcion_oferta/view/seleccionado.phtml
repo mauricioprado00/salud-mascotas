@@ -1,0 +1,56 @@
+<?
+$adopcion_oferta = $this->getAdopcionOferta();
+$usuario = $adopcion_oferta->getUsuario();
+$adopcion_conciliacion = $this->getAdopcionConciliacion();
+
+			$texto = 'Has seleccionado una mascota del usuario <b>' . $usuario->getNombre() .' '.$usuario->getApellido() . '</b> como posible adopción';
+//			if($adopcion_oferta){
+//				if($adopcion_oferta->getTieneMascota()){
+//					$texto .= ' <b>tiene una mascota</b> que podría ser tuya ';
+//				}
+//				else{
+//					$texto .= ' <b>ha visto una mascota</b> que podría ser tuya ';
+//				}
+//			}
+			if($adopcion_conciliacion->esConfirmado()){
+				$texto .= ' y <b>ha confirmado</b> la entrega';
+			}
+			else{
+				$texto .= ' pero todavía <b>no ha confirmado</b> la entrega';
+			}
+			$texto .= '.';
+			if($telefono = $adopcion_conciliacion->getTelefono()){
+				$texto .= ' Puedes contactarte con el telefónicamente a ' . htmlentities($telefono). ' para arreglar la adopción de la mascota.';
+			}
+
+			$p = new Core_Html_Tag_Custom('p');
+			$p->setInnerHtml($texto);
+			echo $p->getHtml();
+
+			$descripcion = trim($adopcion_conciliacion->getDescripcion());
+			if(isset($adopcion_oferta)){
+				$mascota = c(new Frontend_Model_Mascota())
+					->setData($adopcion_oferta->getMascota()->getData())
+					->loadNonTableColumn()
+				;
+				
+				$modo = $this->getModo();
+				$mascota_preview = c($this->getLayout()->getBlock('mascota_preview_'.$modo))
+					->setMascota($mascota)
+				;
+				if($modo=='full'){
+					$mascota_preview->setPhotoList($mascota->getListFoto());
+				}
+				echo $mascota_preview->toHtml();
+			}
+			
+			if($descripcion){
+				$p = new Core_Html_Tag_Custom('p');
+				$p->setInnerHtml($descripcion);
+				echo $p->getHtml();
+			}
+			if($this->getWithLink()){?> 
+			<a class="link_view_mascota" href="<?php print $this->getUrl($mascota->getUrlSimpleView()); ?>">Ver todos los datos</a><?
+			
+			}
+?>

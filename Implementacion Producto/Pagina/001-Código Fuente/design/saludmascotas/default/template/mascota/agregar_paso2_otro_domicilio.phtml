@@ -203,82 +203,88 @@ $lng = $object_to_edit->getLng();
 
 	<script type="text/javascript">
 	<!--
-	function searchLocation(){
+	<?php if($this->getGeocode()==null||$this->getGeocode()): ?> 
+		<?php if(get_class($this->getChild('location_selector'))=='Maps_Block_LocationSelectorNn4d'): ?> 
+			function searchLocation(){
+				
+				var location = [];
+				var direccion = $$('#domicilio').pop().value;
+				if(direccion)
+					location.push(direccion);
+				var localidad = $$('#localidad').pop().value;
+				if(localidad)
+					location.push(localidad);
+				var provincia = $$('#provincia').pop().value;
+				if(provincia)
+					location.push(provincia);
+				var pais = jQuery('#pais option:selected').text();
+				///var pais = $$('#pais').pop().value;
+				if(pais)
+					location.push(pais);
+				location = location.join(',');
+				if(location=='')
+					return;
+				//window.console.log(location);
+				//MapaNavTeq.findAddress(direccion, localidad, provincia, 'argentina');
+				MapaNavTeq.try_geocode(location);
+			}
+			function searchLocation2(){
+				var searchText = new Map24.WebServices.Address();
+				var location = [];
+				var direccion = $$('#domicilio').pop().value;
+				if(direccion)
+					searchText.Street = direccion;
+				var localidad = $$('#localidad').pop().value;
+				if(localidad)
+					searchText.City = localidad;
+				var provincia = $$('#provincia').pop().value;
+				if(provincia)
+					searchText.County = provincia;//District
+				var pais = jQuery('#pais option:selected').text();
+				pais = 'AR';
+				///var pais = $$('#pais').pop().value;
+				if(pais)
+					searchText.Country = pais;
+				//location = location.join(',');
+				//window.console.log(location);
+				//MapaNavTeq.findAddress(direccion, localidad, provincia, 'argentina');
+				window.console.log(searchText instanceof Map24.WebServices.Address);
+				MapaNavTeq.try_geocode(searchText);
+			}
+			
+			Event.observe(document.getElementById('domicilio'), 'keyup', searchLocation);
+			Event.observe(document.getElementById('localidad'), 'keyup', searchLocation);
+			Event.observe(document.getElementById('provincia'), 'change', searchLocation);
+			Event.observe(document.getElementById('pais'), 'change', searchLocation);
+			<?php if($lat && $lng): ?> 
+			function add_address_location(){
+				try{
+					//Create a new location.
+					myLoc = new Map24.Location(<?php print json_encode(array(
+						'Longitude'=>$lng,
+						'Latitude'=>$lat,
+						'Description'=>'Tu domicilio',
+						'LogoURL'=>'http://maptpzone.navteq.com/AJAXAPI/images/pin_maparea_home.png',
+					)); ?>);
+					//Commit the location. Only after calling commit() it is possible
+					//to execute further operations on the location such as hide and show.
+					myLoc.commit();
+					Map24.MapApplication.center(<?php print json_encode(array(
+						'Longitude'=>$lng,
+						'Latitude'=>$lat,
+					)); ?>);
+				}
+				catch(e){
+					setTimeout(add_address_location, 1000);
+				}
+			}
+			add_address_location();
+			<?php else: ?> 
+			setTimeout(searchLocation, 10000);
+			<?php endif; ?> 
+		<?php elseif(get_class($this->getChild('location_selector'))=='Maps_Block_LocationSelectorGmap'): ?> 
 		
-		var location = [];
-		var direccion = $$('#domicilio').pop().value;
-		if(direccion)
-			location.push(direccion);
-		var localidad = $$('#localidad').pop().value;
-		if(localidad)
-			location.push(localidad);
-		var provincia = $$('#provincia').pop().value;
-		if(provincia)
-			location.push(provincia);
-		var pais = jQuery('#pais option:selected').text();
-		///var pais = $$('#pais').pop().value;
-		if(pais)
-			location.push(pais);
-		location = location.join(',');
-		if(location=='')
-			return;
-		//window.console.log(location);
-		//MapaNavTeq.findAddress(direccion, localidad, provincia, 'argentina');
-		MapaNavTeq.try_geocode(location);
-	}
-	function searchLocation2(){
-		var searchText = new Map24.WebServices.Address();
-		var location = [];
-		var direccion = $$('#domicilio').pop().value;
-		if(direccion)
-			searchText.Street = direccion;
-		var localidad = $$('#localidad').pop().value;
-		if(localidad)
-			searchText.City = localidad;
-		var provincia = $$('#provincia').pop().value;
-		if(provincia)
-			searchText.County = provincia;//District
-		var pais = jQuery('#pais option:selected').text();
-		pais = 'AR';
-		///var pais = $$('#pais').pop().value;
-		if(pais)
-			searchText.Country = pais;
-		//location = location.join(',');
-		//window.console.log(location);
-		//MapaNavTeq.findAddress(direccion, localidad, provincia, 'argentina');
-		window.console.log(searchText instanceof Map24.WebServices.Address);
-		MapaNavTeq.try_geocode(searchText);
-	}
-	
-	Event.observe(document.getElementById('domicilio'), 'keyup', searchLocation);
-	Event.observe(document.getElementById('localidad'), 'keyup', searchLocation);
-	Event.observe(document.getElementById('provincia'), 'change', searchLocation);
-	Event.observe(document.getElementById('pais'), 'change', searchLocation);
-	<?php if($lat && $lng): ?> 
-	function add_address_location(){
-		try{
-			//Create a new location.
-			myLoc = new Map24.Location(<?php print json_encode(array(
-				'Longitude'=>$lng,
-				'Latitude'=>$lat,
-				'Description'=>'Tu domicilio',
-				'LogoURL'=>'http://maptpzone.navteq.com/AJAXAPI/images/pin_maparea_home.png',
-			)); ?>);
-			//Commit the location. Only after calling commit() it is possible
-			//to execute further operations on the location such as hide and show.
-			myLoc.commit();
-			Map24.MapApplication.center(<?php print json_encode(array(
-				'Longitude'=>$lng,
-				'Latitude'=>$lat,
-			)); ?>);
-		}
-		catch(e){
-			setTimeout(add_address_location, 1000);
-		}
-	}
-	add_address_location();
-	<?php else: ?> 
-	setTimeout(searchLocation, 10000);
+		<?php endif; ?> 
 	<?php endif; ?> 
 	// -->
 	</script>

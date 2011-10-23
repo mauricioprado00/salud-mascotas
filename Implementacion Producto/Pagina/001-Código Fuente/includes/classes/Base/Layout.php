@@ -90,6 +90,16 @@ class Base_Layout extends Base_Singleton{
 			$this->actions = $actions;
 		return($this);
 	}
+	public function hasActions(){
+		$args = func_get_args();
+		if(!count($args))
+			return false;
+		$actions = $this->getActions();
+		foreach($args as $action)
+			if(!in_array($action, $actions))
+				return false;
+		return true;
+	}
 	public function getActions(){
 		$args = func_get_args();
 		return(call_user_method_array('_getActions', ($obj=$this?$this:self::getInstance()), $args));

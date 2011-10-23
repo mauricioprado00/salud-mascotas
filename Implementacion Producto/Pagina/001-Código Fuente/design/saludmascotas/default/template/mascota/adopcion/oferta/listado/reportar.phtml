@@ -1,0 +1,83 @@
+<?php //útf8
+$object_to_edit = $this->getObjectToEdit();
+
+
+?>
+
+<div class="addeditmascota_publicacion">
+	<div class="reportar_a_dueno">
+		<h2>¡Enhorabuena! Informale a XXXX sobre su mascota</h2>
+		<div class="textbox">
+			<div class="holding share_row half_size edad">
+				<?php
+					$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+					$input
+						->setMaxlength(300)
+						->setType('text')
+						->setAutocomplete('on')
+						->setTitle('Nombre')
+						->setName('nombre')
+						->setId('nombre')
+					;
+					echo $input->getHtml();
+					//<input type="text" autocomplete="on" title="edad" name="edad" value="">
+				?> 
+				<span class="holder">Nombre</span>
+				<!--<span class="help">Ingresa tu edad</span>-->
+			</div>
+			<div class="holding share_row half_size">
+				<?php
+					$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+					$input
+						->setMaxlength(20)
+						->setType('text')
+						->setTitle('Email')
+						->setName('email')
+						->setId('email')
+					;
+					echo $input->getHtml();
+				?>
+				<span class="holder">Email</span>
+				<span class="help"><?php print $label_edad; ?></span>
+			</div>
+			<div style="clear:both;"></div>
+		</div>
+		<div class="textarea">
+			<div class="holding">
+			<?
+				$input = Core::getObject('Core_Html_Tag_Custom', 'textarea');
+				$input
+					->setId('descripcion')
+					->setName('descripcion')
+					->setInnerHtml(/*htmlentities*/($descripcion))
+				;
+				echo $input->getHtml();
+			?> 
+			<span class="holder">Mensaje / descripción</span>
+			</div>
+		</div>
+		<div class="form_row actions_row single_action">
+			<button class="submit button" type="submit" name="notificar">Notificar a Dueño</button>
+			<div style="clear:both;"></div>
+			<ul>
+				<li><a href="#">Puedes crear un anuncio de adopcion_solicitud</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="reportar_a_dueno_toggler form_row actions_row two_actions">
+		<button class="submit button" type="button" name="si_la_vi">Si la ví</button>
+		<button class="submit button" type="submit" name="no_la_vi">No la ví</button>
+		<div style="clear:both;"></div>
+	</div>
+</div>
+<script type="text/javascript">
+<!--
+	jQuery(document).ready(function(){
+		jQuery('.reportar_a_dueno_toggler [name=si_la_vi]').click(function(){
+			jQuery('.reportar_a_dueno').toggle();
+			jQuery('.reportar_a_dueno_toggler').toggle();
+		});
+	});
+-->
+</script>

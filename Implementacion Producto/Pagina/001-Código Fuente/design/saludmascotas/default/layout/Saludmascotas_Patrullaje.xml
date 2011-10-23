@@ -1,0 +1,99 @@
+﻿<layout><!-- útf8 -->
+	<patrullaje_prioridades>
+		<reference name="html_head">
+		<!--
+			<script>js/jQuery/fancybox/jquery.fancybox-1.3.1.pack.js</script>
+			<css>js/jQuery/fancybox/jquery.fancybox-1.3.1.css</css>
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.core.js</script>
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.widget.js</script>
+			<css>fullcalendar-1.5.2/fullcalendar/fullcalendar.css</css>
+			<css>fullcalendar-1.5.2/fullcalendar/fullcalendar.print.css</css>
+			<script>fullcalendar-1.5.2/fullcalendar/fullcalendar.min.js</script>
+			<css>jquery-ui-1.8.4-126/development-bundle/themes/base/jquery.ui.all.css</css>
+			-->
+			<script>js/patrullaje_prioridades_selector.js</script>
+		</reference>
+		<reference name="contenido">
+			<patrullaje_prioridades_list name="patrullaje_prioridades_list">
+				<action method="setData">
+					<key>help_text</key>
+					<text><![CDATA[
+					A continuación se le presenta una sugerencia de prioridades de barrios a recorrer. Puede registrar los barrios que ya ha recorrido seleccionandolos y presionando "registrar visita"
+					]]></text>
+				</action>
+				<action method="setData">
+					<key>show_link_configurar_prioridades</key>
+					<value>1</value>
+				</action>
+				<template name="list_entity_template" template="patrullaje/prioridades/item.phtml">
+					<block name="child_right">
+						<template template="patrullaje/prioridades/item/selector.phtml" />
+					</block>
+					<block name="child_left">
+						<template template="patrullaje/prioridades/item/informacion_adicional.phtml" />
+					</block>
+				</template>
+			</patrullaje_prioridades_list>
+			<patrullaje_patrullaje_listado name="patrullaje_listado_patrullaje">
+			<!--
+				<action method="addLink">
+					<url>patrullajes/adopcion/oferta/agregar</url>
+					<label>Ofrecer Adopcion</label>
+				</action>
+			-->
+				<template name="list_entity_template" template="patrullaje/listado/item.phtml">
+					
+				</template>
+			</patrullaje_patrullaje_listado>
+		</reference>
+	</patrullaje_prioridades>
+	<patrullaje_recorrido>
+		<reference name="html_head">
+		<!--
+			<script>js/jQuery/fancybox/jquery.fancybox-1.3.1.pack.js</script>
+			<css>js/jQuery/fancybox/jquery.fancybox-1.3.1.css</css>
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.core.js</script>
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.widget.js</script>
+			<css>fullcalendar-1.5.2/fullcalendar/fullcalendar.css</css>
+			<css>fullcalendar-1.5.2/fullcalendar/fullcalendar.print.css</css>
+			<script>fullcalendar-1.5.2/fullcalendar/fullcalendar.min.js</script>
+			<css>jquery-ui-1.8.4-126/development-bundle/themes/base/jquery.ui.all.css</css>
+			-->
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.core.js</script>
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.widget.js</script>
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.datepicker.js</script>
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/i18n/jquery.ui.datepicker-es.js</script>
+			<css>jquery-ui-1.8.4-126/development-bundle/themes/base/jquery.ui.all.css</css>
+			<script>js/patrullaje_prioridades_selector.js</script>
+		</reference>
+		<reference name="contenido">
+			<patrullaje_prioridades_list name="patrullaje_prioridades_list" html_class="listado_registro">
+				<action method="setData">
+					<key>help_text</key>
+					<text><![CDATA[
+					A continuación se le presentan los barrios que ha seleccionado para registrar en el recorrido.
+					Debe ingresar la fecha para continuar con el registro.
+					]]></text>
+				</action>
+				<template name="form_elements" template="patrullaje/registro.phtml" />
+				<template name="list_entity_template" template="patrullaje/prioridades/item.phtml">
+					<block name="child_right">
+						<template template="patrullaje/prioridades/item/selector.phtml" selected_default="true" />
+					</block>
+				</template>
+			</patrullaje_prioridades_list>
+		</reference>
+	</patrullaje_recorrido>
+	<patrullaje_configurar_prioridades>
+		<reference name="html_head">
+				<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.core.js</script>
+				<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.widget.js</script>
+				<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.mouse.js</script>
+				<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.slider.js</script>
+			<css>jquery-ui-1.8.4-126/development-bundle/themes/base/jquery.ui.all.css</css>
+		</reference>
+		<reference name="contenido">
+			<template name="patrullaje_configurar" template="patrullaje/configurar.phtml" />
+		</reference>
+	</patrullaje_configurar_prioridades>
+</layout>

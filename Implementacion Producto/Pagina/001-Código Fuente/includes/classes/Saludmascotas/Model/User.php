@@ -1,6 +1,7 @@
 <?
 /**
  *@referencia Domicilio(id_domicilio) Saludmascotas_Model_Domicilio(id)
+ *@listar Castracion Saludmascotas_Model_Castracion
 */
 class Saludmascotas_Model_User extends Core_Model_User{
 	public function init(){
@@ -17,6 +18,7 @@ class Saludmascotas_Model_User extends Core_Model_User{
 			->setUsername(null)
 			->setPassword(null)
 			->setIdDomicilio(null)
+			->setTipo(null)
 		;
 		$this->addAutofilterFieldInput('fecha_alta', array('Mysql_Helper','filterTimestampInput'));
 		$this->addAutofilterFieldOutput('fecha_alta', array('Mysql_Helper','filterTimestampOutput'));
@@ -74,6 +76,15 @@ class Saludmascotas_Model_User extends Core_Model_User{
 //		}
 //		return(parent::login($this->username, $this->password));
 //	}
+	public function esTipoSpa(){
+		return $this->getTipo()=='spa';
+	}
+	public function esTipoNormal(){
+		return $this->getTipo()=='normal';
+	}
+	public function esTipoVeterinaria(){
+		return $this->getTipo()=='veterinaria';
+	}
 	public static function getLogedUser(){
 		$_this = new self();
 		

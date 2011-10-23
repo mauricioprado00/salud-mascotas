@@ -47,7 +47,7 @@ CREATE  TABLE IF NOT EXISTS `app_saludmascotas`.`sm_etiqueta_mascota` (
   CONSTRAINT `fk_etiqueta_mascota_etiqueta`
     FOREIGN KEY (`id_etiqueta` )
     REFERENCES `app_saludmascotas`.`sm_etiqueta` (`id` )
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_etiqueta_mascota_mascota`
     FOREIGN KEY (`id_mascota` )

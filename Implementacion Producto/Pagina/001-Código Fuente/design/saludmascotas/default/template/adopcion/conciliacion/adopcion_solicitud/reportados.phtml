@@ -1,0 +1,40 @@
+<?php //es útf8
+$adopcion_conciliacions = $this->getAdopcionConciliacions();
+$mascota_adopcion_oferta = $this->getMascotaAdopcionOferta();
+$id_mascota_adopcion_oferta = $mascota_adopcion_oferta->getId();
+?>
+
+<?php if(!isset($adopcion_conciliacions)||!$adopcion_conciliacions->count()): ?> 
+<h3>Nadie ha reportado coincidencias</h3>
+<?php return; endif; ?> 
+<ul class="listado_entidad listado_mascotas listado_mascotas_adopcion_conciliacions_reportados listado_mascotas_adopcion_conciliacions_reportados_adopcion_solicitud">
+	<?php foreach($adopcion_conciliacions as $idx=>$adopcion_conciliacion): $class = $idx%2?'pair':'even'; ?> 
+	<li class="listado_entidad_item mascota_item listado_entidad_item_<?php print $class; ?>">
+		<?php
+		$adopcion_solicitud = $adopcion_conciliacion->getAdopcionSolicitud();
+		echo $this->getChild('adopcion_solicitud_view')
+			->setAdopcionSolicitud($adopcion_solicitud)
+			->setAdopcionConciliacion($adopcion_conciliacion)
+			->toHtml()
+		;
+				if(!$adopcion_conciliacion->esConfirmado()){?> 
+		<a class="link_confirmar_adopcion_conciliacion" href="<?php print $this->getUrl(Frontend_Mascota_Adopcion_Conciliacion_Helper::getUrlConfirmar($id_mascota_adopcion_oferta, $adopcion_conciliacion->getId())); ?>">Confirmar adopción</a>
+		<div style="clear:both;float:none;"></div><?php
+		}?> 
+	</li>
+	<?php endforeach; ?> 
+</ul>
+<script type="text/javascript">
+<!--
+	jQuery('.link_view_mascota')
+		.fancybox({
+			'width': 460,
+			'height':490,
+	        'autoDimensions':true,
+	        'transitionIn':'none',
+			'transitionOut':'none',
+			'type':'iframe'
+		})
+	;
+-->
+</script>

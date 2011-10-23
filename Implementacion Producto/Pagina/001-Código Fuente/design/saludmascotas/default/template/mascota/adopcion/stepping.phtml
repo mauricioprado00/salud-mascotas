@@ -1,0 +1,46 @@
+<?php
+
+$step = Core_App::getInstance()->getStep();
+$adopcion_oferta = in_array('mascota_adopcion_oferta_addedit', Core_App::getLayout()->getActions());
+$class = $adopcion_oferta?'stepping_adopcion_oferta':'stepping_adopcion_solicitud';
+$url_helper = $adopcion_oferta?Frontend_Mascota_Adopcion_Oferta_Helper::getInstance():Frontend_Mascota_Adopcion_Solicitud_Helper::getInstance();
+$id_mascota = Core_App::getInstance()->getMascota()->getId();
+
+ ?>
+<div class="stepping stepping_adopcion <?php print $class; ?>">
+	<div class="stepping_progress stepping_progress_<?php print $step; ?>">
+	<?php for($i=0; $i<4; $i++): ?>
+		<?php if($step>($i+1)): ?>
+		<a href="<?php print $this->getUrl($url_helper->getUrlEditar($id_mascota, 1, $i+1)); ?>">
+		<?php endif; ?>
+		<?php switch($i): 
+		case 0: ?>
+		<div class="step step_1">
+			<h1>Paso 1</h1>
+			<em>Datos mascota</em>
+		</div>
+		<?php break; ?>
+		<?php case 1: ?>
+		<div class="step step_2">
+			<h1>Paso 2</h1>
+			<em>Ubicación Pérdida</em>
+		</div>
+		<?php break; ?>
+		<?php case 2: ?>
+		<div class="step step_3">
+			<h1>Paso 3</h1>
+			<em>Búsqueda en sitio</em>
+		</div>
+		<?php break; ?>
+		<?php case 3: ?>
+		<div class="step step_4">
+			<h1>Paso 4</h1>
+			<em>Publicación</em>
+		</div>
+		<?php endswitch; ?>
+		<?php if($step>($i+1)): ?>
+		</a>
+		<?php endif; ?>
+	<?php endfor; ?>
+	</div>
+</div>

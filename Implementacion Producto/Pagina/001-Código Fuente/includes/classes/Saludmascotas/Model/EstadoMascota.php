@@ -29,6 +29,9 @@ class Saludmascotas_Model_EstadoMascota extends Core_Model_Abstract{
 	public static function getEstadoVista(){
 		return self::getEstadoByName('vista');
 	}
+	public static function getEstadoNoAplica(){
+		return self::getEstadoByName('na');
+	}
 	public function getDbTableName() 
 	{
 		return 'sm_estadomascota';

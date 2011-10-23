@@ -25,7 +25,7 @@
 			<tbody>
 				<?php while($this->moveNext()): ?> 
 				<?php $class = $this->getCurrentRelativeIndex()%2?'pair':'even'; ?>
-				<tr class="notificacion_item notificacion_item_<?php print $class; ?>">
+				<tr class="notificacion_item notificacion_item_<?php print $this->getCurrentEntity()->esLeida()?'leida':'no_leida'; ?> notificacion_item_<?php print $class; ?>">
 					<?php print $this->entityToHtml(); ?>
 				</tr>
 				<?php endwhile; ?> 

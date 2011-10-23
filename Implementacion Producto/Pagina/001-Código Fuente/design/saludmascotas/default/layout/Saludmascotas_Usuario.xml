@@ -69,13 +69,19 @@
 	</usuario_update>
 	<usuario_update_address>
 		<reference name="html_head">
-			<script charset="utf8" external="true">http://api.maptp.map24.com/ajax?appkey={#CONF_MAP24_APPKEY}</script>
-			<script charset="utf8">js/update_address_nn4d.js</script>
+			<!--<script charset="utf8" external="true">http://api.maptp.map24.com/ajax?appkey={#CONF_MAP24_APPKEY}</script>
+			<script charset="utf8">js/update_address_nn4d.js</script>-->
+			<script charset="utf8" external="true"><![CDATA[http://maps.googleapis.com/maps/api/js?sensor=true&key={#CONF_GMAPS_APPKEY}]]></script>
+			<script>js/gmap.js</script>
+			
 			<script charset="utf8">js/select_typeable.js</script>
 		</reference>
 		<reference name="contenido">
 			<template name="form_edit" template="usuario/update_address.phtml">
+				<!--
 				<location_selector_nn4d name="location_selector" />
+				-->
+				<location_selector_gmap name="location_selector" zoom="15" />
 			</template>
 		</reference>
 	</usuario_update_address>

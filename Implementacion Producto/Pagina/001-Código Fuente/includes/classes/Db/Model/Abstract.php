@@ -145,7 +145,17 @@ abstract class Db_Model_Abstract extends Core_Object{
     }
     protected function resolveOrderBy($order_by, $order_dir){
 		$order_by = $order_by!==null?($this->getWhere()->getFieldName($order_by)):null;//traduce el campo de un alias a el verdaro campo
-		$order_by = $order_by!==null?' ORDER BY '.$this->getDb()->nameToString($order_by).($order_dir&&in_array(trim(strtoupper($order_dir)),array('ASC','DESC'))?' '.$order_dir:''):'';
+		if($order_by!=null){
+			$order_by = explode(',', $order_by);
+			foreach($order_by as &$part){
+				$part = $this->getDb()->nameToString($part);
+				$part = preg_replace('/[`]desc[`]/i', 'DESC', $part);
+				$part = preg_replace('/[`]asc[`]/i', 'ASC', $part);
+			}
+			$order_by = implode(', ', $order_by);
+		}
+		
+		$order_by = $order_by!==null?' ORDER BY '.$order_by.($order_dir&&in_array(trim(strtoupper($order_dir)),array('ASC','DESC'))?' '.$order_dir:''):'';
 		return $order_by;
 	}
 	public function search($order_by=null, $order_dir='ASC', $limit=null, $start=0, $as_objects=true, $columns=null){

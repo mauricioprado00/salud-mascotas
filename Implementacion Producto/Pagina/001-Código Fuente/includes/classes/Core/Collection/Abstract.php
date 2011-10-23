@@ -1,5 +1,22 @@
 <?php 
-abstract class Core_Collection_Abstract extends Core_Object implements IteratorAggregate{
+abstract class Core_Collection_Abstract extends Core_Object implements IteratorAggregate, ArrayAccess{
+	private $_join_class = 'Core_Collection';
+	public function offsetSet($offset, $value) {
+		die('offsetSet no implementado en Core_Collection_Abstract');
+        $this->container[$offset] = $value;
+    }
+    public function offsetExists($offset) {
+    	$_items = $this->getItems();
+    	return isset($_items[$offset]);
+    }
+    public function offsetUnset($offset) {
+    	die('offsetUnset no implementado en Core_Collection_Abstract');
+        unset($this->container[$offset]);
+    }
+    public function offsetGet($offset) {
+    	$_items = $this->getItems();
+    	return isset($_items[$offset])?$_items[$offset]:null;
+    }
 	public function __construct($items=null){
 		parent::__construct();
 		if(func_num_args()){
@@ -236,7 +253,7 @@ abstract class Core_Collection_Abstract extends Core_Object implements IteratorA
 		}
 		return $filtered;
 	}
-	protected function _orderBy($field){
+	protected function _orderBy($field, $reverse=false){
 		$class = get_class($this);
 		$ordered_collection = new $class();
 		$ordered = array();
@@ -255,6 +272,8 @@ abstract class Core_Collection_Abstract extends Core_Object implements IteratorA
 		}
 		$fields = array_keys($ordered);
 		sort($fields);
+		if($reverse)
+			$fields = array_reverse($fields);
 		foreach($fields as $field){
 			foreach($ordered[$field] as $item){
 				$ordered_collection->addItem($item);
@@ -267,8 +286,8 @@ abstract class Core_Collection_Abstract extends Core_Object implements IteratorA
 		}
 		return $ordered_collection;
 	}
-	public function OrderBy($field){
-		return $this->_orderBy($field);
+	public function OrderBy($field, $reverse=false){
+		return $this->_orderBy($field, $reverse);
 	}
 	private function _function_filter_eq($value, $params){
 		return (!isset($value)&&($params['match_null']||!isset($params['value'])))||(isset($value)&&$value==$params['value']);

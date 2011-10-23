@@ -51,7 +51,7 @@ form.standart p{
 form.standart .share_row{
 	float:left;
 }
-form.standart .holding input[type=text], form.standart .holding input[type=password], form.standart .holding select {
+form.standart .holding input[type=text], form.standart .holding input[type=password], form.standart .holding select{
 	width:397px;
 	-moz-border-radius:4px;
 	-khtml-border-radius:4px;
@@ -62,6 +62,9 @@ form.standart .holding input[type=text], form.standart .holding input[type=passw
 	padding:8px 7px 9px;
 	font:19px "Helvetica Neue",Arial,sans-serif;
 	border: 1px solid #CCCCCC !important;
+}
+form.standart .holding .slider{
+	width:397px;
 }
 form.standart textarea{
 	-moz-border-radius:4px;
@@ -724,40 +727,40 @@ form .mascota_fotos_addedit .help{
 	/*termina listado fotos*/
 /*termina mascota*/
 
-.listado_mascotas{
+.listado_entidad{
 	width:439px;
 }
-.listado_mascotas>li{
+.listado_entidad>li{
 	padding:4px 10px;
 }
-.listado_mascotas>li>*{
+.listado_entidad>li>*{
 	float:left;
 }
-.listado_mascotas>li.mascota_item_even{
+.listado_entidad>li.listado_entidad_item_even{
 	background-color:#FFFF7A;
 }
-.listado_mascotas>li .image{
+.listado_entidad>li .image{
 	margin-right:10px;
 }
-.listado_mascotas>li .column1, .listado_mascotas li .column2{
+.listado_entidad>li .column1, .listado_entidad li .column2{
 	width:165px;
 }
-.listado_mascotas>li .column1{
+.listado_entidad>li .column1{
 	margin-right:5px;
 }
-.listado_mascotas>li .column2{
+.listado_entidad>li .column2{
 	
 }
-.listado_mascotas>li .column2>li>a{
+.listado_entidad>li .column2>li>a{
 	font-weight:bold;
 }
-.listado_mascotas>li>ul>li>b{
+.listado_entidad>li>ul>li>b{
 	font-weight:bold;
 }
-.listado_mascotas>li>ul>li>em{
+.listado_entidad>li>ul>li>em{
 	
 }
-.listado_mascotas > li > .link_confirmar_reencuentro{
+.listado_entidad > li > .link_confirmar_reencuentro{
 	float:none;
 }
 
@@ -777,7 +780,7 @@ form .mascota_fotos_addedit .help{
 	content: "  ·  ";
 }
 
-form.wider .holding input[type=text], form.wider .holding input[type=password], form.wider .holding select{
+form.wider .holding input[type=text], form.wider .holding input[type=password], form.wider .holding select, form.wider .holding .slider{
 	width:423px;/*diff 26px*/	
 }
 form.wider textarea{
@@ -901,6 +904,9 @@ form.wider .two_actions input+input, form.wider .two_actions button+button{
 	padding:5px;
 	width: 488px;
 }
+.notificacion_view .notificacion table{
+	width:100%;
+}
 .notificacion_usuario_listado_view table tbody tr td{
 	
 	vertical-align: middle;
@@ -940,8 +946,18 @@ form.wider .two_actions input+input, form.wider .two_actions button+button{
 	text-align:left;
 	font-weight:bold;
 }
+.notificacion_usuario_listado_view .notificacion_action{
+	font-size:9px;
+	visibility:hidden;
+}
+.notificacion_usuario_listado_view td:hover .notificacion_action{
+	visibility:visible;
+}
+.notificacion_item_no_leida, .notificacion_item_no_leida a, .notificacion_item_no_leida b, .notificacion_item_no_leida em{
+	font-weight:bold;
+}
 /*termina notificacion*/
-.mascotas_usuario_tab{
+.tab_interno{
 	height:39px;
 	display:block;
 	margin-top:20px;
@@ -963,11 +979,11 @@ form.wider .two_actions input+input, form.wider .two_actions button+button{
 	box-shadow:3px 3px 7px rgba(0, 0, 0, 0.79);
 	*/
 }
-.mascotas_usuario_tab>li{
+.tab_interno>li{
 	display:block;
 	float:left;
 }
-.mascotas_usuario_tab>li>a{
+.tab_interno>li>a{
 	
 	margin:0;
 	overflow:hidden;
@@ -1005,23 +1021,23 @@ form.wider .two_actions input+input, form.wider .two_actions button+button{
 	padding:8px 8px 8px 8px;
 	/*width:164px;*/
 }
-.mascotas_usuario_tab>li.active>a, .mascotas_usuario_tab>li>a:hover{
+.tab_interno>li.active>a, .tab_interno>li>a:hover{
 	background:#FFC63E url(../img/buttons/bg-btn-yellow3.png) repeat-x 0 0;
 	border:1px solid #fa2;
 	text-shadow:0 1px 0 rgba(0, 0, 0, 0.1), 0 -1px 0 rgba(0, 0, 0, 0.1), 1px 0 0 rgba(0, 0, 0, 0.1), -1px 0 0 rgba(0, 0, 0, 0.1), 0 2px 0 #FFEE66, 2px 0 0 #FFEE66;
 	/*text-shadow:0 1px 0 #fe6;*/
 	/*0 1px 0 rgba(0, 0, 0, 0.1), 0 -1px 0 rgba(0, 0, 0, 0.1), 1px 0 0 rgba(0, 0, 0, 0.1), -1px 0 0 rgba(0, 0, 0, 0.1)*/
 }
-.mascotas_usuario_tab>li>a:hover{
+.tab_interno>li>a:hover{
 	color:#333;
 
 }
-.mascotas_usuario_tab>li>a:focus,.mascotas_usuario_tab>li.active>a:hover{
+.tab_interno>li>a:focus,.tab_interno>li.active>a:hover{
 	background-position:0 -5px;
 	color:#111;
 }
 /*
-.mascotas_usuario_tab>li+li{
+.tab_interno>li+li{
 	margin-top:10px;
 }*/
 
@@ -1046,6 +1062,11 @@ form.wider .two_actions input+input, form.wider .two_actions button+button{
 }
 */
 /*comienza paso3 coincidencias*/
+.show_select_coincidencias_paso3>ul>li>h3{
+	float: right;
+    font-weight: bold;
+    width: 253px;
+}
 .show_select_coincidencias_paso3>ul>li{
 	padding:10px 0;
 }
@@ -1108,35 +1129,38 @@ form.wider .two_actions input+input, form.wider .two_actions button+button{
 	height:50px;
 }
 	/*comienza específico perdida/encuentro*/
-	.stepping_encuentro_perdida{
+	.stepping_adopcion, .stepping_encuentro_perdida{
 		background-image:url("../img/progress/bk-perdida-encuentro.png");
 	}
-	.stepping_encuentro_perdida .stepping_progress{
+	.stepping_adopcion .stepping_progress, .stepping_encuentro_perdida .stepping_progress{
 		background-image:url("../img/progress/progress-perdida-encuentro.png");
 	}
-	.stepping_encuentro_perdida .step_1{
+	.stepping_adopcion .step_1, .stepping_encuentro_perdida .step_1{
 		width:85px;
 	}
-	.stepping_encuentro_perdida .step_2{
+	.stepping_adopcion .step_2, .stepping_encuentro_perdida .step_2{
 		width:114px;
 	}
-	.stepping_encuentro_perdida .step_3{
+	.stepping_adopcion .step_3, .stepping_encuentro_perdida .step_3{
 		width:108px;
 	}
-	.stepping_encuentro_perdida .step_4{
+	.stepping_adopcion .step_4, .stepping_encuentro_perdida .step_4{
 		width:76px;
 	}
-	.stepping_encuentro_perdida .stepping_progress_1{
+	.stepping_adopcion .stepping_progress_1, .stepping_encuentro_perdida .stepping_progress_1{
 		background-position:-352px 0;
 	}
-	.stepping_encuentro_perdida .stepping_progress_2{
+	.stepping_adopcion .stepping_progress_2, .stepping_encuentro_perdida .stepping_progress_2{
 		background-position:-224px 0;
 	}
-	.stepping_encuentro_perdida .stepping_progress_3{
+	.stepping_adopcion .stepping_progress_3, .stepping_encuentro_perdida .stepping_progress_3{
 		background-position:-102px 0;
 	}
-	.stepping_encuentro_perdida .stepping_progress_4{
+	.stepping_adopcion .stepping_progress_4, .stepping_encuentro_perdida .stepping_progress_4{
 		background-position:0 0;
+	}
+	.mascota_adopcion_solicitud_addedit .fecha_nacimiento,.mascota_adopcion_solicitud_addedit .fecha_nacimiento_hasta{
+		display:none!important;
 	}
 	/*termina específico perdida/encuentro*/
 	/*comienza específico mascota*/
@@ -1283,3 +1307,224 @@ form.wider .two_actions input+input, form.wider .two_actions button+button{
     width: 69px;
 }
 /*termina algo*/
+
+/*comienzo de castracion*/
+.asignar_castracion .form_asignar_castracion{
+	display:none;
+}
+.finalizar_castracion .form_finalizar_castracion{
+	display:none;
+}
+form.standart .asignar_castracion .holding .holder{
+	font:15px "Helvetica Neue",Arial,sans-serif;
+}
+form.wider .asignar_castracion .holding.half_size input[type="text"], form.wider .asignar_castracion .holding.half_size input[type="password"]{
+	width:160px;
+	padding: 0 7px;
+	margin-bottom: 5px;
+}
+form.wider .asignar_castracion textarea{
+	width:160px;
+}
+.asignar_castracion .dropdown_button{
+	top:4px;
+	right:5px;
+}
+form.standart .asignar_castracion .holding.half_size + *{
+	margin:0;
+}
+.asignar_castracion .select_typeable .options{
+	top:23px;
+}
+.asignar_castracion .value_holder{
+	display:none;
+}
+/*fin de castracion*/
+/*comienzo de vacunacion*/
+.vista_cronograma_spa .fc-header-right{
+	visibility: hidden;
+}
+.vacunacion_views{
+	display:none;
+}
+.view_vacunacion li b{
+	font-weight:bold;
+}
+/*fin de vacunacion*/
+/*comienzo prioridades patrullaje*/
+.form_barrio_patrullaje_prioridades p{
+	width: 439px;
+	margin-top:10px;
+}
+.listado_barrios{
+	
+}
+.listado_barrios > li .column1{
+	width:280px;
+}
+.listado_barrios li .column2{
+	width:130px;
+}
+.listado_barrios .selector_barrio{
+	background-image:url(../img/icon/cancel_32.png);
+	background-repeat:no-repeat;
+	padding-left:35px;
+	height:32px;
+	line-height:32px;
+	display:block;
+}
+
+.listado_barrios .deselector_barrio{
+	background-image:url(../img/icon/check_32.png);
+	background-repeat:no-repeat;
+	padding-left:35px;
+	height:32px;
+	display:block;
+	line-height:32px;
+	height:32px;
+	display:none;
+}
+.listado_barrios input[type=checkbox]{
+	display:none;
+}
+.informacion_adicional_barrio .mas_informacion, .informacion_adicional_barrio .menos_info, .informacion_adicional_barrio_enabled .mas_info{
+	display:none;
+}
+.informacion_adicional_barrio_enabled .mas_informacion, .informacion_adicional_barrio_enabled .menos_info{
+	display:inherit;
+}
+.informacion_adicional_barrio .mas_informacion>li>b{
+	font-weight:bold;
+}
+
+/*fin prioridades patrullaje*/
+/*comienzo etiquetas*/
+.etiqueta_listado{
+	position:relative;
+}
+.etiqueta_listado ul{
+	display:inline;
+}
+.etiqueta_listado li{
+	display:inline;
+	margin-right:2px;
+}
+.etiqueta_listado ul.drop_down{
+	position:absolute;
+	z-index:1;
+}
+.etiqueta_listado ul.drop_down li{
+	display:none;
+}
+.etiqueta_listado ul.drop_down li.filtrar{
+	display:block;
+}
+.etiqueta_listado ul.drop_down:hover, .etiqueta_mascota_listado ul.drop_down{
+	background-color:black;
+	padding:2px 5px;
+	-moz-border-radius:4px;
+	-khtml-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+}
+.etiqueta_listado ul.drop_down ul{
+	display:block;
+	padding-left:10px;
+}
+.etiqueta_listado ul.drop_down:hover li{
+	display:block;
+}
+.etiqueta_listado ul.drop_down:hover li.filtrar{
+	display:none;
+}
+.etiqueta_listado li a, .etiqueta_listado li>.filtro_etiqueta{
+	padding:2px 8px;
+	background-color:#EEEEEE;
+	-moz-border-radius:4px;
+	-khtml-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+	display: inline;
+}
+.etiqueta_listado li>.filtro_etiqueta>a{
+	border:none;
+	padding:0px;
+	background:none;
+	-moz-border-radius:0px;
+	-khtml-border-radius:0px;
+	-webkit-border-radius:0px;
+	border-radius:0px;
+}
+.etiqueta_listado li>.filtro_etiqueta>a.eliminar_etiqueta{
+	width:16px;
+	height:16px;
+	background-image:url(../img/icon/delete2.png);
+	background-position:0 5px;
+	background-repeat:no-repeat;
+	display:inline-block;
+	padding-top:5px;
+	visibility:hidden;
+	margin-left:5px;
+}
+.etiqueta_listado li>.filtro_etiqueta:hover>a.eliminar_etiqueta{
+	visibility:visible;
+}
+.etiqueta_listado .seleccionada:hover a{
+	text-decoration:line-through;
+}
+.etiqueta_listado .drop_down{
+	
+}
+.etiqueta_listado .drop_down ul{
+	
+}
+.etiqueta_listado .drop_down li{
+	
+}
+
+.listado_entidad > li > .etiqueta_mascota_listado{
+	float:none;
+}
+.etiqueta_mascota_listado ul.drop_down li{
+	display: inline;
+}
+.etiqueta_mascota_listado ul.drop_down li>a{
+	display:none;
+}
+.etiqueta_mascota_listado ul.drop_down{
+	position:inherit;
+	display:block;
+}
+.etiqueta_mascota_listado ul.drop_down ul{
+	display:inline;
+	padding:0;
+}
+.etiqueta_mascota_listado ul.drop_down:hover ul{
+	display:block;
+	padding-left: 10px;
+}
+.etiqueta_mascota_listado ul.drop_down li.etiqueta_mascota_agregada>a
+,.etiqueta_mascota_listado ul.drop_down li.filtrar>a{
+	display:inline;
+}
+.etiqueta_mascota_listado ul.drop_down li.filtrar{
+	display:inline;
+}
+.etiqueta_mascota_listado ul.drop_down li.etiqueta_mascota_agregada>a{
+	background-color:#BBFFBB;
+}
+.etiqueta_mascota_listado ul.drop_down li.etiqueta_mascota_seleccionada{
+	display:none;
+}
+.etiqueta_mascota_listado ul.drop_down:hover li.etiqueta_mascota_seleccionada>a{
+	display:inline;
+}
+.etiqueta_mascota_listado ul.drop_down:hover li>a{
+	display:inline;
+}
+.etiqueta_mascota_listado ul.drop_down:hover li.filtrar{
+	display:inline;
+}
+
+
+/*fin etiquetas*/

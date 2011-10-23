@@ -1,0 +1,101 @@
+<layout><!-- útf8 -->
+	<vacunacion_cronograma>
+		<reference name="html_head">
+		<!--
+			<script>js/jQuery/fancybox/jquery.fancybox-1.3.1.pack.js</script>
+			<css>js/jQuery/fancybox/jquery.fancybox-1.3.1.css</css>
+			-->
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.core.js</script>
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.widget.js</script>
+			<css>fullcalendar-1.5.2/fullcalendar/fullcalendar.css</css>
+			<!--
+			<css>fullcalendar-1.5.2/fullcalendar/fullcalendar.print.css</css>
+			-->
+			<script>fullcalendar-1.5.2/fullcalendar/fullcalendar.min.js</script>
+			<css>jquery-ui-1.8.4-126/development-bundle/themes/base/jquery.ui.all.css</css>
+		</reference>
+		<reference name="contenido">
+			<vacunacion_cronograma_view name="vacunacion_cronograma_view" />
+		</reference>
+		<reference name="html_body">
+			<action method="appData">
+				<key>html_class</key>
+				<value> vista_cronograma_spa</value>
+			</action>
+		</reference>
+	</vacunacion_cronograma>
+	<vacunacion_agregar>
+		<reference name="html_head">
+			<script charset="utf8" external="true"><![CDATA[http://maps.googleapis.com/maps/api/js?sensor=true&key={#CONF_GMAPS_APPKEY}]]></script>
+			<script>js/gmap.js</script>
+			
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.core.js</script>
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.widget.js</script>
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.datepicker.js</script>
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/i18n/jquery.ui.datepicker-es.js</script>
+			<css>jquery-ui-1.8.4-126/development-bundle/themes/base/jquery.ui.all.css</css>
+			<script charset="utf8">js/select_typeable.js</script>
+		</reference>
+		<reference name="contenido">
+			<vacunacion_agregar name="form_edit">
+				<template name="form_edit_domicilio" template="mascota/agregar_paso2_otro_domicilio.phtml">
+					<location_selector_gmap name="location_selector" zoom="15" />
+				</template>
+			</vacunacion_agregar>
+		</reference>
+	</vacunacion_agregar>
+	<vacunacion_consultar>
+		<reference name="html_head">
+			<script charset="utf8" external="true"><![CDATA[http://maps.googleapis.com/maps/api/js?sensor=true&key={#CONF_GMAPS_APPKEY}]]></script>
+			<script>js/gmap.js</script>
+			<script>js/viewVacunaciones.js</script>
+		</reference>
+		<reference name="contenido">
+			<vacunacion_consultar_view name="vacunacion_consultar_view">
+				<template name="map_swicher" template="vacunacion/consultar/map_swicher.phtml" image_type_visto="it_yellow" image_type_no_visto="it_red">
+					<template name="vacunacion_view" template="vacunacion/view.phtml" />
+					<domicilio_gmap_view name="view_ubicacion" pin_file="img/pin/pin_black.png" pin_hotspot="bottom,right" zoom="13">
+						<action method="addIconType">
+							<name>yellow</name>
+							<file>img/pin/pin_yellow.png</file>
+							<hotspot>bottom,right</hotspot>
+						</action>
+						<action method="addIconType">
+							<name>green</name>
+							<file>img/pin/pin_green.png</file>
+							<hotspot>bottom,right</hotspot>
+						</action>
+						<action method="addIconType">
+							<name>red</name>
+							<file>img/pin/pin_red.png</file>
+							<hotspot>bottom,right</hotspot>
+						</action>
+					</domicilio_gmap_view>
+				</template>
+			</vacunacion_consultar_view>
+		</reference>
+	</vacunacion_consultar>
+	<vacunacion_consulta>
+		<reference name="html_head">
+		<!--
+			<script>js/jQuery/fancybox/jquery.fancybox-1.3.1.pack.js</script>
+			<css>js/jQuery/fancybox/jquery.fancybox-1.3.1.css</css>
+			-->
+			<!--
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.core.js</script>
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.widget.js</script>
+			<css>fullcalendar-1.5.2/fullcalendar/fullcalendar.css</css>
+			-->
+			<!--
+			<css>fullcalendar-1.5.2/fullcalendar/fullcalendar.print.css</css>
+			-->
+			<!--
+			<script>fullcalendar-1.5.2/fullcalendar/fullcalendar.min.js</script>
+			<css>jquery-ui-1.8.4-126/development-bundle/themes/base/jquery.ui.all.css</css>
+			-->
+		</reference>
+		<reference name="contenido">
+			
+		</reference>
+	</vacunacion_consulta>
+</layout>

@@ -1,0 +1,27 @@
+<layout><!-- útf8 -->
+	<default when="accion(mascota_usuario_listado,mascota_encontre_listado)" in="tipo_usuario_spa">
+		<reference name="html_head">
+			<script>js/etiqueta_mascota.js</script>
+		</reference>
+		<reference name="contenido">
+			<listado_etiquetas in="tipo_usuario_spa" after="mascotas_usuario_tab">
+				<template name="etiqueta_renderer" template="etiqueta/listado/renderer.phtml" />
+			</listado_etiquetas>
+		</reference>
+		<reference name="list_entity_template">
+			<listado_usuario_etiqueta_agregar as="final">
+				<template name="etiqueta_renderer" template="etiqueta/listado/usuario/item/renderer.phtml" />
+			</listado_usuario_etiqueta_agregar>
+		</reference>
+	</default>
+	<etiqueta_mascota_agregar>
+		<reference name="contenido">
+			<template name="etiqueta_mascota_agregar" template="etiqueta/mascota/agregar.phtml">
+				<mascota_view name="view_datos_mascota" template="mascota/preview.phtml" />
+				<listado_etiquetas name="selector_etiquetas" template="etiqueta/selector.phtml" html_name="id_parent">
+					<template name="etiqueta_renderer" template="etiqueta/selector/renderer.phtml" />
+				</listado_etiquetas>
+			</template>
+		</reference>
+	</etiqueta_mascota_agregar>
+</layout>

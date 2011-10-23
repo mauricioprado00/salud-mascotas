@@ -27,16 +27,24 @@ class Saludmascotas_Model_Notificacion extends Core_Model_Abstract{
 			,'id_perdida'
 			,'id_encuentro'
 			,'id_reencuentro'
+			,'leida'
 		);
 		$this->addAutofilterFieldInput('hora', array('Mysql_Helper','filterTimestampInput'));
 		$this->addAutofilterFieldOutput('hora', array('Mysql_Helper','filterTimestampOutput'));
 		$this->mailer = new Core_Mailer2();
+	}
+	public function esLeida(){
+		return $this->getLeida()=='si';
+	}
+	public function setLeida($leida=true){
+		return $this->setData('leida', $leida?true:false);
 	}
 	public function getDbTableName() 
 	{
 		return 'sm_notificacion';
 	}
 	public function enviar($email_to=null, $nombre_to=null){
+		return true;//comentado para presentacion
 		$email_from = $this->mailer->From;
 		$nombre_from = $this->mailer->FromName;
 		if(!$email_from){

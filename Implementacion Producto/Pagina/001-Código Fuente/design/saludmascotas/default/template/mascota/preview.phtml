@@ -9,15 +9,25 @@ $extra_data = $this->getExtraData();
 //datos
 $nombre = $mascota->getNombre();
 $edad = $mascota->calcularEdad();
+$edad_hasta = $mascota->calcularEdadHasta();
 $sexo = $mascota->getSexo();
 $castrado = ucfirst($mascota->getCastrado());
 $raza = $mascota->getRaza(false);
 $manto = $mascota->getManto();
 $largo = $mascota->getLongitudPelaje();
-$manto = $manto->getNombre() . ', ' . $largo->getNombre();
-$nombres_colores = Saludmascotas_Model_Color::getNombresColoresFromRgb($mascota->getColoresSeleccionados());
-$nombres_colores = implode(', ', $nombres_colores);
-$manto .= ', ' . $nombres_colores;
+$manto = '';
+if($manto)
+	$manto .= $manto->getNombre();
+if($largo)
+	$manto .= ', ' . $largo->getNombre();
+if($mascota->getColoresSeleccionados()){
+	$nombres_colores = Saludmascotas_Model_Color::getNombresColoresFromRgb($mascota->getColoresSeleccionados());
+	$nombres_colores = implode(', ', $nombres_colores);
+	$manto .= ', ' . $nombres_colores;
+}
+else $nombres_colores = '';
+
+
 $descripcion = $mascota->getDescripcion();
 
 		$id_especie = $mascota->getIdEspecie();
@@ -48,11 +58,17 @@ $descripcion = $mascota->getDescripcion();
 		</li>
 	<?php endforeach; ?>
 	<?php endif; ?>  
+	<?php if($nombre&&$nombre!='sin nombre'): ?> 
 		<li class="nombre">
 			<b>Nombre</b>:<em><?php print $nombre; ?></em>
 		</li>
+	<?php endif; ?>
 		<li class="edad">
-			<b>Edad</b>:<em><?php print $edad; ?></em>
+			<b>Edad</b>:<em><?php print $edad; ?>
+			<?php if($edad_hasta): ?>
+			<?php print ' / '.$edad_hasta; ?>
+			<?php endif; ?>
+			</em>
 		</li>
 		<li class="sexo">
 			<b>Sexo</b>:<em><?php print $sexo; ?></em>
@@ -61,24 +77,39 @@ $descripcion = $mascota->getDescripcion();
 			<b>Castrado</b>:<em><?php print $castrado; ?></em>
 		</li>
 		<li class="raza">
+			<?php if($raza): ?>
 			<b>Raza</b>:<em><?php print $raza; ?></em>
+			<?php endif; ?>
 		</li>
 		<li class="manto">
+			<?php if($manto): ?>
 			<b>Manto</b>:<em><?php print $manto; ?></em>
+			<?php endif; ?>
 		</li>
+		<?php if($id_especie!=1): ?>
 		<li class="descripcion">
-			<b>Descripcion</b>:<em><?php print $descripcion; ?></em>
+			<b>Tamano</b>:<em><?php print Frontend_Mascota_Helper::getTamanoMascota($tamano); ?></em>
 		</li>
+		<?php endif; ?>
+		<li class="descripcion">
+			<?php if($descripcion): ?>
+			<b>Descripcion</b>:<em><?php print $descripcion; ?></em>
+			<?php endif; ?>
+		</li>
+		
+		
 	</ul>
+	<?php if($id_especie==1): ?>
 	<div class="view_tamano_mascota view_tamano_mascota_<?php print $id_especie?>">
 		<?php 
 		if($id_especie==1){
 			$class = 'view_tamano_mascota_option view_tamano_mascota_option_' . preg_replace('/\s+/', '_', strtolower($tamano));
 			echo '<div class="'.$class.'"></div>';
 		}
-		else print $tamano;
+		//else print Frontend_Mascota_Helper::getTamanoMascota($tamano);
 		?> 
 	</div>
+	<?php endif; ?>
 	<div style="clear:both;"></div>
 </div>
 <?php if($fotos_mascota): ?> 

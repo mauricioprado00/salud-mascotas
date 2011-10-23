@@ -1,0 +1,111 @@
+<layout><!-- útf8 -->
+	<default when="accion(mascota_castracion_pendientes,mascota_castracion_asignadas,mascota_castracion_realizadas)">
+		<reference name="html_head">
+			<script>js/jQuery/fancybox/jquery.fancybox-1.3.1.pack.js</script>
+			<css>js/jQuery/fancybox/jquery.fancybox-1.3.1.css</css>
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.core.js</script>
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.widget.js</script>
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.datepicker.js</script>
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/i18n/jquery.ui.datepicker-es.js</script>
+			<css>jquery-ui-1.8.4-126/development-bundle/themes/base/jquery.ui.all.css</css>
+			<script charset="utf8">js/select_typeable.js</script>
+			<script>js/asignar_castracion.js</script>
+			<script>js/finalizar_castracion.js</script>
+		</reference>
+		<reference name="contenido">
+			<!--
+			<template template="mascota/usuario/listado2.phtml" />
+			-->
+			<block type="Frontend/Menu" name="mascota_castracion_tab" html_class="tab_interno mascota_castracion_tab">
+				<action  method="addItem">
+					<name>mascota_castracion_tab_pendientes</name>
+					<text>Pendientes</text>
+					<link>mascotas/castracion/pendientes</link>
+					<weight>1</weight>
+					<parent></parent>
+				</action>
+				<action  method="addItem">
+					<name>mascota_castracion_tab_asignadas</name>
+					<text>Asignadas</text>
+					<link>mascotas/castracion/asignadas</link>
+					<weight>1</weight>
+					<parent></parent>
+				</action>
+				<action  method="addItem">
+					<name>mascota_castracion_tab_realizadas</name>
+					<text>Finalizadas</text>
+					<link>mascotas/castracion/realizadas</link>
+					<weight>1</weight>
+					<parent></parent>
+				</action>
+				<action in="mascota_castracion_pendientes" method="setActive">
+					<name>mascota_castracion_tab_pendientes</name>
+				</action>
+				<action in="mascota_castracion_asignadas" method="setActive">
+					<name>mascota_castracion_tab_asignadas</name>
+				</action>
+				<action in="mascota_castracion_realizadas" method="setActive">
+					<name>mascota_castracion_tab_realizadas</name>
+				</action>
+			</block>
+			<mascota_castracion_listado_pendientes in="mascota_castracion_pendientes" name="mascota_castracion_listado_pendientes" show_datos_usuario="si">
+			<!--
+				<action method="addLink">
+					<url>mascotas/adopcion/oferta/agregar</url>
+					<label>Ofrecer Adopcion</label>
+				</action>
+			-->
+				<template name="list_entity_template" template="mascota/usuario/listado/item.phtml">
+				<!--
+					<template name="list_entity_pluggin_castracion" template="mascota/usuario/listado/item/castracion.phtml"/>
+					-->
+				</template>
+			</mascota_castracion_listado_pendientes>
+			<mascota_castracion_listado_asignadas in="mascota_castracion_asignadas" name="mascota_castracion_listado_asignadas" show_datos_usuario="si">
+				<template name="list_entity_template" template="mascota/usuario/listado/item.phtml">
+					<template name="list_entity_pluggin_castracion" template="mascota/usuario/listado/item/castracion.phtml"/>
+				</template>
+			</mascota_castracion_listado_asignadas>
+			<mascota_castracion_listado_realizadas in="mascota_castracion_realizadas" name="mascota_castracion_listado_realizadas" show_datos_usuario="si">
+				<template name="list_entity_template" template="mascota/usuario/listado/item.phtml">
+					<template name="list_entity_pluggin_castracion" template="mascota/usuario/listado/item/castracion.phtml"/>
+				</template>
+			</mascota_castracion_listado_realizadas>
+			
+		</reference>
+		<reference name="list_entity_template">
+			<action method="setData">
+				<field>show_section_field_raza</field>
+				<value></value>
+			</action>
+			<action method="setData">
+				<field>show_section_field_estado</field>
+				<value></value>
+			</action>
+			<action method="setData">
+				<field>show_section_field_domicilio</field>
+				<value>true</value>
+			</action>
+			<action method="setData">
+				<field>show_section_field_barrio</field>
+				<value>true</value>
+			</action>
+			<action method="setData">
+				<field>show_section_field_localidad</field>
+				<value>true</value>
+			</action>
+			<action method="setData">
+				<field>show_section_owner_links</field>
+				<value></value>
+			</action>
+			<action method="setData">
+				<field>show_section_spa_links</field>
+				<value>true</value>
+			</action>
+			<action method="setData">
+				<field>show_section_spa_link_castracion</field>
+				<value>true</value>
+			</action>
+		</reference>
+	</default>
+</layout>

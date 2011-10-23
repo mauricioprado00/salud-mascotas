@@ -622,6 +622,7 @@ abstract class Core_Block_Abstract extends Core_Object implements Core_IHtmlRend
 //                $translate->setTranslateInline(true);
 //            }
         }
+        else{die(__FILE__.__LINE__);}
 
         $html = $this->_afterToHtml($html);
         //Mage::dispatchEvent('core_block_abstract_to_html_after', array('block' => $this));
@@ -772,6 +773,15 @@ abstract class Core_Block_Abstract extends Core_Object implements Core_IHtmlRend
      */
     public function getHelper($type)
     {
+    	if(preg_match('/[A-Za-z_]+[\\/][A-Za-z_]+/', $type)){
+			$class = implode('_Helper_', explode('/', $type));
+//			var_dump(get_class(Saludmascotas_Helper_Etiqueta::getInstance()));
+//			var_dump($class.'::getInstance()');
+//			die(__FILE__.__LINE__);
+			if(class_exists($class)){
+				return call_user_func(array($class, 'getInstance')); 
+			}
+		}
         return $this->getLayout()->getBlockSingleton($type);
         //return $this->helper($type);
     }

@@ -1,0 +1,84 @@
+<?php //útf8 
+//$object_to_edit = $this->getObjectToEdit();
+
+$list_entity_template = $this->getChild('list_entity_template');
+
+?>
+<div class="form_container form_barrio_patrullaje_prioridades <?php print $this->getHtmlClass(); ?>">
+	<p><?php print htmlentities(utf8_decode($this->getHelpText())); ?></p>
+	<?php if($this->getShowLinkConfigurarPrioridades()): ?>
+	<a href="<?php print $this->getUrl(Frontend_Patrullaje_Helper::getUrlConfigurarPrioridades()); ?>">Configurar Prioridades</a>
+	<?php endif; ?>
+	<form class="standart wider login" name="form1" method="post" action="<?php print $this->getUrl($this->getUrlAction()); ?>">
+		<?php print $this->getChildHtml('form_elements'); ?>
+		<ul class="listado_entidad listado_barrios">
+			<?php while($this->moveNext()): ?> 
+			<?php $class = $this->getCurrentRelativeIndex()%2?'pair':'even'; ?>
+			<li class="listado_entidad_item barrio_item listado_entidad_item_<?php print $class; ?>"><?php print $this->entityToHtml(); ?></li>
+			<?php endwhile; ?>
+			<?php if(!$this->searchCount()): ?> 
+			<li class="listado_entidad_item listado_entidad_item_even">No hay barrios</li>
+			<?php endif; ?>
+			<?php if($this->getCantidadPaginas()>1):?>
+			<?php $pagination_info = $this->getPaginationInfo($this->getPagina(), $this->getCantidadPaginas(), 4, 2); ?>
+			<ul class="paginas">
+				<!--<li class="titPaginador">P&aacute;ginas: </li>-->
+				<?php if($this->getPagina()): ?> 
+				<li><a href="<?php print $this->getUrlPagina(); ?>">Anterior</a></li>
+				<?php else: ?> 
+				<li><em>Anterior</em></li> 
+				<?php endif;?> 
+				<?php foreach($pagination_info as $pi): ?> 
+					<?php if(!in_array($pi->getPagina(), array('',null),true)): ?> 
+					<li><a href="<?php print $this->getUrlPagina($pi->getPagina()); ?>"><?php print $pagina.$pi->getLabel(); ?></a></li>
+					<?php else: ?> 
+					<li><em><?php print $pi->getLabel(); ?></em></li>
+					<?php endif; ?> 
+				<?php endforeach; ?> 
+				<?php if($this->getPagina()!=($this->getCantidadPaginas()-1)): ?> 
+				<li><a href="<?php print $this->getUrlPagina($this->getPagina()+1); ?>"><em>Siguiente</em></a></li>
+				<?php endif; ?> 
+			</ul>
+			<?php endif;?> 
+		</ul>
+		
+		
+		<?php if($this->getShowAddButton()!==false): ?>
+		<div class="form_row actions_row single_action">
+			<button class="submit button" type="submit">Registrar Visita</button>
+			<?php if($this->getLinks()): ?>
+			<ul>
+				<?php foreach($this->getLinks() as $link): ?>
+				<li>
+					<a href="<?php print $this->getUrl($link->getUrl()); ?>"><?php print htmlentities(utf8_decode($link->getLabel())); ?></a>
+				</li> 
+				<?php endforeach; ?> 
+			</ul>
+			<?php endif; ?>
+			<!--
+			<ul>
+				<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlServiceConditions()); ?>">Condiciones de Servicio</a></li>
+				<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlPrivacyPolicy()); ?>">Políticas de Privacidad</a></li>
+			</ul>
+			<ul>
+				<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlLogin()); ?>">¿Ya tienes cuenta?</a></li>
+			</ul>
+			-->
+		</div>
+		<?php endif; ?>
+	</form>
+</div>      
+<script type="text/javascript">
+	<!--
+		jQuery(document).ready(function(){
+			var c = new patrullajePrioridadesSelector();
+			c.init(<?php print json_encode(array(
+				'select_container'=>'.listado_barrios'
+			)); ?>);
+			jQuery('.informacion_adicional_barrio .switch_info').click(function(){
+				jQuery(this).parents('.informacion_adicional_barrio:first').toggleClass('informacion_adicional_barrio_enabled');
+			});
+		});
+	//-->
+</script>
+

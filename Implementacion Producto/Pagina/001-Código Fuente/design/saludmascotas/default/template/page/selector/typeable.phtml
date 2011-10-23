@@ -18,8 +18,11 @@ if(!$this->hasEntityToList()||!$this->getEntityToList()){?>
 	$c = $this->getSelectControl();
 ?> 
 <div class="select_typeable" id="<?php print $control_id = uniqid(); ?>">
-	<input type="text" autocomplete="off" value="<?php print htmlentities(utf8_decode($text)); ?>" />
+	<input type="text" class="typeable" autocomplete="off" value="<?php print htmlentities(utf8_decode($text)); ?>" />
 	<div class="dropdown_button"></div>
+	<?php if($vh = $this->getUseValueHolder()): ?>
+	<input type="text" class="value_holder" name="<?php print $vh; ?>" />
+	<?php endif; ?>
 	<ul class="options"></ul><?php
 	echo $c
 		->setStyle('display:none')
@@ -36,6 +39,9 @@ jQuery(document).ready(function(){
 		'url_search'=>$this->getUrl($this->getUrlLoad()),
 		'parent_loader'=>$this->getParentLoader(),
 		'aditional_data'=>$this->getAditionalData(),
+		'use_on_keyup'=>$this->getUseOnKeyup()?true:false,
+		'use_on_blur'=>Core_Helper::coalesce($this->getUseOnBlur(), true)?true:false,
+		'use_on_change'=>Core_Helper::coalesce($this->getUseOnChange(), true)?true:false,
 	)); ?>);
 });
 </script>

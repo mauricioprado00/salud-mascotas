@@ -1,0 +1,36 @@
+<?php 
+
+$patrullaje = $this->getEntity(); 
+
+$visitas_barrios = $patrullaje->getListVisitasBarrios();
+$comentario = trim($patrullaje->getComentario());
+//var_dump(count($visitas_barrios));
+//if($visitas_barrios)
+//echo '<pre>';
+//foreach($visitas_barrios as $v)
+//	var_dump($v->getData());
+//echo '</pre>';
+?>
+<ul class="column1">
+	<li>
+		<b>Fecha:</b>
+		<em><?php print $patrullaje->getFecha(); ?></em>
+	</li>
+	<?php if($comentario): ?> 
+	<li>
+		<b>Comentario:</b>
+		<em><?php print $comentario; ?></em>
+	</li>
+	<?php endif; ?> 
+</ul>
+<ul class="column2">
+	<li>
+		<b>Barrios Visitados</b>
+		<?php foreach($visitas_barrios as $visita_barrio): ?>
+		<?php $barrio = $visita_barrio->getBarrio(); ?> <br />
+		<em><?php print $barrio->getNombre(); ?></em>
+		<?php endforeach; ?>
+	</li>
+	<?php print $this->getChildHtml(); ?>
+</ul>
+<div style="clear:both;float:none;"></div>

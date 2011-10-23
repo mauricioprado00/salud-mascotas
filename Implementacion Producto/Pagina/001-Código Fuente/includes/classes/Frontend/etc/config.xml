@@ -3,6 +3,9 @@
 		<Frontend_Notificacion />
 		<Frontend_Usuario />
 		<Frontend_Mascota />
+		<Frontend_Vacunacion />
+		<Frontend_Patrullaje />
+		<Frontend_Etiqueta />
 		<!--
 		<Frontend_Barrio/>
 		<Frontend_Categoria/>
@@ -78,7 +81,7 @@
 	</block>
 	<block>
 		<type>domicilio_view</type>
-		<class>Frontend_Block_Domicilio_View</class>
+		<class>Frontend_Block_Domicilio_GmapView</class><!--Frontend_Block_Domicilio_View nn4d-->
 	</block>
 	<block>
 		<type>domicilio_gmap_view</type>
@@ -96,7 +99,10 @@
 		<type>random_encuentro</type>
 		<class>Frontend_Block_RandomEncuentro</class>
 	</block>
-	
+	<block>
+		<type>selector_veterinaria</type>
+		<class>Frontend_Block_Selector_Veterinaria</class>
+	</block>
 	<design>
 		<saludmascotas_legacy><![CDATA[saludmascotas/default/]]></saludmascotas_legacy>
 		<saludmascotas_legacy><![CDATA[saludmascotas_legacy/default/]]></saludmascotas_legacy>

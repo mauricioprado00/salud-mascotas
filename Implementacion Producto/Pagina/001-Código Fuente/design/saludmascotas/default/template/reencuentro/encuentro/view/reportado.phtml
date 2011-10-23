@@ -20,7 +20,7 @@ $reencuentro = $this->getReencuentro();
 			}
 			$texto .= '.';
 			if($telefono = $reencuentro->getTelefono()){
-				$texto .= ' Puedes contactarte con el telefonicamente a ' . htmlentities($telefono). '.';
+				$texto .= ' Puedes contactarte con el telefónicamente a ' . htmlentities($telefono). '.';
 			}
 
 			$p = new Core_Html_Tag_Custom('p');
