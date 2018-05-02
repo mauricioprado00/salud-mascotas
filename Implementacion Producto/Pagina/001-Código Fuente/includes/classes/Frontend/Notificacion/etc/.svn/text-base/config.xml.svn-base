@@ -1,0 +1,23 @@
+<global>
+	<modules>
+	</modules>
+	<routers>
+		<Frontend_Notificacion_Router>user/notificaciones</Frontend_Notificacion_Router>
+	</routers>
+	<block>
+		<type>notificacion_listado</type>
+		<class>Frontend_Notificacion_Block_ListadoNotificacion</class>
+	</block>
+	<block>
+		<type>notificacion_view</type>
+		<class>Frontend_Notificacion_Block_View</class>
+	</block>
+	<design>
+	</design>
+	<layouts>
+		<saludmascotas>Saludmascotas_Notificacion.xml</saludmascotas>
+	<!--
+		<saludmascotas>Saludmascotas_Mascota.xml</saludmascotas>
+	-->
+	</layouts>
+</global>

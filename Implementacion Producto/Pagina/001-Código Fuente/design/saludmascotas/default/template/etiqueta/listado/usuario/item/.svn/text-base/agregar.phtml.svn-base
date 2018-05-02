@@ -1,0 +1,22 @@
+<?php //útf8
+	$etiquetas = $this->getEtiquetas();
+	$id_mascota = $this->getMascota()->getId();
+?>
+<ul class="etiqueta_mascota_listado etiqueta_listado" id="<?php print ($uid = uniqid()); ?>">
+<li><ul class="drop_down">
+<?php foreach($etiquetas as $etiqueta){
+	echo $this->renderEtiqueta($etiqueta);
+}?>
+<li class="filtrar"><a href="<?php print $this->getUrl(Frontend_Etiqueta_Helper::getUrlAgregarEtiquetaMascota($this->getMascota()->getId())); ?>">+agregar</a></li>
+</ul></li>
+</ul>
+<script type="text/javascript">
+<!--
+var c = new etiquetaMascota();
+c.init(<?php print json_encode(array(
+	'select_container'=>'#'.$uid,
+	'id_mascota'=>$id_mascota,
+	'url_action'=>$this->getUrl(Frontend_Etiqueta_Helper::getUrlChangeEtiquetaMascota())
+)); ?>);
+//-->
+</script>

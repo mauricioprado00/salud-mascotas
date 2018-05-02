@@ -1,0 +1,92 @@
+<global>
+	<modules>
+		<!--<cosas_de_inta>-->
+		<Admin_Agencia/>
+		<Admin_Problema/>
+		<Admin_Audiencia/>
+		<Admin_Objetivo/>
+		<Admin_ResultadoEsperado/>
+		<Admin_Actividad/>
+		<Admin_User/>
+		<Admin_Reporte/>
+
+		<Admin_Inta/>
+		<Admin_Proyecto/>
+		<Admin_AspectoActividad/>
+		<Admin_AudienciaActividad/>
+		<Admin_ResultadoEsperadoActividad/>
+		<Admin_EstrategiaActividad/>
+		<Admin_UsuarioActividad/>
+		<Admin_ProyectoActividad/>
+		<Admin_Usuario/>
+		<Admin_Documento/>
+		<Admin_Aspecto/>
+		<Admin_Estrategia/>
+		<Admin_Indicador/>
+		<Admin_MedioVerificacion/>
+		<Admin_TipoAspecto/>
+		<Admin_TipoIndicador/>
+		<Admin_TipoAudiencia/>
+		<Admin_Chained/>
+		<Admin_Pruebas/>
+		<Admin_Config/>
+		<Admin_Translate/>
+		<Admin_Prototype/>
+		<Admin_Saludmascotas />
+		<!--</cosas_de_inta>-->
+		<!--<cosas_de_granguia>-->
+<!--		<Admin_Estadistica/>
+		<Admin_TipoPunto/>
+		<Admin_Categoria/>
+		<Admin_Barrio/>
+		<Admin_Archivo/>
+		<Admin_Menu/>
+		<Admin_Pagina/>
+		<Admin_Anuncio/>
+		<Admin_Nodo/>
+		<Admin_BannerCarrousel/>
+		<Admin_BannerDinamico/>
+		
+		<Admin_CronjobResult/>
+		<Admin_Sitemap />-->
+		<!--</cosas_de_granguia>-->
+<!--
+		<Admin_Importador/>
+		<Admin_Ciudad/>
+		<Admin_MetodoEnvio/>
+		<Admin_FormaPago/>
+		<Admin_MarcaImagen/>
+		<Admin_CiudadCodigoPostal/>
+		<Admin_Cliente/>
+		<Admin_Venta/>
+		<Admin_Novedad/>
+		<Admin_Testimonio/>
+		-->
+		<!-- <Visualadmin/> -->
+		<Visualadmin/>
+		
+		<!--
+		<Admin_Intatheme/>
+		-->
+		<Admin_Saludmascotastheme/>
+	</modules>
+	<block>
+		<type>frame</type>
+		<class>Admin_Block_Frame</class>
+	</block>
+	<routers>
+		<Admin_Router_Admin>administrator</Admin_Router_Admin>
+	</routers>
+	<layouts>
+		<!-- la idea es que se puedan cargar layouts segun el modo 
+			ej: para mostrar pagina normal, para ajax, para print, rss, etc -->
+		<admin>Admin.xml</admin>
+		<admin>Theme.xml</admin>
+		<ajax>Admin_Ajax.xml</ajax>
+		<admin>Simple.xml</admin>
+	</layouts>
+	<design>
+		<ajax><![CDATA[admin/default/]]></ajax>
+		<admin><![CDATA[admin/default/]]></admin>
+	</design>
+</global>

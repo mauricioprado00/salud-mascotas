@@ -1,0 +1,21 @@
+<global>
+	<routers>
+		
+	</routers>
+	<modules>
+		
+	</modules>
+	<layouts>
+		<!-- la idea es que se puedan cargar layouts segun el modo 
+			ej: para mostrar pagina normal, para ajax, para print, rss, etc -->
+		<!--<frontend>Custom.xml</frontend>-->
+		<!--<frontend>Home.xml</frontend>-->
+		<!-- <frontend>Catalog.xml</frontend> -->
+		<!--<frontend>News.xml</frontend>-->
+		<!--  <email>Email.xml</email> -->
+	</layouts>
+	<translate>
+		<weight>10</weight>
+		<class>Saludmascotas_Translate</class>
+	</translate>
+</global>

@@ -1,0 +1,57 @@
+<?
+$lf = $this->getListFields();
+$vf = $this->getVirtualFields();
+	$data = $this->getDatos();
+?><<?php print $this->getRowsTag()?>>
+<page><?=$this->getPage()?></page>
+<total><?=$this->getTotal()?></total>
+<records><?=$this->getRecords()?></records><?
+	if($data)
+	foreach($data as $item){?> 
+	<<?php print $this->getRowTag()?> id="<?=$item->getId()?>"><?
+		if(!isset($lf)||!count($lf)){
+			foreach($item->setData($var, '')->getData() as $var=>$value){
+			$tag = $this->getFieldTag($item, $var);
+			if(in_array($var, $vf)):?> 
+		<<?php print $tag; ?>><![CDATA[<?=$item->getData($var)?>]]></<?php print $tag; ?>><?
+			elseif($value!==null):?> 
+		<<?php print $tag; ?>><![CDATA[<?=$value?>]]></<?php print $tag; ?>><?
+			else:?> 
+		<<?php print $tag; ?>><![CDATA[]]></<?php print $tag; ?>><?
+			endif;
+			}
+		}
+		else{
+			foreach($lf as $var){
+				if(preg_match('/(?P<varname>[^@]*)@(?P<special>.*)/', $var, $matches)){
+					$var = $matches['varname'];
+					$special = $matches['special'];
+					$special = $special?' special="'.$special.'"':'';
+				}
+				else $special = '';
+				$value = $item->getData($var);
+					
+				if(in_array($var, $vf)):
+					$value = $item->setData($var, '')->getData($var);
+				elseif($value!==null):
+					$value = $this->outputFilter($value);
+				else:
+					$value = '';
+				endif;
+				
+				$output = $this->renderValue($item, $var, $value);
+				$tag = $this->getFieldTag($item, $var);
+			if($this->fieldUseCData($item, $var)){
+			?> 
+		<<?php print $tag; ?><?php print $special; ?>><![CDATA[<?php print $output; ?>]]></<?php print $tag; ?>><?
+			}
+			else{
+			?> 
+		<<?php print $tag; ?><?php print $special; ?>><?php print $output; ?></<?php print $tag; ?>><?
+			}
+			}
+		}?> 
+	</<?php print $this->getRowTag()?>><?
+	}
+?> 
+</<?php print $this->getRowsTag()?>>

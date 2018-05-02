@@ -1,0 +1,11 @@
+<layout><!-- útf8 -->
+	<email_usuario_register>
+		<template name="usuario_register_message" template="usuario/email/register_message.phtml" />
+	</email_usuario_register>
+	<email_usuario_activation>
+		<template name="usuario_activacion_message" template="usuario/email/activation_message.phtml" />
+	</email_usuario_activation>
+	<email_usuario_recover>
+		<template name="usuario_recover_message" template="usuario/email/recover_message.phtml" />
+	</email_usuario_recover>
+</layout>

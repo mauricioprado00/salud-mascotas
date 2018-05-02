@@ -1,0 +1,43 @@
+<?php //es útf8
+
+?>
+<div class="adopcion_conciliacion_adopcion_solicitud_confirmar">
+	<form class="standart wider busqueda" name="form1" method="post">
+		<input type="hidden" name="dummy" value="continuar" />
+		<p>Finaliza esta confirmación si ya te has entregado en adopción la mascota que publicaste.<br />Te presentamos los datos nuevamente:</p>
+		<div>
+			<h2>Datos de Mascota entregada</h2>
+			<?php print $this->getChildHtml('view_datos_mascota'); ?>
+		</div>
+		<div>
+			<h2>Datos de Anuncio de Oferta de Adopción</h2>
+			<?php print $this->getChildHtml('adopcion_solicitud_view'); ?>
+		</div>
+		<?php /** / ?>
+		<div>
+			<h2>Opciones de confirmación</h2>
+			<?php print $this->getChildHtml('opciones_confirmacion'); ?>
+		</div>
+		<?php /**/ ?>
+		<div class="form_row actions_row single_action">
+			<button class="submit button" type="submit">Confirmar</button>
+			<ul>
+				<li><a href="#">algun link</a></li>
+			</ul>
+		</div>
+	</form>
+</div>
+<script type="text/javascript">
+<!--
+	jQuery('.link_view_mascota')
+		.fancybox({
+			'width': 460,
+			'height':490,
+	        'autoDimensions':true,
+	        'transitionIn':'none',
+			'transitionOut':'none',
+			'type':'iframe'
+		})
+	;
+-->
+</script>

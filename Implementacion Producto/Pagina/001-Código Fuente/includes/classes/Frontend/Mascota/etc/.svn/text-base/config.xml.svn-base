@@ -1,0 +1,42 @@
+<global>
+	<modules>
+		<Frontend_Mascota_Perdida />
+		<Frontend_Mascota_Encuentro />
+		<Frontend_Mascota_Reencuentro />
+		<Frontend_Mascota_Adopcion />
+		<Frontend_Mascota_Castracion />
+	</modules>
+	<routers>
+		<Frontend_Mascota_Router>mascotas</Frontend_Mascota_Router>
+		<Frontend_Mascota_Router_Fotos>mascotas/fotos</Frontend_Mascota_Router_Fotos>
+	</routers>
+	<block>
+		<type>mascota_fotos_addedit</type>
+		<class>Frontend_Mascota_Block_Fotos_AddEdit</class>
+	</block>
+	<block>
+		<type>mascota_listado_usuario</type>
+		<class>Frontend_Mascota_Block_ListadoUsuario</class>
+	</block>
+	<block>
+		<type>mascota_listado_encontre</type>
+		<class>Frontend_Mascota_Block_ListadoEncontre</class>
+	</block>
+	<block>
+		<type>mascota_listado_quiero_adoptar</type>
+		<class>Frontend_Mascota_Block_ListadoAdopcion</class>
+	</block>
+	<block>
+		<type>mascota_listado_quiero_cruzar</type>
+		<class>Frontend_Mascota_Block_ListadoCruza</class>
+	</block>
+	<block>
+		<type>mascota_view</type>
+		<class>Frontend_Mascota_Block_View</class>
+	</block>
+	<design>
+	</design>
+	<layouts>
+		<saludmascotas>Saludmascotas_Mascota.xml</saludmascotas>
+	</layouts>
+</global>

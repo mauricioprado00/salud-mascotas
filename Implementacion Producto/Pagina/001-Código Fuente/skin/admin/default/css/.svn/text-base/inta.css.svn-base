@@ -1,0 +1,179 @@
+.indicadores_resultado{
+	list-style-position: inside;
+	list-style-type:none;
+}
+.indicador_resultado_toolbox{
+	float:left;
+	display:none;
+}
+.indicador_resultado_toolbox:after{
+	content:' -  ';
+	margin-right:4px;
+}
+li:hover>.indicador_resultado_toolbox{
+	display:inline;
+}
+.objetivo_actividad_toolbox{
+	float:left;
+	display:none;
+}
+.objetivo_actividad_toolbox:after{
+	content:' -  ';
+	margin-right:4px;
+}
+li:hover>.objetivo_actividad_toolbox{
+	display:inline;
+}
+.indicadores_resultado>li:hover{
+	background-color:#EEEEEE;
+}
+
+
+.medios_verificacion_indicador_resultado{
+	margin-left:20px;
+}
+.medio_verificacion_toolbox{
+	float:left;
+	display:none;
+}
+.medio_verificacion_toolbox:after{
+	content:' -  ';
+	margin-right:4px;
+}
+li:hover>.medio_verificacion_toolbox{
+	display:inline;
+}
+.medios_verificacion_indicador_resultado>li:hover{
+	background-color:#DDDDDD;
+}
+
+
+
+.medios_verificacion_indicador_resultado .listado_documentos li{
+	list-style:none outside none;
+	margin-left:37px;
+}
+/*
+.listado_toolbox_documentos{
+	float:left;
+	display:none;
+}
+.listado_toolbox_documentos:after{
+	content:' -  ';
+	margin-right:4px;
+}
+li:hover>.listado_toolbox_documentos{
+	display:inline;
+}
+.listado_toolbox_documentos>li:hover{
+	background-color:#EEEEEE;
+}*/
+.medios_verificacion_indicador_resultado .box_listado_documentos>li:hover{
+	background-color:#CCCCCC;
+}
+
+
+.add_edit_list{
+	background-color:#EEEEEE;
+	border:1px solid black;
+	padding:14px;
+}
+.add_edit_list_toolbox{
+	margin:-7px 0 0 -7px;
+}
+.add_edit_list li{
+	position:relative;
+	list-style-position:inside;
+}
+.listado_toolbox{
+	background-color:white;
+	border:1px solid;
+	position:absolute;
+	z-index:100;
+	display:none;
+}
+li:hover>.listado_toolbox{
+	display:block;
+}
+.add_edit_list .listado_documentos{
+}
+.add_edit_list .box_listado_documentos{
+	
+}
+.add_edit_list .box_listado_documentos>li{
+	list-style:none outside none;
+}
+
+
+
+.cronograma_actividad{
+	width:450px;
+}
+.cronograma_actividad li{
+	float:left;
+	height:30px;
+	border:1px solid black;
+	list-style:none;
+	padding:8px 9px 0;
+	width:130px;
+}
+.cronograma_actividad li.activo{
+	background-color:#DDEEFF;
+}
+.cronograma_actividad li label{
+	cursor:pointer;margin-bottom:3px;white-space:nowrap;
+	display:inline;
+}
+
+
+.listado_proyecto_actividads .total{
+	text-align:left;
+	margin-top:3px;
+	border-top:1px solid #00577B;
+}
+.listado_proyecto_actividads .total i{
+	float:right;
+	color:#53BE1F;
+	font-weight:bold;
+}
+.listado_proyecto_actividads .total i:before{
+	content:'$ ';
+}
+
+.motivo{
+	background-color:#FFFFBB;
+	border:1px solid black;
+	padding:2px;
+}
+
+.entity_addedit fieldset select{
+	min-width:267px;
+}
+
+
+.export-selection{
+	float:left;
+	border:1px solid black;
+	padding:5px 2px;
+	width:100px;
+	cursor:pointer;
+}
+.export-selection:hover{
+	background-color:#FFFFEE;
+}
+.export-selection.selected{
+	background-color:#DDFFDD;
+}
+.export-selection+.export-selection{
+	margin-left:10px;
+}
+
+.listado_re{
+	
+}
+.listado_re ul{
+	
+}
+.listado_re li{
+	list-style-position: inside;
+}

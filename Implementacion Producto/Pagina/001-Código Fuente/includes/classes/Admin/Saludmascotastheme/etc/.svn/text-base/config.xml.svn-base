@@ -1,0 +1,11 @@
+<global>
+	<design>
+		<ajax><![CDATA[admin/saludmascotas/]]></ajax>
+		<admin><![CDATA[admin/saludmascotas/]]></admin>
+	</design>
+	<layouts>
+		<ajax>theme_saludmascotas.xml</ajax>
+		<admin>theme_saludmascotas.xml</admin>
+		<simple>theme_saludmascotas.xml</simple>
+	</layouts>
+</global>

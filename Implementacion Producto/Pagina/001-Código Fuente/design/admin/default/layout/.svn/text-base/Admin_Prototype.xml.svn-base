@@ -1,0 +1,40 @@
+<layout>
+	<default>
+		<reference name="menu_admin">
+			<action method="addItem">
+				<link_url>prototype</link_url>
+				<text>Prototype</text>
+				<title>Prototype</title>
+				<name>menu_admin_prototype</name>
+			</action>
+		</reference>
+	</default>
+	<default>
+		<reference name="menu_admin_prototype">
+			<block type="Admin/Menu">
+				<action method="addItem">
+					<link_url>prototype/listar_raza</link_url>
+					<text>Listado Raza</text>
+					<title>Listado Raza</title>
+				</action>
+				<action method="addItem">
+					<link_url>prototype/addEditRaza</link_url>
+					<text>Agregar Raza</text>
+					<title>Agregar Raza</title>
+				</action>
+
+
+				<action method="addItem">
+					<link_url>prototype/listar_especie</link_url>
+					<text>Listado Especie</text>
+					<title>Listado Especie</title>
+				</action>
+				<action method="addItem">
+					<link_url>prototype/addEditEspecie</link_url>
+					<text>Agregar Especie</text>
+					<title>Agregar Especie</title>
+				</action>
+			</block>
+		</reference>
+	</default>
+</layout>

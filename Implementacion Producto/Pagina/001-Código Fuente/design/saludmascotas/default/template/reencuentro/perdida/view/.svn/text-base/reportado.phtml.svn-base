@@ -1,0 +1,52 @@
+<?php
+$perdida = $this->getPerdida();
+$reencuentro = $this->getReencuentro();
+
+			$perdida = $reencuentro->getPerdida();
+			$texto = 'El usuario <b>' . $reencuentro->getNombreCompleto() . '</b> ha reclamado la mascota que reportaste ';
+//			if($perdida){
+//				if($perdida->getTieneMascota()){
+//					$texto .= ' <b>tiene una mascota</b> que podría ser tuya ';
+//				}
+//				else{
+//					$texto .= ' <b>ha visto una mascota</b> que podría ser tuya ';
+//				}
+//			}
+			if($reencuentro->esConfirmado()){
+				$texto .= ' y ya <b> has confirmado</b> la coincidencia';
+			}
+			else{
+				$texto .= ' pero todavía <b>no has confirmado</b> la coincidencia';
+			}
+			$texto .= '.';
+			if($telefono = $reencuentro->getTelefono()){
+				$texto .= ' Puedes contactarte con el telefónicamente a ' . htmlentities($telefono). '.';
+			}
+
+			$p = new Core_Html_Tag_Custom('p');
+			$p->setInnerHtml($texto);
+			echo $p->getHtml();
+
+			$descripcion = trim($reencuentro->getDescripcion());
+			if(isset($perdida)){
+				$mascota = c(new Frontend_Model_Mascota())
+					->setData($perdida->getMascota()->getData())
+					->loadNonTableColumn()
+				;
+				
+				$modo = $this->getModo();
+				$mascota_preview = c($this->getLayout()->getBlock('mascota_preview_'.$modo))
+					->setMascota($mascota)
+				;
+				if($modo=='full'){
+					$mascota_preview->setPhotoList($mascota->getListFoto());
+				}
+				echo $mascota_preview->toHtml();
+			}
+			
+			if($descripcion){
+				$p = new Core_Html_Tag_Custom('p');
+				$p->setInnerHtml(htmlentities(utf8_decode($descripcion)));
+				echo $p->getHtml();
+			}
+?>

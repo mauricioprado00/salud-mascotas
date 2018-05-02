@@ -1,0 +1,214 @@
+<?php //es útf8
+
+$adopcion_solicitud = $this->getAdopcionSolicitud();
+$descripcion = $adopcion_solicitud->getDescripcion();
+$tiene_mascota = $adopcion_solicitud->getTieneMascota();
+$estado_mascota = $adopcion_solicitud->getEstadoMascota();
+$notificacion_email = $adopcion_solicitud->getNotificacionEmail();
+$mostrar_telefono = $adopcion_solicitud->getMostrarTelefono();
+$republicar_automaticamente = $adopcion_solicitud->getRepublicarAutomaticamente();
+$quiere_destacar = $adopcion_solicitud->getQuiereDestacar();
+
+?>
+
+			<div class="textarea">
+				<?
+					$input = Core::getObject('Core_Html_Tag_Custom', 'textarea');
+					$input
+						->setId('descripcion')
+						->setName('descripcion')
+						->setInnerHtml(/*htmlentities*/($descripcion))
+					;
+					echo $input->getHtml();
+				?> 
+			</div>
+			<div class="opciones_formulario opciones_formulario_adopcion_solicitud">
+				<?php /** / ?>
+				<div class="opcion_formulario">
+					<div class="holding mostrar_telefono">
+						<?php
+							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+							$input
+								//->setMaxlength(20)
+								->setType('radio')
+								//->setAutocomplete('off')
+								->setTitle('Tengo la mascota en mi casa')
+								//->setClass('datepicker')
+								->setName('tiene_mascota')
+								->setId('tengo_la_mascota')
+								->setValue('si')
+							;
+							if($tiene_mascota=='si')
+								$input->setChecked('checked');
+							echo $input->getHtml();
+						?>
+						<label for="tengo_la_mascota">Tengo la mascota en mi casa</label>
+						<?php
+							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+							$input
+								//->setMaxlength(20)
+								->setType('radio')
+								//->setAutocomplete('off')
+								->setTitle('No la tengo, solo la vi')
+								//->setClass('datepicker')
+								->setName('tiene_mascota')
+								->setId('solo_la_vi')
+								->setValue('no')
+							;
+							if($tiene_mascota=='no')
+								$input->setChecked('checked');
+							echo $input->getHtml();
+						?>
+						<label for="solo_la_vi">No la tengo, solo la vi</label>
+					</div>
+				</div>
+				<div class="opcion_formulario">
+					<div class="holding mostrar_telefono">
+						<?php
+							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+							$input
+								//->setMaxlength(20)
+								->setType('radio')
+								//->setAutocomplete('off')
+								->setTitle('Estaba adopcion_oferta')
+								//->setClass('datepicker')
+								->setName('estado_mascota')
+								->setId('estaba_adopcion_oferta')
+								->setValue('adopcion_oferta')
+							;
+							if($estado_mascota=='adopcion_oferta')
+								$input->setChecked('checked');
+							echo $input->getHtml();
+						?>
+						<label for="estaba_adopcion_oferta">Estaba adopcion_oferta</label>
+						<?php
+							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+							$input
+								//->setMaxlength(20)
+								->setType('radio')
+								//->setAutocomplete('off')
+								->setTitle('Estaba abandonada')
+								//->setClass('datepicker')
+								->setName('estado_mascota')
+								->setId('estaba_abandonada')
+								->setValue('abandonada')
+							;
+							if($estado_mascota=='abandonada')
+								$input->setChecked('checked');
+							echo $input->getHtml();
+						?>
+						<label for="estaba_abandonada">Estaba abandonada</label>
+						<?php
+							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+							$input
+								//->setMaxlength(20)
+								->setType('radio')
+								//->setAutocomplete('off')
+								->setTitle('No lo sé')
+								//->setClass('datepicker')
+								->setName('estado_mascota')
+								->setId('no_se_estado')
+								->setValue('no se')
+							;
+							if($estado_mascota=='no se')
+								$input->setChecked('checked');
+							echo $input->getHtml();
+						?>
+						<label for="no_se_estado">No lo sé</label>
+					</div>
+				</div>
+				<?php /**/ ?>
+				<div class="opcion_formulario">
+					<div class="holding notificacion_email">
+						<input type="hidden" name="notificacion_email" value="no">
+						<?php
+							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+							$input
+								//->setMaxlength(20)
+								->setType('checkbox')
+								//->setAutocomplete('off')
+								->setTitle('Notificarme por email sobre novedades')
+								//->setClass('datepicker')
+								->setName('notificacion_email')
+								->setId('notificacion_email')
+								->setValue('si')
+							;
+							if($notificacion_email=='si')
+								$input->setChecked('checked');
+							echo $input->getHtml();
+						?>
+						<label for="pedigree">Notificarme por email sobre novedades</label>
+					</div>
+				</div>
+				<div class="opcion_formulario">
+					<div class="holding mostrar_telefono">
+						<input type="hidden" name="mostrar_telefono" value="no">
+						<?php
+							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+							$input
+								//->setMaxlength(20)
+								->setType('checkbox')
+								//->setAutocomplete('off')
+								->setTitle('Mostrar mi teléfono en el anuncio')
+								//->setClass('datepicker')
+								->setName('mostrar_telefono')
+								->setId('mostrar_telefono')
+								->setValue('si')
+							;
+							if($mostrar_telefono=='si')
+								$input->setChecked('checked');
+							echo $input->getHtml();
+						?>
+						<label for="para_cruza">Mostrar mi teléfono en el anuncio</label>
+					</div>
+				</div>
+				<div class="opcion_formulario">
+					<div class="holding republicar_automaticamente">
+						<input type="hidden" name="republicar_automaticamente" value="no">
+						<?php
+							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+							$input
+								//->setMaxlength(20)
+								->setType('checkbox')
+								//->setAutocomplete('off')
+								->setTitle('Republicar automáticamente una vez')
+								//->setClass('datepicker')
+								->setName('republicar_automaticamente')
+								->setId('republicar_automaticamente')
+								->setValue('si')
+							;
+							if($republicar_automaticamente=='si')
+								$input->setChecked('checked');
+							echo $input->getHtml();
+						?>
+						<label for="republicar_automaticamente">Republicar automáticamente una vez</label>
+						<em>(1 semana de extensión)</em>
+					</div>
+				</div>
+				<?php /** / ?>
+				<div class="opcion_formulario">
+					<div class="holding quiere_destacar">
+						<input type="hidden" name="quiere_destacar" value="no">
+						<?php
+							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+							$input
+								//->setMaxlength(20)
+								->setType('checkbox')
+								//->setAutocomplete('off')
+								->setTitle('Quiero destacar mi anuncio')
+								//->setClass('datepicker')
+								->setName('quiere_destacar')
+								->setId('quiere_destacar')
+								->setValue('si')
+							;
+							if($quiere_destacar=='si')
+								$input->setChecked('checked');
+							echo $input->getHtml();
+						?>
+						<label for="pedigree">Quiero destacar mi anuncio</label>
+						<em>(Costo $10)</em>
+						<a href="#">más información</a>
+					</div>
+				</div>
+				<?php /**/ ?>
+			</div>

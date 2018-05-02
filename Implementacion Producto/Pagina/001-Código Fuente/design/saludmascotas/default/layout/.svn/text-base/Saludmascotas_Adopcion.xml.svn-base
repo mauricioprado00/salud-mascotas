@@ -1,0 +1,343 @@
+<layout><!-- útf8 -->
+	<mascota_adopcion_oferta_addedit>
+		<reference name="contenido">
+			<template name="stepping" template="mascota/adopcion/stepping.phtml" before=""/>
+		</reference>
+	</mascota_adopcion_oferta_addedit>
+	<mascota_adopcion_solicitud_addedit>
+		<reference name="html_body">
+			<action method="appData">
+				<key>html_class</key>
+				<value> mascota_adopcion_solicitud_addedit</value>
+			</action>
+		</reference>
+		<reference name="contenido">
+			<template name="stepping" template="mascota/adopcion/stepping.phtml" before=""/>
+		</reference>
+	</mascota_adopcion_solicitud_addedit>
+	<!--
+	<left_menu_usuario>
+		<reference name="left_menu">
+			<action method="addItem">
+				<name>mascotas_usuario</name>
+				<text>Mis Mascotas</text>
+				<link>mascotas/usuario</link>
+				<weight>2</weight>
+				<parent></parent>
+			</action>
+			<action  method="addItem">
+				<name>mascotas_usuario_mis_mascotas</name>
+				<text>Mis Mascotas</text>
+				<link>mascotas/usuario</link>
+				<weight>0</weight>
+				<parent>mascotas_usuario</parent>
+			</action>
+			<action  method="addItem">
+				<name>mascotas_usuario_perdi_mi_mascota</name>
+				<text>Perdi mi mascota</text>
+				<link>mascotas/perdida/agregar</link>
+				<weight>1</weight>
+				<parent>mascotas_usuario</parent>
+			</action>
+			<action  method="addItem">
+				<name>mascotas_usuario_encontre_mascota</name>
+				<text>Encontré o vi una mascota</text>
+				<link>mascotas/encuentro/agregar</link>
+				<weight>1</weight>
+				<parent>mascotas_usuario</parent>
+			</action>
+			<action  method="addItem">
+				<name>mascotas_usuario_quiero_cruzar</name>
+				<text>Quiero cruzar</text>
+				<link>mascotas/usuario/quiero_cruzar</link>
+				<weight>2</weight>
+				<parent>mascotas_usuario</parent>
+			</action>
+			<action  method="addItem">
+				<name>mascotas_usuario_quiero_adoptar</name>
+				<text>Quiero adoptar</text>
+				<link>mascotas/usuario/quiero_adoptar</link>
+				<weight>3</weight>
+				<parent>mascotas_usuario</parent>
+			</action>
+		</reference>
+	</left_menu_usuario>
+	-->
+	<default when="accion(mascota_quiero_adoptar_listado,mascota_quiero_cruzar_listado)">
+		<reference name="html_head">
+			<script>js/jQuery/fancybox/jquery.fancybox-1.3.1.pack.js</script>
+			<css>js/jQuery/fancybox/jquery.fancybox-1.3.1.css</css>
+		</reference>
+		<reference name="contenido">
+			<!--
+			<template template="mascota/usuario/listado2.phtml" />
+			-->
+			<!--
+			<block type="Frontend/Menu" name="mascotas_usuario_tab" html_class="mascotas_usuario_tab">
+				<action  method="addItem">
+					<name>mascotas_usuario_tab_mis_mascotas</name>
+					<text>Mis mascotas</text>
+					<link>mascotas/usuario</link>
+					<weight>1</weight>
+					<parent></parent>
+				</action>
+				<action  method="addItem">
+					<name>mascotas_usuario_tab_encontradas</name>
+					<text>Que encontré</text>
+					<link>mascotas/encontre</link>
+					<weight>1</weight>
+					<parent></parent>
+				</action>
+				<action in="mascota_usuario_listado" method="setActive">
+					<name>mascotas_usuario_tab_mis_mascotas</name>
+				</action>
+				<action in="mascota_encontre_listado" method="setActive">
+					<name>mascotas_usuario_tab_encontradas</name>
+				</action>
+			</block>
+			-->
+			<mascota_listado_quiero_adoptar in="mascota_quiero_adoptar_listado" name="mascota_listado_quiero_adoptar">
+				<template name="list_entity_template" template="mascota/usuario/listado/item.phtml">
+				</template>
+			</mascota_listado_quiero_adoptar>
+			<mascota_listado_quiero_cruzar in="mascota_quiero_cruzar_listado" name="mascota_listado_quiero_cruzar">
+				<template name="list_entity_template" template="mascota/usuario/listado/item.phtml">
+				</template>
+			</mascota_listado_quiero_cruzar>
+		</reference>
+	</default>
+	<default when="accion(mascota_adopcion_oferta,mascota_adopcion_solicitud)">
+		<reference name="html_head">
+			<script>js/jQuery/fancybox/jquery.fancybox-1.3.1.pack.js</script>
+			<css>js/jQuery/fancybox/jquery.fancybox-1.3.1.css</css>
+		</reference>
+		<reference name="contenido">
+			<!--
+			<template template="mascota/usuario/listado2.phtml" />
+			-->
+			<block type="Frontend/Menu" name="mascotas_usuario_tab" html_class="mascotas_usuario_tab">
+				<action  method="addItem">
+					<name>mascotas_adopcion_tab_oferta</name>
+					<text>Oferta</text>
+					<link>mascotas/adopcion/oferta</link>
+					<weight>1</weight>
+					<parent></parent>
+				</action>
+				<action  method="addItem">
+					<name>mascotas_adopcion_tab_solicitud</name>
+					<text>Solicitud</text>
+					<link>mascotas/adopcion/solicitud</link>
+					<weight>1</weight>
+					<parent></parent>
+				</action>
+				<action in="mascota_adopcion_oferta" method="setActive">
+					<name>mascotas_adopcion_tab_oferta</name>
+				</action>
+				<action in="mascota_adopcion_solicitud" method="setActive">
+					<name>mascotas_adopcion_tab_solicitud</name>
+				</action>
+			</block>
+			<mascota_adopcion_listado_oferta in="mascota_adopcion_oferta" name="mascota_adopcion_listado_oferta">
+				<template name="list_entity_template" template="mascota/usuario/listado/item.phtml">
+				</template>
+			</mascota_adopcion_listado_oferta>
+			<mascota_adopcion_listado_solicitud in="mascota_encontre_listado" name="mascota_adopcion_listado_solicitud">
+				<template name="list_entity_template" template="mascota/usuario/listado/item.phtml">
+				</template>
+			</mascota_adopcion_listado_solicitud>
+		</reference>
+	</default>
+	<mascota_addedit>
+	<!--
+		<reference name="html_head">
+		
+		</reference>
+	-->
+	</mascota_addedit>
+	<default when="accion(mascota_adopcion_oferta_addedit_datos, mascota_adopcion_solicitud_addedit_datos)">
+		<reference name="html_head">
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.core.js</script>
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.widget.js</script>
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.datepicker.js</script>
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/i18n/jquery.ui.datepicker-es.js</script>
+			<css>jquery-ui-1.8.4-126/development-bundle/themes/base/jquery.ui.all.css</css>
+			<script charset="utf8">js/select_typeable.js</script>
+			<script>js/jQuery/fancybox/jquery.fancybox-1.3.1.pack.js</script>
+			<css>js/jQuery/fancybox/jquery.fancybox-1.3.1.css</css>
+			<script>js/file_upload.js</script>
+			<script>js/jsDate.js</script>
+			<script>js/calcular_edad.js</script>
+			<script>js/selector_tamano_mascota.js</script>
+			<!--
+			<script>colorpicker/js/colorpicker.js</script>
+			<css>colorpicker/css/colorpicker.css</css>
+			<css>colorpicker/css/layout1.css</css>
+			-->
+			<script>js/selector_colores.js</script>
+		</reference>
+		<reference name="contenido" in="mascota_adopcion_oferta_addedit_datos">
+			<template name="main_form_edit,form_edit" template="mascota/agregar.phtml">
+				<mascota_fotos_addedit name="fotos_addedit" />
+				<template in="mascota_addedit_datos" name="form_edit_opciones_publicacion,form_edit" template="mascota/agregar_opciones_publicacion.phtml" />
+			</template>
+		</reference>
+		<reference name="contenido" in="mascota_adopcion_solicitud_addedit_datos">
+			<template name="main_form_edit,form_edit" template="mascota/agregar_adopcion_solicitud.phtml">
+				<!--<mascota_fotos_addedit name="fotos_addedit" />-->
+				<template in="mascota_addedit_datos" name="form_edit_opciones_publicacion,form_edit" template="mascota/agregar_opciones_publicacion.phtml" />
+			</template>
+		</reference>
+	</default>
+	<default when="accion(mascota_adopcion_oferta_addedit_domicilio, mascota_adopcion_solicitud_addedit_domicilio)">
+		<reference name="html_head">
+			<!--<script charset="utf8" external="true">http://api.maptp.map24.com/ajax?appkey={#CONF_MAP24_APPKEY}</script>
+			<script charset="utf8">js/update_address_nn4d.js</script>-->
+			<script charset="utf8" external="true"><![CDATA[http://maps.googleapis.com/maps/api/js?sensor=true&key={#CONF_GMAPS_APPKEY}]]></script>
+			<script>js/gmap.js</script>
+			<script charset="utf8">js/select_typeable.js</script>
+			<script charset="utf8">js/addedit_mascota_paso2.js</script>
+		</reference>
+		<reference name="contenido">
+			<template name="addedit_paso2_form" template="mascota/agregar_paso2.phtml">
+				<domicilio_selector name="domicilio_selector,form_edit">
+					<template name="form_edit" template="mascota/agregar_paso2_otro_domicilio.phtml">
+						<!--
+						<location_selector_nn4d name="location_selector" />
+						-->
+						<location_selector_gmap name="location_selector" zoom="15" />
+					</template>
+				</domicilio_selector>
+			</template>
+		</reference>
+	</default>
+	<default when="accion(mascota_adopcion_oferta_addedit_domicilio,mascota_adopcion_solicitud_addedit_domicilio)">
+		<reference name="html_head">
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.core.js</script>
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.widget.js</script>
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.datepicker.js</script>
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/i18n/jquery.ui.datepicker-es.js</script>
+			<script>jquery-ui-1.8.4-126/development-bundle/ui/jquery.ui.datepicker.js</script>
+			<script>jquery-timepicker/jquery.ui.timepicker.js</script>
+			<script>jquery-timepicker/jquery.ui.timepicker-es.js</script>
+			<css>jquery-timepicker/jquery-ui-timepicker.css</css>
+			
+			<css>jquery-ui-1.8.4-126/development-bundle/themes/base/jquery.ui.all.css</css>
+		</reference>
+		<!--
+		<reference name="addedit_paso2_form" when="accion(mascota_adopcion_oferta_addedit_domicilio)">
+			<template name="addedit_fecha_extravio" template="mascota/adopcion/oferta/paso2_fecha_extravio.phtml" />
+		</reference>
+		<reference name="addedit_paso2_form" when="accion(mascota_adopcion_solicitud_addedit_domicilio)">
+			<template name="addedit_fecha_encuentro" template="mascota/encuentro/paso2_fecha_encuentro.phtml" />
+		</reference>
+		-->
+	</default>
+	<default when="accion(mascota_adopcion_oferta_addedit_busqueda)">
+		<reference name="html_head">
+			<script charset="utf8" external="true"><![CDATA[http://maps.googleapis.com/maps/api/js?sensor=true&key={#CONF_GMAPS_APPKEY}]]></script>
+			<script>js/gmap.js</script>
+			<script>js/coincidencias.js</script>
+		</reference>
+		<reference name="contenido">
+			<template name="form_edit" template="mascota/adopcion/oferta/paso3.phtml">
+				<template name="show_select_coincidencias" template="mascota/adopcion/oferta/paso3_select_coincidencias.phtml">
+					<!--<mascota_view name="view_datos_mascota" template="mascota/preview.phtml" />-->
+					<!--<mascota_view name="view_datos_mascota_coincidencia" template="mascota/view/nn4d.phtml" />-->
+					<!--<mascota_view name="view_datos_mascota_coincidencia" template="mascota/view/coincidencia_gmap.phtml" />-->
+					<mascota_view name="view_datos_mascota_coincidencia" template="mascota/preview.phtml" />
+					<domicilio_gmap_view name="gmap_view_ubicacion" zoom="15">
+						<action method="addIconType">
+							<name>yellow</name>
+							<file>img/pin/pin_yellow.png</file>
+							<hotspot>bottom,right</hotspot>
+						</action>
+						<action method="addIconType">
+							<name>green</name>
+							<file>img/pin/pin_green.png</file>
+							<hotspot>bottom,right</hotspot>
+						</action>
+						<action method="addIconType">
+							<name>red</name>
+							<file>img/pin/pin_red.png</file>
+							<hotspot>bottom,right</hotspot>
+						</action>
+					</domicilio_gmap_view>
+				</template>
+			</template>
+		</reference>
+	</default>
+	<default when="accion(mascota_adopcion_solicitud_addedit_busqueda)">
+		<reference name="html_head">
+			<script charset="utf8" external="true"><![CDATA[http://maps.googleapis.com/maps/api/js?sensor=true&key={#CONF_GMAPS_APPKEY}]]></script>
+			<script>js/gmap.js</script>
+			<script>js/coincidencias.js</script>
+		</reference>
+		<reference name="contenido">
+			<template name="form_edit" template="mascota/adopcion/solicitud/paso3.phtml">
+				<template name="show_select_coincidencias" template="mascota/adopcion/solicitud/paso3_select_coincidencias.phtml">
+					<!--<mascota_view name="view_datos_mascota_coincidencia" template="mascota/view/nn4d.phtml" /> -->
+					<!--<mascota_view name="view_datos_mascota_coincidencia" template="mascota/view/coincidencia_gmap.phtml" />-->
+					<mascota_view name="view_datos_mascota_coincidencia" template="mascota/preview.phtml" />
+					
+					<domicilio_gmap_view name="gmap_view_ubicacion" zoom="15">
+						<action method="addIconType">
+							<name>yellow</name>
+							<file>img/pin/pin_yellow.png</file>
+							<hotspot>bottom,right</hotspot>
+						</action>
+						<action method="addIconType">
+							<name>green</name>
+							<file>img/pin/pin_green.png</file>
+							<hotspot>bottom,right</hotspot>
+						</action>
+						<action method="addIconType">
+							<name>red</name>
+							<file>img/pin/pin_red.png</file>
+							<hotspot>bottom,right</hotspot>
+						</action>
+					</domicilio_gmap_view>
+				</template>
+			</template>
+		</reference>
+	</default>
+	<default when="accion(mascota_adopcion_oferta_addedit_publicacion, mascota_adopcion_solicitud_addedit_publicacion)">
+		<reference name="html_head">
+			<!--<script charset="utf8" external="true">http://api.maptp.map24.com/ajax?appkey={#CONF_MAP24_APPKEY}</script>
+			<script charset="utf8">js/update_address_nn4d.js</script>-->
+			<script charset="utf8" external="true"><![CDATA[http://maps.googleapis.com/maps/api/js?sensor=true&key={#CONF_GMAPS_APPKEY}]]></script>
+			<script>js/gmap.js</script>
+			<script>js/jQuery/fancybox/jquery.fancybox-1.3.1.pack.js</script>
+			<css>js/jQuery/fancybox/jquery.fancybox-1.3.1.css</css>
+		</reference>
+		<reference name="contenido">
+			<template name="form_edit" template="mascota/adopcion/oferta/paso4.phtml">
+				<action when="accion(mascota_adopcion_solicitud_addedit_publicacion)" method="setTemplate">
+					<template>mascota/adopcion/solicitud/paso4.phtml</template>
+				</action>
+				<mascota_view name="view_datos_mascota" template="mascota/preview.phtml" />
+				<domicilio_view name="view_ubicacion" zoom="15" />
+				<!--<block in="mascota_encuentro_addedit_publicacion" name="view_posibles_adopcion_conciliacions" />-->
+				<template in="mascota_adopcion_solicitud_addedit_publicacion" name="view_posibles_adopcion_conciliacions" template="mascota/adopcion/solicitud/paso4_select_coincidencias.phtml">
+					<mascota_view name="view_datos_mascota_coincidencia" template="mascota/adopcion/solicitud/paso4_adopcion_oferta_preview.phtml" />
+				</template>
+				<template in="mascota_adopcion_oferta_addedit_publicacion" name="view_posibles_adopcion_conciliacions" template="mascota/adopcion/oferta/paso4_select_coincidencias.phtml">
+					<mascota_view name="view_datos_mascota_coincidencia" template="mascota/adopcion/oferta/paso4_adopcion_solicitud_preview.phtml" />
+				</template>
+				<template when="accion(mascota_adopcion_oferta_addedit_publicacion)" name="form_edit_publicacion" template="mascota/adopcion/oferta/paso4_opciones_publicacion.phtml" />
+				<template when="accion(mascota_adopcion_solicitud_addedit_publicacion)" name="form_edit_publicacion" template="mascota/adopcion/solicitud/paso4_opciones_publicacion.phtml" />
+			</template>
+		</reference>
+	</default>
+	<!--
+	<mascota_upload_foto>
+		<reference name="html_head">
+			<script>js/xhr_file_upload.js</script>
+		</reference>
+		<reference name="contenido">
+			<template name="form_edit" template="mascota/agregar_foto.phtml">
+				<file_upload name="file_upload" />
+			</template>
+		</reference>
+	</mascota_upload_foto>
+	-->
+</layout>

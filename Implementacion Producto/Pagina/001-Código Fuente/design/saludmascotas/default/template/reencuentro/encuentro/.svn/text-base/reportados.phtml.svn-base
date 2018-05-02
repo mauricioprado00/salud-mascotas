@@ -1,0 +1,38 @@
+<?php //es útf8
+$reencuentros = $this->getReencuentros();
+$mascota_perdida = $this->getMascotaPerdida();
+$id_mascota_perdida = $mascota_perdida->getId();
+?>
+
+<?php if(!isset($reencuentros)||!$reencuentros->count()): ?> 
+<h3>Nadie ha reportado coincidencias</h3>
+<?php return; endif; ?> 
+<ul class="listado_entidad listado_mascotas listado_mascotas_reencuentros_reportados listado_mascotas_reencuentros_reportados_encuentro">
+	<?php foreach($reencuentros as $idx=>$reencuentro): $class = $idx%2?'pair':'even'; ?> 
+	<li class="listado_entidad_item mascota_item listado_entidad_item_<?php print $class; ?>">
+		<?php
+		$encuentro = $reencuentro->getEncuentro();
+		echo $this->getChild('encuentro_view')
+			->setEncuentro($encuentro)
+			->setReencuentro($reencuentro)
+			->toHtml()
+		;
+		?> 
+		<a class="link_confirmar_reencuentro" href="<?php print $this->getUrl(Frontend_Mascota_Reencuentro_Helper::getUrlConfirmar($id_mascota_perdida, $reencuentro->getId())); ?>">Confirmar coincidencia</a>
+	</li>
+	<?php endforeach; ?> 
+</ul>
+<script type="text/javascript">
+<!--
+	jQuery('.link_view_mascota')
+		.fancybox({
+			'width': 460,
+			'height':490,
+	        'autoDimensions':true,
+	        'transitionIn':'none',
+			'transitionOut':'none',
+			'type':'iframe'
+		})
+	;
+-->
+</script>

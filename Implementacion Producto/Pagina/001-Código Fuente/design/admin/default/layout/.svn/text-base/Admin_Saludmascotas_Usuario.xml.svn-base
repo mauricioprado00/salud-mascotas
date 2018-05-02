@@ -1,0 +1,62 @@
+<layout>
+	<default>
+		<reference name="menu_admin">
+			<action method="addItem">
+				<link_url>usuario</link_url>
+				<text>usuario</text>
+				<title>usuario</title>
+				<name>menu_admin_usuario</name>
+			</action>
+		</reference>
+	</default>
+	<default>
+		<reference name="menu_admin_usuario">
+			<block type="Admin/Menu">
+				<action method="addItem">
+					<link_url>usuario/listar</link_url>
+					<text>Listado</text>
+					<title>Listado</title>
+				</action>
+				<action method="addItem">
+					<link_url>usuario/addEdit</link_url>
+					<text>Agregar</text>
+					<title>Agregar</title>
+				</action>
+			</block>
+		</reference>
+	</default>
+	<datalist_admin_usuario>
+<!--			output_filters="utf8_encode"   -->
+		<block type="Admin_Saludmascotas_Usuario/XmlList"
+			name="xml_data_admin_usuario">
+			<action method="appListFields">
+				<fieldname>acciones@ui</fieldname>
+				<fieldname>id</fieldname>
+				<fieldname>activo</fieldname>
+				<fieldname>nombre</fieldname>
+				<fieldname>apellido</fieldname>
+				<fieldname>username</fieldname>
+				<fieldname>email</fieldname>
+				<fieldname>telefono</fieldname>
+			</action>
+			<action method="appVirtualFields">
+				<fieldname>acciones</fieldname>
+			</action>
+			<action method="addAutofilterFieldOutput">
+				<fieldname>acciones</fieldname>
+				<filter>Core_Object::DataStrtr</filter>
+				<param><![CDATA[
+					<a href="#usuario/listar" onclick="getGrid(this).setSelection('{!id}')"><div class="lstse" ></div></a>
+					<a href="#usuario/addEdit/{!id}"><div class="lsted"></div></a>
+					<a href="#usuario/delete/{!id}" onclick="getGrid(this).setSelection('{!id}'); return confirm('Desea continuar eliminando la usuario seleccionado?')"><div class="lstde"></div></a>
+					]]></param>
+			</action>
+			<!--
+			<action method="addAutofilterFieldOutput">
+				<fieldname>acciones</fieldname>
+				<filter>htmlentities</filter>
+			</action>
+			-->
+		</block>
+	</datalist_admin_usuario>
+</layout>

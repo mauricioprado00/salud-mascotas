@@ -1,0 +1,10 @@
+<div id="overfix">
+	<div id="overfix">
+		<a href="<?php print $this->getUrl(Frontend_Helper::getUrlDashboard()); ?>"><div class="biglogo_white"></div></a>
+		<?php echo $this->getChildHtml(); ?>
+	</div>
+</div>
+<!--
+<div class="half_shadow"></div>
+-->
+      

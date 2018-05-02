@@ -1,0 +1,58 @@
+<layout>
+	<default>
+		<reference name="menu_admin">
+			<action method="addItem">
+				<link_url>raza</link_url>
+				<text>raza</text>
+				<title>raza</title>
+				<name>menu_admin_raza</name>
+			</action>
+		</reference>
+	</default>
+	<default>
+		<reference name="menu_admin_raza">
+			<block type="Admin/Menu">
+				<action method="addItem">
+					<link_url>raza/listar</link_url>
+					<text>Listado</text>
+					<title>Listado</title>
+				</action>
+				<action method="addItem">
+					<link_url>raza/addEdit</link_url>
+					<text>Agregar</text>
+					<title>Agregar</title>
+				</action>
+			</block>
+		</reference>
+	</default>
+	<datalist_admin_raza>
+<!--			output_filters="utf8_encode"   -->
+		<block type="Admin_Saludmascotas_Raza/XmlList"
+			name="xml_data_admin_raza">
+			<action method="appListFields">
+				<fieldname>acciones@ui</fieldname>
+				<fieldname>id</fieldname>
+				<fieldname>nombre</fieldname>
+				<fieldname>especie</fieldname>
+			</action>
+			<action method="appVirtualFields">
+				<fieldname>acciones</fieldname>
+			</action>
+			<action method="addAutofilterFieldOutput">
+				<fieldname>acciones</fieldname>
+				<filter>Core_Object::DataStrtr</filter>
+				<param><![CDATA[
+					<a href="#raza/listar" onclick="getGrid(this).setSelection('{!id}')"><div class="lstse" ></div></a>
+					<a href="#raza/addEdit/{!id}"><div class="lsted"></div></a>
+					<a href="#raza/delete/{!id}" onclick="getGrid(this).setSelection('{!id}'); return confirm('Desea continuar eliminando la raza seleccionado?')"><div class="lstde"></div></a>
+					]]></param>
+			</action>
+			<!--
+			<action method="addAutofilterFieldOutput">
+				<fieldname>acciones</fieldname>
+				<filter>htmlentities</filter>
+			</action>
+			-->
+		</block>
+	</datalist_admin_raza>
+</layout>

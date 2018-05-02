@@ -1,0 +1,28 @@
+<?php //es útf8
+$mascota = $this->getMascota();
+$es_perdida = $mascota->esEstadoPerdida();
+?>
+<div class="reencuentro_confirmaciones_pendientes">
+	<form class="standart wider busqueda" name="form1" method="post">
+		<input type="hidden" name="dummy" value="continuar" />
+		<div>
+			<h2>Datos de Mascota <a href="<?php print $this->getUrl($mascota->getUrlPerdidaEditar(0, 1)); ?>">Modificar</a></h2>
+			<?php print $this->getChildHtml('view_datos_mascota'); ?>
+		</div>
+		<div>
+			<h2>Posibles coincidencias que has seleccionado<a href="<?php print $this->getUrl($mascota->getUrlPerdidaEditar(0, 3)); ?>">Modificar</a></h2>
+			<?php print $this->getChildHtml('reencuentros_seleccionados'); ?>
+		</div>
+		<div>
+			<h2>Coincidencias reportadas por usuario</h2>
+			<?php print $this->getChildHtml('reencuentros_reportados'); ?>
+		</div>
+		<div class="form_row actions_row single_action">
+			<a href="<?php print $this->getUrl($mascota->getUrlEditar()); ?>"><button class="submit button" type="button">Modificar anuncio o buscar nuevas coincidencias</button></a>
+			<ul>
+				<li><a href="<?php print $this->getUrl($mascota->getUrlFinalizarAnuncio()); ?>">
+				<?php print $es_perdida?'ya encontre mi mascota ':'ya encontre a su dueño'; ?> (eliminar anuncio)</a></li>
+			</ul>
+		</div>
+	</form>
+</div>

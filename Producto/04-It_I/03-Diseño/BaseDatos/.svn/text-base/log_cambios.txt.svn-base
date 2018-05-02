@@ -1,0 +1,143 @@
+11/09/2011 - mauricio
+agrego tablas de adopción (20110911_tablas_adopcion.sql)
+04/08/2011 - mauricio
+* hago nulleable el campo id_usuario de la tabla reencuentro
+31/07/2011 - mauricio
+* agrego campo activo a tabla reencuentro (para marcar si el usuario a quien va dirigida la confirmación ya lo vio y selecciono una opcion en el campo confirmado)
+30/07/2011 - mauricio
+* agrego campo iniciado_por en tabla reencuentro con las opciones "perdida" y "encuentro" para saber quien lo inicia
+* creo tabla notificacion
+28/07/2011 - mauricio
+* agrego campo activo a tabla encuentro
+* agrego campo fecha_publicacion a tabla encuentro
+* agrego campo fecha_expiracion a tabla encuentro
+* cambio campo id_domicilio de tabla encuentro, la hago nulleable
+* cambio clave foranea id_domicilio de tabla  encuentro, le hago on delete set null
+* elimino campo fecha_encuentro de la tabla encuentro
+* cambio el campo hora_encuentro a tipo DATETIME
+* cambio el campo sexo de la tabla mascota le saco el acento a la opción "no sé"
+27/07/2011 - mauricio
+* cambio campo id_domicilio de tabla perdida, la hago nulleable
+* cambio clave foranea id_domicilio de tabla  perdida, le hago on delete set null
+* ambos cambios para permitir la edición de la perdida, al cambiar de domicilio es necesario eliminar el domicilio anterior y permitir que la fk sea null.
+26/07/2011 - mauricio
+* agrego filas a estadomascota segun digrama de estados
+* cambio la clave foranea id_domicilio en tabla mascota, le hago on delete set null
+* cambio campo entrenada, lo hago nulleable y dejo por default en NULL (el campo no es necesario de cargar para mascotas perdidas)
+25/07/2011 - mauricio
+* agrego constraint de clave primaria a tambla colores
+24/07/2011 - mauricio
+* cambio campo id_mascota de tabla foto_mascota, lo hago nulleable
+* agrego campo id_usuario en tabla foto_mascota
+* agrego campo fecha_carga en tabla foto_mascota
+23/07/2011 - mauricio
+* agrego filas a diferentes tablas (estadomascota, manto, longitud_pelaje, raza, especie)
+22/07/2011 - mauricio
+* agrego propiedad auto_increment a campo id de tabla manto
+* cambio campo manto de tabla manto por nombre
+* elimino campo longitud_pelaje de tabla  mascota
+* agrego tabla longitud_pelaje
+* agrego campo id_longitud_pelaje a tabla mascota
+* agrego opción "no sé" a campo sexo de mascota
+21/07/2011 - mauricio
+* agrego clave única en tabla provincia
+* agrego clave única en tabla localidad
+* agrego clave única en tabla barrio
+19/07/2011 - mauricio
+* agrego campo activo en la tabla usuario
+* elimino clave foranea id_perfil de tabla usuario
+15/07/2011 - mauricio
+* agrego campo confirmado a la tabla reencuentro
+* agrego campo email_informante a la tabla reencuentro
+* agrego campo nombre_informante a la tabla reencuentro
+* modifico campo email en tabla usuario, lo hago de varchar de 100
+* modifico campo castrado de tabla mascota, le agrego opción "no se"
+* modifico campo id_manto en tabla mascota, lo hago nulleable por si el usuario no sabe que tipo de manto tiene
+* modifico campo calle de la tabla domicilio, lo llamo calle_numero para que se guarden ambas cosas
+* elimino campo numero de tabla domicilio
+* elimino campo piso de tabla domicilio
+* elimino campo depto de tabla domicilio
+* elimino el campo id_mascota de tabla reencuentro
+* agrego campo id_perdida a tabla reencuentro
+* agrego campo id_encuentro a tabla reencuentro
+* agrego campo activa a mascota
+* agrego campo para_cruza a mascota
+* agrego campo para_adoptar a mascota
+* agrego campo para_venta a mascota
+* agrego campo quiere_destacar a mascota
+* agrego campo destacada a mascota
+* agrego campo pedigree a mascota
+* agrego campo entrenada a mascota
+* agrego campo tiene_mascota a tabla encontrada
+* agrego campo estado_mascota a tabla encontrada
+* agrego campo notificacion_email a tabla encontrada
+* agrego campo mostrar_telefono a tabla encontrada
+* agrego campo republicar_automaticamente a tabla encontrada
+* agrego campo mostrar_telefono a tabla perdida
+
+
+
+13/07/2011 - mauricio
+* cambio campo id_usuario de tabla mascota por id_dueno. Lo hago que sea nulleable.
+* quito el campo edad de la tabla mascota, no tiene sentido con la fecha de nacimiento alcanza.
+* cambio el campo tamaño de la tabla mascota para no tener lio con las Ñ
+* cambio tabla pelaje por manto
+* elimino el campo tamaño de la tabla manto
+* agrego campo descripcion a tabla manto
+* agrego campo ruta_imagen a tabla manto
+* agrego campo longitud_pelaje a tabla mascota
+* cambio nombre campo id_pelaje por id_manto a tabla mascota (referencia a tabla manto)
+* agrego campo sexo a mascota
+* agrego campo castrado a mascota
+* elimino campo color de mascota (ya existe una tabla para esto)
+* cambio el nombre de la tabla imagen por foto_mascota
+* cambio el campo ruta de la tabla foto_mascota, a TEXT y no nulleable
+* cambio el campo idi por id en la tabla foto_mascota
+* elimino campo id_barrio de tabla perdida
+* agrego campo id_domicilio a tabla perdida
+* agrego campo id_domicilio a tabla encuentro
+* agrego campo lat y lng (latitud y longitud) a tabla domicilio
+* agrego campo notificacion_email a tabla perdida
+* agrego campo republicar_automaticamente a tabla perdida
+* agrego campo quiere_destacar a tabla perdida (este esta en "si" cuando el usuario quiere destacarlo)
+* agrego campo destacado a tabla perdida  (este solo el administrador podrá cambiarlo, lo hara luego de cobrarle.)
+* agrego campo fecha_publicación y fecha_expiración a tabla perdida
+* agrego campo activo a tabla perdida
+
+
+
+
+
+
+11/07/2011 - mauricio
+
+cambios:
+* cambie todos los nombres de claves primarias por "id"
+* cambie todos los nombres de campos con camelcase a formato unerlined (ej: tipoDocumento por tipo_documento)
+* complete nombres de claves foraneas, algunos estaban cortados y/o no tenian el nombre de la tabla de referencia
+* eliminé el campo fecha_reencuentro de la tabla "reencuentro"
+* cambie el campo hora_reencuentro de TIME a DATETIME
+* elimine la referencia de la tabla "mascota" a la tabla "tipomascota"
+* cambie el nombre de la tabla "tipomascota" por "especie"
+* cree una referencia de la tabla "mascota" a la tabla "raza"
+* hice el campo username de la tabla usuario de tipo Unico
+* hice el campo email de la tabla usuario de tipo Unico
+* eliminé el campo fecha_extravio de la tabla "perdida"
+* cambie el campo hora_extravio de TIME a DATETIME
+* le quite el not null de id_domicilio de mascota
+* le quite el not null de id_domicilio de usuario ( sino no vamos a poder crear el usuario hasta que no tenga domicilio)
+* agrege referencia de la tabla "mascota" a "usuario"
+* cambie todas las tablas  a tipo "utf8 default collation"
+* cambie el campo descripcion de "especies" a tipo TEXT
+* cambie el campo descripcion de "mascota" a tipo TEXT
+* cambie el campo descripcion de "reclamomascota" a tipo TEXT
+* cambie el campo descripcion de "encuentro" a tipo TEXT
+* cambie el campo descripcion de "reencuentro" a tipo TEXT
+* cambie el campo descripcion de "perdida" a tipo TEXT
+* cambie el campo descripcion de "raza" a tipo TEXT
+* agrege la tabla administrador donde van solo los usuarios administradores
+* agrege la tabla config donde van a ir las configuraciones de la aplicación
+
+
+(¿No deberíamos eliminar el id_domicilio en la tabla mascota? el domicilio va a ser siempre el mismo del dueño... y si no tiene dueño no tiene domicilio)
+(¿necesitamos la tabla sesión para algo? estaba por eliminarla pero queria preguntarte primero)

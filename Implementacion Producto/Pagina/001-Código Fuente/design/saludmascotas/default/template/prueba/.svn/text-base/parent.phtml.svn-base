@@ -1,0 +1,5 @@
+<?php
+//$childs = $this->getChild();
+//var_dump(count($childs));
+echo $this->getChildHtml();
+?>

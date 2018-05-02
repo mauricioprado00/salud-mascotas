@@ -1,0 +1,17 @@
+<?php 
+if(!$this->hasEntityToList()||!$this->getEntityToList()){?> 
+	error, no hay entidad para el control <?php print get_class($this); ?><?
+	return;
+}
+
+	$html_select = '';
+	if($options = $this->createOptions())
+		foreach($options as $option)
+			$html_select .= $option->getHtml();
+	
+	$c = $this->getSelectControl();
+	echo $c
+		->setInnerHtml($html_select)
+		->getHtml()
+	;
+?>

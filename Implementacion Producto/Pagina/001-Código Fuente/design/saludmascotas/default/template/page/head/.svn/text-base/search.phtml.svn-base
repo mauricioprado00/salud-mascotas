@@ -1,0 +1,23 @@
+<div class="search_toolbox">
+	<form>
+		<div class="textbox">
+			<div class="holding query">
+				<input type="text" value="" id="query" name="query" title="Buscar en SaludMascotas" autocomplete="on">
+				<span class="holder">Buscar en SaludMascotas</span>
+			</div>
+		</div>
+		<div class="select">
+			<div class="holding query_type">
+				<select id="query_type" name="query_type">
+					<option>Consultas</option>
+					<option>Productos</option>
+					<option>Perdí mi mascota</option>
+					<option>Quiero adoptar</option>
+					<option>Ver mascotas perdidas</option>
+					<option>Quiero cruzar mascota</option>
+				</select>
+			</div>
+		</div>
+		<div style="clear:both;"></div>
+	</form>
+</div>

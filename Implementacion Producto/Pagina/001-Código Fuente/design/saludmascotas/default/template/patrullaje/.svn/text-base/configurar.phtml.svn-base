@@ -1,0 +1,149 @@
+<?php //útf8
+$configuraciones = $this->getConfiguraciones();
+
+?>
+<div class="addeditmascota_datos">
+	<div class="form_container form_mascota_datos">
+		<form class="standart wider login" name="form1" method="post">
+			<div class="textbox">
+				<div class="holding max_dias">
+					<?php
+						$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+						$input
+							->setMaxlength(300)
+							->setType('text')
+							//->setAutocomplete('on')
+							->setTitle('Cantidad Dias Máximos')
+							->setName('patrullaje/met2/max_dias')
+							->setId('max_dias')
+							->setValue($configuraciones['patrullaje/met2/max_dias'])
+						;
+						echo $input->getHtml();
+						//<input type="text" autocomplete="on" title="nombre" name="nombre" id="nombre" value="">
+					?> 
+					<div class="slider" data-info="<?php print htmlentities(json_encode(array('target'=>'#max_dias', 'min'=>0,'max'=>max(90*2, $configuraciones['patrullaje/met2/max_dias']), 'step'=>15, 'fixed'=>0))); ?>"></div>
+					<span class="holder">Maximo Días</span>
+					<span class="help">Cantidad de Dias Máximos</span>
+				</div>
+			</div>
+			<div class="textbox">
+				<div class="holding dias_visita">
+					<?php
+						$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+						$input
+							->setMaxlength(300)
+							->setType('hidden')
+							//->setAutocomplete('on')
+							->setTitle('Peso Días Sin Visitar')
+							->setName('patrullaje/met2/peso/dias_visita')
+							->setId('dias_visita')
+							->setValue($configuraciones['patrullaje/met2/peso/dias_visita'])
+						;
+						echo $input->getHtml();
+						//<input type="text" autocomplete="on" title="nombre" name="nombre" id="nombre" value="">
+					?> 
+					<div class="slider" data-info="<?php print htmlentities(json_encode(array('target'=>'#dias_visita', 'min'=>0,'max'=>10, 'step'=>1, 'fixed'=>0))); ?>"></div>
+					<span class="holder">Dias sin visitar</span>
+					<span class="help">Peso de días sin visitar</span>
+				</div>
+			</div>
+			<div class="textbox">
+				<div class="holding cantidad_avistamientos">
+					<?php
+						$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+						$input
+							->setMaxlength(300)
+							->setType('hidden')
+							//->setAutocomplete('on')
+							->setTitle('Peso de cantidad de avistamientos')
+							->setName('patrullaje/met2/peso/cantidad_avistamientos')
+							->setId('cantidad_avistamientos')
+							->setValue($configuraciones['patrullaje/met2/peso/cantidad_avistamientos'])
+						;
+						echo $input->getHtml();
+						//<input type="text" autocomplete="on" title="nombre" name="nombre" id="nombre" value="">
+					?> 
+					<div class="slider" data-info="<?php print htmlentities(json_encode(array('target'=>'#cantidad_avistamientos', 'min'=>0,'max'=>10, 'step'=>1, 'fixed'=>0))); ?>"></div>
+					<span class="holder">cantidad de avistamientos</span>
+					<span class="help">Peso de cantidad de avistamientos</span>
+				</div>
+			</div>
+			<div class="textbox">
+				<div class="holding cantidad_perdidas">
+					<?php
+						$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+						$input
+							->setMaxlength(300)
+							->setType('hidden')
+							//->setAutocomplete('on')
+							->setTitle('Peso de cantidad de pérdidas')
+							->setName('patrullaje/met2/peso/cantidad_perdidas')
+							->setId('cantidad_perdidas')
+							->setValue($configuraciones['patrullaje/met2/peso/cantidad_perdidas'])
+						;
+						echo $input->getHtml();
+						//<input type="text" autocomplete="on" title="nombre" name="nombre" id="nombre" value="">
+					?> 
+					<div class="slider" data-info="<?php print htmlentities(json_encode(array('target'=>'#cantidad_perdidas', 'min'=>0,'max'=>10, 'step'=>1, 'fixed'=>0))); ?>"></div>
+					<span class="holder">cantidad de pérdidas</span>
+					<span class="help">Peso de cantidad de pérdidas</span>
+				</div>
+			</div>
+			<div class="textbox">
+				<div class="holding cantidad_en_guarda">
+					<?php
+						$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+						$input
+							->setMaxlength(300)
+							->setType('hidden')
+							//->setAutocomplete('on')
+							->setTitle('Peso de cantidad en guarda')
+							->setName('patrullaje/met2/cantidad_en_guarda')
+							->setId('cantidad_en_guarda')
+							->setValue($configuraciones['patrullaje/met2/peso/cantidad_en_guarda'])
+						;
+						echo $input->getHtml();
+						//<input type="text" autocomplete="on" title="nombre" name="nombre" id="nombre" value="">
+					?> 
+					<div class="slider" data-info="<?php print htmlentities(json_encode(array('target'=>'#cantidad_en_guarda', 'min'=>0,'max'=>10, 'step'=>1, 'fixed'=>0))); ?>"></div>
+					<span class="holder">Cantidad en guarda</span>
+					<span class="help">Peso de cantidad en guarda</span>
+				</div>
+			</div>
+			
+			<div class="form_row actions_row single_action">
+				<button class="submit button" type="submit">Continuar</button>
+			</div>
+		</form>
+	</div>
+</div> 
+<script type="text/javascript">
+<!--
+jQuery(document).ready(function(){
+	jQuery('.slider').each(function(){
+    	jQuery(this).css('margin-top', '9px');
+		var data = jQuery(this).attr('data-info');
+		var options = null;
+		try{
+			eval('options='+data);
+		}
+		catch(e){
+			alert("kradkk");
+			return;
+		}
+		options.value = jQuery(options.target).val();
+		options.slide = function(event, ui){
+			var val = ui.value;
+			if(options.fixed){
+				val = (new Number(parseFloat(val))).toFixed(options.fixed);
+			}
+			jQuery(options.target).val(val);
+		}
+		options.change = function(){jQuery(options.target).change()}
+		jQuery(this).slider(options);
+		//jQuery(options.target).val(ui.value);
+	});
+});
+
+//-->
+</script>

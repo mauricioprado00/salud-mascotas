@@ -1,0 +1,46 @@
+<?php
+
+$parent = $this->getParentBlock();
+$mascota = $parent->getEntity();
+$castracion = $mascota->getCastracionActual();
+if(!$castracion)
+	return;
+$veterinario = $castracion->getVeterinario();
+if($veterinario)
+	$veterinario = $veterinario->getNombre();
+else $veterinario = $castracion->getVeterinario(false);
+if($mascota->esEstadoCastracionRealizada()){
+	$realizada = $castracion->esResultadoConfirmacionRealizada();
+}
+else $realizada = null;
+$descripcion = $castracion->getDescripcion();
+
+
+?>
+<?php if($castracion->getFechaAsignacion()): ?> 
+		<li>
+			<b>Fecha castracion:</b>
+			<em><?php print date('d/m/Y', $castracion->getFechaAsignacion()); ?></em>
+		</li>
+		<li>
+			<b>Veterinario:</b>
+			<em><?php print $veterinario; ?></em>
+		</li>
+		<?php if(isset($realizada)): ?> 
+		<li>
+			<b>Realizada:</b>
+			<em><?php print $realizada?'si':'no'; ?></em>
+		</li>
+		<?php endif; ?>
+		<?php if(isset($descripcion)): ?> 
+		<li>
+			<b>Descripcion:</b>
+			<em><?php print $descripcion; ?></em>
+		</li>
+		<?php endif; ?>
+<?php else: ?> 
+		<li>
+			<b>Castracion:</b>
+			<em>Solicitada</em>
+		</li>
+<?php endif; ?> 

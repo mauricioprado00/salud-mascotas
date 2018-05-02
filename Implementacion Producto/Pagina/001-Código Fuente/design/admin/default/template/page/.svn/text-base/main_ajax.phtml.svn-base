@@ -1,0 +1,20 @@
+<?
+	//$classnames = array('contenedor_main');
+	$classnames = array();
+	if($html_class = $this->getHtmlClass())
+		$classnames[] = $html_class;
+	if($this->hasClassnames()){
+		$classnames[] = implode(' ', $this->getClassnames());
+	}
+	$classnames[] = implode(' ', Core_App::getLayout()->getActions());
+	$classnames = implode(' ', $classnames);
+	$classnames = $classnames?' class="'.$classnames.'"':'';
+?>
+<div <?=$classnames?>><?php
+
+	print $this->getChildHtml('contenedor_main');
+	if($right = $this->getChildHtml('contenedor_right')){?> 
+	<div class="contenedor_right"><?=$right?></div><?	
+	}
+	print $this->getChildHtml('bottom_container'); ?> 
+</div>

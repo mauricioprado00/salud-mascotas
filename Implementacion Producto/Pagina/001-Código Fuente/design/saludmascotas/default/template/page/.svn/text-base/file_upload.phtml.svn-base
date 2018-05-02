@@ -1,0 +1,62 @@
+<div class="file_upload" id="<?php print $id = uniqid(); ?>">
+	<?php if(Core_Http_Header::isNavigator('chrome','firefox')): ?> 
+	<div class="drop_zone" id="<?php print $id.'_drop_zone'; ?>"><?php print $this->getDropMessage(); ?></div>
+	<ul id="<?php print $id.'_file_upload_list'; ?>"></ul>
+	<?php endif; ?>
+	<h2 id="<?php print $id.'_status'; ?>"></h2>
+	Selecciona un archivo<input type="file" name="archivo" id="archivo"  /> 
+	<div id="<?php print $id.'_returnarea'; ?>"></div>
+	
+</div>
+<script>
+jQuery(document).ready(function(){
+	<?php if(Core_Http_Header::isNavigator('chrome','firefox')): ?> 
+	function handleFileSelect(evt) {
+		try{
+		evt.stopPropagation();
+		evt.preventDefault();
+		// object for allowed media types
+//		var accept = {
+//		    binary : ["image/png", "image/jpeg"],
+//		    text :   ["text/plain", "text/css", "application/xml", "text/html"]
+//		};
+		var files = evt.dataTransfer.files; // FileList object.
+		
+		// files is a FileList of File objects. List some properties.
+		var output = [];
+		output.push('<li class="main">Subiendo archivos</li>');
+		for (var i = 0, f; f = files[i]; i++) {
+			//window.console.log(f.getAsText('base-64'));
+			output.push('<li><strong>', f.name, '</strong> (', f.type || 'n/a', ') ',f.size, ' bytes','</li>');
+		}
+		document.getElementById('<?php print $id.'_file_upload_list'; ?>').innerHTML = '<ul>' + output.join('') + '</ul>';
+		sendMultipleFiles({
+			files: files,
+			url: '<?php print $this->getUrl($this->getUploadUrl())?>',
+			onload: function (event,xhr){
+				//window.console.log(xhr.responseText); alert(xhr.responseText);
+				jQuery('#<?php print $id.'_returnarea'; ?>').html(xhr.responseText);
+			}
+		});
+		}catch(e){
+			alert(e);
+		}
+	}
+	
+	function handleDragOver(evt) {
+		evt.stopPropagation();
+		evt.preventDefault();
+	}
+	
+	// Setup the dnd listeners.
+	var dropZone = document.getElementById('<?php print $id.'_drop_zone'; ?>');
+	dropZone.addEventListener('dragover', handleDragOver, false);
+	dropZone.addEventListener('drop', handleFileSelect, false);
+	<?php endif; ?> 
+	jQuery('#archivo').change(function(){
+		jQuery(this).parents('form:first').submit();
+	});
+});
+
+
+</script>

@@ -1,0 +1,10 @@
+<?php //útf8
+	$etiquetas = $this->getEtiquetas();
+?>
+<select name="<?php print $this->getHtmlName(); ?>">
+<option>Etiqueta superior</option>
+<?php foreach($etiquetas as $etiqueta){
+	$etiqueta->setDeep(0);
+	echo $this->renderEtiqueta($etiqueta);
+}?>
+</select>

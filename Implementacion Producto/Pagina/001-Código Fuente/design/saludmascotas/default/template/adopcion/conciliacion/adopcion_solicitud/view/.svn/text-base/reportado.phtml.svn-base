@@ -1,0 +1,53 @@
+<?php
+$adopcion_solicitud = $this->getAdopcionSolicitud();
+$adopcion_conciliacion = $this->getAdopcionConciliacion();
+
+			$adopcion_solicitud = $adopcion_conciliacion->getAdopcionSolicitud();
+			$texto = 'El usuario <b>' . $adopcion_conciliacion->getNombreCompleto() . '</b> ha reclamado la mascota que publicaste para adopción ';
+			//$texto .= ' <b>ofrece una mascota</b> para adopción ';
+//			if($adopcion_solicitud){
+//				if($adopcion_solicitud->getTieneMascota()){
+//					$texto .= ' <b>tiene una mascota</b> que podría ser tuya ';
+//				}
+//				else{
+//					$texto .= ' <b>ha visto una mascota</b> que podría ser tuya ';
+//				}
+//			}
+			if($adopcion_conciliacion->esConfirmado()){
+				$texto .= ' ya <b>la has confirmado</b> haberla entregado';
+			}
+			else{
+				$texto .= ' pero todavía <b>no has confirmado</b> haberla entregado';
+			}
+			$texto .= '.';
+			if($telefono = $adopcion_conciliacion->getTelefono()){
+				$texto .= ' Puedes contactarte con el telefónicamente a ' . htmlentities($telefono). '.';
+			}
+
+			$p = new Core_Html_Tag_Custom('p');
+			$p->setInnerHtml($texto);
+			echo $p->getHtml();
+
+			$descripcion = trim($adopcion_conciliacion->getDescripcion());
+			if(isset($adopcion_solicitud)){
+				$mascota = c(new Frontend_Model_Mascota())
+					->setData($adopcion_solicitud->getMascota()->getData())
+					->loadNonTableColumn()
+				;
+				
+				$modo = $this->getModo();
+				$mascota_preview = c($this->getLayout()->getBlock('mascota_preview_'.$modo))
+					->setMascota($mascota)
+				;
+				if($modo=='full'){
+					$mascota_preview->setPhotoList($mascota->getListFoto());
+				}
+				echo $mascota_preview->toHtml();
+			}
+			
+			if($descripcion){
+				$p = new Core_Html_Tag_Custom('p');
+				$p->setInnerHtml(htmlentities(utf8_decode($descripcion)));
+				echo $p->getHtml();
+			}
+?>

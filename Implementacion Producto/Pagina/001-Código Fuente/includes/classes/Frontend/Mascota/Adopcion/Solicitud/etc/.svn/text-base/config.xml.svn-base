@@ -1,0 +1,21 @@
+<global>
+	<modules>
+		<Frontend_Mascota_Adopcion_Solicitud_Listado />
+	</modules>
+	<routers>
+		<Frontend_Mascota_Adopcion_Solicitud_Router>mascotas/adopcion/solicitud</Frontend_Mascota_Adopcion_Solicitud_Router>
+	</routers>
+	<!--
+	<block>
+		<type>mascota_fotos_addedit</type>
+		<class>Frontend_Mascota_Block_Fotos_AddEdit</class>
+	</block>
+	-->
+	<design>
+	</design>
+	<layouts>
+	<!--
+		<saludmascotas>Saludmascotas_Mascota.xml</saludmascotas>
+	-->
+	</layouts>
+</global>

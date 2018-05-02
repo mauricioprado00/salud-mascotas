@@ -1,0 +1,46 @@
+<?php //útf8
+?>
+		<div class="textbox">
+			<div class="holding fecha">
+				<div class="input_autocomplete">
+					<?php
+						$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+						$input
+							->setMaxlength(20)
+							->setType('text')
+							->setAutocomplete('off')
+							->setTitle('Fecha de Patrullaje')
+							->setClass('datepicker')
+							->setName('fecha')
+							->setId('fecha')
+							->setValue(date('d/m/Y'))
+						;
+						echo $input->getHtml();
+					?>
+				</div>
+				<span class="holder">Fecha de patrullaje</span>
+			</div>
+		</div>
+		<div class="textarea">
+			<?
+				$input = Core::getObject('Core_Html_Tag_Custom', 'textarea');
+				$input
+					->setId('comentario')
+					->setName('comentario')
+					//->setInnerHtml(/*htmlentities*/($comentario))
+//                                        ->setRows(5)
+//                                        ->setCols(40)
+//					->setData('data-campo', '<b>Observaciones</b>')
+//					->setData('data-validator', '{empty:false}')
+//                                        ->setData('data-mensaje', 'Debe cargar uno o mas %field separados por comas')
+				;
+				echo $input->getHtml();
+			?> 
+			</div>
+		<script type="text/javascript">
+		<!--
+		jQuery(document).ready(function(){
+			jQuery('.datepicker').datepicker({ dateFormat: 'dd/mm/yy', changeYear: true, minDate: new Date() });
+		});
+		-->
+		</script>

@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/external_library/phpmailer
+END
+LICENSE
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/external_library/phpmailer/LICENSE
+END
+aboutus.html
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/external_library/phpmailer/aboutus.html
+END
+changelog.txt
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/external_library/phpmailer/changelog.txt
+END
+phpmailer.php
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/external_library/phpmailer/phpmailer.php
+END
+class.pop3.php
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/external_library/phpmailer/class.pop3.php
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/external_library/phpmailer/README
+END
+class.smtp.php
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/external_library/phpmailer/class.smtp.php
+END

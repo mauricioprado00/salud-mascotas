@@ -1,0 +1,154 @@
+<layout><!-- útf8 -->
+	<default2>
+		<block type="Page/html_document" name="html_document">
+			<block compress_scripts="0" type="Page/html_head" name="html_head" title="SaludMascotas">
+			
+				<css name="saludmascotas_css_estilos">css/styles.css</css>
+				<script charset="utf8">jquery-ui-1.8.1.custom/development-bundle/jquery-1.4.2.js</script>
+				<script charset="utf8">prototype/prototype.js</script>
+				<script charset="utf8">js/prototype.function.js</script>
+                <!--<css when="!accion(homeloadajax)">css/skin.css</css>-->
+                <!--
+				
+				<script charset="UTF-8">js/jQuery/jquery.blockUI-2.33.js</script>
+				-->
+				<script charset="UTF-8">js/forms.js</script>
+			</block>
+			<block type="Page/html_body" name="html_body" html_class="cuerpo">
+				<wrapper html_class="wrapper">
+					<wrapper html_class="head">
+						<wrapper html_class="head_center">
+							<template name="head_logo" template="page/head/logo.phtml" />
+							<wrapper html_class="head_content">
+								<block name="head_content">
+									<template template="page/head/search.phtml" />
+									<template in="usuario_no_logeado" template="page/head/usermenu_unlogged.phtml" />
+									<template in="usuario_logeado" template="page/head/usermenu_logged.phtml" />
+								</block>
+							</wrapper>
+						</wrapper>
+					</wrapper>
+					<wrapper html_class="contenedor_mensajes">
+						<block name="message_container" type="MessageContainer">
+							<action method="requestMessageContainerTo">
+								<class>Core_App</class>
+								<method>getMessageContainer</method>
+							</action>
+						</block>
+					</wrapper>
+					<wrapper html_class="middle">
+						<wrapper html_class="left" name="left">
+							<template template="page/left/title.phtml" />
+						</wrapper>
+						<wrapper html_class="content">
+							<block name="contenido">
+							</block>
+						</wrapper>
+						<wrapper html_class="bottom">
+						</wrapper>
+					</wrapper>
+					<wrapper html_class="footer">
+						<template template="page/footer/links.phtml" />
+					</wrapper>
+				</wrapper>
+			</block>
+		</block>
+	</default2>
+	<default>
+		<block type="Page/html_document" name="html_document">
+			<block compress_scripts="0" type="Page/html_head" name="html_head" title="SaludMascotas">
+			
+				<css name="saludmascotas_css_estilos">css/styles.css</css>
+				<script charset="utf8">jquery-ui-1.8.1.custom/development-bundle/jquery-1.4.2.js</script>
+				<script charset="utf8">prototype/prototype.js</script>
+				<script charset="utf8">js/prototype.function.js</script>
+                <!--<css when="!accion(homeloadajax)">css/skin.css</css>-->
+                <!--
+				
+				<script charset="UTF-8">js/jQuery/jquery.blockUI-2.33.js</script>
+				-->
+				<script charset="UTF-8">js/forms.js</script>
+			</block>
+			<block type="Page/html_body" name="html_body" html_class="cuerpo">
+				<wrapper html_class="wrapper">
+					<wrapper html_class="head">
+						<wrapper html_class="head_center">
+							<template name="head_logo" template="page/head/logo.phtml" />
+							<wrapper html_class="head_content">
+								<block name="head_content">
+									<template template="page/head/search.phtml" />
+									<template in="usuario_no_logeado" template="page/head/usermenu_unlogged.phtml" />
+									<template in="usuario_logeado" template="page/head/usermenu_logged.phtml" />
+								</block>
+							</wrapper>
+						</wrapper>
+					</wrapper>
+					<wrapper html_class="contenedor_mensajes">
+						<block name="message_container" type="MessageContainer">
+							<action method="requestMessageContainerTo">
+								<class>Core_App</class>
+								<method>getMessageContainer</method>
+							</action>
+						</block>
+					</wrapper>
+					<wrapper html_class="middle">
+						<wrapper html_class="left" name="left">
+							<template template="page/left/title.phtml" />
+						</wrapper>
+						<wrapper html_class="content">
+							<block name="contenido">
+							</block>
+						</wrapper>
+						<wrapper html_class="bottom">
+						</wrapper>
+					</wrapper>
+					<wrapper html_class="footer">
+						<template template="page/footer/links.phtml" />
+					</wrapper>
+				</wrapper>
+			</block>
+		</block>
+	</default>
+	<show_left_menu>
+		<reference name="left">
+			<block type="Frontend/LeftMenu" name="left_menu" />
+		</reference>
+	</show_left_menu>
+	<simple_layout>
+		<block type="Page/html_document" name="html_document">
+			<block compress_scripts="0" type="Page/html_head" name="html_head" title="SaludMascotas">
+				<css name="saludmascotas_css_estilos">css/styles.css</css>
+				<script charset="utf8">jquery-ui-1.8.1.custom/development-bundle/jquery-1.4.2.js</script>
+				<script charset="utf8">prototype/prototype.js</script>
+				<script charset="utf8">js/prototype.function.js</script>
+                <!--<css when="!accion(homeloadajax)">css/skin.css</css>-->
+                <!--
+				
+				<script charset="UTF-8">js/jQuery/jquery.blockUI-2.33.js</script>
+				<script charset="UTF-8">js/forms.js</script>
+				-->
+			</block>
+			<block type="Page/html_body" name="html_body" html_class="cuerpo">
+				<wrapper html_class="wrapper_simple">
+					<wrapper name="head_content" html_class="head">
+						<template template="page/left/title.phtml" />
+					</wrapper>
+					<wrapper html_class="contenedor_mensajes">
+						<block name="message_container" type="MessageContainer">
+							<action method="requestMessageContainerTo">
+								<class>Core_App</class>
+								<method>getMessageContainer</method>
+							</action>
+						</block>
+					</wrapper>
+					<wrapper html_class="middle">
+						<wrapper html_class="content">
+							<block name="contenido">
+							</block>
+						</wrapper>
+					</wrapper>
+				</wrapper>
+			</block>
+		</block>
+	</simple_layout>
+</layout>

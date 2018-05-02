@@ -1,0 +1,131 @@
+<?php //útf8 
+$object_to_edit = $this->getObjectToEdit();
+?>
+<div class="form_container form_login">
+	<form class="standart login" name="form1" method="post">
+		<div class="textbox">
+			<div class="holding nombre">
+				<?php
+					$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+					$input
+						->setMaxlength(300)
+						->setType('text')
+						->setAutocomplete('on')
+						->setTitle('nombre')
+						->setName('nombre')
+						->setId('nombre')
+						->setValue($object_to_edit->getNombre())
+					;
+					echo $input->getHtml();
+					//<input type="text" autocomplete="on" title="nombre" name="nombre" id="nombre" value="">
+				?> 
+				<span class="holder">Nombre</span>
+				<span class="help">Ingresa tu nombre</span>
+			</div>
+		</div>
+		<div class="textbox">
+			<div class="holding apellido">
+				<?php
+					$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+					$input
+						->setMaxlength(300)
+						->setType('text')
+						->setAutocomplete('on')
+						->setTitle('apellido')
+						->setName('apellido')
+						->setId('apellido')
+						->setValue($object_to_edit->getApellido())
+					;
+					echo $input->getHtml();
+					//<input type="text" autocomplete="on" title="apellido" name="apellido" value="">
+				?> 
+				<span class="holder">Apellido</span>
+				<span class="help">Ingresa tu apellido</span>
+			</div>
+		</div>
+		<div class="textbox">
+			<div class="holding telefono">
+				<?php
+					$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+					$input
+						->setMaxlength(300)
+						->setType('text')
+						->setAutocomplete('on')
+						->setTitle('telefono')
+						->setName('telefono')
+						->setId('telefono')
+						->setValue($object_to_edit->getTelefono())
+					;
+					echo $input->getHtml();
+					//<input type="text" autocomplete="on" title="telefono" name="telefono" value="">
+				?> 
+				<span class="holder">Teléfono</span>
+				<span class="help">Ingresa tu teléfono</span>
+			</div>
+		</div>
+		<div class="textbox">
+			<div class="holding email">
+				<?php
+					$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+					$input
+						->setMaxlength(300)
+						->setType('text')
+						->setAutocomplete('on')
+						->setTitle('email')
+						->setName('email')
+						->setId('email')
+						->setValue($object_to_edit->getEmail())
+					;
+					echo $input->getHtml();
+					//<input type="text" autocomplete="on" title="email" name="email" value="">
+				?> 
+				<span class="holder">Email</span>
+				<span class="help">Ingresa tu email</span>
+			</div>
+		</div>
+		<div class="textbox">
+			<div class="holding username">
+				<?php
+					$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+					$input
+						->setMaxlength(300)
+						->setType('text')
+						->setAutocomplete('on')
+						->setTitle('Nombre de usuario o correo electrónico')
+						->setName('username')
+						->setId('username')
+						->setValue($object_to_edit->getUsername())
+					;
+					echo $input->getHtml();
+					//<input type="text" autocomplete="on" title="username" name="username" value="">
+				?> 
+				<span class="holder">Nombre de usuario</span>
+				<span class="help">Ingresa tu nombre de usuario</span>
+			</div>
+		</div>
+		<div class="textbox">
+			<div class="holding password">
+				<input type="password" autocomplete="on" title="password" name="password" value="">
+				<span class="holder">Contrase&ntilde;a</span>
+				<span class="help">Ingresa tu contraseña</span>
+			</div>
+		</div>
+		<div class="textbox">
+			<div class="holding password2">
+				<input type="password" autocomplete="on" title="password2" name="password2" value="">
+				<span class="holder">Contrase&ntilde;a</span>
+				<span class="help">Repite la contraseña</span>
+			</div>
+		</div>
+		<div class="form_row actions_row single_action">
+			<button class="submit button" type="submit">Registrar Usuario</button>
+			<ul>
+				<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlServiceConditions()); ?>">Condiciones de Servicio</a></li>
+				<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlPrivacyPolicy()); ?>">Políticas de Privacidad</a></li>
+			</ul>
+			<ul>
+				<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlLogin()); ?>">¿Ya tienes cuenta?</a></li>
+			</ul>
+		</div>
+	</form>
+</div>      

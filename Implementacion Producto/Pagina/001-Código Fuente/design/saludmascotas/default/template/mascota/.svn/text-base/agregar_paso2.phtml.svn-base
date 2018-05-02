@@ -1,0 +1,26 @@
+<?php //útf8
+
+?>
+
+<div class="addeditmascota_domicilio">
+	<form class="standart wider domicilio" name="form1" method="post">
+		<?php print $this->getChildHtml(); ?> 
+		<div class="form_row actions_row single_action">
+			<button class="submit button" type="submit">Guardar</button>
+			<ul>
+				<li><a href="#">algun link</a></li>
+			</ul>
+			<!--
+			<ul>
+				<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlUpdate()); ?>">Modificar Datos</a></li>
+				<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlUpdatePassword()); ?>">Modificar contraseña</a></li>
+			</ul>
+			<ul>
+				<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlServiceConditions()); ?>">Condiciones de Servicio</a></li>
+				<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlPrivacyPolicy()); ?>">Políticas de Privacidad</a></li>
+			</ul>
+			-->
+		</div>
+	</form>
+</div>
+<br /><br /><br /><br /><br /><br /><br /><br />

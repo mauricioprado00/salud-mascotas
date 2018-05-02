@@ -1,0 +1,263 @@
+
+body {
+    font: 13px/1.5 Helvetica Neue,Arial,Helvetica,'Liberation Sans',FreeSans,sans-serif;
+    background-image:url(../img/bg_degradado.png);
+    background-repeat:repeat-y;
+    background-color:#66859f;
+    margin:0px;
+}
+ul{
+	margin:0;
+	padding:0;
+}
+body>div>.simple{
+	/*background-image:url(../img/world-dog-centered.png);*/
+	background-image:url(../img/world-dog.png);
+	background-position:center 10px;
+	background-repeat:no-repeat;
+	min-width:1000px;
+
+	/*min-height:596px;*/
+	min-height:418px;
+	position:relative;
+	padding:1px;
+}
+.half_shadow{
+	position:absolute;
+	top:247px;
+	width:100%;
+	height:20000px;
+	background-color:black;
+	/* for IE */
+	filter:alpha(opacity=30);
+	/* CSS3 standard */
+	opacity:0.3;
+}
+#overfix{
+	position: relative;
+	z-index:10;
+}
+#white-box{
+	background-image:url(../img/white-box.png);
+	background-repeat:no-repeat;
+	background-position:50% 50%;
+	/*
+	margin-top: 94px;
+	margin-left: 472px;
+	*/
+	margin: 94px auto 0;
+	
+	height: 363px;
+    padding: 21px 45px;
+    width: 227px;
+}
+.blue-vdeg{
+	background-image: url(../img/dgv_516f89_0b497c.png);
+	background-repeat:repeat-x;
+	background-color: #0B497C;
+    height: 315px;
+    padding: 12px 23px;
+}
+input {border:none!important;-webkit-box-shadow:0 -1px 0 rgba(0,0,0,.3),inset 0 1px 2px rgba(0,0,0,.2);-moz-box-shadow:0 -1px 0 rgba(0,0,0,.3),inset 0 1px 2px rgba(0,0,0,.2);box-shadow:0 -1px 0 rgba(0,0,0,.3),inset 0 1px 2px rgba(0,0,0,.2);background-color:white;color:#567792;opacity:.7;-webkit-transition:opacity 1s;-moz-transition:opacity 1s;-o-transition:opacity 1s;}
+form.signin {padding-top: 13px;}
+form.signin .textbox{margin:25px 0;}
+form.signin p,form.signin span{font-size:11px;color:#999;}
+form.signin .textbox input{-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;border:1px solid #CCC;font:13px Arial,sans-serif;padding:6px 6px 4px;width:166px;}
+form.signin .textbox input{font-size: 13px;padding: 6px;}
+form.signin .textbox input:hover,form.signin .textbox input:focus,form.signin .textbox input.focused,form.signin .textbox input.actasfocused{border-color:#999;}
+form.signin .textbox label{display:block;padding-bottom:7px;}
+form.signin .textbox span{display:block;}
+
+
+
+
+form .holding{position:relative;}
+
+form .holding .holder{position:absolute;top:0;z-index:1;left:8px;white-space:nowrap;cursor:text;color:#999;text-shadow:0 1px 0 rgba(255,255,255,0.5);-webkit-transition:opacity .1s,font-size .1s;-moz-transition:opacity .1s,font-size .1s;-o-transition:opacity .1s,font-size .1s;}
+form .hasome .holder{opacity:0;filter:alpha(opacity=0);font-size:0!important;}
+
+form.standart .holding input {
+	width:296px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+	margin-bottom:8px;
+	opacity:1!important;
+	padding:9px 7px 10px;
+	font:15px "Helvetica Neue",Arial,sans-serif;
+}
+
+form.standart .holding .holder{
+	font:15px "Helvetica Neue",Arial,sans-serif;
+	line-height:38px;
+}
+
+form .holding:hover input {
+	opacity:.9;
+	-webkit-box-shadow:0 -1px 0 rgba(0,0,0,.4),inset 0 1px 2px rgba(0,0,0,.3);
+	-moz-box-shadow:0 -1px 0 rgba(0,0,0,.4),inset 0 1px 2px rgba(0,0,0,.3);
+	box-shadow:0 -1px 0 rgba(0,0,0,.4),inset 0 1px 2px rgba(0,0,0,.3);
+}
+
+form .holding input:focus+span.holder{opacity:.6;}
+form .holding .holder{line-height: 28px;}
+
+.button{-moz-border-radius:4px;-khtml-border-radius:4px;-webkit-border-radius:4px;background:#ddd url(../img/buttons/bg-btn.gif) repeat-x 0 0;border-color:#bbb #bbb #999;border-radius:4px;border-style:solid;border-width:1px;cursor:pointer;display:inline-block;font:12px/15px Helvetica Neue,Arial,"Lucida Grande",Sans-serif;margin:0;overflow:hidden;padding:5px 9px 5px 9px;text-shadow:0 1px #F0F0F0;color:#333!important;-moz-box-shadow:0 1px 0 #f8f8f8;-wekbit-box-shadow:0 1px 0 #f8f8f8;box-shadow:0 1px 0 #f8f8f8;*display:inline;*zoom:1;}
+.signin .submit{padding: 6px;/*position:absolute;margin-top:-27px;left:265px;*margin-top:-26px;*/*width:64px;min-width:64px;text-align:center;white-space:nowrap;font-weight:bold;box-shadow:0 1px 0 rgba(0,0,0,0.2);-moz-box-shadow:0 1px 0 rgba(0,0,0,0.2);-webkit-box-shadow:0 1px 0 rgba(0,0,0,0.2);}
+.signin p{padding-left:131px;}
+form.signin .mensajes{color:white;margin-top:10px;}
+
+form .holding input:focus,.front-page form .holding input.focused,.front-page form .holding input.actasfocused{-webkit-box-shadow:0 -1px 0 rgba(0,0,0,.3),inset 0 1px 2px rgba(0,0,0,.1),0 0 10px rgba(255,255,255,.9) -moz-box-shadow:0 -1px 0 rgba(0,0,0,.3),inset 0 1px 2px rgba(0,0,0,.1),0 0 10px rgba(255,255,255,.9);box-shadow:0 -1px 0 rgba(0,0,0,.3),inset 0 1px 2px rgba(0,0,0,.1),0 0 10px rgba(255,255,255,.9);opacity:1;outline:none;}
+
+
+form .button{
+	border:none;
+	opacity:1;
+}
+
+.front-signup .submit {
+	height:35px;
+	float:right;
+	padding-left:16px;
+	padding-right:16px;
+	box-shadow:0 1px 0 rgba(0,0,0,0.2);
+	-moz-box-shadow:0 1px 0 rgba(0,0,0,0.2);
+	-webkit-box-shadow:0 1px 0 rgba(0,0,0,0.2);
+}
+
+a.promotional,input.promotional {
+	background:#fa2 url(../img/buttons/bg-btn-signup.png) repeat-x 0 0;
+	display:block;
+	border:1px solid #fa2;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	border-radius:5px;
+	text-decoration:none;
+	text-align:center;
+	color:#333;
+	text-shadow:0 1px 0 #fe6;
+	font:bold 16px Helvetica Neue,Arial,Sans-serif;
+	cursor:pointer;
+	-moz-box-shadow:0 1px 0 #fff;
+	-webkit-box-shadow:0 1px 0 #fff;
+	box-shadow:0 1px 0 #fff;
+	padding:8px;
+}
+a.promotional:hover,a.promotional:focus,input.promotional:hover,input.promotional:focus {
+	background-position:0 -5px;
+	color:#111;
+}
+
+
+
+
+/*INICIO HOME*/
+.home {
+    background-image:none;
+    background-color:white;
+}
+.home>.bg_degradado{
+	background-image:url(../img/bg_degradado.png);
+	background-repeat: repeat-y;
+	background-color: #66859F;
+}
+
+.home .footer{
+	background-image:url(../img/bg_footer.png);
+	background-repeat: repeat-x;
+	background-color: white;
+}
+
+.home .biglogo_white{
+	background-image:url(../img/logo.png);
+	width:374px;
+	height:49px;
+}
+.home .biglogo_white{
+	position: absolute;
+	top: 5px;
+	left: 230px;
+}
+.home_left,.home_right{
+	margin-left:60px;
+	float:left;
+}
+.home_left{
+	/*width:610px;*/
+	width: 530px;
+	
+}
+.home_right{
+	width: 310px;
+}
+.home #overfix #overfix{
+	text-align:center;
+}
+.home .content{
+	display:inline-block;
+	text-align:left;
+	margin-top: 85px;
+}
+.home_left h2 {
+	font-size:50px;
+	font-weight:100;
+	line-height:.9em;
+	margin:86px 0 8px;
+}
+.home_left h2 a {
+	color:#FFF;
+	text-shadow:0 1px 0 rgba(0,0,0,0.6);
+	outline:none;
+	-webkit-transition:text-shadow .4s ease-in-out;
+}
+.home_left p {
+	/*color:#B9CBD6;*/
+	color:white;
+	font-weight:300;
+	font-size:20px;
+	line-height:26px;
+	text-shadow:0 1px 3px rgba(0,0,0,0.6);
+}
+.home_left h2 a:hover {
+	text-decoration:none;
+	text-shadow:0 1px 0 rgba(0,0,0,0.6),0 0 6px rgba(143,181,200,1),0 0 30px rgba(143,181,200,.7);
+}
+
+.home_right h3 {
+	color:#FFF;
+	font-weight:700;
+	text-shadow:0 1px 0 rgba(0,0,0,0.3);
+	font-size:16px;
+	margin: 90px 0 5px;
+}
+.home_right h3 em{
+	font-style:normal;
+	font-weight:300;
+}
+.home #mini_login{
+	position: absolute;
+    top: 5px;
+}
+.home #mini_login form>.textbox{
+	float:left;
+	margin:0 5px 0 0;
+	width:115px;
+}
+.home .signin .textbox input{
+	font-size: 13px;
+	padding: 6px;
+	width: 105px;
+}
+.home #mini_login form >.actions_row{
+	float:left;
+}
+.home a.promotional, .home input.promotional{
+	float: right;
+}
+/*FIN HOME*/
+
+
+/*deshabilitar registro en home*/
+.home_right .signup .holding{display:none;}
+.home a.promotional, .home input.promotional{float:none;}
+/*deshabilitar registro en home*/

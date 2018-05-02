@@ -1,0 +1,24 @@
+<?php //útf8 
+	$logeado = Frontend_Usuario_Model_User::getLogedUser();
+	$username = $logeado->getUsername();
+?>
+<div class="usermenu">
+	<div class="usermenu_normal"><?php print $username; ?></div>
+	<div class="usermenu_floating">
+		<ul class="opciones">
+			<li class="first"><a><?php print $username; ?></a></li>
+			<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlUpdate()); ?>">Perfil de Usuario</a></li>
+			<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlUpdateAddress()); ?>">Domicilio</a></li>
+			<li><a href="<?php print $this->getUrl(Frontend_Mascota_Helper::getUrlUsuario()); ?>">Mascotas</a></li>
+			<?php if($logeado->esTipoNormal()): ?>
+			<li><a href="<?php print $this->getUrl(Frontend_Mascota_Helper::getUrlQuieroAdoptar()); ?>">Quiero adoptar</a></li>
+			<?php endif; ?> 
+			<li><a href="<?php print $this->getUrl(Frontend_Notificacion_Helper::getUrlListado()); ?>">Notificaciones</a></li>
+			<?php if($logeado->esTipoSpa()): ?>
+			<li><a href="<?php print $this->getUrl(Frontend_Vacunacion_Helper::getUrlCronogramaVacunacion()); ?>">Vacunaciones</a></li>
+			<li><a href="<?php print $this->getUrl(Frontend_Patrullaje_Helper::getUrlRegenerarPrioridadesPatrullaje()); ?>">Patrullaje</a></li>
+			<?php endif; ?> 
+			<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlLogout()); ?>">Cerrar Sesión</a></li>
+		</ul>
+	</div>
+</div>

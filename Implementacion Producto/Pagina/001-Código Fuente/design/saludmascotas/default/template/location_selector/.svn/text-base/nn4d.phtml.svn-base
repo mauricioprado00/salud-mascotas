@@ -1,0 +1,84 @@
+<?php /* es útf8 */
+
+if($ote = $this->getObjectToEdit()){
+	$lat = $ote->getLat();
+	$lng = $ote->getLng();
+}
+else{
+	$lat = $lng = '';
+}
+
+?>
+<div class="location_selector">
+    <input type="hidden" name="lat" id="lat" value="<?php print $lat; ?>" />
+    <input type="hidden" name="lng" id="lng" value="<?php print $lng; ?>" />
+    <a name="mapa"></a>
+	<DIV id="maparea" class="maparea"></DIV>
+	<div id="geocodingresults" class="geocodingresults"></div>
+	<?php /*
+	<br />
+	<center><b>Reference Points:</b></center><hr />
+	<div id="puntos_referencia">
+	 Villa Carlos Paz, Santa María, Córdoba, AR: 
+		<a onclick="Map24.MapApplication.center( {Longitude:    -3870.1853532986, Latitude: -1884.910976171875});" href="#mapa"><b>Cucú</b></a>, 
+		<a onclick="Map24.MapApplication.center( {Longitude:    -3869.932587890625, Latitude: -1885.105234375});" href="#mapa"><b>Puente Cassaffousth</b></a>, 
+		<a onclick="Map24.MapApplication.center( {Longitude:    -3869.9459259258856, Latitude: -1885.2564406779666});" href="#mapa"><b>Centro</b></a>,
+		<a onclick="Map24.MapApplication.center( {Longitude:    -3870.1348148147754, Latitude: -1885.228983050848});" href="#mapa"><b>Puente 9 de Julio</b></a>,
+		<a onclick="Map24.MapApplication.center( {Longitude:    -3869.7103703703306, Latitude: -1885.4491525423728});" href="#mapa"><b>Estación de servicio el triangulo</b></a>,
+		<a onclick="Map24.MapApplication.center( {Longitude:    -3870.396296296256, Latitude: -1885.0510169491527});" href="#mapa"><b>Molino Rojo</b></a>
+	</div>
+	*/?>
+	<div id="coordinates"></div>
+</div>
+<ul class="ubicadores">
+	<li>
+		<a data-lat="-1884.905084745763" data-lng="-3870.1177777777375">Ubicar Encuentro</a>
+	</li>
+	<li>
+		<a data-lat="-1884.6859322033897" data-lng="-3870.3533333332925">Ubicar Pérdida</a>
+	</li>
+</ul>
+<script type="text/javascript">
+(function(){
+	jQuery(function(){
+		jQuery('.ubicadores li a').css('cursor','pointer').click(function(){
+			var lat = jQuery(this).attr('data-lat');
+			var lng = jQuery(this).attr('data-lng');
+			jQuery('#lat').val(lat);
+			jQuery('#lng').val(lng);
+		});
+	});
+})();
+(function(){
+	function on_add_my_house( Longitude, Latitude ){
+		//window.console.log( Longitude, Latitude, 'on_add_my_house' );
+		$( 'lat' ).value = Latitude;
+		$( 'lng' ).value = Longitude;
+	}
+	Event.observe(window, 'load', function() {
+		MapaNavTeq
+			.setCustomOnload(function(){
+				//window.console.log("custom onload", this);
+				this.add_my_house_on_click_listener();
+			})
+			.setAddMyHouseCustomListener( on_add_my_house );
+		;
+		MapaNavTeq.initialize(<?php print json_encode(array(
+			'id_lat'=>'lat',
+			'id_lgn'=>'lng', 
+			'id_mapa'=>'maparea',
+			'txt_my_house'=>'My House/Department',
+			'custom_onload'=>null,
+			'map_type'=>$this->getMapType(),
+			'location_image_url'=>$this->getSkinUrl('img/map24/pin_maparea_home.png')
+		)); ?>);	
+
+//	Event.observe(document.getElementById('limpiar_overlays'), 'click', function() {
+//		alert("limpiando overlays");
+//		clearOverlays();
+//	});
+	
+	});
+})();
+</script>
+		

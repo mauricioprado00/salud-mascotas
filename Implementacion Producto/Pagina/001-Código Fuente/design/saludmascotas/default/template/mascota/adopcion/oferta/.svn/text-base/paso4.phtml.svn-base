@@ -1,0 +1,43 @@
+<?php //útf8
+$object_to_edit = $this->getObjectToEdit();
+
+
+?>
+
+<div class="addeditmascota_publicacion">
+	<form class="standart wider busqueda" name="form1" method="post">
+		<input type="hidden" name="dummy" value="continuar" />
+		<div>
+			<h2>Datos de Mascota <a href="<?php print $this->getUrl($object_to_edit->getUrlAdopcionOfertaEditar(1, 1)); ?>">Modificar</a></h2>
+			<?php print $this->getChildHtml('view_datos_mascota'); ?>
+		</div>
+		<div>
+			<h2>Ubicación Pérdida <a href="<?php print $this->getUrl($object_to_edit->getUrlAdopcionOfertaEditar(1, 2)); ?>">Modificar</a></h2>
+			<?php print $this->getChildHtml('view_ubicacion'); ?>
+		</div>
+		<div>
+			<h2>Posibles coincidencias seleccionadas <a href="<?php print $this->getUrl($object_to_edit->getUrlAdopcionOfertaEditar(1, 3)); ?>">Modificar</a></h2>
+			<?php print $this->getChildHtml('view_posibles_adopcion_conciliacions'); ?>
+		</div>
+		<div>
+			<h2>Opciones de Publicación <a href="<?php print $this->getUrl($object_to_edit->getUrlAdopcionOfertaEditar(1, 4)); ?>">Modificar</a></h2>
+			<?php print $this->getChildHtml('form_edit_publicacion'); ?>
+		</div>
+		<div class="form_row actions_row single_action">
+			<button class="submit button" type="submit">Publicar Anuncio</button>
+			<ul>
+				<li><a href="#">algun link</a></li>
+			</ul>
+			<!--
+			<ul>
+				<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlUpdate()); ?>">Modificar Datos</a></li>
+				<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlUpdatePassword()); ?>">Modificar contraseña</a></li>
+			</ul>
+			<ul>
+				<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlServiceConditions()); ?>">Condiciones de Servicio</a></li>
+				<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlPrivacyPolicy()); ?>">Políticas de Privacidad</a></li>
+			</ul>
+			-->
+		</div>
+	</form>
+</div>

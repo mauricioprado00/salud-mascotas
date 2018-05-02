@@ -1,0 +1,12 @@
+<?php //útf8 ?>
+<?php 
+$url_eliminar = $this->getParentBlock()->getNotificacion()->getUrlEliminar(true); 
+$url_eliminar = $this->getUrl($url_eliminar);
+?>
+<div>
+	<form class="standart wider login" name="form1" id="form_notificacion_eliminar" method="post" action="<?php print $url_eliminar; ?>">
+		<input type="hidden" name="return_to" value="<?php print $this->getReturnTo(); ?>" />
+		<p>Esta a punto de eliminar una notificacion. a continuación se le presenta el contenido de la misma. <br />
+		<a href="#" onclick="javascript: jQuery('#form_notificacion_eliminar').submit();">Para continuar eliminandola presione aqui</a>. </p>
+	</form>
+</div>

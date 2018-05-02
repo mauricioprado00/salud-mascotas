@@ -1,0 +1,22 @@
+<?php //útf8 
+$email_or_user = $this->getEmailOrUser();
+?>
+<div class="form_container form_login">
+	<form class="standart login" name="form1" method="post">
+		<p>Si perdiste tu contraseña o usuario puedes recuperarlo completando este formulario.</p>
+		<div class="textbox">
+			<div class="holding recover">
+				<input type="text" autocomplete="on" title="Nombre de usuario o correo electr&oacute;nico" name="recover" id="recover" value="<?php print htmlentities($email_or_user); ?>">
+				<span class="holder">Email o Nombre de usuario</span>
+				<span class="help">Ingresa tu email o nombre de usuario</span>
+			</div>
+		</div>
+		<div class="form_row actions_row single_action">
+			<button class="submit button" type="submit">Recuperar Usuario</button>
+			<ul>
+				<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlLogin()); ?>">Iniciar sesión</a></li>
+				<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlRegister()); ?>">Crear Cuenta</a></li>
+			</ul>
+		</div>
+	</form>
+</div>      

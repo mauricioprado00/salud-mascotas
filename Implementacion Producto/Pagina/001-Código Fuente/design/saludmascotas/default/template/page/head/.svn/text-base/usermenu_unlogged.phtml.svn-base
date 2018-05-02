@@ -1,0 +1,11 @@
+<?php //útf8 ?>
+<div class="usermenu">
+	<div class="usermenu_normal">Iniciar Sesión</div>
+	<div class="usermenu_floating">
+		<ul class="opciones">
+			<li class="first"><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlLogin()); ?>">Iniciar Sesión</a></li>
+			<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlRegister()); ?>">Crear Cuenta</a></li>
+			<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlRecover()); ?>">Recuperar Cuenta</a></li>
+		</ul>
+	</div>
+</div>

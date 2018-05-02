@@ -1,0 +1,35 @@
+<global>
+	<modules>
+<!--
+		<Frontend_Mascota_Adopcion_Oferta />
+		<Frontend_Mascota_Adopcion_Solicitud />
+		<Frontend_Mascota_Adopcion_Conciliacion />
+-->
+	</modules>
+	<routers>
+		<Frontend_Patrullaje_Router>patrullaje</Frontend_Patrullaje_Router>
+	</routers>
+	<block>
+		<type>patrullaje_prioridades_list</type>
+		<class>Frontend_Patrullaje_Block_ListadoPrioridades</class>
+	</block>
+	<block>
+		<type>patrullaje_patrullaje_listado</type>
+		<class>Frontend_Patrullaje_Block_ListadoPatrullajes</class>
+	</block>
+	<!--
+	<block>
+		<type>mascota_patrullaje_listado_pendientes</type>
+		<class>Frontend_Mascota_Patrullaje_Block_ListadoPendientes</class>
+	</block>
+	<block>
+		<type>mascota_patrullaje_listado_asignadas</type>
+		<class>Frontend_Mascota_Patrullaje_Block_ListadoAsignadas</class>
+	</block>
+	-->
+	<design>
+	</design>
+	<layouts>
+		<saludmascotas>Saludmascotas_Patrullaje.xml</saludmascotas>
+	</layouts>
+</global>

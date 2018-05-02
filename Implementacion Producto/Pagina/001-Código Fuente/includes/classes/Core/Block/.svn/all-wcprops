@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/138/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/Block
+END
+Template.php
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/Block/Template.php
+END
+XmlTemplate.php
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/Block/XmlTemplate.php
+END
+Inline.php
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/Block/Inline.php
+END
+Fieldset.php
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/Block/Fieldset.php
+END
+Excel.php
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/Block/Excel.php
+END
+Selector.php
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/Block/Selector.php
+END
+Wrapper.php
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/Block/Wrapper.php
+END
+Container.php
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/Block/Container.php
+END
+Abstract.php
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/!svn/ver/138/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/Block/Abstract.php
+END
+Root.php
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/Block/Root.php
+END
+aAbstract.php
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/Block/aAbstract.php
+END
+MessageContainer.php
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/Block/MessageContainer.php
+END

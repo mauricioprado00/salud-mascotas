@@ -1,0 +1,22 @@
+<?php //útf8 
+$usuario = $this->getUsuario();
+$nombre = $usuario->getNombre();
+$apellido = $usuario->getApellido();
+$username = $usuario->getUsername();
+$password = $usuario->getPassword();
+$recover_url = $this->getUrl($this->getRecoverUrl());
+$activation_url = $this->getUrl($this->getActivationUrl());
+?>
+<div class="form_container">
+	Hola <?php print $nombre; ?>, te has registrado correctamente, para activar tu cuenta sigue el siguiente enlace <br />
+	<a href="<?php print $activation_url; ?>"><?php print $activation_url; ?></a> <br />
+	<small>( si no puede hacer click copia y pega la dirección en tu navegador )</small><br /><br />
+	
+	Tu nombre de usuario es <b><?php print $username; ?></b>, tambien puedes usar tu email para logearte.<br />
+	Si no recuerdas tu contraseña puedes solicitarla siguiendo el enlace a continuación:<br />
+	<a href="<?php print $recover_url; ?>"><?php print $recover_url; ?></a> <br />
+	<small>( si no puede hacer click copia y pega la dirección en tu navegador )</small><br /><br />
+	
+	Gracias por registrarte en SaludMascotas, comienza a disfrutar de la comunidad online.
+		
+</div>      

@@ -1,0 +1,16 @@
+<?php //útf8
+	$etiquetas = $this->getEtiquetas();
+?>
+<ul class="etiqueta_listado">
+<?php if($etiqueta = $this->getEtiquetaSeleccionada()): ?> 
+<li class="seleccionada">
+	<a title="quitar" href="?"><?php print $etiqueta->getNombre(); ?></a>
+</li>
+<?php endif; ?>
+<li><ul class="drop_down">
+<li class="filtrar"><a href="#">+filtrar</a></li>
+<?php foreach($etiquetas as $etiqueta){
+	echo $this->renderEtiqueta($etiqueta);
+}?>
+</ul></li>
+</ul>

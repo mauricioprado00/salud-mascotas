@@ -1,0 +1,53 @@
+<?php //es útf8
+	$coincidencias = $this->getCoincidencias();
+	$coincidencias_seleccionadas = $this->getCoincidenciasSeleccionadas();
+?> 
+<?php if(!$coincidencias): ?> 
+<div class="show_select_coincidencias show_select_coincidencias_paso4">
+	<h3>No has seleccionado posibles mascotas</h3>
+</div>
+<?php return; endif; ?> 
+<div class="show_select_coincidencias show_select_coincidencias_paso4">
+<ul><?php
+	
+	$view_mascota = $this->getChild('view_datos_mascota_coincidencia');
+//	$childs = $this->getChild();
+//	var_dump(array_keys($childs));
+//	
+	foreach($coincidencias as $coincidencia ){
+		//$o = c(new Core_Object())->setData($coincidencia->getData());
+		//var_dump($coincidencia->getData('en_id'), $o->getEnId(), get_class($coincidencia));
+		//die(__FILE__.__LINE__);
+		$mascota = $coincidencia->getMascota(new Frontend_Model_Mascota())->loadNonTableColumn();
+		$adopcion_oferta = $coincidencia->getAdopcionOferta(new Frontend_Model_AdopcionOferta());
+		$seleccionada = in_array($adopcion_oferta->getId(), $coincidencias_seleccionadas);
+
+		echo '<li>';
+		echo $view_mascota
+			->setCoincidencia($coincidencia)
+			->setAdopcionOferta($adopcion_oferta)
+			->setMascota($mascota)
+			->setSeleccionada($seleccionada)
+			->toHtml()
+		;
+		//echo $this->getChildHtml('view_datos_mascota');
+		echo '</li>';
+	}
+	
+?> 
+</ul>
+</div>
+<script type="text/javascript">
+<!--
+	jQuery('.link_view_mascota')
+		.fancybox({
+			'width': 460,
+			'height':490,
+	        'autoDimensions':true,
+	        'transitionIn':'none',
+			'transitionOut':'none',
+			'type':'iframe'
+		})
+	;
+-->
+</script>

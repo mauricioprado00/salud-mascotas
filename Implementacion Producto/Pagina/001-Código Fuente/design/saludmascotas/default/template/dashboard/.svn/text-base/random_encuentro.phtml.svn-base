@@ -1,0 +1,44 @@
+<?php //es útf8
+
+$mascotas = $this->getMascotas();
+
+?>
+
+<?php if(!isset($mascotas)||!count($mascotas)): ?> 
+<h3>No hay mascotas Reportadas como Encontradas</h3>
+<?php return; endif; ?>
+
+
+<?php $filled_width=0;$fill_width = $this->getFillWidth() ?>
+<ul class="random_mascotas random_encuentro">
+<?php foreach($mascotas as $mascota): ?>
+	<?php
+	if($fill_width){
+		list($width, $height) = $mascota->getSizeImage(0, 100);
+		
+		if(($filled_width+$width)>$fill_width)
+			continue;
+		$filled_width += $width;
+	}
+	?>
+	<li>
+		<a href="<?php print $this->getUrl($mascota->getUrlListadoEncuentro()); ?>">
+			<img src="<?php print $mascota->getUrlImage(0, 100); ?>" title="Mascota Encontrada: <?php print htmlentities(utf8_encode($mascota->getNombre())); ?>" />
+		</a>
+	</li>
+<?php endforeach; ?>
+<?php if($fill_width): ?>
+	<li style="display: inline-block; width: <?php print $fill_width.'px'; ?>;"></li>
+<?php endif; ?> 
+</ul>
+<ul class="multilink">
+	<li>
+		<a href="<?php print $this->getUrl(Frontend_Mascota_Encuentro_Helper::getUrlAgregar()); ?>">Encontré una mascota</a>
+	</li>
+	<li>
+		<a href="#no_implementado">Quiero adoptar</a>
+	</li>
+	<li>
+		<a href="<?php print $this->getUrl(Frontend_Mascota_Encuentro_Listado_Helper::getUrl()); ?>">Ver todas las mascotas encontradas</a>
+	</li>
+</ul>

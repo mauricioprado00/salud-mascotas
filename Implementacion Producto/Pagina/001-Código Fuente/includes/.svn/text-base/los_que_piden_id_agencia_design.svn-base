@@ -1,0 +1,1 @@
+../design/admin/default/template/objetivo/datos.phtml:				$id_agencia = $x->getIdAgencia()?$x->getIdAgencia():Admin_Helper::getInstance()->getIdAgencia();			

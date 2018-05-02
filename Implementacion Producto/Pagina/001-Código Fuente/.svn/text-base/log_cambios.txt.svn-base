@@ -1,0 +1,4 @@
+* 31/07/2011
+- cuando se edita una mascota publicada como perdida y se deseleccionan perdidas guardadas previamente como reencuentros, estos son eliminados al finalizar el procedimiento.
+- idem mascota encontrada
+- correcciones varias en edicion de mascotas encontradas y perdidas.

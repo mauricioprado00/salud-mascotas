@@ -1,0 +1,34 @@
+14/07/2011 mauricio
+* agrego registrar mascota y consultar mascota normal.
+* actualizo registrar mascota encontrada
+
+14/07/2011  mauricio
+* modifico registrar_perdida2.psd
+	cambio texto paso 3.
+
+* cambio nombres de enlaces en home_dashboard.psd hacia los casos de uso "registrar mascota perdida" (perdí mi mascota) y "registrar mascota encontrada" (encontré una mascota)
+
+* creo el archivo registrar_encontrada.psd y todos sus pasos
+	
+13/07/2011  mauricio
+* modifico registrar_perdida2.psd
+	* agrego listado desplegable en paso 1, para seleccionar mascotas existentes
+	* cambio ultimo paso, agrege el campo castrado en datos de mascota
+	* cambio ultimo paso, agrego campo de texto de la publicación
+	* agrego opcion de mostrar mi domicilio, mi telefono
+* creo el consultar_mascotas.psd 
+	* listado de mascotas
+	* consulta de mascota perdida
+
+
+
+
+
+campos "pedigree" y "entrenado"	
+entrenado: 
+- entrenado para guardia o policia
+- entranado para caza
+- entrenado para ciegos
+- solo es obdiente
+
+	

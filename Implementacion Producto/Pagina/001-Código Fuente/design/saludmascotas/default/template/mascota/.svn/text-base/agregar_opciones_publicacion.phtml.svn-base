@@ -1,0 +1,124 @@
+<?php //útf8 
+$object_to_edit = $this->getObjectToEdit();
+
+$perdido = $object_to_edit->getPerdido();
+$para_cruza = $object_to_edit->getParaCruza();
+$para_adoptar = $object_to_edit->getParaAdoptar();
+$para_venta = $object_to_edit->getParaVenta(); 
+$quiere_destacar = $object_to_edit->getQuiereDestacar();
+
+$colores_seleccionados = $object_to_edit->getColoresSeleccionados();
+
+?>
+			<h4>Opciones de Publicación</h4>
+			<div class="opciones_formulario opciones_formulario_agregar_mascota">
+				<div class="opcion_formulario">
+					<div class="holding perdido">
+						<input type="hidden" name="perdido" value="no">
+						<?php
+							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+							$input
+								//->setMaxlength(20)
+								->setType('checkbox')
+								//->setAutocomplete('off')
+								->setTitle('¿Está perdido?')
+								//->setClass('datepicker')
+								->setName('perdido')
+								->setId('perdido')
+								->setValue('si')
+							;
+							if($perdido=='si')
+								$input->setChecked('checked');
+							echo $input->getHtml();
+						?>
+						<label for="pedigree">¿Está perdido?</label>
+					</div>
+				</div>
+				<div class="opcion_formulario">
+					<div class="holding longitud_pelaje">
+						<input type="hidden" name="para_cruza" value="no">
+						<?php
+							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+							$input
+								//->setMaxlength(20)
+								->setType('checkbox')
+								//->setAutocomplete('off')
+								->setTitle('Quiero cruzarlo')
+								//->setClass('datepicker')
+								->setName('para_cruza')
+								->setId('para_cruza')
+								->setValue('si')
+							;
+							if($para_cruza=='si')
+								$input->setChecked('checked');
+							echo $input->getHtml();
+						?>
+						<label for="para_cruza">Quiero cruzarlo</label>
+					</div>
+				</div>
+				<div class="opcion_formulario">
+					<div class="holding para_adoptar">
+						<input type="hidden" name="para_adoptar" value="no">
+						<?php
+							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+							$input
+								//->setMaxlength(20)
+								->setType('checkbox')
+								//->setAutocomplete('off')
+								->setTitle('Ofrecer para regalar')
+								//->setClass('datepicker')
+								->setName('para_adoptar')
+								->setId('para_adoptar')
+								->setValue('si')
+							;
+							if($para_adoptar=='si')
+								$input->setChecked('checked');
+							echo $input->getHtml();
+						?>
+						<label for="para_adoptar">Ofrecer para regalar</label>
+					</div>
+				</div>
+				<div class="opcion_formulario">
+					<div class="holding para_venta">
+						<input type="hidden" name="para_venta" value="no">
+						<?php
+							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+							$input
+								//->setMaxlength(20)
+								->setType('checkbox')
+								//->setAutocomplete('off')
+								->setTitle('Ofrecer para vender')
+								//->setClass('datepicker')
+								->setName('para_venta')
+								->setId('para_venta')
+								->setValue('si')
+							;
+							if($para_venta=='si')
+								$input->setChecked('checked');
+							echo $input->getHtml();
+						?>
+						<label for="para_venta">Ofrecer para vender</label>
+					</div>
+					<div class="holding quiere_destacar">
+						<input type="hidden" name="quiere_destacar" value="no">
+						<?php
+							$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+							$input
+								//->setMaxlength(20)
+								->setType('checkbox')
+								//->setAutocomplete('off')
+								->setTitle('Destacar anuncio de venta')
+								//->setClass('datepicker')
+								->setName('quiere_destacar')
+								->setId('quiere_destacar')
+								->setValue('si')
+							;
+							if($quiere_destacar=='si')
+								$input->setChecked('checked');
+							echo $input->getHtml();
+						?>
+						<label for="pedigree">Destacar anuncio de venta</label>
+						<em>(Costo $10)</em>
+					</div>
+				</div>
+			</div>

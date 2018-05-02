@@ -1,0 +1,155 @@
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/!svn/ver/138/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core
+END
+Iterator.php
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/Iterator.php
+END
+Xslt.php
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/Xslt.php
+END
+Collection.php
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/Collection.php
+END
+Mailer2.php
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/Mailer2.php
+END
+Persistant.php
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/Persistant.php
+END
+PathHelper.php
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/PathHelper.php
+END
+Cronjob.php
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/Cronjob.php
+END
+Registro.php
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/Registro.php
+END
+Singleton.php
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/Singleton.php
+END
+IHtmlRenderer.php
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/IHtmlRenderer.php
+END
+Config.php
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/Config.php
+END
+StringHelper.php
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/StringHelper.php
+END
+Server.php
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/Server.php
+END
+Object.php
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/!svn/ver/138/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/Object.php
+END
+Filters.php
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/Filters.php
+END
+Mailer.php
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/Mailer.php
+END
+Email2.php
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/Email2.php
+END
+Helper.php
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/!svn/ver/138/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/Helper.php
+END
+App.php
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/!svn/ver/112/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/App.php
+END
+Session.php
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/!svn/ver/106/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/Session.php
+END
+UrlModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/UrlModel.php
+END
+Db.php
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/Db.php
+END
+MessageContainer.php
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/!svn/ver/106/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/MessageContainer.php
+END
+Email.php
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/Email.php
+END
+IHtmlPollable.php
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Core/IHtmlPollable.php
+END

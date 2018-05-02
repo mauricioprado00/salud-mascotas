@@ -1,0 +1,37 @@
+<?php //es útf8
+
+$barrio = $this->getEntity();
+$localidad = $barrio->getLocalidad();
+
+/*
+show_sections:
+	show_section_field_domicilio: false (default)
+*/
+
+//var_dump(get_class($barrio),$barrio->getData());
+//die(__FILE__.__LINE__);
+?>
+<?php /** / ?>  
+	<div class="image">
+		<img src="<?php print $barrio->getUrlImage(70, 78); ?>" />
+	</div>
+<?php /**/ ?>  
+	<ul class="column1">
+		<li>
+			<b>Barrio:</b>
+			<em><?php print $barrio->getNombre(); ?></em>
+		</li>
+		<li>
+			<b>Localidad:</b>
+			<em><?php print $localidad->getNombre(); ?></em>
+		</li>
+		<?php echo $this->getChildHtml('child_left', null); ?>
+	</ul>
+	<ul class="column2">
+		<?php echo $this->getChildHtml('child_right', null); ?>
+		<li>
+			<ul class="multilink">
+			</ul>
+		</li>
+	</ul>
+	<div style="clear:both;float:none;"></div>

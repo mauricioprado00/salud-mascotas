@@ -1,0 +1,14 @@
+<?php //útf8 ?>
+<div class="home_left">
+	<h2><a>Encontrá tu mascota</a></h2>
+	<p>
+		Te ayudamos a encontrar tu mascota. Realiza una búsqueda rápida por barrio y encuentra tu mascota.
+	</p>
+</div>
+<div class="home_right">
+	<?php print $this->getChildHtml('login_form'); ?> 
+	<h3>&iquest;Quieres unirte a SaludMascotas? <em>¡Registrate Hoy!</em></h3>
+	<?php print $this->getChildHtml('register_form'); ?> 
+</div>
+
+<div style="clear:both;"></div>

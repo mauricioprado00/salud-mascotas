@@ -1,0 +1,15 @@
+<?php //útf8
+$etiqueta = $this->getEtiqueta();
+$childs = $etiqueta->getChilds();
+$deep = $etiqueta->getDeep();
+
+?>
+<option value="<?php print $etiqueta->getId(); ?>"><?php print str_repeat('-- ', $deep).$etiqueta->getNombre(); ?></option>
+<?php if($childs): ?>
+<?php
+foreach($childs as $child){
+	$child->setDeep($deep+1);
+	print $this->getParentBlock()->renderEtiqueta($child);
+}
+?>
+<?php endif; ?>

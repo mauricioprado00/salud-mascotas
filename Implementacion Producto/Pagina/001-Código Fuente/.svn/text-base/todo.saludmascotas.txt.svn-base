@@ -1,0 +1,7 @@
+* [hecho]_pre_editar_handle_post debería retornar true si maneja el post y da ok, false si maneja el post y no da OK, null si no maneja el post, quien llama a _pre_editar_handle_post debería llamar a _editar_step_ok si el resultado es true, de esta manera es extensible cada paso a las diferentes clases que heredan.
+
+* [hecho] un usuario registra una perdida y selecciona posibles encuentros coincidentes, uno de ellos (que ha encontrado o visto una mascota) confirma la seleccion, al usuario de la mascota perdida se le informa, pero falta:
+	* finalizar publicación perdida
+	* finalizar todos los reencuentros confirmados y no confirmados
+
+

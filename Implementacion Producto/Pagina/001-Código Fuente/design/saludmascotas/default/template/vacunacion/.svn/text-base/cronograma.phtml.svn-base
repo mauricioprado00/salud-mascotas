@@ -1,0 +1,165 @@
+<?php //útf8 
+//$object_to_edit = $this->getObjectToEdit();
+$vacunaciones = $this->getVacunaciones();
+$events = $this->getEvents();
+?>
+<div class="form_container form_vacunacion_cronograma">
+	<form class="standart wider login" name="form1" method="post">
+		<input type="hidden" name="dummy" />
+		<div id='calendar'></div>
+		<?php if($this->getShowAddButton()!==false): ?>
+		<div class="form_row actions_row single_action">
+			<button class="submit button" type="submit">Nueva Vacunacion</button>
+			<?php if($this->getLinks()): ?>
+			<ul>
+				<?php foreach($this->getLinks() as $link): ?>
+				<li>
+					<a href="<?php print $this->getUrl($link->getUrl()); ?>"><?php print htmlentities(utf8_decode($link->getLabel())); ?></a>
+				</li> 
+				<?php endforeach; ?> 
+			</ul>
+			<?php endif; ?>
+		</div>
+		<?php endif; ?>
+	</form>
+</div>      
+
+<script type='text/javascript'>
+<!--
+	jQuery(document).ready(function() {
+	
+		var date = new Date();
+		var d = date.getDate();
+		var m = date.getMonth();
+		var y = date.getFullYear();
+		
+		var calendar = jQuery('#calendar').fullCalendar({
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay'
+			},
+			selectable: true,
+			selectHelper: true,
+			select: function(start, end, allDay) {
+				start = start.getFullYear()+'-'+((start.getMonth()+1)<10?'0':'')+(start.getMonth()+1)+'-'+start.getDate();
+				end = end.getFullYear()+'-'+((end.getMonth()+1)<10?'0':'')+(end.getMonth()+1)+'-'+end.getDate();
+				var jqfecha_inicio = jQuery('<input type="hidden" name="fecha_inicio" />').val(start);
+				var jqfecha_fin = jQuery('<input type="hidden" name="fecha_fin" />').val(end);
+				jqfecha_inicio.appendTo('.form_vacunacion_cronograma form');
+				jqfecha_fin.appendTo('.form_vacunacion_cronograma form');
+				jQuery('.form_vacunacion_cronograma form').submit();
+//				window.console.log(start,end);
+				//alert("kradkk");
+//				var title = prompt('Event Title:');
+//				if (title) {
+//					calendar.fullCalendar('renderEvent',
+//						{
+//							title: title,
+//							start: start,
+//							end: end,
+//							allDay: allDay
+//						},
+//						true // make the event "stick"
+//					);
+//				}
+//				calendar.fullCalendar('unselect');
+			},
+			editable: true,
+			<?php if($events): ?> 
+			events: 
+			[ 
+			<?php $first_object = true; foreach($events as $event): ?> 
+			<?php print !$first_object?',':''; ?>{
+			<?php $first_attribute = true; foreach($event as $key=>$value){
+				if(in_array($key, array('start','end'))){?> 
+				<?php print !$first_attribute?',':''; ?>'<?php print $key; ?>':new Date(<?php print date('Y, m-1, d',$value); ?>)//<?print $value."\n";
+				}
+				else{?> 
+				<?php print !$first_attribute?',':''; ?>'<?php print $key; ?>':<?php print json_encode($value); ?><?
+				}
+				$first_attribute = false;
+			}?> 
+			}
+			<?php $first_object = false; endforeach; ?>
+			],
+			<?php endif; ?> 
+			<?php /** / ?>
+//			[
+//				{
+//					title: 'All Day Event',
+//					start: new Date(y, m, 1)
+//				},
+//				{
+//					title: 'Long Event',
+//					start: new Date(y, m, d-5),
+//					end: new Date(y, m, d-2)
+//				},
+//				{
+//					id: 999,
+//					title: 'Repeating Event',
+//					start: new Date(y, m, d-3, 16, 0),
+//					allDay: false
+//				},
+//				{
+//					id: 999,
+//					title: 'Repeating Event',
+//					start: new Date(y, m, d+4, 16, 0),
+//					allDay: false
+//				},
+//				{
+//					title: 'Meeting',
+//					start: new Date(y, m, d, 10, 30),
+//					allDay: false
+//				},
+//				{
+//					title: 'Lunch',
+//					start: new Date(y, m, d, 12, 0),
+//					end: new Date(y, m, d, 14, 0),
+//					allDay: false
+//				},
+//				{
+//					title: 'Birthday Party',
+//					start: new Date(y, m, d+1, 19, 0),
+//					end: new Date(y, m, d+1, 22, 30),
+//					allDay: false
+//				},
+//				{
+//					title: 'Click for Google',
+//					start: new Date(y, m, 28),
+//					end: new Date(y, m, 29),
+//					url: 'http://google.com/'
+//				}
+//			]
+			,
+			<?php /**/ ?>
+			//locale
+			monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+			monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+			dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+			dayNamesShort: ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],
+			buttonText: {
+				prev: '&nbsp;&#9668;&nbsp;',
+				next: '&nbsp;&#9658;&nbsp;',
+				prevYear: '&nbsp;&lt;&lt;&nbsp;',
+				nextYear: '&nbsp;&gt;&gt;&nbsp;',
+				today: 'hoy',
+				month: 'mes',
+				week: 'semana',
+				day: 'día'
+			}
+		});
+		
+	});
+-->
+</script>
+<style type='text/css'>
+	#calendar h2{
+		width: auto!important;
+	}
+	#calendar {
+		width: 500px;
+		margin: 0 auto;
+		}
+
+</style>

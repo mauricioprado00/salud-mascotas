@@ -1,0 +1,9 @@
+<?php
+class Frontend_Block_Domicilio_Selector extends Core_Block_Template{
+	public function __construct(){
+		parent::__construct();
+		$this->setTemplate('domicilio/selector.phtml');
+	}
+}
+
+?>

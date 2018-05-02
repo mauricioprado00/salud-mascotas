@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/design/saludmascotas/default/template/usuario/email
+END
+activation_message.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/design/saludmascotas/default/template/usuario/email/activation_message.phtml
+END
+register_message.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/design/saludmascotas/default/template/usuario/email/register_message.phtml
+END
+recover_message.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/design/saludmascotas/default/template/usuario/email/recover_message.phtml
+END

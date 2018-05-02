@@ -1,0 +1,34 @@
+<?php //útf8
+$object_to_edit = $this->getObjectToEdit();
+
+
+?>
+
+<div class="addeditmascota_busqueda">
+	<form class="standart wider busqueda" name="form1" method="post">
+		<p>
+			Antes de continuar con la publicación del anuncio te mostramos las mascotas resportadas como perdidas cerca de la ubicación y período indicado.
+		</p>
+		<p>
+			Revísalas cuidadosamente y marca las posibles coincidencias.
+		</p>
+		<?php print $this->getChildHtml(); ?>
+		<input type="hidden" name="dummy" value="continuar" />
+		<div class="form_row actions_row single_action">
+			<button class="submit button" type="submit">Continuar</button>
+			<ul>
+				<li><a href="#">algun link</a></li>
+			</ul>
+			<!--
+			<ul>
+				<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlUpdate()); ?>">Modificar Datos</a></li>
+				<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlUpdatePassword()); ?>">Modificar contraseña</a></li>
+			</ul>
+			<ul>
+				<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlServiceConditions()); ?>">Condiciones de Servicio</a></li>
+				<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlPrivacyPolicy()); ?>">Políticas de Privacidad</a></li>
+			</ul>
+			-->
+		</div>
+	</form>
+</div>

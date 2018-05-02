@@ -1,0 +1,146 @@
+<layout>
+	<list_admin_prototype_raza>
+		<reference in="superadmin" name="listado_datos_grid"
+			toolbar_edit_url="administrator/agencia/addEdit,id"
+			toolbar_delete_url="administrator/agencia/delete,id">
+		</reference>
+		<reference name="listado_datos_grid"
+			caption="Listado de Razas"
+			source="administrator/prototype/datalist_raza"
+			sort_name="id"
+			sort_order="asc"
+			can_edit="false"
+			can_add="false"
+			can_delete="false"
+			full_width="true"
+			toolbar="top">
+			<block custom_type="boton" 
+				titulo="Buscar"
+				action_js="jQuery(&quot;###table_id##&quot;).searchGrid( {sopt:['cn','bw','eq','ne','lt','gt','ew']} );" />
+			<action named_args="true" method="addColumn">	
+				<title>Acciones</title>
+				<name>acciones</name>
+				<index>acciones</index>
+				<width>82</width>
+				<align>left</align>
+				<sortable>false</sortable>
+				<hideinexport>1</hideinexport>
+			</action>
+			<action named_args="true" method="addColumn">
+				<title>Inv No</title>
+				<name>id</name>
+				<index>id</index>
+				<width>55</width>
+				<align>left</align>
+				<sortable>true</sortable>
+			</action>
+			<action named_args="true" method="addColumn">
+				<title>Nombre</title>
+				<name>nombre</name>
+				<index>nombre</index>
+				<width>100</width>
+				<align>left</align>
+				<sortable>true</sortable>
+			</action>
+			<action named_args="true" method="addColumn">
+				<title>Especie</title>
+				<name>especie</name>
+				<index>especie</index>
+				<width>150</width>
+				<align>left</align>
+				<sortable>true</sortable>
+			</action>
+		</reference>
+	</list_admin_prototype_raza>
+	<admin_prototype_addedit_raza>
+		<reference name="contenedor_main">
+			<block 
+				type="Admin/AddEditForm"
+				action_url="raza/addEdit" 
+				ajax_target=".contenedor_main"
+				ajax_replace_with="true"
+				validador_js="validar_agregar_raza" 
+				method="post">
+				<tabset>
+					<tab title="Datos de Raza">
+						<block name="raza_add_edit_form" type="template" template="prototype/add_raza.phtml" ></block>
+					</tab>
+				</tabset>
+			</block>
+		</reference>
+	</admin_prototype_addedit_raza>
+	
+	
+	
+	
+	<list_admin_prototype_especie>
+		<reference in="superadmin" name="listado_datos_grid"
+			toolbar_edit_url="administrator/agencia/addEdit,id"
+			toolbar_delete_url="administrator/agencia/delete,id">
+		</reference>
+		<reference name="listado_datos_grid"
+			caption="Listado de Especies"
+			source="administrator/prototype/datalist_especie"
+			sort_name="id"
+			sort_order="asc"
+			can_edit="false"
+			can_add="false"
+			can_delete="false"
+			full_width="true"
+			toolbar="top">
+			<block custom_type="boton" 
+				titulo="Buscar"
+				action_js="jQuery(&quot;###table_id##&quot;).searchGrid( {sopt:['cn','bw','eq','ne','lt','gt','ew']} );" />
+			<action named_args="true" method="addColumn">	
+				<title>Acciones</title>
+				<name>acciones</name>
+				<index>acciones</index>
+				<width>82</width>
+				<align>left</align>
+				<sortable>false</sortable>
+				<hideinexport>1</hideinexport>
+			</action>
+			<action named_args="true" method="addColumn">
+				<title>Inv No</title>
+				<name>id</name>
+				<index>id</index>
+				<width>55</width>
+				<align>left</align>
+				<sortable>true</sortable>
+			</action>
+			<action named_args="true" method="addColumn">
+				<title>Nombre</title>
+				<name>nombre</name>
+				<index>nombre</index>
+				<width>100</width>
+				<align>left</align>
+				<sortable>true</sortable>
+			</action>
+			<action named_args="true" method="addColumn">
+				<title>Descripcion</title>
+				<name>descripcion</name>
+				<index>descripcion</index>
+				<width>150</width>
+				<align>left</align>
+				<sortable>true</sortable>
+			</action>
+		</reference>
+	</list_admin_prototype_especie>
+	<admin_prototype_addedit_especie>
+		<reference name="contenedor_main">
+			<block 
+				type="Admin/AddEditForm"
+				action_url="especie/addEdit" 
+				ajax_target=".contenedor_main"
+				ajax_replace_with="true"
+				validador_js="validar_agregar_especie" 
+				method="post">
+				<tabset>
+					<tab title="Datos de Especie">
+						<block name="especie_add_edit_form" type="template" template="prototype/add_especie.phtml" ></block>
+					</tab>
+				</tabset>
+			</block>
+		</reference>
+	</admin_prototype_addedit_especie>
+</layout>

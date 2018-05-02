@@ -1,0 +1,47 @@
+<?php 
+if(!$this->hasEntityToList()||!$this->getEntityToList()){?> 
+	error, no hay entidad para el control <?php print get_class($this); ?><?
+	return;
+}
+
+	$html_select = '';
+	$text = $this->getInputText();
+	//var_dump($text);die(__FILE__.__LINE__);
+	if($options = $this->createOptions())
+		foreach($options as $option){
+			if($option->getSelected()){
+				$text = $option->getInnerHtml();
+			}
+			$html_select .= $option->getHtml();
+		}
+	
+	$c = $this->getSelectControl();
+?> 
+<div class="select_typeable" id="<?php print $control_id = uniqid(); ?>">
+	<input type="text" class="typeable" autocomplete="off" value="<?php print htmlentities(utf8_decode($text)); ?>" />
+	<div class="dropdown_button"></div>
+	<?php if($vh = $this->getUseValueHolder()): ?>
+	<input type="text" class="value_holder" name="<?php print $vh; ?>" />
+	<?php endif; ?>
+	<ul class="options"></ul><?php
+	echo $c
+		->setStyle('display:none')
+		->setInnerHtml($html_select)
+		->getHtml()
+	;
+?> 
+	
+</div>
+<script type="text/javascript">
+jQuery(document).ready(function(){
+	create_typeable(<?php print json_encode((object)array(
+		'control_id'=>$control_id,
+		'url_search'=>$this->getUrl($this->getUrlLoad()),
+		'parent_loader'=>$this->getParentLoader(),
+		'aditional_data'=>$this->getAditionalData(),
+		'use_on_keyup'=>$this->getUseOnKeyup()?true:false,
+		'use_on_blur'=>Core_Helper::coalesce($this->getUseOnBlur(), true)?true:false,
+		'use_on_change'=>Core_Helper::coalesce($this->getUseOnChange(), true)?true:false,
+	)); ?>);
+});
+</script>

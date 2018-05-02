@@ -1,0 +1,24 @@
+<?php //útf8
+
+
+
+?>
+
+<div class="mascota_adopcion_solicitud_listado">
+	<form class="standart wider" name="form1" method="post">
+		<p>Aquí podrás ver fotos de mascotas encontradas cerca de tu casa que tal vez hayas visto. Ayuda a sus dueños a recuperarlas. <br />
+Si tu has perdido tu mascota puedes registrarla ingresando a <a href="#no_implementado">Perdí mi mascota</a> para agregarla a este listado.
+</p>
+		<div>
+			<h2>Datos de Mascota</h2>
+			<?php print $this->getChildHtml('view_datos_mascota'); ?> 
+		</div>
+		<div>
+			<?php print $this->getChildHtml('reportar'); ?>
+		</div>
+		<div>
+			<h2>Ubicación AdopcionSolicitud</h2>
+			<?php print $this->getChildHtml('map_swicher'); ?>
+		</div>
+	</form>
+</div>

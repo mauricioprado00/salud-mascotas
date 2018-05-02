@@ -1,0 +1,85 @@
+<?php //es útf8
+	$coincidencias = $this->getCoincidencias();
+	$coincidencias_seleccionadas = $this->getCoincidenciasSeleccionadas();
+	$view_mascota = $this->getChild('view_datos_mascota_coincidencia');
+	$gmap_view_ubicacion = $this->getChild('gmap_view_ubicacion');
+	$map_js_object_name = $gmap_view_ubicacion->getJsObjectName();
+?> 
+<?php if(!$coincidencias): ?> 
+<div class="show_select_coincidencias show_select_coincidencias_paso3">
+	<h3>No hay posibles mascotas</h3>
+</div>
+<?php return; endif; ?> 
+<div class="show_select_coincidencias show_select_coincidencias_paso3" id="<?php print $container_id = 'coincidencias_'.uniqid();?>">
+	<ul><?php
+		$view_mascota = $this->getChild('view_datos_mascota_coincidencia');
+	//	$childs = $this->getChild();
+	//	var_dump(array_keys($childs));
+	//	
+		foreach($coincidencias as $coincidencia ){
+			//$o = c(new Core_Object())->setData($coincidencia->getData());
+			//var_dump($coincidencia->getData('en_id'), $o->getEnId(), get_class($coincidencia));
+			//die(__FILE__.__LINE__);
+			$perdida = $coincidencia->getPerdida(new Frontend_Model_Perdida());
+			$domicilio = $perdida->getDomicilio();
+			$id = $perdida->getId();
+			$mascota = $coincidencia->getMascota(new Frontend_Model_Mascota())->loadNonTableColumn();
+			$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+			$input
+				//->setMaxlength(20)
+				->setType('checkbox')
+				//->setAutocomplete('off')
+				//->setTitle('Castrado')
+				//->setClass('datepicker')
+				->setName('coincidencias_seleccionadas[]')
+				->setId('coincidencia'.$id)
+				->setValue($id)
+			;
+			if(in_array($id, $coincidencias_seleccionadas))
+				$input->setChecked('checked');
+				
+			$lat = c(Core::getObject('Core_Html_Tag_Custom', 'input'))
+				->setType('text')
+				->setClass('lat')
+				->setValue($domicilio->getLat()/60)
+			;
+			$lng = c(Core::getObject('Core_Html_Tag_Custom', 'input'))
+				->setType('text')
+				->setClass('lng')
+				->setValue($domicilio->getLng()/60)
+			;
+			$icon_type = c(Core::getObject('Core_Html_Tag_Custom', 'input'))
+				->setType('text')
+				->setClass('icon_type')
+				->setValue('it_green')
+			;
+	
+			echo '<li>';
+			echo $input->getHtml();
+			echo '<label for="coincidencia'.$id.'">&nbsp;&nbsp;Creo que podría ser esta</label>';
+			echo '<div style="display:none;">';
+			echo $lat->getHtml();
+			echo $lng->getHtml();
+			echo $icon_type->getHtml();
+			echo '</div>';
+			echo '<div class="infowindow_content"><div class="embeeded_mascota_content">';
+			echo $view_mascota->setMascota($mascota)->toHtml();
+			echo '</div></div>';
+			//echo $this->getChildHtml('view_datos_mascota');
+			echo '</li>';
+		}
+		
+	?> 
+	</ul>
+	<div><?php print $gmap_view_ubicacion->getHtml(); ?></div>
+</div>
+<script type="text/javascript">
+<!--
+	jQuery(function(){
+		var sc = (new selectorCoincidencias()).init(<?php print json_encode(array(
+			'container_id'=>$container_id,
+			'map_js_object_name'=>$map_js_object_name
+		)); ?>);
+	});
+-->
+</script>

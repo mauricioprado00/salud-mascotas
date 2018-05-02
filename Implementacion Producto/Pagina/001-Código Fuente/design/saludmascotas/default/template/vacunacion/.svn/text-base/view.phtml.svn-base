@@ -1,0 +1,54 @@
+<?php //útf8
+$vacunacion = $this->getVacunacion();
+$fecha_inicio = $vacunacion->getFechaInicio();
+$fecha_fin = $vacunacion->getFechaFin();
+$texto = $vacunacion->getTexto();
+$spa = $vacunacion->getSpa();
+$spa_nombre = $spa->getNombre();
+$domicilio = $vacunacion->getDomicilio(); 
+$calle_numero = $domicilio->getCalleNumero();
+$barrio = $domicilio->getBarrio();
+$barrio_nombre = $barrio->getNombre();
+$localidad = $barrio->getLocalidad();
+$localidad_nombre = $localidad->getNombre();
+$provincia = $localidad->getProvincia();
+$provincia_nombre = $provincia->getNombre();
+$pais = $provincia->getPais();
+$pais_nombre = $pais->getNombre();
+
+
+
+?>
+<div>
+	<input type="text" class="lat" value="<?php print $domicilio->getLat()/60; ?>" />
+	<input type="text" class="lng" value="<?php print $domicilio->getLng()/60; ?>" />
+	<input type="text" class="icon_type" value="normal" />
+	<div class="infowindow_content">
+		<ul class="view_vacunacion">
+			<li>
+				<b>Fecha Inicio</b>: <em><?php print (date('d/m/Y', $fecha_inicio)); ?></em>
+			</li>
+			<li>
+				<b>Fecha Fin</b>: <em><?php print (date('d/m/Y', $fecha_fin)); ?></em>
+			</li>
+			<li>
+				<b>Descripción</b>: <em><?php print htmlentities($texto); ?></em>
+			</li>
+			<li>
+				<b>Domicilio</b>: <em><?php print htmlentities($calle_numero); ?></em>
+			</li>
+			<li>
+				<b>Barrio</b>: <em><?php print htmlentities($barrio_nombre); ?></em>
+			</li>
+			<li>
+				<b>Localidad</b>: <em><?php print htmlentities($localidad_nombre); ?></em>
+			</li>
+			<li>
+				<b>Provincia</b>: <em><?php print htmlentities($provincia_nombre); ?></em>
+			</li>
+			<li title="sociedad protectora de animales">
+				<b>Spa</b>: <em><?php print ($spa_nombre); ?></em>
+			</li>
+		</ul>
+	</div>
+</div>      

@@ -1,0 +1,18 @@
+<?php //útf8
+$etiqueta = $this->getEtiqueta();
+$childs = $etiqueta->getChilds();
+$selected = $this->getParentBlock()->esEtiquetaMascota($etiqueta);
+$es_etiqueta_seleccionada = $this->getParentBlock()->esEtiquetaSeleccionada($etiqueta);
+?>
+<li class="<?php if($selected): ?> etiqueta_mascota_agregada<?php endif; ?><?php if($es_etiqueta_seleccionada): ?> etiqueta_mascota_seleccionada<?php endif; ?>">
+	<a href="#" data-id="<?php print $etiqueta->getId(); ?>">
+		<span class="change"><?php print $etiqueta->getNombre();?></span>
+	</a>
+	<?php if($childs): ?> 
+	<ul><?php
+		foreach($childs as $child)
+			print $this->getParentBlock()->renderEtiqueta($child);
+		?>
+	</ul>
+	<?php endif; ?>
+</li>

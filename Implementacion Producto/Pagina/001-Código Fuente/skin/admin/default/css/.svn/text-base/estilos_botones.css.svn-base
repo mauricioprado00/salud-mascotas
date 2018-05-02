@@ -1,0 +1,59 @@
+.jqgrid_top_controls>*{
+	margin: 0 4px;
+}
+.btn_eliminar{
+	background-image:url(../img/delete2.png);
+	background-position:0 50%;
+	padding-left:16px;
+	height:16px;
+	display:inline-block;
+}
+.btn_agregar{
+	background-image:url(../img/add2.png);
+	background-position:0 50%;
+	padding-left:16px;
+	height:16px;
+	display:inline-block;
+	background-repeat:no-repeat;
+}
+.btn_editar{
+	background-image:url(../img/16x16/edit.png);
+	background-position:0 50%;
+	padding-left:16px;
+	height:16px;
+	display:inline-block;
+	background-repeat:no-repeat;
+}
+.btn_refresh{
+	background-image:url(../img/16x16/refresh.png);
+	background-position:0 50%;
+	padding-left:16px;
+	height:16px;
+	display:inline-block;
+	background-repeat:no-repeat;
+}
+.btn_agregar_certificacion{
+	/*background-image:url(../img/16x16/certificate_add.png);*/
+	background-image:url(../img/16x16/check2.png);
+	background-position:0 50%;
+	padding-left:16px;
+	height:16px;
+	display:inline-block;
+	background-repeat:no-repeat;
+}
+.btn_agregar_documento{
+	background-image:url(../img/16x16/document_add.png);
+	background-position:0 50%;
+	padding-left:16px;
+	height:16px;
+	display:inline-block;
+	background-repeat:no-repeat;
+}
+.btn_descargar_documento{
+	background-image:url(../img/16x16/download.png);
+	background-position:0 50%;
+	padding-left:16px;
+	height:16px;
+	display:inline-block;
+	background-repeat:no-repeat;
+}

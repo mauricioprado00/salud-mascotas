@@ -1,0 +1,39 @@
+<?php //útf8 
+$email_or_user = $this->getEmailOrUser();
+?>
+<div class="form_container form_login">
+	<form class="standart login" name="form1" method="post">
+		<div class="textbox">
+			<div class="holding username">
+				<input type="text" autocomplete="on" title="Nombre de usuario o correo electr&oacute;nico" name="username" id="username" value="<?php print htmlentities($email_or_user); ?>">
+				<span class="holder">Nombre de usuario</span>
+				<span class="help">Ingresa tu nombre de usuario o tu email</span>
+			</div>
+		</div>
+		<div class="textbox">
+			<div class="holding password">
+				<input type="password" autocomplete="on" title="password" name="password" value="">
+				<span class="holder">Contrase&ntilde;a</span>
+				<span class="help">Ingresa tu contraseña</span>
+			</div>
+		</div>
+		<div class="form_row actions_row single_action">
+			<button class="submit button" type="submit">Iniciar sesi&oacute;n</button>
+			<ul>
+				<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlRegister()); ?>">Crear Cuenta</a></li>
+				<li><a href="<?php print $this->getUrl(Frontend_Usuario_Helper::getUrlRecover()); ?>">Recuperar Cuenta</a></li>
+			</ul>
+		</div>
+		
+	</form>
+	
+	<script type="text/javascript" language="JavaScript">
+	<!--
+//	var focusControl = document.getElementById('username');
+//	
+//	if (focusControl.type != "hidden") {
+//		focusControl.focus();
+//	}
+	// -->
+	</script>
+</div>      

@@ -1,0 +1,22 @@
+<?php //útf8
+
+
+
+?>
+
+<div class="mascota_encuentro_listado">
+	<form class="standart wider" name="form1" method="post">
+		<p>Aquí podrás consultar las campañas de vacunacion para informarte donde y cuando vacunar a tus mascotas. <br />
+		</p>
+		<!--
+		<div>
+			<h2>Datos de Mascota</h2>
+			<?php // print $this->getChildHtml('view_datos_mascota'); ?> 
+		</div>
+		-->
+		<div>
+			<h2>Vacunaciones</h2>
+			<?php print $this->getChildHtml('map_swicher'); ?>
+		</div>
+	</form>
+</div>

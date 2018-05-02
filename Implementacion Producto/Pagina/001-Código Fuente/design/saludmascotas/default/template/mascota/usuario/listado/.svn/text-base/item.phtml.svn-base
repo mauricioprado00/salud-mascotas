@@ -1,0 +1,257 @@
+<?php //es útf8
+
+$mascota = $this->getEntity();
+if($this->getShowSectionFieldDomicilio()||$this->getShowSectionFieldBarrio()||$this->getShowSectionFieldLocalidad())
+	$domicilio = $mascota->getDomicilio();
+if($this->getShowSectionFieldBarrio()||$this->getShowSectionFieldLocalidad())
+	$barrio = $domicilio->getBarrio();
+if($this->getShowSectionFieldLocalidad())
+	$localidad = $barrio->getLocalidad();
+if($this->getParentBlock()->getShowDatosUsuario()){
+	$usuario = $mascota->getDueno();
+	$usuario_nombre = $usuario->getApellido() . ', ' . $usuario->getNombre();
+	$telefono = $usuario->getTelefono();
+}
+/*
+show_sections:
+	show_section_field_domicilio: false (default)
+*/
+
+//var_dump(get_class($mascota),$mascota->getData());
+//die(__FILE__.__LINE__);
+?> 
+	<div class="image">
+		<img src="<?php print $mascota->getUrlImage(70, 78); ?>" />
+	</div>
+	<ul class="column1">
+		<li>
+			<b>Nombre:</b>
+			<em><?php print $mascota->getNombre(); ?></em>
+		</li>
+		<?php if(Core_Helper::coalesce($this->getShowSectionFieldSexo(),true)): ?>
+		<li>
+			<b>Sexo:</b>
+			<em><?php print $mascota->getSexo(); ?></em>
+		</li>
+		<?php endif; ?>
+		<?php if(Core_Helper::coalesce($this->getShowSectionFieldEdad(),true)): ?>
+		<li>
+			<b>Edad:</b>
+			<em><?php print $mascota->calcularEdad(); ?></em>
+		</li>
+		<?php endif; ?>
+		<?php if(Core_Helper::coalesce($this->getShowSectionFieldRaza(),true)): ?>
+		<li>
+			<b>Raza:</b>
+			<em><?php print $mascota->getRaza()->getNombre(); ?></em>
+		</li>
+		<?php endif; ?>
+		<?php if($this->getShowSectionFieldDomicilio()): ?>
+		<li>
+			<b>Domicilio:</b>
+			<em><?php print $domicilio->getCalleNumero(); ?></em>
+		</li>
+		<?php endif; ?>
+		<?php if($this->getShowSectionFieldBarrio()): ?>
+		<li>
+			<b>Barrio:</b>
+			<em><?php print $barrio->getNombre(); ?></em>
+		</li>
+		<?php endif; ?>
+		<?php if($this->getShowSectionFieldLocalidad()): ?>
+		<li>
+			<b>Localidad:</b>
+			<em><?php print $localidad->getNombre(); ?></em>
+		</li>
+		<?php endif; ?>
+		<?php if($this->getParentBlock()->getShowDatosUsuario()=='si'): ?> 
+			<li>
+				<b>Usuario:</b>
+				<em><?php print $usuario_nombre; ?></em>
+			</li>
+			<?php if($telefono): ?> 
+			<li>
+				<b>Telefono:</b>
+				<em><?php print $telefono; ?></em>
+			</li>
+			<?php endif; ?>
+		<?php endif; ?> 
+	</ul>
+	<ul class="column2">
+		<?php print $this->getChildHtml('list_entity_pluggin_castracion', false, true); ?>
+		<?php if(Core_Helper::coalesce($this->getShowSectionFieldEstado(),true)): ?>
+		<li>
+			<b>Estado:</b>
+			<em><?php print $mascota->getEstadoFull(); ?></em>
+		</li>
+		<?php endif; ?>
+		<li>
+			<a class="link_view_mascota" href="<?php print $this->getUrl($mascota->getUrlSimpleView()); ?>">Ver todos los datos</a>
+			<?php if(Core_Helper::coalesce($this->getShowSectionFieldRaza(),true)): ?>
+			<a href="<?php print $this->getUrl($mascota->getUrlEditar()); ?>">Modificar o agregar fotos</a>
+				<?php if(false&&$mascota->puedeCancelarCastracion()): ?> 
+				<li><a href="<?php print $this->getUrl($mascota->getUrlSetParaCastracion(true)); ?>">Cancelar castración</a></li>
+				<?php endif; ?> 
+			<?php endif; ?>
+			<ul class="multilink">
+				<?php if($this->getShowSectionSpaLinks()): ?>
+					<?php if($this->getShowSectionSpaLinkCastracion()): ?>
+						<?php if($mascota->puedeAsignarCastracion()||$mascota->puedeReasignarCastracion()): ?> 
+						<li class="asignar_castracion" data-id="<?php print $mascota->getId(); ?>">
+							<div class="form_asignar_castracion">
+								<?php
+									$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+									$input
+										->setType('hidden')
+										->setName('id_mascota['.$mascota->getId().']')
+										->setValue($mascota->getId())
+									;
+									echo $input->getHtml();
+								?>
+								<div class="holding share_row half_size fecha_asignacion">
+									<div class="input_autocomplete">
+										<?php
+											$input = Core::getObject('Core_Html_Tag_Custom', 'input');
+											$input
+												->setMaxlength(20)
+												->setType('text')
+												->setAutocomplete('off')
+												->setTitle('Fecha de Asignación')
+												->setClass('datepicker')
+												->setName('fecha_asignacion['.$mascota->getId().']')
+												->setId('fecha_asignacion')
+												//->setValue($fecha_nacimiento)
+											;
+											echo $input->getHtml();
+										?>
+									</div>
+									<span class="holder">Fecha de Asignación</span>
+								</div>
+								<div class="holding share_row half_size provincia">
+									<div class="input_autocomplete">
+										<?
+											$selector_veterinaria = $this->appendBlock('<selector_veterinaria parent_loader="'.'veterinaria'.$mascota->getId().'" use_on_keyup="true" use_on_blur="" use_on_change="" use_value_holder="veterinaria_id['.$mascota->getId().']" />');
+											
+											$id_veterinaria = 0;
+											if($veterinaria){
+												foreach($selector_veterinaria->listEntityes() as $entity){
+													if($entity->getNombre()==$veterinaria){
+														$id_veterinaria = $id_entity = $entity->getId();
+														$selector_veterinaria->setSelectedValue($id_entity);
+														break;
+													}
+												}
+											}
+											
+											echo c($selector_veterinaria)
+												//->setSelectedValue($x->getIdpais())
+												//->void($selector_pais->setSelectedValue($id_pais_argentina))
+												//->void(($entityes = $selector_pais->listEntityes()) && isset($entityes[0]) && $entityes[0]->getId() && $selector_pais->setSelectedValue($entityes[0]->getId()))
+					//                            ->setSelectMessage('Cualquiera')
+					//                            ->setSelectedValue($x->getIdAgencia())
+												->void($selector_veterinaria
+													->getSelectControl()
+														->setName('veterinaria_nombre['.$mascota->getId().']')
+														->setId('veterinaria'.$mascota->getId())
+														->setTitle('veterinaria')
+					//									->setData('data-campo', '<b>pais</b>')
+					//									->setData('data-mensaje', 'Seleccione %field')
+					//									->setData('data-validator', '{empty:false}')
+					//									->setMultiple('multiple')
+					//									->setStyle('min-width:200px')
+												)
+												->toHtml()
+											;
+										?>
+									</div>
+									<span class="holder">Veterinaria</span>
+								</div>
+								<div class="textarea">
+									<?
+										$input = Core::getObject('Core_Html_Tag_Custom', 'textarea');
+										$input
+											->setId('descripcion'.$mascota->getId())
+											->setName('descripcion['.$mascota->getId().']')
+											//->setInnerHtml(/*htmlentities*/($descripcion))
+						//                                        ->setRows(5)
+						//                                        ->setCols(40)
+						//					->setData('data-campo', '<b>Observaciones</b>')
+						//					->setData('data-validator', '{empty:false}')
+						//                                        ->setData('data-mensaje', 'Debe cargar uno o mas %field separados por comas')
+										;
+										echo $input->getHtml();
+									?> 
+								</div>
+								<input type="submit" name="aceptar[<?php print $mascota->getId(); ?>]" class="aceptar" value="aceptar" />
+								<input type="button" class="cancelar" value="cancelar" />
+							</div>
+							<?php if($mascota->puedeAsignarCastracion()): ?>
+							<a class="link" href="#">Asignar Castracion</a>
+							<?php else: ?>
+							<a class="link" href="#">Reasignar Castracion</a>
+							<?php endif; ?>
+						</li>
+						<li class="finalizar_castracion" data-id="<?php print $mascota->getId(); ?>">
+							<div class="form_finalizar_castracion">
+								<input checked="checked" type="radio" name="finalizar_resultado[<?php print $mascota->getId(); ?>]" id="finalizar_resultado_si_<?php print $mascota->getId(); ?>" value="si" />
+								<label for="finalizar_resultado_si_<?php print $mascota->getId(); ?>">Realizada</label>
+								<input type="radio" name="finalizar_resultado[<?php print $mascota->getId(); ?>]" id="finalizar_resultado_no_<?php print $mascota->getId(); ?>" value="no" />
+								<label for="finalizar_resultado_no_<?php print $mascota->getId(); ?>">No Realizada</label>
+								<input type="submit" name="finalizar[<?php print $mascota->getId(); ?>]" class="aceptar" value="aceptar" />
+								<input type="button" class="cancelar" value="cancelar" />
+							</div>
+							<a class="link" href="#">Finalizar Castración</a>
+						</li>
+						<?php endif; ?>
+						<?php if($mascota->puedeCancelarCastracion()): ?> 
+						<li><a href="<?php print $this->getUrl($mascota->getUrlSetParaCastracion(true, true)); ?>">Cancelar castración</a></li>
+						<?php endif; ?> 
+					<?php endif; ?>
+				<?php endif; ?>
+				<?php if(Core_Helper::coalesce($this->getShowSectionOwnerLinks(),true)): ?>
+					<?php if(!$mascota->esEstadoAdopcionSolicitud()): ?>
+						<?php if($mascota->esEstadoPerdida()): ?> 
+						<li><a href="<?php print $this->getUrl($mascota->getUrlFinalizarAnuncio()); ?>">Ya lo encontré</a></li>
+						<?php else: ?> 
+							<?php if($mascota->esEstadoConDueno()): ?>
+							<li><a href="<?php print $this->getUrl($mascota->getUrlPerdidaEditar()); ?>">Lo perdí</a></li> 
+								<?php if(!$mascota->esParaCruza()): ?>
+								<li><a href="<?php print $this->getUrl($mascota->getUrlSetParaCruza()); ?>">Quiero cruzarlo</a></li>
+								<?php endif; ?>
+								<?php if(!$mascota->esParaVenta()): ?>
+								<li><a href="<?php print $this->getUrl($mascota->getUrlSetParaVenta()); ?>">Quiero venderlo</a></li>
+								<?php endif; ?>
+							<?php endif; ?> 
+							<?php if(!$mascota->esParaAdoptar() && !$mascota->esEstadoVista()): ?> 
+							<li><a href="<?php print $this->getUrl($mascota->getUrlSetParaAdoptar()); ?>">Quiero regalar</a></li>
+							<?php endif; ?> 
+							<?php if($mascota->esEstadoEncuentro()): ?> 
+							<li><a href="<?php print $this->getUrl($mascota->getUrlFinalizarAnuncio()); ?>">Finalizar anuncio</a></li>
+							<?php endif; ?>
+							<?php if($mascota->puedeCrearCastracion()): ?> 
+							<li><a href="<?php print $this->getUrl($mascota->getUrlSetParaCastracion()); ?>">Solicitar castración</a></li>
+							<?php endif; ?>
+							<?php if($mascota->puedeConfirmarCastracion()): ?> 
+							<li><a href="<?php print $this->getUrl($mascota->getUrlConfirmarCastracion()); ?>">Confirmar castración Realizada</a></li>
+							<?php endif; ?> 
+							<?php if($mascota->puedeCancelarCastracion()): ?> 
+							<li><a href="<?php print $this->getUrl($mascota->getUrlSetParaCastracion(true)); ?>">Cancelar castración</a></li>
+							<?php endif; ?> 
+						<?php endif; ?>
+						<?php if(!$mascota->esEstadoConDueno()): ?>
+						<?php if($mascota->hasReencuentros()): ?> 
+						<li><a href="<?php print $this->getUrl($mascota->getUrlConfirmacionesPendientes()); ?>">Confirmaciones Pendientes</a></li>	
+						<?php endif; ?>
+						<?php endif; ?>
+					<?php endif; ?>
+					<?php if(!$mascota->noEsEstadoAdopcion())://if($mascota->hasAdopcionConciliacion()): ?>
+					<li><a href="<?php print $this->getUrl($mascota->getUrlAdopcionConciliacionesPendientes()); ?>">Conciliacion Adopción</a></li>
+					<?php endif; ?> 
+				<?php endif; ?>  
+			</ul>
+		</li>
+	</ul>
+	<div style="clear:both;float:none;"></div>
+	<?php print $this->getChildHtml('final', false, true); ?>
+	<div style="clear:both;float:none;"></div>
+	

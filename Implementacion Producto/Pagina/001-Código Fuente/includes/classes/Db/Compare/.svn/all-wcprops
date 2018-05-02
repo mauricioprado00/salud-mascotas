@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Db/Compare
+END
+Between.php
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Db/Compare/Between.php
+END
+Custom.php
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Db/Compare/Custom.php
+END
+Null.php
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Db/Compare/Null.php
+END
+Abstract.php
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Db/Compare/Abstract.php
+END
+Like.php
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Db/Compare/Like.php
+END
+In.php
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Db/Compare/In.php
+END
+Equal.php
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Db/Compare/Equal.php
+END
+Unsupported.php
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/!svn/ver/82/trunk/Implementacion%20Producto/Pagina/001-C%C3%B3digo%20Fuente/includes/classes/Db/Compare/Unsupported.php
+END

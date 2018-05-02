@@ -1,0 +1,27 @@
+<?php //es útf8
+
+$photo_list = $this->getPhotoList();
+
+?>
+			<div class="mascota_fotos_addedit holding" id="<?php print ($id = 'handler_' . uniqid()); ?>">
+				<ul><?php if($photo_list)foreach($photo_list as $foto_mascota): ?> 
+					<li data-imgid="<?php print $foto_mascota->getId(); ?>">
+						<a rel="listado_imagenes" href="<?php print $foto_mascota->getUrl(); ?>"><img src="<?php print $foto_mascota->getThumbUrl(null, 72); ?>" /></a>
+						<a class="delete" href="#">Eliminar</a>
+					</li><?php
+					endforeach; ?>
+				</ul>
+				<div class="help">
+					Ingresa fotografias de tu mascota<br />
+					<a class="add">Agregar fotografía</a>
+				</div>
+				<div style="clear:both;"></div>
+				<script type="text/javascript">
+					var <?php print $id; ?> = new photo_file_upload();
+					<?php print $id; ?>.init(<?php print json_encode(array(
+						'container_id'=>$id,
+						'base_url'=>$this->getUrl($this->getUrlPhoto()),
+						'id_mascota'=>$this->getIdMascota(),
+					))?>);
+				</script>
+			</div>

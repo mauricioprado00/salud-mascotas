@@ -1,0 +1,126 @@
+<global>
+	<modules>
+		<Frontend_Notificacion />
+		<Frontend_Usuario />
+		<Frontend_Mascota />
+		<Frontend_Vacunacion />
+		<Frontend_Patrullaje />
+		<Frontend_Etiqueta />
+		<!--
+		<Frontend_Barrio/>
+		<Frontend_Categoria/>
+		<Frontend_Pagina/>
+		<Frontend_Anuncio/>
+		<Frontend_BannerDinamico/>
+		<Frontend_Buscador/>
+		<Frontend_BannerCarrousel/>
+		<Frontend_Menu/>
+		<Frontend_Contacto/>
+		-->
+	</modules>
+	<routers>
+		<Frontend_Router>home</Frontend_Router>
+		<Frontend_Router_Location>location</Frontend_Router_Location>
+		<Frontend_Router_Animal>animal</Frontend_Router_Animal>
+	</routers>
+	<block>
+		<type>selector_pais</type>
+		<class>Frontend_Block_Selector_Pais</class>
+	</block>
+	<block>
+		<type>selector_provincia</type>
+		<class>Frontend_Block_Selector_Provincia</class>
+	</block>
+	<block>
+		<type>selector_localidad</type>
+		<class>Frontend_Block_Selector_Localidad</class>
+	</block>
+	<block>
+		<type>selector_barrio</type>
+		<class>Frontend_Block_Selector_Barrio</class>
+	</block>
+	<block>
+		<type>selector_especie</type>
+		<class>Frontend_Block_Selector_Especie</class>
+	</block>
+	<block>
+		<type>selector_raza</type>
+		<class>Frontend_Block_Selector_Raza</class>
+	</block>
+	<block>
+		<type>selector_manto</type>
+		<class>Frontend_Block_Selector_Manto</class>
+	</block>
+	<block>
+		<type>selector_longitud_pelaje</type>
+		<class>Frontend_Block_Selector_LongitudPelaje</class>
+	</block>
+	<block>
+		<type>selector_cantidad_colores</type>
+		<class>Frontend_Block_Selector_CantidadColores</class>
+	</block>
+	<block>
+		<type>selector_longitud_tamano_mascota</type>
+		<class>Frontend_Block_Selector_TamanoMascota</class>
+	</block>
+	<block>
+		<type>selector_sexo_mascota</type>
+		<class>Frontend_Block_Selector_SexoMascota</class>
+	</block>
+	<block>
+		<type>selector_castrado_mascota</type>
+		<class>Frontend_Block_Selector_CastradoMascota</class>
+	</block>
+	<block>
+		<type>selector_longitud_entrenada_mascota</type>
+		<class>Frontend_Block_Selector_EntrenadaMascota</class>
+	</block>
+	<block>
+		<type>file_upload</type>
+		<class>Frontend_Block_FileUpload</class>
+	</block>
+	<block>
+		<type>domicilio_view</type>
+		<class>Frontend_Block_Domicilio_GmapView</class><!--Frontend_Block_Domicilio_View nn4d-->
+	</block>
+	<block>
+		<type>domicilio_gmap_view</type>
+		<class>Frontend_Block_Domicilio_GmapView</class>
+	</block>
+	<block>
+		<type>domicilio_selector</type>
+		<class>Frontend_Block_Domicilio_Selector</class>
+	</block>
+	<block>
+		<type>random_perdida</type>
+		<class>Frontend_Block_RandomPerdida</class>
+	</block>
+	<block>
+		<type>random_encuentro</type>
+		<class>Frontend_Block_RandomEncuentro</class>
+	</block>
+	<block>
+		<type>selector_veterinaria</type>
+		<class>Frontend_Block_Selector_Veterinaria</class>
+	</block>
+	<design>
+		<saludmascotas_legacy><![CDATA[saludmascotas/default/]]></saludmascotas_legacy>
+		<saludmascotas_legacy><![CDATA[saludmascotas_legacy/default/]]></saludmascotas_legacy>
+		<saludmascotas><![CDATA[saludmascotas/default/]]></saludmascotas>
+		<email><![CDATA[saludmascotas/default/]]></email>
+	</design>
+	<layouts>
+		<!-- la idea es que se puedan cargar layouts segun el modo 
+			ej: para mostrar pagina normal, para ajax, para print, rss, etc -->
+			<!--
+		<granguia>Granguia.xml</granguia>
+		<ajax_mode>Granguia_Ajax.xml</ajax_mode>
+		<simple>Granguia_Simple.xml</simple>
+		-->
+		<saludmascotas_legacy>Saludmascotas_Legacy.xml</saludmascotas_legacy>
+		<saludmascotas_legacy>Saludmascotas_Home.xml</saludmascotas_legacy>
+		<saludmascotas>Saludmascotas.xml</saludmascotas>
+		<saludmascotas>Saludmascotas_Dashboard.xml</saludmascotas>
+		<email>Saludmascotas_Email.xml</email>
+	</layouts>
+</global>
